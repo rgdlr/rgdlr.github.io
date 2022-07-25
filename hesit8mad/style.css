@@ -1,0 +1,100 @@
+/* Format text selection */
+::selection {
+    color: white;
+    background: darkslategray;
+}
+
+/* Format header image */
+.home img {
+    height: auto;
+    width: 90%;
+    display: block;
+    margin: auto;
+    filter: brightness(1.5) opacity(.8);
+}
+
+/* Format input select */
+.form-select option {
+    font-size: .9rem;
+}
+
+/* Format question icon */
+.icon-question:hover {
+    cursor: pointer;
+}
+
+.bi-question-circle {
+    color: grey;
+}
+
+/* Format input */
+input:focus,
+select:focus,
+textarea:focus {
+    border: 1px solid gray !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Format Google Places Autocomplete */
+.pac-container {
+    margin-top: .1rem;
+    padding: .2rem;
+    border-radius: .3rem;
+    border: 1px solid lightgray;
+    box-shadow: none;
+}
+
+.pac-container:after {
+    /* Removes Powered by Google */
+    content: none;
+}
+
+.pac-item {
+    border: none;
+    padding-left: .5rem;
+}
+
+.pac-icon {
+    display: none;
+}
+
+/* Format buttons */
+.navbar-toggler,
+.btn {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Format checkbox color */
+.form-check-input:checked {
+    background-color: darkslategray !important;
+    border-color: darkslategray !important;
+}
+
+/* Format file input check */
+#file-spinner,
+#file-check {
+    position: absolute;
+    top: 7px;
+    right: 77px;
+    background: white;
+    border: none;
+    cursor: default;
+}
+
+#file-spinner {
+    color: darkslategray;
+}
+
+#file-check {
+    color: darkgreen;
+}
+
+/* Social media animation */
+.bi-instagram:hover,
+.bi-youtube:hover,
+.bi-facebook:hover {
+    color: lightgray;
+}

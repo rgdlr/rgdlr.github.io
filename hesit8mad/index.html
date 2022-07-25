@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="rgdlr">
+    <meta name="desciption" content="[Hesit8 Mad] Filmmaker de Madrid especializado en videclips">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hesit8 Mad · Filmmaker</title>
+
+    <!-- [CSS] CUSTOM CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- [CSS] BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- [CSS] ANIMATE ON SCROLL -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- [ICON] FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- [ICON] BOOTSTRAP-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- [JAVASCRIPT | API] GOOGLE MAPS -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsRw6AazDD0m6f0IvE3V5MbTCHJ01-8ds&libraries=places&callback=initMap"></script>
+    <!-- [JAVASCRIPT | API] DROPBOX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/10.5.0/Dropbox-sdk.min.js"
+        integrity="sha512-Dls40K8oqUR55MKlJX1/po/OtzQIHZam1Tq0UYIREGzu85MwEihpWCchAq0VlmQudLeSzij2Tg4xPX8rh2pGMg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+
+    <!-- HOME -->
+    <!-- <header class="home" id="home" data-aos="fade-down"> -->
+    <header class="home" id="home">
+        <h1 class="pt-5 fw-bold text-center">HESIT8 MAD · FILMMAKER</h1>
+        <img src="https://i.pinimg.com/originals/fc/52/8c/fc528c192df87cc0f1e38a5b2bd9afee.png" alt="Madrid Skyline">
+    </header>
+
+    <!-- NAVBAR -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" data-aos="fade-up"> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#home">HESIT8 MAD</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#trabajos">Trabajos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#presupuesto">Presupuesto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WORK -->
+    <div class="container pt-5" id="trabajos">
+        <h2 class="h1 pt-5 pb-3 text-center">TRABAJOS</h2>
+        <!-- <div class="p-5 ratio ratio-21x9" data-aos="zoom-in" data-aos-delay="250" data-aos-duration="1000"> -->
+        <div class="p-5 ratio ratio-21x9">
+            <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/videoseries?list=PLSVUmAdJi3Zq4Eo7nHiBDt7C_v9ptJvdA"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <!-- FORM https://postmail.invotes.com/accounts/manage/34a5e2b5-2298-4c40-a256-048380eb6918 -->
+    <form action="https://postmail.invotes.com/send" method="post" id="email_form">
+
+        <!-- BUDGET -->
+        <div class="container pt-5" id="presupuesto">
+
+            <h2 class="h1 pt-5 text-center">PRESUPUESTO</h2>
+
+            <div class="d-flex justify-content-center flex-wrap">
+
+                <!-- BASIC -->
+                <!-- <div class="flex-fill m-3 p-5 shadow-sm rounded" data-aos="flip-left" data-aos-duration="1250" data-aos-offset="500"> -->
+                <div class="flex-fill m-3 p-5 shadow-sm rounded">
+
+                    <h3>Básico</h3>
+                    <hr class="dropdown-divider mb-3">
+
+                    <label class="form-label" for="recording">Días de grabación</label>
+                    <input class="form-control" type="number" id="recording" name="extra_recording" value="1" min="1"
+                        max="3" onkeypress="return event.keyCode != 13" onchange="calculateBudget()" /><br>
+
+                    <label class="form-label" for="location">Localización</label>
+                    <input class="form-control" type="text" id="location" name="extra_location"
+                        placeholder="Introduzca localización" onkeypress="return event.keyCode != 13"
+                        onchange="calculateBudget()" autocomplete="new-password" /><br>
+
+                    <!-- DISPLACEMENT TAKING LOCATION -->
+                    <span id="displacement" hidden></span>
+
+                    <label class="form-label" for="duration">Duración de canción</label>
+                    <input class="form-control" type="time" id="duration" name="extra_duration" value="02:00"
+                        min="01:00" max="05:00" onchange="calculateBudget()" /><br>
+
+                    <label class="form-label" for="edition">Edición</label>
+                    <select class="form-select" id="edition" name="extra_edition" onchange="calculateBudget()">
+                        <option value="1">Básica</option>
+                        <option value="2">Media</option>
+                        <option value="3">Avanzada</option>
+                    </select>
+
+                </div>
+
+                <!-- EXTRA -->
+                <!-- <div class="flex-fill m-3 p-5 shadow-sm rounded" data-aos="flip-right" data-aos-duration="1250" data-aos-offset="500"> -->
+                <div class="flex-fill m-3 p-5 shadow-sm rounded">
+
+                    <h3>Añadido</h3>
+                    <hr class="dropdown-divider mb-4">
+
+                    <div class="form-check mt-3 mb-2">
+                        <input class="form-check-input" type="checkbox" id="illumination" name="extra_illumination"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="illumination" class="form-label">
+                            Iluminación
+                            <a class="pt-2 ps-1 pe-1 icon-question" data-bs-toggle="modal"
+                                data-bs-target="#illuminationModal">
+                                <sup>
+                                    <i class="bi bi-question-circle"></i>
+                                </sup>
+                            </a>
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="drone" name="extra_drone"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="drone" class="form-label">Dron</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="script" name="extra_script"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="script" class="form-label">Guionización</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="cover-youtube" name="extra_cover-youtube"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="cover-youtube" class="form-label">Portada
+                            YouTube</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="cover-spotify" name="extra_cover-spotify"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="cover-spotify" class="form-label">Portada
+                            Spotify</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="photography" name="extra_photography"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="photography" class="form-label">Sesión de
+                            fotografía</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="teaser" name="extra_teaser"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="teaser" class="form-label">Vídeo promocional</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="making-of" name="extra_making-of"
+                            onchange="calculateBudget()" />
+                        <label class="form-check-label" for="making-of" class="form-label">Vídeo making of</label>
+                    </div>
+
+                    <label class="form-label mt-3" for="discount">Descuento</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="discount" name="extra_discount" placeholder="Código"
+                            onkeypress="return event.keyCode != 13" maxlength="5" autocomplete="off" />
+                        <!-- <div class="input-group-append"> -->
+                        <button class="btn btn-secondary" id="apply-discount" type="button"
+                            onclick="calculateBudget()">Aplicar</button>
+                        <!-- </div> -->
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CALCULATION -->
+            <!-- <div class="container mb-5 mt-5 text-center" data-aos="zoom-out" data-aos-delay="250" data-aos-duration="1500" data-aos-offset="500"> -->
+            <div class="container mb-5 mt-5 text-center">
+                <p class="fs-1" id="budget">150.00 EUR</p>
+            </div>
+
+        </div>
+
+        <!-- CONTACT -->
+        <!-- <div class="container mb-3 p-5" id="contacto" data-aos="fade-up" data-aos-delay="250" data-aos-duration="1750" data-aos-offset="750"> -->
+        <div class="container mb-3 p-5" id="contacto">
+
+            <h3 class="h2">Contacto</h3>
+            <hr class="dropdown-divider mb-4">
+
+            <label class="form-label" for="reply_to">Tu email</label>
+            <input class="form-control" type="email" id="reply_to" name="reply_to" autocomplete="email" required /><br>
+
+            <label class="form-label" for="subject">Asunto</label>
+            <input class="form-control" type="text" id="subject" name="subject" autocomplete="off" required /><br>
+
+            <label class="form-label" for="message">Mensaje</label>
+            <textarea class="form-control" type="text" id="message" name="text" autocomplete="off"
+                required></textarea><br>
+
+            <!-- to split your message into 160 chars for an sms gateway -->
+            <!-- <input type="hidden" name="sms_format" value="true" /> -->
+
+            <!-- to append extra fields, use the extra_ prefix. Entries will be appended to your message body. -->
+            <!-- <label class="form-label" for="extra_file">Archivo</label>
+            <input class="form-control" type="file" id="extra_file" name="extra_file" disabled /><br> -->
+
+            <input type="hidden" name="access_token" value="gfuodolx9kvvptl7p5bzixxd" />
+            <!-- return urls can be fully qualified -OR- start with / for root relative -OR- start with . for url relative -->
+            <input type="hidden" name="success_url" value="/hesit8mad?message=Email+Successfully+Sent%21&isError=0" />
+            <input type="hidden" name="error_url" value="/hesit8mad?message=Email+could+not+be+sent.&isError=1" />
+
+            <div class="text-end">
+                <input class="btn btn-secondary" id="submit_form" type="submit" value="Enviar" />
+            </div>
+
+            <!-- not required, but we'd appreciate it if you'd link to us somewhere on your site -->
+            <!-- <p class="m-0 p-0 text-center"><small><sub>Powered by <a style="text-decoration: none; color: gray;" href="https://postmail.invotes.com" target="_blank">PostMail</a></sub></small></p> -->
+
+        </div>
+
+        <!-- SEND SONG -->
+        <div class="container p-5">
+            <h3 class="h2">Archivos</h3>
+            <hr class="dropdown-divider mb-4">
+            <label class="form-label" for="file-upload">Enviar canción</label>
+            <div class="input-group" id="file-select">
+                <input class="form-control" type="file" id="file-upload" />
+                <button id="file-spinner" hidden>
+                    <i class="spinner-border spinner-border-sm" role="status"></i>
+                </button>
+                <button id="file-check" hidden>
+                    <i class="bi bi-check-circle"></i>
+                </button>
+                <button class="btn btn-secondary" type="button" onclick="uploadFile()">Enviar</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="p-3"></div>
+
+    <!-- FOOTER -->
+    <div class="mt-5 p-5 bg-dark">
+        <p class="text-center text-light fw-bold"><i class="fas fa-code"></i> with <i class="fas fa-heart"></i> by RGDLR
+        </p>
+        <p class="fs-5 text-center text-light">
+            <a class="text-light" target="_blank" href="https://www.instagram.com/hesit8_mad"><i
+                    class="bi bi-instagram p-2"></i></a>
+            <a class="text-light" target="_blank" href="https://www.youtube.com/channel/UCKyN-dqAwYkF6J44P-zCCTw"><i
+                    class="bi bi-youtube p-2"></i></a>
+            <a class="text-light" target="_blank" href="https://www.facebook.com/Hesit8.Mad/"><i
+                    class="bi bi-facebook p-2"></i></a>
+        </p>
+        <p class="text-center text-light fw-light">All Rights Reserved © 2021 Hesit8 Mad</p>
+    </div>
+
+
+    <!-- [MODAL] ILLUMINATION -->
+    <div class="modal fade" id="illuminationModal" tabindex="-1" aria-labelledby="illuminationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="illuminationModalLabel">Iluminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">2 tubos LED RGB para lograr unas condiciones lumínicas óptimas en cualquier
+                        ambiente</p>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <div class="card m-3" style="width: 25rem;">
+                            <img src="data:image/jpeg;base64,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" class="card-img-top"
+                                alt="illumination">
+                            <div class="card-body">
+                                <p class="card-text">SOONWELL MAGIC TUBE</p>
+                            </div>
+                        </div>
+                        <div class="card m-3" style="width: 25rem;">
+                            <img src="https://i.ytimg.com/vi/0BmHK9BqTFY/maxresdefault.jpg" class="card-img-top"
+                                alt="illumination">
+                            <div class="card-body">
+                                <p class="card-text">YC ONION ENERGY TUBE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [JAVASCRIPT] CUSTOM JAVASCRIPT -->
+    <script type="text/javascript" src="script.js"></script>
+    <!-- [JAVASCRIPT] BOOSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <!-- [JAVASCRIPT] ANIMATE ON SCROLL -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+
+</body>
+
+</html>

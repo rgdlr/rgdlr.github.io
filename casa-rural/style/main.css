@@ -1,0 +1,55 @@
+html {
+    scroll-padding-top: 5rem;
+}
+
+.cover-title {
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+.cover-image {
+    filter: brightness(0.75) hue-rotate(15deg);
+}
+
+.cover-logo {
+    filter: invert();
+    width: 35%;
+}
+
+.carousel-image {
+    filter: brightness(0.9) contrast(1.1) saturate(1.1) hue-rotate(15deg);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title-icon {
+    min-width: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.list-group-item {
+    margin-bottom: 1rem;
+}
+
+.list-group-item-amount {
+    background-color: black;
+    color: white;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.map {
+    border: 0;
+    width: 100%;
+    aspect-ratio: 2/1;
+}
