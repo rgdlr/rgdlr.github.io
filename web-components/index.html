@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Web Components</h1>
+
+    <h2>Button</h2>
+
+    <h3>html-button</h3>
+    <button>click</button>
+
+    <h3>wc-button-v1</h3>
+    <wc-button background-color="#55C" color="#CC5" value="click"></wc-button>
+    <wc-button background-color="#CC5" color="#55C">
+      <slot slot="children">click</slot>
+    </wc-button>
+    <wc-button
+      background-color="#A5A"
+      color="#AFA"
+      height="3rem"
+      value="click"
+      width="15rem"
+    ></wc-button>
+
+    <h2>Input</h2>
+
+    <h3>html-input</h3>
+    <input />
+
+    <h3>wc-input</h3>
+    <wc-input name="wc-input-0">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input name="wc-input-1" placeholder="Insert email">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input name="wc-input-2" clean placeholder="Insert email">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input name="wc-input-3" icon="@" placeholder="Insert email">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input name="wc-input-4" icon="📧" clean placeholder="Insert email">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input name="wc-input-5" label="EMAIL" placeholder="Insert email">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input name="wc-input-6" clean label="EMAIL" placeholder="Insert mail">
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input
+      name="wc-input-7"
+      icon="💰"
+      label="AMOUNT"
+      placeholder="Insert amount"
+    >
+      <slot slot="children">children</slot>
+    </wc-input>
+    <br />
+    <wc-input
+      name="wc-input-8"
+      clean
+      color="#F88"
+      icon="👤"
+      label="NAME"
+      placeholder="Insert name"
+    >
+      <slot slot="children">children</slot>
+    </wc-input>
+
+    <h2>Span</h2>
+
+    <h3>wc-span-v1 : shadow ? no</h3>
+    <wc-span-v1 text="wc-span-1" background-color="#DEF" color="#012">
+      <span slot="tag">tag</span>
+    </wc-span-v1>
+
+    <h3>wc-span-v2 : shadow ? yes</h3>
+    <wc-span-v2 text="wc-span-2" background-color="#ABC" color="#345">
+      <span slot="tag">tag</span>
+    </wc-span-v2>
+
+    <h3>wc-span-v3 : shadow ? shadowRoot</h3>
+    <wc-span-v3 text="wc-span-3" background-color="#A50" color="#05A">
+      <span slot="children">children</span>
+      <span slot="tag">tag</span>
+    </wc-span-v3>
+
+    <h3>wc-span-v4 : shadow ? shadowRoot</h3>
+    <wc-span-v4 text="wc-span-4" background-color="#000" color="#FFF">
+      <span slot="children">children</span>
+      <span slot="tag">tag</span>
+    </wc-span-v4>
+  </body>
+</html>
