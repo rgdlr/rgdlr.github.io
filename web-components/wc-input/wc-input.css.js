@@ -6,11 +6,13 @@ export function wcCss(attributes) {
     borderColor,
     borderRadius,
     borderSize,
-    clean,
+    clear,
     color,
     height,
     icon,
     iconBackgroundColor,
+    iconBorderColor,
+    iconBorderSize,
     iconColor,
     label,
     labelIn,
@@ -36,6 +38,8 @@ export function wcCss(attributes) {
         --border-size: ${borderSize ?? "1px"};
         --color: ${color ?? "#555"};
         --icon-background-color: ${iconBackgroundColor ?? "#EEE"};
+        --icon-border-color: ${iconBorderColor ?? "1px"};
+        --icon-border-size: ${iconBorderSize ?? "0px"};
         --icon-color: ${iconColor ?? "#555"};
         --label-color: ${labelColor ?? "#333"};
         --outline-color: ${outlineColor ?? "#555"};
@@ -59,21 +63,20 @@ export function wcCss(attributes) {
         outline: var(--outline-size) solid var(--outline-color);
       }
 
-      .label-out {
-        color: var(--label-color);
-        cursor: text;
-        display: block;
-        font-size: 1rem;
-        margin-bottom: 0.25rem;
-        padding-left: 0.075rem;
-      }
-
-      .label-in {
+      .label {
         color: var(--label-color);
         cursor: text;
         display: block;
         font-size: 0.8rem;
         padding-left: 0.075rem;
+      }
+
+      .label-out {
+        margin-bottom: 0.25rem;
+      }
+      
+      .label-in {
+        margin-bottom: 0rem;
       }
 
       .input {
@@ -103,11 +106,11 @@ export function wcCss(attributes) {
       }
 
       .icon-left {
-        border-radius: var(--border-radius) 0rem 0rem var(--border-radius);
+        border-radius: calc(var(--border-radius) * 0.725) 0rem 0rem calc(var(--border-radius) * 0.725);
       }
       
       .icon-right {
-        border-radius: 0rem var(--border-radius) var(--border-radius) 0rem;
+        border-radius: 0rem calc(var(--border-radius) * 0.725) calc(var(--border-radius) * 0.725) 0rem;
       }
 
       .icon-right:hover {
@@ -125,13 +128,13 @@ export function wcCss(attributes) {
 
       .wrapper {
         ${
-          clean !== null
-            ? "border-right: var(--border-size) solid var(--border-color);"
+          clear !== null
+            ? "border-right: var(--icon-border-size) solid var(--border-color);"
             : ""
         }
         ${
           icon
-            ? "border-left: var(--border-size) solid var(--border-color);"
+            ? "border-left: var(--icon-border-size) solid var(--border-color);"
             : ""
         }
         padding: 0.5rem;

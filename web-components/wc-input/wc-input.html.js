@@ -6,11 +6,13 @@ export function wcHtml(attributes) {
     borderColor,
     borderRadius,
     borderSize,
-    clean,
+    clear,
     color,
     height,
     icon,
     iconBackgroundColor,
+    iconBorderColor,
+    iconBorderSize,
     iconColor,
     label,
     labelIn,
@@ -30,7 +32,7 @@ export function wcHtml(attributes) {
   const html = `
     ${
       label && (labelIn === null || labelOut !== null)
-        ? `<label class="label-out" for="${name ?? ""}">${label ?? ""}</label>`
+        ? `<label class="label label-out" for="${name ?? ""}">${label ?? ""}</label>`
         : ""
     }
     <div class="container">
@@ -38,7 +40,7 @@ export function wcHtml(attributes) {
       <div class="wrapper">
         ${
           label && labelIn !== null
-            ? `<label class="label-in" for="${name ?? ""}">${
+            ? `<label class="label label-in" for="${name ?? ""}">${
                 label ?? ""
               }</label>`
             : ""
@@ -53,7 +55,7 @@ export function wcHtml(attributes) {
         />
       </div>
       ${
-        clean !== null
+        clear !== null
           ? `<span class="icon icon-right" tabindex="0">×</span>`
           : ""
       }
