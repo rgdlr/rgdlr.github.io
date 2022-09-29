@@ -4,13 +4,13 @@
   window.console.log(
     "%c</> WITH <3 BY RGDLR",
     `
-    background-color: #359;
-    color: #A5A;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin: 0.25rem 0rem;
-    padding: 0.25rem 2.25rem;
-  `
+      background-color: #359;
+      color: #A5A;
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0.25rem 0rem;
+      padding: 0.25rem 2.25rem;
+    `
   );
 }
 

@@ -1,1 +1,3 @@
-export * from "./prototype.js";
+"use strict";
+
+import "./prototype.js";
