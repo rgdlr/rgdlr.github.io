@@ -1,0 +1,15 @@
+.footer {
+  background-color: var(--background-color-primary);
+  color: var(--background-color-secondary);
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer-list {
+}
+
+.footer-list-item {
+}

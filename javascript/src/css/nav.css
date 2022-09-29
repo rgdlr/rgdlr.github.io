@@ -1,0 +1,31 @@
+.nav {
+  align-items: center;
+  background-color: var(--background-color-primary);
+  color: var(--background-color-secondary);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.nav-list {
+  display: flex;
+  flex-grow: 1;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.nav-list-item {
+}
+
+.nav-list-item-link {
+  color: var(--background-color-secondary);
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-right {
+  padding: 1rem;
+}
