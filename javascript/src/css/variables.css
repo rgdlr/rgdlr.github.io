@@ -1,0 +1,12 @@
+:root {
+  --background-color-main: #333;
+  --background-color-primary: #359;
+  --background-color-secondary: #a5a;
+  --background-color-clock: linear-gradient(
+    var(--background-color-primary),
+    var(--background-color-secondary)
+  );
+  --border-size: 0.2rem;
+  --border-radius: 0.35rem;
+  --color-primary: #fff;
+}
