@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 import { snakeCaseToCamelCase } from "./converter.js";
 

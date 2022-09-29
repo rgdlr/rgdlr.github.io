@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 import { wc, wcAttributes as getWcAttributes } from "../utils/index.js";
 import { ATTRIBUTES, wcCss, wcHtml } from "./index.js";

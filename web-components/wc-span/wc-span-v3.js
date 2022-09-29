@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 import { ATTRIBUTES } from "./wc-span.attributes.js";
 

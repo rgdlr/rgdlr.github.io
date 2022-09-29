@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 export { ATTRIBUTES } from "./wc-input.attributes.js";
 export { wcCss } from "./wc-input.css.js";

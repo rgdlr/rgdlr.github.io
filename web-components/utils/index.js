@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 export { wcAttributes } from "./attributes.js";
 export { snakeCaseToCamelCase } from "./converter.js";

@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 export { WcSpanV1, defineWcSpanV1 } from "./wc-span-v1.js";
 export { WcSpanV2, defineWcSpanV2 } from "./wc-span-v2.js";
