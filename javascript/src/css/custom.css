@@ -1,17 +1,18 @@
 body {
-  background-color: var(--background-color-main);
-  color: var(--color-primary);
   display: flex;
   flex-direction: column;
 }
 
 .main {
+  background-color: var(--background-color-main);
+  color: var(--color-main);
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   margin: auto;
   padding: 1rem;
   width: min(100rem, 100%);
+  /* transition: all 250ms; */
 }
 
 .main-title {

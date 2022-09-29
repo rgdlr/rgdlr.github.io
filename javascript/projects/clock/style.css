@@ -1,9 +1,9 @@
 @import url(../../src/css/index.css);
 
 .clock {
-  background: var(--background-color-clock);
+  background: var(--background-color-gradient);
   border-radius: var(--border-radius);
-  border: var(--border-size) solid var(--color-primary);
+  border: var(--border-size) solid var(--color-main);
   display: flex;
   font-family: monospace;
   font-size: 2rem;
@@ -17,6 +17,6 @@
 }
 
 .clock-minutes {
-  border-left: var(--border-size) dashed var(--color-primary);
-  border-right: var(--border-size) dashed var(--color-primary);
+  border-left: var(--border-size) dashed var(--color-main);
+  border-right: var(--border-size) dashed var(--color-main);
 }

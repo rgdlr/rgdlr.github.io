@@ -1,12 +1,16 @@
 :root {
-  --background-color-main: #333;
+  --background-color-light: #ccc;
+  --background-color-dark: #333;
+  --background-color-main: var(--background-color-light);
   --background-color-primary: #359;
   --background-color-secondary: #c7c;
-  --background-color-clock: linear-gradient(
+  --background-color-gradient: linear-gradient(
     var(--background-color-primary),
     var(--background-color-secondary)
   );
   --border-size: 0.2rem;
   --border-radius: 0.35rem;
-  --color-primary: #fff;
+  --color-light: var(--background-color-dark);
+  --color-dark: var(--background-color-light);
+  --color-main: var(--color-light);
 }
