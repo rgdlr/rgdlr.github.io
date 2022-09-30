@@ -29,7 +29,7 @@ export function wcHtml(attributes) {
     width,
   } = attributes;
 
-  const html = `
+  const html = /*html*/ `
     ${
       label && (labelIn === null || labelOut !== null)
         ? `<label class="label label-out" for="${name ?? ""}">${label ?? ""}</label>`
@@ -40,9 +40,7 @@ export function wcHtml(attributes) {
       <div class="wrapper">
         ${
           label && labelIn !== null
-            ? `<label class="label label-in" for="${name ?? ""}">${
-                label ?? ""
-              }</label>`
+            ? `<label class="label label-in" for="${name ?? ""}">${label ?? ""}</label>`
             : ""
         }
         <input
@@ -54,11 +52,7 @@ export function wcHtml(attributes) {
           value="${value ?? ""}"
         />
       </div>
-      ${
-        clear !== null
-          ? `<span class="icon icon-right" tabindex="0">×</span>`
-          : ""
-      }
+      ${clear !== null ? `<span class="icon icon-right" tabindex="0">×</span>` : ""}
     </div>
   `;
 

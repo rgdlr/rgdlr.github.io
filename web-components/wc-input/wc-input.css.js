@@ -29,7 +29,7 @@ export function wcCss(attributes) {
     width,
   } = attributes;
 
-  const css = `
+  const css = /*css*/ `
     <style type="text/css">
       :host {
         --background-color: ${backgroundColor ?? "#FFF"};
@@ -127,16 +127,8 @@ export function wcCss(attributes) {
       }
 
       .wrapper {
-        ${
-          clear !== null
-            ? "border-right: var(--icon-border-size) solid var(--border-color);"
-            : ""
-        }
-        ${
-          icon
-            ? "border-left: var(--icon-border-size) solid var(--border-color);"
-            : ""
-        }
+        ${clear !== null ? "border-right: var(--icon-border-size) solid var(--border-color);" : ""}
+        ${icon ? "border-left: var(--icon-border-size) solid var(--border-color);" : ""}
         padding: 0.5rem;
         width: 100%;
       }

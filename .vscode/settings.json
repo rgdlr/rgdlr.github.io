@@ -1,4 +1,5 @@
 {
+  "prettier.embeddedLanguageFormatting": "auto",
   "prettier.tabWidth": 2,
   "prettier.printWidth": 100,
   "cSpell.words": ["tabindex"]

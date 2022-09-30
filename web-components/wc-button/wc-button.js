@@ -56,15 +56,8 @@ export class WcButton extends HTMLElement {
   }
 }
 
-function getTemplate({
-  backgroundColor,
-  children,
-  color,
-  height,
-  value,
-  width,
-}) {
-  const templateCss = `
+function getTemplate({ backgroundColor, children, color, height, value, width }) {
+  const templateCss = /*css*/ `
     <style type="text/css">
       button {
         background-color: ${backgroundColor ?? "#000"};
@@ -85,10 +78,8 @@ function getTemplate({
     </style>
   `;
 
-  const templateHtml = `
-    <button>
-      ${children.length ? `<slot name="children"></slot>` : value ?? ""}
-    </button>
+  const templateHtml = /*html*/ `
+    <button>${children.length ? `<slot name="children"></slot>` : value ?? ""}</button>
   `;
 
   const template = document.createElement("template");
