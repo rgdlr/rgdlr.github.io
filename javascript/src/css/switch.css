@@ -14,7 +14,7 @@
 .switch-circle {
   background-color: var(--color-main);
   border-radius: 50%;
-  display: grid;
+  display: none;
   height: 1.35rem;
   left: 5%;
   place-content: center;

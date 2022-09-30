@@ -1,5 +1,5 @@
 :root {
-  --background-color-light: #ccc;
+  --background-color-light: #eee;
   --background-color-dark: #333;
   --background-color-main: var(--background-color-light);
   --background-color-primary: #359;
@@ -13,4 +13,18 @@
   --color-light: var(--background-color-dark);
   --color-dark: var(--background-color-light);
   --color-main: var(--color-light);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color-main: var(--background-color-light);
+    --color-main: var(--color-light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color-main: var(--background-color-dark);
+    --color-main: var(--color-dark);
+  }
 }
