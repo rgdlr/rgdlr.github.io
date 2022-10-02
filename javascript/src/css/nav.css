@@ -3,8 +3,8 @@
   background-color: var(--background-color-primary);
   color: var(--background-color-secondary);
   display: flex;
-  gap: 1rem;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .nav-list {

@@ -2,6 +2,8 @@
 
 import { THEME, getTheme, setTheme } from "./index.js";
 
+// THEME
+
 export function getThemeFromSwitch(themeSwitch) {
   return themeSwitch.checked ? THEME.VALUES.DARK : THEME.VALUES.LIGHT;
 }
@@ -53,3 +55,6 @@ setThemeForSwitch(getTheme(), themeSwitch);
 
 const themeSwitchCircle = document.querySelector(".switch-circle");
 themeSwitchCircle.style.display = "grid";
+
+// LANGUAGE
+// TODO: USE INITIAL MODAL WINDOW TO CHOOSE LANGUAGE
