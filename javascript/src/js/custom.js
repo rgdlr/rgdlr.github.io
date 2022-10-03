@@ -1,6 +1,6 @@
 "use strict";
 
-import { THEME, getTheme, setTheme } from "./index.js";
+import { EVENT, getTheme, setTheme, THEME } from "./index.js";
 
 // THEME
 
@@ -43,8 +43,8 @@ export function setThemeForSwitch(theme, themeSwitch) {
   }
 }
 
-const themeSwitch = document.querySelector(".switch-checkbox");
-themeSwitch.addEventListener("change", () => {
+const themeSwitch = window.document.querySelector(".switch-checkbox");
+themeSwitch.addEventListener(EVENT.CHANGE, () => {
   const theme = getThemeFromSwitch(themeSwitch);
   setThemeForSwitch(theme, themeSwitch);
   setTheme(theme);
@@ -53,7 +53,7 @@ themeSwitch.addEventListener("change", () => {
 updateThemeForSwitchByPrefersColorScheme(themeSwitch);
 setThemeForSwitch(getTheme(), themeSwitch);
 
-const themeSwitchCircle = document.querySelector(".switch-circle");
+const themeSwitchCircle = window.document.querySelector(".switch-circle");
 themeSwitchCircle.style.display = "grid";
 
 // LANGUAGE

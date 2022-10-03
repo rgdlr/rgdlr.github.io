@@ -3,9 +3,9 @@
 export const INTERVAL_TIMEOUT_MILLISECONDS = 1000;
 
 export function formatNumberDigits(number, minimumIntegerDigits = 2) {
-  const PAD_STRING = "0";
-  return number.toString().padStart(minimumIntegerDigits, PAD_STRING);
-  //   return number.toLocaleString("en-US", { minimumIntegerDigits, useGrouping: false });
+  // const PAD_STRING = "0";
+  // return number.toString().padStart(minimumIntegerDigits, PAD_STRING);
+  return number.toLocaleString("en-US", { minimumIntegerDigits, useGrouping: false });
 }
 
 export function getCurrentTime() {
