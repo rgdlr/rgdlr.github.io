@@ -20,6 +20,15 @@
                 <a class="nav-list-item-link" href="/javascript/projects/clock">Clock</a>
             </li>
             <li class="nav-list-item">
+                <a class="nav-list-item-link" href="/javascript/projects/drag">Drag</a>
+            </li>
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="/javascript/projects/gps">GPS</a>
+            </li>
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="/javascript/projects/history">History</a>
+            </li>
+            <li class="nav-list-item">
                 <a class="nav-list-item-link" href="/javascript/projects/file">File</a>
             </li>
         </ul>
@@ -33,18 +42,25 @@
     <main class="main">
         <h1 class="main-title">File</h1>
         <div class="main-content">
-            <label class="file" for="file-input">
+            <label class="drop" for="file-input">
                 <input class="file-input" type="file" id="file-input" />
-                <div class="file-input-title">
-                    <span class="file-input-title-keyword">select</span>
+                <div class="drop-title">
+                    <span class="drop-title-keyword">select</span>
                     <span>or</span>
-                    <span class="file-input-title-keyword">drop</span>
+                    <span class="drop-title-keyword">drop</span>
                     <span>your files</span>
                 </div>
-                <span class="file-input-subtitle">No files selected</span>
+                <span class="drop-subtitle">No files selected</span>
             </label>
-            <div class="file drag-target"></div>
-            <div class="drag-source"></div>
+            <section class="drop">
+                <div class="drop-title">
+                    <span class="drop-title-keyword">drop</span>
+                    <span>your file for preview</span>
+                </div>
+            </section>
+            <section class="modal-preview">
+                <div class="preview"></div>
+            </section>
         </div>
     </main>
     <footer class="footer">

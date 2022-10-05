@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Drag</title>
+    <link rel="stylesheet" href="./styles.css">
     <script type="module" src="./script.js" defer></script>
 </head>
 
@@ -39,14 +39,23 @@
             </label>
         </div>
     </nav>
-    </nav>
     <main class="main">
-        <h1 class="main-title">Clock</h1>
+        <h1 class="main-title">Drag</h1>
         <div class="main-content">
-            <section class="clock">
-                <div class="clock-hours">00</div>
-                <div class="clock-minutes">00</div>
-                <div class="clock-seconds">00</div>
+            <p class="main-paragraph">To create a draggable element, add <b>draggable="true"</b> attribute to tag</p>
+            <p class="main-paragraph"><small><b>WARN</b> : drag is only available in desktop mode</small></p>
+            <section class="drop">
+                <div class="drag-source"></div>
+                <div class="file drag-target">
+                    <div class="drop-title">
+                        <span>Drag and drop circle here</span>
+                    </div>
+                </div>
+            </section>
+            <section class="drag-container">
+                <span draggable="true" class="drag drag-primary"></span>
+                <span draggable="true" class="drag drag-secondary"></span>
+                <span draggable="true" class="drag drag-element"></span>
             </section>
         </div>
     </main>

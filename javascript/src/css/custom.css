@@ -15,8 +15,10 @@ body {
   width: min(100rem, 100%);
 }
 
-.main-title {
+.main-title,
+.main-paragraph {
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .main-content {

@@ -3,6 +3,7 @@
 export const LANGUAGE = {
   KEY: "language",
   VALUES: {
+    DEFAULT: window.navigator.language,
     ENGLISH: "en",
     SPANISH: "es",
   },

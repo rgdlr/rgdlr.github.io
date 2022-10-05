@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>GPS</title>
+    <link rel="stylesheet" href="./styles.css">
     <script type="module" src="./script.js" defer></script>
 </head>
 
@@ -39,14 +39,20 @@
             </label>
         </div>
     </nav>
-    </nav>
     <main class="main">
-        <h1 class="main-title">Clock</h1>
+        <h1 class="main-title">GPS</h1>
         <div class="main-content">
-            <section class="clock">
-                <div class="clock-hours">00</div>
-                <div class="clock-minutes">00</div>
-                <div class="clock-seconds">00</div>
+            <section class="position">
+                <div class="position-content">
+                    <span class="position-latitude-title">Latitude</span>
+                    <span class="position-longitude-title">Longitude</span>
+                    <span class="position-altitude-title">Altitude</span>
+                </div>
+                <div class="position-content">
+                    <span class="position-latitude-value">0.0</span>
+                    <span class="position-longitude-value">0.0</span>
+                    <span class="position-altitude-value">0.0</span>
+                </div>
             </section>
         </div>
     </main>
