@@ -1,3 +1,5 @@
+"use strict";
+
 export const EVENT = {
   BLUR: "blur",
   CHANGE: "change",

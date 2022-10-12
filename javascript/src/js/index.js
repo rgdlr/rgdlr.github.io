@@ -3,6 +3,8 @@
 import "./event.js";
 export * from "./event.js";
 
+import "./attribute.js";
+export * from "./attribute.js";
 import "./clock.js";
 export * from "./clock.js";
 import "./drag.js";
