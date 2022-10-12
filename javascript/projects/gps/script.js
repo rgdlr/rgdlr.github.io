@@ -19,17 +19,17 @@ const successCallback = (parameter) => {
   position.altitude.innerHTML = altitude ?? UNKNOWN_COORDINATE;
 
   const box = {
-    topLeft: longitude - 0.01,
-    topRight: latitude - 0.01,
-    bottomRight: latitude + 0.01,
-    bottomLeft: longitude + 0.01,
+    topLeft: longitude - 0.0025,
+    topRight: latitude - 0.0025,
+    bottomRight: latitude + 0.0025,
+    bottomLeft: longitude + 0.0025,
   };
 
   const map = {
     class: "position-map-iframe",
     container: window.document.querySelector(".position-map"),
     element: window.document.createElement("iframe"),
-    height: Math.min(250, window.screen.height * 0.5),
+    height: Math.min(250, window.screen.height * 0.25),
     footer: `"<br /><small><a href="https://www.openstreetmap.org/#map=14/40.4024/-3.7130">Ver mapa más grande</a></small>"`,
     src: `https://www.openstreetmap.org/export/embed.html?bbox=${box.topLeft}%2C${box.topRight}%2C${box.bottomLeft}%2C${box.bottomRight}&amp;layer=mapnik`,
     width: Math.min(500, window.screen.width * 0.9),
@@ -41,7 +41,7 @@ const successCallback = (parameter) => {
   map.element.setAttribute(ATTRIBUTE.SRC, map.src);
 
   map.container.appendChild(map.element);
-  map.container.appendChild(map.footer);
+  // map.container.appendChild(map.footer);
 };
 
 getCoordinates(successCallback, successCallback);
