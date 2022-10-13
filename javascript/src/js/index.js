@@ -9,6 +9,8 @@ import "./clock.js";
 export * from "./clock.js";
 import "./drag.js";
 export * from "./drag.js";
+import "./element.js";
+export * from "./element.js";
 import "./history.js";
 export * from "./history.js";
 import "./localStorage.js";
