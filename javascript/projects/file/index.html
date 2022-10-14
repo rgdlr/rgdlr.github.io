@@ -42,8 +42,8 @@
     <main class="main">
         <h1 class="main-title">File</h1>
         <div class="main-content">
-            <label class="drop" for="file-input">
-                <input class="file-input" type="file" id="file-input" />
+            <label class="drop drag-and-drop" for="file-input">
+                <input class="file-input" type="file" id="file-input" accept=".jpeg,.jpg,.png,.txt" multiple />
                 <div class="drop-title">
                     <span class="drop-title-keyword">select</span>
                     <span>or</span>
@@ -52,14 +52,34 @@
                 </div>
                 <span class="drop-subtitle">No files selected</span>
             </label>
-            <section class="drop">
+            <section class="drop modal-open-button">
+                <div class="drop-title">
+                    <span class="drop-title-keyword">CLICk</span>
+                    <span>for source code preview</span>
+                </div>
+                <span class="drop-subtitle"><i>index.html</i></span>
+            </section>
+            <section class="drop drop-preview">
                 <div class="drop-title">
                     <span class="drop-title-keyword">drop</span>
                     <span>your file for preview</span>
                 </div>
             </section>
-            <section class="modal-preview">
-                <div class="preview"></div>
+            <section class="modal">
+                <div class="modal-window">
+                    <div class="modal-window-header">
+                        <div class="modal-window-header-files">
+                            <span class="modal-window-header-files-title">Files : </span>
+                            <span class="modal-window-header-files-name"></span>
+                        </div>
+                        <span class="modal-window-header-close">x</span>
+                    </div>
+                    <div class="modal-window-body"></div>
+                    <div class="modal-window-footer">
+                        <span class="modal-window-footer-cancel">CANCEL</span>
+                        <span class="modal-window-footer-accept">ACCEPT</span>
+                    </div>
+                </div>
             </section>
         </div>
     </main>

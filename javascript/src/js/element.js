@@ -3,4 +3,5 @@
 export const ELEMENT = {
   A: "a",
   IFRAME: "iframe",
+  IMG: "img",
 };
