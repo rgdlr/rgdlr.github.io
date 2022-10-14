@@ -29,6 +29,9 @@
                 <a class="nav-list-item-link" href="/javascript/projects/history">History</a>
             </li>
             <li class="nav-list-item">
+                <a class="nav-list-item-link" href="/javascript/projects/modal">Modal</a>
+            </li>
+            <li class="nav-list-item">
                 <a class="nav-list-item-link" href="/javascript/projects/file">File</a>
             </li>
         </ul>
@@ -52,7 +55,7 @@
                 </div>
                 <span class="drop-subtitle">No files selected</span>
             </label>
-            <section class="drop modal-open-button">
+            <section class="drop modal-open">
                 <div class="drop-title">
                     <span class="drop-title-keyword">CLICk</span>
                     <span>for source code preview</span>
@@ -65,12 +68,12 @@
                     <span>your file for preview</span>
                 </div>
             </section>
-            <section class="modal">
+            <section class="modal hidden">
                 <div class="modal-window">
                     <div class="modal-window-header">
-                        <div class="modal-window-header-files">
-                            <span class="modal-window-header-files-title">Files : </span>
-                            <span class="modal-window-header-files-name"></span>
+                        <div class="modal-window-header-title">
+                            <span class="modal-window-header-title-files">Files : </span>
+                            <span class="modal-window-header-title-filenames"></span>
                         </div>
                         <span class="modal-window-header-close">x</span>
                     </div>

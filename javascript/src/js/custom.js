@@ -2,8 +2,6 @@
 
 import { EVENT, getTheme, setTheme, THEME } from "./index.js";
 
-// THEME
-
 export function getThemeFromSwitch(themeSwitch) {
   return themeSwitch.checked ? THEME.VALUES.DARK : THEME.VALUES.LIGHT;
 }
@@ -56,5 +54,5 @@ setThemeForSwitch(getTheme(), themeSwitch);
 const themeSwitchCircle = window.document.querySelector(".switch-circle");
 themeSwitchCircle.style.display = "grid";
 
-// LANGUAGE
+// TODO: UPDATE THEME FOR ALPHA COLORS
 // TODO: USE INITIAL MODAL WINDOW TO CHOOSE LANGUAGE

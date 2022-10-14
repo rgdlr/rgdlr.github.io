@@ -12,6 +12,8 @@ export const EVENT = {
   DRAG_START: "dragstart",
   DROP: "drop",
   FOCUS: "focus",
+  KEY_DOWN: "keydown",
+  KEY_UP: "keyup",
   LOAD: "load",
   LOAD_END: "loadend",
   MOUSE_DOWN: "mousedown",

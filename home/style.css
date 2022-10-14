@@ -32,7 +32,7 @@ html {
 }
 
 .cover {
-  margin: 0 auto;
+  margin-inline: auto;
   height: 100%;
   width: min(75rem, 85%);
   display: flex;
@@ -218,7 +218,7 @@ html {
     display: flex;
     justify-content: space-between;
     width: min(75rem, 85%);
-    margin: 0 auto;
+    margin-inline: auto;
   }
 
   .nav-bar-logo,
@@ -473,7 +473,7 @@ hr {
 }
 
 .container {
-  margin: 0 auto;
+  margin-inline: auto;
   max-width: 35rem;
   flex: 0 1 100%;
 }

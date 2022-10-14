@@ -1,6 +1,19 @@
 "use strict";
 
-import { EVENT, FileTools } from "../../src/js/index.js";
+import {
+  ATTRIBUTE,
+  ELEMENT,
+  EVENT,
+  FileTools,
+  initializeModal,
+  MODAL,
+  NODE,
+  openModal,
+} from "../../src/js/index.js";
+
+// ------------------------- Modal -------------------------
+
+initializeModal();
 
 function textFileFetcher(fileName, outputElement) {
   const decodeFile = (uInt8Array) => new TextDecoder().decode(uInt8Array.value);
@@ -9,114 +22,106 @@ function textFileFetcher(fileName, outputElement) {
   window.fetch(fileName).then(readFile);
 }
 
-function openModal(_event) {
-  const modal = window.document.querySelector(".modal");
-  modal.classList.add("open");
-}
-
-function closeModal(_event) {
-  const modalWindowHeaderFileName = window.document.querySelector(
-    ".modal-window-header-files-name"
-  );
-  modalWindowHeaderFileName.textContent = "";
-  const modalWindowBody = window.document.querySelector(".modal-window-body");
-  modalWindowBody.textContent = "";
-  const modal = window.document.querySelector(".modal");
-  modal.classList.remove("open");
-}
-
 function openModalWithSourceCode(_event) {
   const modalWindowHeaderFileName = window.document.querySelector(
-    ".modal-window-header-files-name"
+    ".modal-window-header-title-filenames"
   );
   modalWindowHeaderFileName.textContent = "index.html";
-  const modalWindowBody = window.document.querySelector(".modal-window-body");
-  textFileFetcher("./index.html", modalWindowBody);
+  const modalBody = window.document.querySelector(MODAL.SELECTOR.BODY);
+  textFileFetcher("./index.html", modalBody);
   openModal();
 }
 
-function modalBehavior() {
-  const openModalButton = window.document.querySelector(".modal-open-button");
-  openModalButton.addEventListener(EVENT.CLICK, openModalWithSourceCode);
+const openModalButton = window.document.querySelector(".modal-open");
+openModalButton.addEventListener(EVENT.CLICK, openModalWithSourceCode);
 
-  const modalCloseButton = window.document.querySelector(".modal-window-header-close");
-  const modalCancelButton = window.document.querySelector(".modal-window-footer-cancel");
-  const modalAcceptButton = window.document.querySelector(".modal-window-footer-accept");
+// ------------------------- FileReader -------------------------
 
-  modalCloseButton.addEventListener(EVENT.CLICK, closeModal);
-  modalCancelButton.addEventListener(EVENT.CLICK, closeModal);
-  modalAcceptButton.addEventListener(EVENT.CLICK, closeModal);
+function appendChildToModal(modalBody, child, childIndex) {
+  const FIRST_CHILD = 0;
+  if (childIndex === FIRST_CHILD) {
+    modalBody.replaceChildren(child);
+  } else {
+    modalBody.appendChild(child);
+  }
 }
 
-modalBehavior();
+function outputTextFile(event, _file, index, output) {
+  const paragraph = window.document.createElement(ELEMENT.P);
+  paragraph.innerText = event.target.result;
+  appendChildToModal(output, paragraph, index);
+  openModal();
+}
 
-function textFileReader(file, output) {
-  const modalWindowHeaderFileName = window.document.querySelector(
-    ".modal-window-header-files-name"
+function outputImageFile(_event, file, index, output) {
+  const image = window.document.createElement(ELEMENT.IMG);
+  image.setAttribute(ATTRIBUTE.SRC, URL.createObjectURL(file));
+  appendChildToModal(output, image, index);
+  openModal();
+}
+
+function outputVideoFile(_event, file, index, output) {
+  // TODO : load video + use progress bar (events: progress, loadend)
+  openModal();
+}
+
+function readFiles(event, output) {
+  const modalHeaderFilenames = window.document.querySelector(
+    ".modal-window-header-title-filenames"
   );
   const dropSubtitle = window.document.querySelector(".drop-subtitle");
-  const readFiles = (event) => {
-    const outputTextFile = (event) => {
-      output.innerHTML = output.innerHTML + `<p>${event.target.result}</p>`;
-      openModal();
-    };
-    const outputImageFile = (event) => {
-      output.innerHTML =
-        output.innerHTML + `<img src="${event.target.result}" style="height: 100%;" />`;
-      openModal();
 
-      // TODO : improve image build and functionality
-      // const url = URL.createObjectURL(file);
-      // const img = window.document.createElement(ELEMENT.IMG);
-      // img.setAttribute(ATTRIBUTE.SRC, url);
-      // img.setAttribute(ATTRIBUTE.STYLE, "height: 100%;");
-      // output.appendChild(img);
-    };
-    const outputVideoFile = (event) => {
-      // TODO : load video + use progress bar (events: progress, loadend)
-      openModal();
-    };
-    Array.from(event.target.files).forEach((file) => {
-      const fileReader = new window.FileReader();
-      const fileInput = new FileTools(file);
-      if (!fileInput.isValid) {
-        return;
-      }
-      if (fileInput.isText) {
-        fileReader.readAsText(file);
-        fileReader.addEventListener(EVENT.LOAD, outputTextFile);
-      }
-      if (fileInput.isImage) {
-        fileReader.readAsDataURL(file);
-        fileReader.addEventListener(EVENT.LOAD, outputImageFile);
-      }
-      if (fileInput.isVideo) {
-        fileReader.readAsArrayBuffer(file);
-        fileReader.addEventListener(EVENT.LOAD, outputVideoFile);
-      }
-      modalWindowHeaderFileName.textContent = `${modalWindowHeaderFileName.textContent} ${
-        modalWindowHeaderFileName.textContent ? ";" : ""
-      } ${file.name}`;
-    });
-    dropSubtitle.innerHTML = `<i>${modalWindowHeaderFileName.textContent}</i>`;
-  };
-  file.addEventListener(EVENT.CHANGE, readFiles);
+  Array.from(event.target.files).forEach((file, index) => {
+    const fileReader = new window.FileReader();
+    const fileInput = new FileTools(file);
+    if (!fileInput.isValid) {
+      return;
+    }
+    if (fileInput.isText) {
+      fileReader.readAsText(file);
+      fileReader.addEventListener(EVENT.LOAD, (event) =>
+        outputTextFile(event, file, index, output)
+      );
+    }
+    if (fileInput.isImage) {
+      fileReader.readAsDataURL(file);
+      fileReader.addEventListener(EVENT.LOAD, (event) =>
+        outputImageFile(event, file, index, output)
+      );
+    }
+    if (fileInput.isVideo) {
+      fileReader.readAsArrayBuffer(file);
+      fileReader.addEventListener(EVENT.LOAD, (event) =>
+        outputVideoFile(event, file, index, output)
+      );
+    }
+    modalHeaderFilenames.textContent = `${modalHeaderFilenames.textContent} ${
+      modalHeaderFilenames.textContent ? ";" : ""
+    } ${file.name}`;
+  });
+  dropSubtitle.innerHTML = `<i>${modalHeaderFilenames.textContent}</i>`;
 }
 
-textFileReader(
+function fileReader(file, output) {
+  file.addEventListener(EVENT.CHANGE, (event) => readFiles(event, output));
+}
+
+fileReader(
   window.document.querySelector(".file-input"),
-  window.document.querySelector(".modal-window-body")
+  window.document.querySelector(MODAL.SELECTOR.BODY)
 );
+
+// ------------------------- DragAndDrop -------------------------
 
 const dragAndDrop = window.document.querySelector(".drag-and-drop");
 function dragOver(event) {
-  if (event.target.nodeName !== "LABEL") {
+  if (event.target.nodeName !== NODE.LABEL) {
     return;
   }
   event.target.style.opacity = "0.8";
 }
 function dragLeave(event) {
-  if (event.target.nodeName !== "LABEL") {
+  if (event.target.nodeName !== NODE.LABEL) {
     return;
   }
   event.target.style.opacity = "1";
