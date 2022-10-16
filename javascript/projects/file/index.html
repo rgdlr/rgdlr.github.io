@@ -46,7 +46,7 @@
         <h1 class="main-title">File</h1>
         <div class="main-content">
             <label class="drop drag-and-drop" for="file-input">
-                <input class="file-input" type="file" id="file-input" accept=".jpeg,.jpg,.png,.txt" multiple />
+                <input class="file-input" type="file" id="file-input" />
                 <div class="drop-title">
                     <span class="drop-title-keyword">select</span>
                     <span>or</span>
@@ -77,7 +77,13 @@
                         </div>
                         <span class="modal-window-header-close">x</span>
                     </div>
-                    <div class="modal-window-body"></div>
+                    <div class="modal-window-body">
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-bar-progress hidden">
+                            <span class="loading-bar-progress-rate"></span>
+                        </span>
+                    </div>
                     <div class="modal-window-footer">
                         <span class="modal-window-footer-cancel">CANCEL</span>
                         <span class="modal-window-footer-accept">ACCEPT</span>

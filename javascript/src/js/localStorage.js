@@ -11,7 +11,7 @@ export const LANGUAGE = {
 
 export function setLanguage(language) {
   if (!Object.values(LANGUAGE.VALUES).includes(language)) {
-    throw `Error : unavailable language : ${language}`;
+    throw new Error(`Unavailable language : ${language}`);
   }
   window.localStorage.setItem(LANGUAGE.KEY, language);
 }

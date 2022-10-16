@@ -1,93 +1,39 @@
 "use strict";
 
-import { EVENT } from "../../src/js/index.js";
+import { DRAG, EVENT, initializeDrag } from "../../src/js/index.js";
 
-const DATA_TRANSFER = "className";
-const DRAG_PRIMARY = "drag-primary";
-const DRAG_SECONDARY = "drag-secondary";
+const drag = {
+  container: window.document.querySelector(".drag-container"),
+  source: window.document.querySelector(".drag-element"),
+  target: window.document.querySelector(".drop"),
+  primary: window.document.querySelector(".drag-primary"),
+  secondary: window.document.querySelector(".drag-secondary"),
+};
 
-const dragContainer = window.document.querySelector(".drag-container");
-const source = window.document.querySelector(".drag-element");
-const target = window.document.querySelector(".drop");
+initializeDrag(drag);
 
-let isDropped = false;
-
-source.addEventListener(EVENT.DRAG_START, (event) => {
-  isDropped = false;
-});
-
-source.addEventListener(EVENT.DRAG, (event) => {
-  source.style.opacity = "0.5";
-});
-
-source.addEventListener(EVENT.DRAG_END, (event) => {
-  if (!isDropped) {
-    source.style.opacity = "1.0";
-    target.classList.remove("no-overlay");
-    dragContainer.appendChild(source);
-  }
-});
-
-target.addEventListener(EVENT.DRAG_ENTER, (event) => {
-  target.style.opacity = "0.9";
-});
-
-target.addEventListener(EVENT.DRAG_OVER, (event) => {
-  event.preventDefault();
-});
-
-target.addEventListener(EVENT.DROP, (event) => {
-  const className = event.dataTransfer.getData(DATA_TRANSFER);
-  if (className.includes(DRAG_PRIMARY)) {
-    target.classList.remove(DRAG_SECONDARY);
-    target.classList.add(DRAG_PRIMARY);
-  } else if (className.includes(DRAG_SECONDARY)) {
-    target.classList.remove(DRAG_PRIMARY);
-    target.classList.add(DRAG_SECONDARY);
+// Extra : mobile behavior
+drag.source.addEventListener(EVENT.TOUCH_START, (_event) => {
+  if (DRAG.IS_DROPPED) {
+    drag.target.classList.remove("no-overlay");
+    drag.container.appendChild(drag.source);
   } else {
-    isDropped = true;
-    target.classList.add("no-overlay");
-    target.appendChild(source);
+    drag.target.classList.add("no-overlay");
+    drag.target.appendChild(drag.source);
   }
-  source.style.opacity = "1.0";
-  target.style.opacity = "1.0";
+  DRAG.IS_DROPPED = !DRAG.IS_DROPPED;
 });
 
-target.addEventListener(EVENT.DRAG_LEAVE, (event) => {
-  target.style.opacity = "1.0";
+drag.primary.addEventListener(EVENT.TOUCH_START, (_event) => {
+  drag.target.classList.remove(DRAG.DATA_TRANSFER.VALUE.SECONDARY);
+  drag.target.classList.add(DRAG.DATA_TRANSFER.VALUE.PRIMARY);
 });
 
-const dragPrimary = window.document.querySelector(".drag-primary");
-const dragSecondary = window.document.querySelector(".drag-secondary");
-
-dragPrimary.addEventListener(EVENT.DRAG_START, (event) => {
-  event.dataTransfer.setData(DATA_TRANSFER, event.target.className);
+drag.secondary.addEventListener(EVENT.TOUCH_START, (_event) => {
+  drag.target.classList.remove(DRAG.DATA_TRANSFER.VALUE.PRIMARY);
+  drag.target.classList.add(DRAG.DATA_TRANSFER.VALUE.SECONDARY);
 });
 
-dragSecondary.addEventListener(EVENT.DRAG_START, (event) => {
-  event.dataTransfer.setData(DATA_TRANSFER, event.target.className);
-});
-
+// TODO : DRAGGABLE MOBILE
 // TODO : DRAGGABLE LIST : https://web.dev/drag-and-drop
 // TODO : DRAGGABLE FULLSCREEN : https://www.w3schools.com/howto/howto_js_draggable.asp
-
-source.addEventListener(EVENT.TOUCH_START, (event) => {
-  if (isDropped) {
-    target.classList.remove("no-overlay");
-    dragContainer.appendChild(source);
-  } else {
-    target.classList.add("no-overlay");
-    target.appendChild(source);
-  }
-  isDropped = !isDropped;
-});
-
-dragPrimary.addEventListener(EVENT.TOUCH_START, (event) => {
-  target.classList.remove(DRAG_SECONDARY);
-  target.classList.add(DRAG_PRIMARY);
-});
-
-dragSecondary.addEventListener(EVENT.TOUCH_START, (event) => {
-  target.classList.remove(DRAG_PRIMARY);
-  target.classList.add(DRAG_SECONDARY);
-});

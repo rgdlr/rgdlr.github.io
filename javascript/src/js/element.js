@@ -6,4 +6,5 @@ export const ELEMENT = {
   IMG: "img",
   LABEL: "label",
   P: "p",
+  VIDEO: "video",
 };

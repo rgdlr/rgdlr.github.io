@@ -65,8 +65,7 @@ const successCallback = (parameter) => {
   map.container.appendChild(map.footer.element);
 };
 
-// TODO : (1) : control resize when map can not be bigger
-// TODO : (2) : if ((window.screen.width * 0.9) > 500) do not call resize again
+// TODO : control resize when map can not be bigger ; if ((window.screen.width * 0.9) > 500) do not call resize again
 getCoordinates(successCallback, successCallback);
 window.addEventListener("resize", () => getCoordinates(successCallback, successCallback));
 

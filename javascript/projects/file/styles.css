@@ -10,3 +10,23 @@
   top: 0;
   width: 100%;
 }
+
+.loading-bar {
+  align-items: center;
+  background-color: var(--color-main);
+  display: flex;
+  min-height: 1.25rem;
+  padding: 0.2rem;
+  width: 100%;
+}
+
+.loading-bar:has(.hidden) {
+  display: none;
+}
+
+.loading-bar-progress {
+  background: var(--background-color-gradient);
+  height: 100%;
+  width: 0%;
+  transition: width 1ms;
+}

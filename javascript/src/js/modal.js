@@ -22,35 +22,26 @@ export const MODAL = {
   SELECTOR: { ...MODAL_CLASS, ...objectClassToSelector(MODAL_CLASS) },
 };
 
-export function initializeModal() {
-  const modalAccept = window.document.querySelector(MODAL.SELECTOR.ACCEPT);
-  const modalCancel = window.document.querySelector(MODAL.SELECTOR.CANCEL);
-  const modalClose = window.document.querySelector(MODAL.SELECTOR.CLOSE);
-  const modalOpen = window.document.querySelector(MODAL.SELECTOR.OPEN);
+export function initializeModal({ accept, cancel, close, modal, open }) {
+  accept.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
+  cancel.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
+  close.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
+  open.addEventListener(EVENT.CLICK, (event) => openModal(event, { modal }));
 
-  modalAccept.addEventListener(EVENT.CLICK, closeModal);
-  modalCancel.addEventListener(EVENT.CLICK, closeModal);
-  modalClose.addEventListener(EVENT.CLICK, closeModal);
-  modalOpen.addEventListener(EVENT.CLICK, openModal);
-  window.addEventListener(EVENT.KEY_DOWN, closeModal);
+  window.addEventListener(EVENT.KEY_DOWN, (event) => closeModal(event, { modal }));
 }
 
-export function openModal(_event) {
-  const modal = window.document.querySelector(MODAL.SELECTOR.MODAL);
+export function openModal(_event, { modal }) {
   modal.classList.remove(MODAL.CLASS.HIDDEN);
 }
 
-export function closeModal(event) {
+export function closeModal(event, { modal }) {
   if (!event.key || event.key === KEYBOARD.KEY.ESCAPE) {
-    const modal = window.document.querySelector(MODAL.SELECTOR.MODAL);
     modal.classList.add(MODAL.CLASS.HIDDEN);
   }
 }
 
-export function resetModal(_event) {
-  const modalBody = window.document.querySelector(MODAL.SELECTOR.BODY);
-  const modalTitle = window.document.querySelector(MODAL.SELECTOR.TITLE);
-
-  modalBody.textContent = "";
-  modalTitle.textContent = "";
+export function resetModal(_event, { body, title }) {
+  body.textContent = "";
+  title.textContent = "";
 }

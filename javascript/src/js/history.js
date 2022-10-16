@@ -1,6 +1,39 @@
 "use strict";
 
-import { EVENT } from "./event.js";
+import { EVENT, objectClassToSelector } from "./index.js";
+
+const HISTORY_CLASS = {
+  BACK: "history-back",
+  FORWARD: "history-forward",
+  QUERY_PARAMETER_BUTTON: "history-query-parameter-button",
+  QUERY_PARAMETER_INPUT: "history-query-parameter-input",
+};
+
+export const HISTORY = {
+  CLASS: HISTORY_CLASS,
+  DEFAULT: {
+    DATA: {},
+    TITLE: "deprecated",
+    URL: "?",
+  },
+  SELECTOR: { ...HISTORY_CLASS, ...objectClassToSelector(HISTORY_CLASS) },
+};
+
+export function initializeHistory({ back, forward, queryParameterButton, queryParameterInput }) {
+  back.addEventListener(EVENT.CLICK, (_event) => {
+    historyGoBack();
+  });
+  forward.addEventListener(EVENT.CLICK, (_event) => {
+    historyGoForward();
+  });
+  queryParameterButton.addEventListener(EVENT.CLICK, () =>
+    historyReplaceState({
+      data: queryParameterInput.value,
+      title: "",
+      url: queryParameterInput.value,
+    })
+  );
+}
 
 export function getHistory() {
   return window.history;
@@ -29,19 +62,21 @@ export function historyGo(delta) {
   return window.location.href;
 }
 
-export function historyPushState({ data, title, url }) {
-  const _data = data ?? {};
-  const _title = title ?? "unused";
-  const _url = url ?? "?url";
-  window.history.pushState(_data, _title, _url);
+export function historyPushState({
+  data = HISTORY.DEFAULT.DATA,
+  title = HISTORY.DEFAULT.TITLE,
+  url = HISTORY.DEFAULT.URL,
+}) {
+  window.history.pushState(data, title, url);
   return { href: window.location.href, state: window.history.state };
 }
 
-export function historyReplaceState({ data, title, url }) {
-  const _data = data ?? {};
-  const _title = title ?? "unused";
-  const _url = url ?? "?url";
-  window.history.replaceState(_data, _title, _url);
+export function historyReplaceState({
+  data = HISTORY.DEFAULT.DATA,
+  title = HISTORY.DEFAULT.TITLE,
+  url = HISTORY.DEFAULT.URL,
+}) {
+  window.history.replaceState(data, title, url);
   return { href: window.location.href, state: window.history.state };
 }
 

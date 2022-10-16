@@ -10,7 +10,7 @@ export const THEME = {
 
 export function setTheme(theme) {
   if (!Object.values(THEME.VALUES).includes(theme)) {
-    throw `Error : unavailable theme : ${theme}`;
+    throw new Error(`Unavailable theme : ${theme}`);
   }
   window.sessionStorage.setItem(THEME.KEY, theme);
 }

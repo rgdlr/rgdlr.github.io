@@ -40,7 +40,7 @@ export const FILES = {
 export class FileTools {
   constructor(file) {
     this.file = file;
-    if (!this.isValid) throw "Error : invalid file type";
+    if (!this.isValid) throw new Error("Invalid file type");
   }
   get extension() {
     return StaticFileTools.extension(this.file);
@@ -64,18 +64,20 @@ export class StaticFileTools {
     return file.name.split(".").pop();
   }
   static isImage(file) {
-    const fileExtension = this.extension(file);
+    const fileExtension = this.extension(file).toLowerCase();
     return FILES.IMAGE.includes(fileExtension);
   }
   static isText(file) {
-    const fileExtension = this.extension(file);
+    const fileExtension = this.extension(file).toLowerCase();
     return FILES.TEXT.includes(fileExtension);
   }
   static isVideo(file) {
-    const fileExtension = this.extension(file);
+    const fileExtension = this.extension(file).toLowerCase();
     return FILES.VIDEO.includes(fileExtension);
   }
   static isValid(file) {
     return file && (this.isImage(file) || this.isText(file) || this.isVideo(file));
   }
 }
+
+// TODO : create "setAccept" and "setMultiple" for attribute creation when necessary
