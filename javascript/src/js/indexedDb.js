@@ -83,7 +83,7 @@ export class IndexedDbTools {
       status,
       message: `Invalid object store request : '${name}' object store could not be read`,
     });
-    if (this.#shouldGetObjectFromStore({ searchedKey: key, cursor })) {
+    if (this.#shouldGetObjectFromStore({ key, cursor })) {
       callback({ key: cursor.result.key, value: cursor.result.value });
     }
     if (this.#hasMoreEntries(cursor)) {
@@ -151,7 +151,7 @@ export class IndexedDbTools {
     });
   }
 
-  readObjectStoreObject({ name, object: { key, value }, callback }) {
+  readObjectStoreObject({ name, object: { key, value } = {}, callback }) {
     this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
       const objectStore = this.#getObjectStore({ name, mode: INDEXED_DB.MODE.READ_ONLY });
       const cursor = objectStore.openCursor();
@@ -233,35 +233,3 @@ export class IndexedDbTools {
     databases.forEach((db) => window.indexedDB.deleteDatabase(db.name));
   }
 }
-
-function testIndexedDb() {
-  const name = "store";
-
-  const idb = new IndexedDbTools("idb", 1);
-
-  idb.createObjectStore({ name });
-
-  idb.createObjectStoreObject({
-    name,
-    object: { key: "key", value: "value" },
-  });
-
-  idb.readObjectStoreObject({
-    name,
-    object: { key: "key" },
-    callback: (object) => console.log(object),
-  });
-
-  idb.updateObjectStoreObject({
-    name,
-    object: { key: "key", value: "changed-value" },
-  });
-
-  console.log(idb.indexedDb);
-  idb.deleteObjectStoreObject({
-    name,
-    object: { key: "key" },
-  });
-}
-
-// testIndexedDb();
