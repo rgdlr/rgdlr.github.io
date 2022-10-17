@@ -6,5 +6,6 @@ export const ATTRIBUTE = {
   HREF: "href",
   SRC: "src",
   TARGET: "target",
+  TYPE: "type",
   WIDTH: "width",
 };

@@ -22,6 +22,7 @@ export const EVENT = {
   MOUSE_DOWN: "mousedown",
   POP_STATE: "popstate",
   PROGRESS: "progress",
+  SUBMIT: "submit",
   SUCCESS: "success",
   TOUCH_CANCEL: "touchcancel",
   TOUCH_END: "touchend",

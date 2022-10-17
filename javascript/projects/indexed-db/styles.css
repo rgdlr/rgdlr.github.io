@@ -1,0 +1,56 @@
+@import url(../../src/css/index.css);
+
+.indexed-db {
+}
+
+.indexed-db-form {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.indexed-db-form-input,
+.indexed-db-form-input-submit {
+  background-color: var(--color-main);
+  border-radius: var(--border-radius);
+  border: none;
+  color: var(--background-color-main);
+  flex-grow: 1;
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+
+.indexed-db-form-input::placeholder {
+  color: var(--background-color-main);
+  opacity: 0.8;
+}
+
+.indexed-db-table {
+  width: 100%;
+}
+
+.indexed-db-table-row {
+}
+
+.indexed-db-table-row-cell {
+  padding: 0.25rem;
+  text-align: start;
+}
+
+.indexed-db-table-row-cell.header {
+}
+
+.indexed-db-table-row-cell.data {
+}
+
+.indexed-db-table-row-cell.edit,
+.indexed-db-table-row-cell.delete {
+  width: 0rem;
+  cursor: default;
+}
+
+.indexed-db-table-row-cell.edit:hover,
+.indexed-db-table-row-cell.delete:hover {
+  opacity: 0.8;
+}
