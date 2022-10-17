@@ -1,9 +1,11 @@
 "use strict";
 
 export const EVENT = {
+  ABORT: "abort",
   BLUR: "blur",
   CHANGE: "change",
   CLICK: "click",
+  COMPLETE: "complete",
   DRAG: "drag",
   DRAG_END: "dragend",
   DRAG_ENTER: "dragenter",
@@ -11,6 +13,7 @@ export const EVENT = {
   DRAG_OVER: "dragover",
   DRAG_START: "dragstart",
   DROP: "drop",
+  ERROR: "error",
   FOCUS: "focus",
   KEY_DOWN: "keydown",
   KEY_UP: "keyup",
@@ -19,8 +22,10 @@ export const EVENT = {
   MOUSE_DOWN: "mousedown",
   POP_STATE: "popstate",
   PROGRESS: "progress",
+  SUCCESS: "success",
   TOUCH_CANCEL: "touchcancel",
   TOUCH_END: "touchend",
   TOUCH_MOVE: "touchmove",
   TOUCH_START: "touchstart",
+  UPGRADE_NEEDED: "upgradeneeded",
 };

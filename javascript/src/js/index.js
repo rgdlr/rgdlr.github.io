@@ -17,6 +17,8 @@ import "./fileReader.js";
 export * from "./fileReader.js";
 import "./history.js";
 export * from "./history.js";
+import "./indexedDb.js";
+export * from "./indexedDb.js";
 import "./keyboard.js";
 export * from "./keyboard.js";
 import "./localStorage.js";
