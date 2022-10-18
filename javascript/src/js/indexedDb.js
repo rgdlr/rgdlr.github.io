@@ -25,12 +25,14 @@ export class IndexedDbTools {
     request: undefined,
     status: undefined,
     version: undefined,
+    isReadingFirstEntry: true,
+    readingEntryIndex: 0,
   };
 
   constructor(name, version) {
     this.indexedDb.name = name;
     this.indexedDb.version = version;
-    this.indexedDb.request = this.openIndexedDb(name, version);
+    this.indexedDb.request = this.#openIndexedDb(name, version);
 
     this.indexedDb.request.addEventListener(EVENT.UPGRADE_NEEDED, (_event) => {
       this.#onIndexedDbOpen(_event, { name, status: INDEXED_DB.STATUS.UPGRADE_NEEDED });
@@ -43,7 +45,7 @@ export class IndexedDbTools {
     );
   }
 
-  openIndexedDb(name, version) {
+  #openIndexedDb(name, version) {
     return window.indexedDB.open(name, version);
   }
 
@@ -78,16 +80,32 @@ export class IndexedDbTools {
     });
   }
 
-  #onIndexedDbObjectStoreOpenCursor(_event, { callback, cursor, name, object: { key }, status }) {
+  #onIndexedDbObjectStoreOpenCursor(
+    _event,
+    { callbackBeforeRead, callback, callbackAfterRead, cursor, name, object: { key }, status }
+  ) {
     this.#onIndexedDbAction(_event, {
       status,
       message: `Invalid object store request : '${name}' object store could not be read`,
     });
+    if (typeof callbackBeforeRead === "function" && this.indexedDb.isReadingFirstEntry) {
+      callbackBeforeRead();
+      this.indexedDb.isReadingFirstEntry = false;
+    }
     if (this.#shouldGetObjectFromStore({ key, cursor })) {
-      callback({ key: cursor.result.key, value: cursor.result.value });
+      callback(
+        { key: cursor.result.key, value: cursor.result.value },
+        this.indexedDb.readingEntryIndex
+      );
     }
     if (this.#hasMoreEntries(cursor)) {
+      this.indexedDb.readingEntryIndex++;
       cursor.result.continue();
+    }
+    if (typeof callbackAfterRead === "function" && cursor.readyState === "done") {
+      callbackAfterRead();
+      this.indexedDb.isReadingFirstEntry = true;
+      this.indexedDb.readingEntryIndex = 0;
     }
   }
 
@@ -151,7 +169,13 @@ export class IndexedDbTools {
     });
   }
 
-  readObjectStoreObject({ name, object: { key, value } = {}, callback }) {
+  readObjectStoreObject({
+    name,
+    object: { key, value } = {},
+    callback = (object = { key, value }, index = 0) => {},
+    callbackBeforeRead = (object = { key, value }) => {},
+    callbackAfterRead = (object = { key, value }) => {},
+  }) {
     this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
       const objectStore = this.#getObjectStore({ name, mode: INDEXED_DB.MODE.READ_ONLY });
       const cursor = objectStore.openCursor();
@@ -159,6 +183,8 @@ export class IndexedDbTools {
       const successCallback = (event) =>
         this.#onIndexedDbObjectStoreOpenCursor(event, {
           callback,
+          callbackAfterRead,
+          callbackBeforeRead,
           cursor,
           name,
           object: { key },
@@ -168,6 +194,8 @@ export class IndexedDbTools {
       const errorCallback = (event) =>
         this.#onIndexedDbObjectStoreOpenCursor(event, {
           callback,
+          callbackAfterRead,
+          callbackBeforeRead,
           cursor,
           name,
           object: { key },

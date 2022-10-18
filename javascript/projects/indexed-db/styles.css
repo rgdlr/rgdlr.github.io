@@ -1,6 +1,7 @@
 @import url(../../src/css/index.css);
 
 .indexed-db {
+  width: min(35rem, 100%);
 }
 
 .indexed-db-form {
@@ -12,18 +13,22 @@
 
 .indexed-db-form-input,
 .indexed-db-form-input-submit {
-  background-color: var(--color-main);
+  background: var(--color-main);
   border-radius: var(--border-radius);
   border: none;
   color: var(--background-color-main);
   flex-grow: 1;
-  outline: none;
   padding: 0.5rem 1rem;
 }
 
 .indexed-db-form-input::placeholder {
   color: var(--background-color-main);
   opacity: 0.8;
+}
+
+.indexed-db-table-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
 }
 
 .indexed-db-table {
@@ -44,13 +49,17 @@
 .indexed-db-table-row-cell.data {
 }
 
-.indexed-db-table-row-cell.edit,
-.indexed-db-table-row-cell.delete {
-  width: 0rem;
+.indexed-db-table-row-cell.data.edit,
+.indexed-db-table-row-cell.data.delete {
   cursor: default;
+  text-align: center;
+  padding: 0rem 0.5rem;
+  width: 0%;
 }
 
-.indexed-db-table-row-cell.edit:hover,
-.indexed-db-table-row-cell.delete:hover {
-  opacity: 0.8;
+.indexed-db-table-row-cell.data.edit:hover,
+.indexed-db-table-row-cell.data.delete:hover {
+  background-color: var(--color-main);
+  border-radius: var(--border-radius);
+  color: var(--background-color-main);
 }
