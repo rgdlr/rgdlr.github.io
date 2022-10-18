@@ -17,7 +17,15 @@ export function setLightThemeForSwitch(themeSwitch) {
     "--background-color-main",
     "var(--background-color-light)"
   );
+  window.document.documentElement.style.setProperty(
+    "--background-color-main-alpha",
+    "var(--background-color-light-alpha)"
+  );
   window.document.documentElement.style.setProperty("--color-main", "var(--color-light)");
+  window.document.documentElement.style.setProperty(
+    "--color-main-alpha",
+    "var(--color-light-alpha)"
+  );
   themeSwitch.checked = false;
 }
 
@@ -26,7 +34,15 @@ export function setDarkThemeForSwitch(themeSwitch) {
     "--background-color-main",
     "var(--background-color-dark)"
   );
+  window.document.documentElement.style.setProperty(
+    "--background-color-main-alpha",
+    "var(--background-color-dark-alpha)"
+  );
   window.document.documentElement.style.setProperty("--color-main", "var(--color-dark)");
+  window.document.documentElement.style.setProperty(
+    "--color-main-alpha",
+    "var(--color-dark-alpha)"
+  );
   themeSwitch.checked = true;
 }
 
@@ -54,5 +70,4 @@ setThemeForSwitch(getTheme(), themeSwitch);
 const themeSwitchCircle = window.document.querySelector(".switch-circle");
 themeSwitchCircle.style.display = "grid";
 
-// TODO: UPDATE THEME FOR ALPHA COLORS
-// TODO: USE INITIAL MODAL WINDOW TO CHOOSE LANGUAGE
+// TODO: USE INITIAL MODAL WINDOW TO CHOOSE LANGUAGE + USE MULTI-LANGUAGE WEB

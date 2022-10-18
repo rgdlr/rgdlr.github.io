@@ -1,14 +1,15 @@
 :root {
+  --alpha-channel: 0.75;
   --background-color-light: #eee;
-  --background-color-light-alpha: rgba(238, 238, 238, 0.9);
+  --background-color-light-alpha: rgba(238, 238, 238, var(--alpha-channel));
   --background-color-dark: #333;
-  --background-color-dark-alpha: rgba(51, 51, 51, 0.9);
+  --background-color-dark-alpha: rgba(51, 51, 51, var(--alpha-channel));
   --background-color-main: var(--background-color-light);
   --background-color-main-alpha: var(--background-color-light-alpha);
   --background-color-primary: #359;
-  --background-color-primary-alpha: rgba(51, 85, 153, 0.9);
+  --background-color-primary-alpha: rgba(51, 85, 153, var(--alpha-channel));
   --background-color-secondary: #c7c;
-  --background-color-secondary-alpha: rgba(204, 119, 204, 0.9);
+  --background-color-secondary-alpha: rgba(204, 119, 204, var(--alpha-channel));
   --background-color-gradient: linear-gradient(
     var(--background-color-primary),
     var(--background-color-secondary)
