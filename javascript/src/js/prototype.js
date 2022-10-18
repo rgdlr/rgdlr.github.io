@@ -22,14 +22,15 @@ function log(...attributes) {
 
 {
   class _Object {
+    #property;
     constructor(property) {
-      this._property = property;
+      this.#property = property;
     }
     get property() {
-      return this._property;
+      return this.#property;
     }
     set property(property) {
-      this._property = property;
+      this.#property = property;
     }
     method() {}
   }

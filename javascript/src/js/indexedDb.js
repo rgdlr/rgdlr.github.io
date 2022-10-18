@@ -18,7 +18,7 @@ export const INDEXED_DB = {
 };
 
 export class IndexedDbTools {
-  indexedDb = {
+  #indexedDb = {
     database: undefined,
     name: undefined,
     objectStore: {},
@@ -30,17 +30,17 @@ export class IndexedDbTools {
   };
 
   constructor(name, version) {
-    this.indexedDb.name = name;
-    this.indexedDb.version = version;
-    this.indexedDb.request = this.#openIndexedDb(name, version);
+    this.#indexedDb.name = name;
+    this.#indexedDb.version = version;
+    this.#indexedDb.request = this.#openIndexedDb(name, version);
 
-    this.indexedDb.request.addEventListener(EVENT.UPGRADE_NEEDED, (_event) => {
+    this.#indexedDb.request.addEventListener(EVENT.UPGRADE_NEEDED, (_event) => {
       this.#onIndexedDbOpen(_event, { name, status: INDEXED_DB.STATUS.UPGRADE_NEEDED });
     });
-    this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) =>
+    this.#indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) =>
       this.#onIndexedDbOpen(_event, { name, status: INDEXED_DB.STATUS.SUCCESS })
     );
-    this.indexedDb.request.addEventListener(EVENT.ERROR, (_event) =>
+    this.#indexedDb.request.addEventListener(EVENT.ERROR, (_event) =>
       this.#onIndexedDbOpen(_event, { name, status: INDEXED_DB.STATUS.ERROR })
     );
   }
@@ -50,11 +50,11 @@ export class IndexedDbTools {
   }
 
   #onIndexedDbAction(_event, { message, status }) {
-    this.indexedDb.status = status;
-    if (this.indexedDb.status === INDEXED_DB.STATUS.ERROR) {
+    this.#indexedDb.status = status;
+    if (this.#indexedDb.status === INDEXED_DB.STATUS.ERROR) {
       throw new Error(message);
     }
-    this.indexedDb.database = this.indexedDb.request.result;
+    this.#indexedDb.database = this.#indexedDb.request.result;
   }
 
   #onIndexedDbOpen(_event, { name, status }) {
@@ -88,24 +88,24 @@ export class IndexedDbTools {
       status,
       message: `Invalid object store request : '${name}' object store could not be read`,
     });
-    if (typeof callbackBeforeRead === "function" && this.indexedDb.isReadingFirstEntry) {
+    if (typeof callbackBeforeRead === "function" && this.#indexedDb.isReadingFirstEntry) {
       callbackBeforeRead();
-      this.indexedDb.isReadingFirstEntry = false;
+      this.#indexedDb.isReadingFirstEntry = false;
     }
     if (this.#shouldGetObjectFromStore({ key, cursor })) {
       callback(
         { key: cursor.result.key, value: cursor.result.value },
-        this.indexedDb.readingEntryIndex
+        this.#indexedDb.readingEntryIndex
       );
     }
     if (this.#hasMoreEntries(cursor)) {
-      this.indexedDb.readingEntryIndex++;
+      this.#indexedDb.readingEntryIndex++;
       cursor.result.continue();
     }
     if (typeof callbackAfterRead === "function" && cursor.readyState === "done") {
       callbackAfterRead();
-      this.indexedDb.isReadingFirstEntry = true;
-      this.indexedDb.readingEntryIndex = 0;
+      this.#indexedDb.isReadingFirstEntry = true;
+      this.#indexedDb.readingEntryIndex = 0;
     }
   }
 
@@ -120,7 +120,7 @@ export class IndexedDbTools {
   }
 
   #getObjectStore({ mode, name }) {
-    const transaction = this.indexedDb.database.transaction(name, mode);
+    const transaction = this.#indexedDb.database.transaction(name, mode);
     transaction.addEventListener(EVENT.COMPLETE, (event) =>
       this.#onIndexedDbAddTransaction(event, { status: INDEXED_DB.STATUS.COMPLETE, name })
     );
@@ -137,16 +137,19 @@ export class IndexedDbTools {
   }
 
   createObjectStore({ name, settings = { autoIncrement: true } }) {
-    this.indexedDb.request.addEventListener(EVENT.UPGRADE_NEEDED, (_event) => {
-      if (this.indexedDb.objectStore[name]) {
+    this.#indexedDb.request.addEventListener(EVENT.UPGRADE_NEEDED, (_event) => {
+      if (this.#indexedDb.objectStore[name]) {
         throw new Error(`Invalid object store name : '${name}' already exists`);
       }
-      this.indexedDb.objectStore[name] = this.indexedDb.database.createObjectStore(name, settings);
+      this.#indexedDb.objectStore[name] = this.#indexedDb.database.createObjectStore(
+        name,
+        settings
+      );
     });
   }
 
   createObjectStoreObject({ name, object: { key, value } }) {
-    this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
+    this.#indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
       const objectStore = this.#getObjectStore({ name, mode: INDEXED_DB.MODE.READ_WRITE });
 
       const request = objectStore.add(value, key);
@@ -176,7 +179,7 @@ export class IndexedDbTools {
     callbackBeforeRead = (object = { key, value }) => {},
     callbackAfterRead = (object = { key, value }) => {},
   }) {
-    this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
+    this.#indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
       const objectStore = this.#getObjectStore({ name, mode: INDEXED_DB.MODE.READ_ONLY });
       const cursor = objectStore.openCursor();
 
@@ -207,7 +210,7 @@ export class IndexedDbTools {
   }
 
   updateObjectStoreObject({ name, object: { key, value } }) {
-    this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
+    this.#indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
       const objectStore = this.#getObjectStore({ name, mode: INDEXED_DB.MODE.READ_WRITE });
       const request = objectStore.put(value, key);
 
@@ -230,7 +233,7 @@ export class IndexedDbTools {
   }
 
   deleteObjectStoreObject({ name, object: { key, value } }) {
-    this.indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
+    this.#indexedDb.request.addEventListener(EVENT.SUCCESS, (_event) => {
       const objectStore = this.#getObjectStore({ name, mode: INDEXED_DB.MODE.READ_WRITE });
       const request = objectStore.delete(key);
 
