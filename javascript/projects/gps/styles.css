@@ -31,15 +31,19 @@
 }
 
 .position-map {
+  align-items: flex-end;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  height: 100%;
+  width: min(50rem, 100%);
 }
 
 .position-map-iframe {
   border-radius: var(--border-radius);
   border: var(--border-size) solid var(--color-main);
   margin: 1rem 0rem;
+  min-height: min(25rem, 50vh);
+  width: 100%;
 }
 
 .position-map-footer {

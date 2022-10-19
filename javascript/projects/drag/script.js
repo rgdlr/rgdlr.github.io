@@ -34,6 +34,6 @@ drag.secondary.addEventListener(EVENT.TOUCH_START, (_event) => {
   drag.target.classList.add(DRAG.DATA_TRANSFER.VALUE.SECONDARY);
 });
 
-// TODO : DRAGGABLE MOBILE
-// TODO : DRAGGABLE LIST : https://web.dev/drag-and-drop
-// TODO : DRAGGABLE FULLSCREEN : https://www.w3schools.com/howto/howto_js_draggable.asp
+// TODO : draggable mobile
+// TODO : draggable list : https://web.dev/drag-and-drop
+// TODO : draggable fullscreen : https://www.w3schools.com/howto/howto_js_draggable.asp

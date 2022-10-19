@@ -1,5 +1,6 @@
 "use strict";
 
+// TODO : recursively transform object when values are objects
 export function objectTransform(
   object,
   { transformKeyCallback = (key) => key, transformValueCallback = (value) => value }

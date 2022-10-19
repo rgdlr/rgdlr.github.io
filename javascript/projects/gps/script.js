@@ -1,6 +1,6 @@
 "use strict";
 
-import { ATTRIBUTE, ELEMENT, getCoordinates } from "../../src/js/index.js";
+import { ATTRIBUTE, ELEMENT, EVENT, getCoordinates } from "../../src/js/index.js";
 
 const successCallback = (parameter) => {
   if (!parameter || !parameter.coords || !parameter.timestamp) {
@@ -48,9 +48,7 @@ const successCallback = (parameter) => {
   };
 
   map.element.setAttribute(ATTRIBUTE.CLASS, map.class);
-  map.element.setAttribute(ATTRIBUTE.HEIGHT, map.height);
   map.element.setAttribute(ATTRIBUTE.SRC, map.src);
-  map.element.setAttribute(ATTRIBUTE.WIDTH, map.width);
 
   map.footer.element.textContent = map.footer.text;
   map.footer.element.setAttribute(ATTRIBUTE.CLASS, map.footer.class);
@@ -65,11 +63,41 @@ const successCallback = (parameter) => {
   map.container.appendChild(map.footer.element);
 };
 
-// TODO : control resize when map can not be bigger ; if ((window.screen.width * 0.9) > 500) do not call resize again
 getCoordinates(successCallback, successCallback);
-window.addEventListener("resize", () => getCoordinates(successCallback, successCallback));
+
+// TODO : useful but not necessary functionality
+
+function shouldUpdateMap({ currentWidth, previousWidth }) {
+  const isCurrentMobile = currentWidth.innerWidth < 550 || currentWidth.outerWidth < 550;
+  const isPreviousMobile = previousWidth.innerWidth < 550 || previousWidth.outerWidth < 550;
+  return isCurrentMobile || isPreviousMobile;
+}
+
+function updateMapOnResize() {
+  let previousWidth = {
+    innerWidth: window.innerWidth,
+    outerWidth: window.outerWidth,
+  };
+  window.addEventListener(EVENT.RESIZE, (event) => {
+    const currentWidth = {
+      innerWidth: window.innerWidth,
+      outerWidth: window.outerWidth,
+    };
+    if (shouldUpdateMap({ currentWidth, previousWidth })) {
+      getCoordinates(successCallback, successCallback);
+    }
+    previousWidth = currentWidth;
+  });
+}
+
+// TODO : use functionality in project : make (mobile map == vertical) + (desktop map == horizontal)
+
+// const query = `(max-width: ${DEVICE.MAX_WIDTH.MOBILE.LARGE})`;
+// const callback = () => console.info("Reached mobile breakpoint");
+// matchMediaQueryOnMatches(query, callback);
 
 // TODO : use OSM and/or Leaflet
+
 // function initMap(id) {
 //   const map = new OpenLayers.Map(id);
 //   const layer = new OpenLayers.Layer.OSM();

@@ -70,4 +70,4 @@ setThemeForSwitch(getTheme(), themeSwitch);
 const themeSwitchCircle = window.document.querySelector(".switch-circle");
 themeSwitchCircle.style.display = "grid";
 
-// TODO: USE INITIAL MODAL WINDOW TO CHOOSE LANGUAGE + USE MULTI-LANGUAGE WEB
+// TODO : use initial modal window to choose language + use multi-language
