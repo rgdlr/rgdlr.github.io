@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Lazy Load</title>
     <link rel="stylesheet" href="./styles.css">
     <script type="module" src="./script.js" defer></script>
 </head>
@@ -38,7 +38,7 @@
                 <a class="nav-list-item-link" href="/javascript/projects/indexed-db">Indexed DB</a>
             </li>
             <li class="nav-list-item">
-                <a class="nav-list-item-link" href="/javascript/projects/lazy-load">Lazy Load</a>
+                <a class="nav-list-item-link" href="/javascript/projects/indexed-db">Lazy Load</a>
             </li>
         </ul>
         <div class="nav-right">
@@ -49,27 +49,11 @@
         </div>
     </nav>
     <main class="main">
-        <h1 class="main-title">Modal</h1>
+        <h1 class="main-title">Lazy Load</h1>
+        <p class="main-paragraph">Scroll down for loading all content</p>
         <div class="main-content">
-            <section class="modal-open">
-                <span class="modal-open-button">OPEN MODAL</span>
-            </section>
-            <section class="modal hidden">
-                <div class="modal-window">
-                    <div class="modal-window-header">
-                        <div class="modal-window-header-title">
-                            <span><b>MODAL HEADER TITLE</b></span>
-                        </div>
-                        <span class="modal-window-header-close">x</span>
-                    </div>
-                    <div class="modal-window-body">
-                        <span>MODAL BODY</span>
-                    </div>
-                    <div class="modal-window-footer">
-                        <span class="modal-window-footer-cancel">CANCEL</span>
-                        <span class="modal-window-footer-accept">ACCEPT</span>
-                    </div>
-                </div>
+            <section class="lazy-load">
+                <span>CONTENT</span>
             </section>
         </div>
     </main>
