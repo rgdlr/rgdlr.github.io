@@ -22,6 +22,7 @@ export class WcInput extends HTMLElement {
       if (input.value.length) {
         input.value = input.value.slice(0, -1);
       } else {
+        input.focus();
         clearInterval(interval);
       }
     };
