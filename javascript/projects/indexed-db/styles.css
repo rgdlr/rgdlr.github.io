@@ -43,22 +43,22 @@
   text-align: start;
 }
 
-.indexed-db-table-row-cell.header {
+.indexed-db-table-row-cell-header {
 }
 
-.indexed-db-table-row-cell.data {
+.indexed-db-table-row-cell-data {
 }
 
-.indexed-db-table-row-cell.data.edit,
-.indexed-db-table-row-cell.data.delete {
+.indexed-db-table-row-cell.indexed-db-table-row-cell-data.indexed-db-table-row-cell-edit,
+.indexed-db-table-row-cell.indexed-db-table-row-cell-data.indexed-db-table-row-cell-delete {
   cursor: default;
   text-align: center;
   padding: 0rem 0.5rem;
   width: 0%;
 }
 
-.indexed-db-table-row-cell.data.edit:hover,
-.indexed-db-table-row-cell.data.delete:hover {
+.indexed-db-table-row-cell.indexed-db-table-row-cell-data.indexed-db-table-row-cell-edit:hover,
+.indexed-db-table-row-cell.indexed-db-table-row-cell-data.indexed-db-table-row-cell-delete:hover {
   background-color: var(--color-main);
   border-radius: var(--border-radius);
   color: var(--background-color-main);

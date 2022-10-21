@@ -25,10 +25,10 @@ const indexedDbTableBody = window.document.querySelector(".indexed-db-table-body
 function getTableRow({ key, value }) {
   const _tableRowInnerHTML = `
   <tr class="indexed-db-table-row">
-    <td class="indexed-db-table-row-cell data language">${key}</td>
-    <td class="indexed-db-table-row-cell data rating">${value}</td>
-    <td class="indexed-db-table-row-cell data edit">Edit</td>
-    <td class="indexed-db-table-row-cell data delete">Delete</td>
+    <td class="indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-language">${key}</td>
+    <td class="indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-rating">${value}</td>
+    <td class="indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-edit">Edit</td>
+    <td class="indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-delete">Delete</td>
   </tr>`;
 
   const tr = window.document.createElement(ELEMENT.TR);
@@ -38,10 +38,14 @@ function getTableRow({ key, value }) {
   const tdDelete = window.document.createElement(ELEMENT.TD);
 
   tr.classList = "indexed-db-table-row";
-  tdLanguage.classList = "indexed-db-table-row-cell data language";
-  tdRating.classList = "indexed-db-table-row-cell data rating";
-  tdEdit.classList = "indexed-db-table-row-cell data edit";
-  tdDelete.classList = "indexed-db-table-row-cell data delete";
+  tdLanguage.classList =
+    "indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-language";
+  tdRating.classList =
+    "indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-rating";
+  tdEdit.classList =
+    "indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-edit";
+  tdDelete.classList =
+    "indexed-db-table-row-cell indexed-db-table-row-cell-data indexed-db-table-row-cell-delete";
 
   tdLanguage.textContent = key;
   tdRating.textContent = value;

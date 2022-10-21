@@ -4,7 +4,7 @@
   color: var(--background-color-secondary);
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: min(100rem, 100%);
 }
 
 .nav-list {

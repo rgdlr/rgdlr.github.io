@@ -1,10 +1,8 @@
 {
   "programmingLanguages": [
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
       "name": ".net",
       "paradigms": [],
@@ -12,10 +10,8 @@
       "website": "https://dotnet.microsoft.com"
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg",
       "name": "bash",
       "paradigms": [],
@@ -23,10 +19,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
       "name": "c",
       "paradigms": [],
@@ -34,10 +28,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
       "name": "c++",
       "paradigms": [],
@@ -45,10 +37,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
       "name": "c#",
       "paradigms": [],
@@ -56,10 +46,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
       "name": "css",
       "paradigms": [],
@@ -67,10 +55,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elixir/elixir-original.svg",
       "name": "elixir",
       "paradigms": [],
@@ -78,10 +64,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/erlang/erlang-original.svg",
       "name": "erlang",
       "paradigms": [],
@@ -89,10 +73,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
       "name": "go",
       "paradigms": [],
@@ -100,10 +82,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/haskell/haskell-original.svg",
       "name": "haskell",
       "paradigms": [],
@@ -111,10 +91,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
       "name": "html",
       "paradigms": [],
@@ -122,10 +100,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": "1995-05-23"
-      },
       "filenameExtensions": ["class", "jar", "java", "jmod"],
+      "firstAppeared": "1995-05-23",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
       "name": "java",
       "paradigms": [
@@ -140,10 +116,8 @@
       "website": "https://www.java.com"
     },
     {
-      "dates": {
-        "firstAppeared": "1995-12-04"
-      },
       "filenameExtensions": ["cjs", "js", "mjs"],
+      "firstAppeared": "1995-12-04",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
       "name": "javascript",
       "paradigms": ["event-driven", "functional", "imperative", "object-oriented", "procedural"],
@@ -151,10 +125,8 @@
       "website": "https://www.ecma-international.org/publications-and-standards/standards/ecma-262"
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
       "name": "kotlin",
       "paradigms": [],
@@ -162,10 +134,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg",
       "name": "latex",
       "paradigms": [],
@@ -173,10 +143,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg",
       "name": "markdown",
       "paradigms": [],
@@ -184,10 +152,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/objectivec/objectivec-plain.svg",
       "name": "objective-c",
       "paradigms": [],
@@ -195,10 +161,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/perl/perl-original.svg",
       "name": "perl",
       "paradigms": [],
@@ -206,10 +170,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
       "name": "php",
       "paradigms": [],
@@ -217,10 +179,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
       "name": "python",
       "paradigms": [],
@@ -228,10 +188,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg",
       "name": "r",
       "paradigms": [],
@@ -239,10 +197,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg",
       "name": "ruby",
       "paradigms": [],
@@ -250,10 +206,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg",
       "name": "rust",
       "paradigms": [],
@@ -261,10 +215,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
       "name": "swift",
       "paradigms": [],
@@ -272,10 +224,8 @@
       "website": ""
     },
     {
-      "dates": {
-        "firstAppeared": ""
-      },
       "filenameExtensions": [],
+      "firstAppeared": "",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
       "name": "typescript",
       "paradigms": [],
@@ -283,13 +233,13 @@
       "website": ""
     }
   ],
-  "types": [
-    { "key": "filenameExtensions", "value": "array" },
-    { "key": "icon", "value": "string" },
-    { "key": "name", "value": "string" },
-    { "key": "paradigms", "value": "array" },
-    { "key": "dates", "value": "object" },
-    { "key": "typingDisciplines", "value": "array" },
-    { "key": "website", "value": "string" }
+  "descriptions": [
+    { "key": "filenameExtensions", "value": "array", "name": "Filename extensions" },
+    { "key": "firstAppeared", "value": "string", "name": "First appeared" },
+    { "key": "icon", "value": "string", "name": "Icon" },
+    { "key": "name", "value": "string", "name": "Name" },
+    { "key": "paradigms", "value": "array", "name": "Paradigms" },
+    { "key": "typingDisciplines", "value": "array", "name": "Typing disciplines" },
+    { "key": "website", "value": "string", "name": "Website" }
   ]
 }

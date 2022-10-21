@@ -1,0 +1,6 @@
+.header {
+  background-color: var(--background-color-primary);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
