@@ -2,6 +2,14 @@
 @import url(../drag/styles.css);
 @import url(../modal/styles.css);
 
+.file {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
 .file-input {
   height: 100%;
   left: 0;
