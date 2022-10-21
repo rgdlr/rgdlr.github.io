@@ -27,19 +27,19 @@ function getProgrammingLanguageCardHeader(programmingLanguage) {
 function getProgrammingLanguageCardBodyListItem(programmingLanguage, description) {
   const listItemTitle = window.document.createElement(ELEMENT.SPAN);
   listItemTitle.classList.add("card-body-list-item-title");
-  listItemTitle.textContent = description.name;
+  listItemTitle.textContent = description.value;
 
   const listItemDescription = window.document.createElement(ELEMENT.SPAN);
   listItemDescription.classList.add("card-body-list-item-description");
 
-  if (description.value === "string") {
+  if (description.type === "string") {
     listItemDescription.textContent = programmingLanguage[description.key] || "-";
   }
-  if (description.value === "array") {
+  if (description.type === "array") {
     listItemDescription.textContent =
       programmingLanguage[description.key].reduce(
         (fullDescription, description) =>
-          (fullDescription === "" ? fullDescription : fullDescription + ", ") + description,
+          (fullDescription === "" ? fullDescription : `${fullDescription}, `) + description,
         ""
       ) || "-";
   }
@@ -97,14 +97,50 @@ function getProgrammingLanguageCard(programmingLanguage, descriptions) {
   return article;
 }
 
-async function getProgrammingLanguages() {
+function getMoreProgrammingLanguages(entries) {
+  if (entries[0].isIntersecting) {
+    getProgrammingLanguages();
+  }
+}
+
+let programmingLanguagesTotalRequestAmount = 0;
+const intersectionObserver = new window.IntersectionObserver(getMoreProgrammingLanguages);
+
+async function getProgrammingLanguages(
+  container = window.document.querySelector(".lazy-load"),
+  itemsPerLoad = 4
+) {
+  // TODO : think about observing footer instead of elements : specific use case?
+  // TODO : think about improving behavior
   const programmingLanguagesResponse = await window.fetch("./data/programming-languages.json");
   const { programmingLanguages, descriptions } = await programmingLanguagesResponse.json();
-  programmingLanguages.forEach((language) => {
-    window.document
-      .querySelector(".lazy-load")
-      .appendChild(getProgrammingLanguageCard(language, descriptions));
-  });
+  const documentFragment = window.document.createDocumentFragment();
+
+  for (
+    let programmingLanguageIndex = 0;
+    programmingLanguageIndex < itemsPerLoad;
+    programmingLanguageIndex++
+  ) {
+    if (programmingLanguages[programmingLanguagesTotalRequestAmount]) {
+      const programmingLanguageCard = getProgrammingLanguageCard(
+        programmingLanguages[programmingLanguagesTotalRequestAmount],
+        descriptions
+      );
+      documentFragment.appendChild(programmingLanguageCard);
+      programmingLanguagesTotalRequestAmount++;
+      if (programmingLanguageIndex === itemsPerLoad - 1) {
+        intersectionObserver.observe(programmingLanguageCard);
+      }
+    } else {
+      const noMoreElements = document.createElement(ELEMENT.H3);
+      noMoreElements.textContent = "No more elements";
+      noMoreElements.style.paddingTop = "2rem";
+      window.document.querySelector(".main-content").appendChild(noMoreElements);
+      intersectionObserver.disconnect();
+      break;
+    }
+  }
+  container.appendChild(documentFragment);
 }
 
 getProgrammingLanguages();

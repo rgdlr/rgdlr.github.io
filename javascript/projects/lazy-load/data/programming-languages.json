@@ -234,12 +234,12 @@
     }
   ],
   "descriptions": [
-    { "key": "filenameExtensions", "value": "array", "name": "Filename extensions" },
-    { "key": "firstAppeared", "value": "string", "name": "First appeared" },
-    { "key": "icon", "value": "string", "name": "Icon" },
-    { "key": "name", "value": "string", "name": "Name" },
-    { "key": "paradigms", "value": "array", "name": "Paradigms" },
-    { "key": "typingDisciplines", "value": "array", "name": "Typing disciplines" },
-    { "key": "website", "value": "string", "name": "Website" }
+    { "key": "filenameExtensions", "value": "Filename extensions", "type": "array" },
+    { "key": "firstAppeared", "value": "First appeared", "type": "string" },
+    { "key": "icon", "value": "Icon", "type": "string" },
+    { "key": "name", "value": "Name", "type": "string" },
+    { "key": "paradigms", "value": "Paradigms", "type": "array" },
+    { "key": "typingDisciplines", "value": "Typing disciplines", "type": "array" },
+    { "key": "website", "value": "Website", "type": "string" }
   ]
 }
