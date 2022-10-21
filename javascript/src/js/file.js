@@ -8,39 +8,33 @@ export const FILE = {
     JPG: "jpg",
     MOV: "mov",
     MP4: "mp4",
+    PDF: "pdf",
     PNG: "png",
     TIFF: "tiff",
     TXT: "txt",
   },
   TYPE: {
     IMAGE: "image",
+    DOCUMENT: "document",
     TEXT: "text",
     VIDEO: "video",
   },
 };
 
 export const FILES = {
-  IMAGE: [
-    FILE.EXTENSION.JPEG,
-    FILE.EXTENSION.JPG,
-    FILE.EXTENSION.PNG,
-    FILE.EXTENSION.TIFF
-  ],
-  TEXT: [
-    FILE.EXTENSION.TXT
-  ],
-  VIDEO: [
-    FILE.EXTENSION.AVI,
-    FILE.EXTENSION.GIF,
-    FILE.EXTENSION.MOV,
-    FILE.EXTENSION.MP4
-  ],
+  DOCUMENT: [FILE.EXTENSION.PDF],
+  IMAGE: [FILE.EXTENSION.JPEG, FILE.EXTENSION.JPG, FILE.EXTENSION.PNG, FILE.EXTENSION.TIFF],
+  TEXT: [FILE.EXTENSION.TXT],
+  VIDEO: [FILE.EXTENSION.AVI, FILE.EXTENSION.GIF, FILE.EXTENSION.MOV, FILE.EXTENSION.MP4],
 };
 
 export class FileTools {
   constructor(file) {
     this.file = file;
     if (!this.isValid) throw new Error("Invalid file type");
+  }
+  get isDocument() {
+    return StaticFileTools.isDocument(this.file);
   }
   get extension() {
     return StaticFileTools.extension(this.file);
@@ -63,6 +57,10 @@ export class StaticFileTools {
   static extension(file) {
     return file.name.split(".").pop();
   }
+  static isDocument(file) {
+    const fileExtension = this.extension(file).toLowerCase();
+    return FILES.DOCUMENT.includes(fileExtension);
+  }
   static isImage(file) {
     const fileExtension = this.extension(file).toLowerCase();
     return FILES.IMAGE.includes(fileExtension);
@@ -76,7 +74,10 @@ export class StaticFileTools {
     return FILES.VIDEO.includes(fileExtension);
   }
   static isValid(file) {
-    return file && (this.isImage(file) || this.isText(file) || this.isVideo(file));
+    return (
+      file &&
+      (this.isDocument(file) || this.isImage(file) || this.isText(file) || this.isVideo(file))
+    );
   }
 }
 

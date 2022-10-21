@@ -72,7 +72,6 @@ function outputImageFile(_event, file, index, output) {
 }
 
 function outputVideoFile(event, file, index, output) {
-  // TODO : load video + use progress bar (events: progress, loadend)
   const blobArguments = {
     blobParts: [new Uint8Array(event.target.result)],
     options: { type: "video/mp4" },
@@ -84,6 +83,17 @@ function outputVideoFile(event, file, index, output) {
   video.onclick = () => {
     video.currentTime === 0 || video.paused || video.ended ? video.play() : video.pause();
   };
+}
+
+function outputDocumentFile(event, file, index, output) {
+  const blobArguments = {
+    blobParts: [new Uint8Array(event.target.result)],
+    options: { type: "application/pdf" },
+  };
+  const blob = new Blob(blobArguments.blobParts, blobArguments.options);
+  const pdf = window.document.createElement(ELEMENT.IFRAME);
+  pdf.setAttribute(ATTRIBUTE.SRC, URL.createObjectURL(blob).concat("#toolbar=0"));
+  appendChildToModal(output, pdf, index);
 }
 
 function readFiles(event, output, loadingBarProgress) {
@@ -110,6 +120,12 @@ function readFiles(event, output, loadingBarProgress) {
       loadingBarProgress.style.width = `${fileProperties.progress.rate}%`;
     });
 
+    if (fileInput.isDocument) {
+      fileReader.readAsArrayBuffer(file);
+      fileReader.addEventListener(EVENT.LOAD, (event) =>
+        outputDocumentFile(event, file, index, output)
+      );
+    }
     if (fileInput.isText) {
       fileReader.readAsText(file);
       fileReader.addEventListener(EVENT.LOAD, (event) =>
