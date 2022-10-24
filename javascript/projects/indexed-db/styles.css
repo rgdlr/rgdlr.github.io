@@ -26,6 +26,10 @@
   opacity: 0.8;
 }
 
+.indexed-db-form-input-submit:hover {
+  opacity: 0.8;
+}
+
 .indexed-db-table-scroll {
   overflow-x: auto;
   padding-bottom: 0.5rem;

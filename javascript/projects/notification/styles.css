@@ -1,1 +1,27 @@
 @import url(../../src/css/index.css);
+@import url(../clock/style.css);
+
+.clock-hours:hover,
+.clock-minutes:hover,
+.clock-seconds:hover {
+  color: var(--background-color-main);
+}
+
+.timer {
+  margin: 1rem;
+}
+
+.timer-button {
+  background: var(--background-color-gradient);
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
+  color: var(--color-main);
+  font-weight: bold;
+  min-width: 8rem;
+  padding: 0.5rem 1rem;
+}
+
+.timer-button:hover {
+  background: var(--color-main);
+  color: var(--background-color-main);
+}
