@@ -25,9 +25,10 @@ export async function checkNotification() {
     throw new Error("Notifications are not available in browser");
   }
   if (notification.permission === NOTIFICATION.PERMISSION.DEFAULT) {
-    await notification.requestPermission((permission) => {
-      throw new Error("Notifications are disabled by user");
-    });
+    await notification.requestPermission((permission) => {});
+    if (notification.permission === NOTIFICATION.PERMISSION.DEFAULT) {
+      throw new Error("Notifications are disabled by default");
+    }
   }
   if (notification.permission === NOTIFICATION.PERMISSION.DENIED) {
     throw new Error("Notifications are not allowed by user");
