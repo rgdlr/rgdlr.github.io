@@ -33,6 +33,8 @@ import "./node.js";
 export * from "./node.js";
 import "./navigator.js";
 export * from "./navigator.js";
+import "./notification.js";
+export * from "./notification.js";
 import "./object.js";
 export * from "./object.js";
 import "./prototype.js";
@@ -41,6 +43,8 @@ import "./sessionStorage.js";
 export * from "./sessionStorage.js";
 import "./time.js";
 export * from "./time.js";
+import "./webWorker.js";
+export * from "./webWorker.js";
 
 import "./custom.js";
 export * from "./custom.js";
