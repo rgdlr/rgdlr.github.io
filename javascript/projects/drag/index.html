@@ -1,82 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drag</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./script.js" defer></script>
-  </head>
 
-  <body>
-    <header class="header">
-      <nav class="nav">
-        <ul class="nav-list">
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript">Home</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/clock">Clock</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/drag">Drag</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/gps">GPS</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/history">History</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/modal">Modal</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/file">File</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/indexed-db">Indexed DB</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/lazy-load">Lazy Load</a>
-          </li>
-        </ul>
-        <div class="nav-right">
-          <label class="switch">
-            <input class="switch-checkbox" type="checkbox" />
-            <div class="switch-circle"></div>
-          </label>
-        </div>
-      </nav>
-    </header>
-    <main class="main">
-      <h1 class="main-title">Drag</h1>
-      <div class="main-content">
-        <p class="main-paragraph">
-          To create a draggable element, add <b>draggable="true"</b> attribute to tag
-        </p>
-        <p class="main-paragraph">
-          <small><b>WARN</b> : drag is only available in desktop mode</small>
-        </p>
-        <section class="drop">
-          <div class="drag-source"></div>
-          <div class="drag-target file">
-            <div class="drop-title">
-              <span>Drag and drop circle here</span>
-            </div>
-          </div>
-        </section>
-        <section class="drag-container">
-          <span draggable="true" class="drag drag-primary"></span>
-          <span draggable="true" class="drag drag-secondary"></span>
-          <span draggable="true" class="drag drag-element"></span>
-        </section>
-      </div>
-    </main>
-    <footer class="footer">
-      <ul class="footer-list">
-        <li class="footer-list-item">All Rights Reserved © 2022 RGDLR</li>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drag</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript">Home</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/clock">Clock</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/drag">Drag</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/gps">GPS</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/history">History</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/modal">Modal</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/file">File</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/indexed-db">Indexed DB</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/lazy-load">Lazy Load</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/notification">Notification</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/web-worker">Web Worker</a>
+        </li>
       </ul>
-    </footer>
-  </body>
+      <div class="nav-right">
+        <label class="switch">
+          <input class="switch-checkbox" type="checkbox" />
+          <div class="switch-circle"></div>
+        </label>
+      </div>
+    </nav>
+  </header>
+  <main class="main">
+    <h1 class="main-title">Drag</h1>
+    <div class="main-content">
+      <p class="main-paragraph">
+        To create a draggable element, add <b>draggable="true"</b> attribute to tag
+      </p>
+      <p class="main-paragraph">
+        <small><b>WARN</b> : drag is only available in desktop mode</small>
+      </p>
+      <section class="drop">
+        <div class="drag-source"></div>
+        <div class="drag-target file">
+          <div class="drop-title">
+            <span>Drag and drop circle here</span>
+          </div>
+        </div>
+      </section>
+      <section class="drag-container">
+        <span draggable="true" class="drag drag-primary"></span>
+        <span draggable="true" class="drag drag-secondary"></span>
+        <span draggable="true" class="drag drag-element"></span>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">
+    <ul class="footer-list">
+      <li class="footer-list-item">All Rights Reserved © 2022 RGDLR</li>
+    </ul>
+  </footer>
+</body>
+
 </html>

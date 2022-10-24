@@ -9,8 +9,8 @@
 }
 
 .card {
-  background: var(--background-color-gradient);
-  border: var(--border-size) solid var(--color-main);
+  background: var(--background-color-gradient-alpha);
+  border: var(--border-size) solid var(--color-main-alpha);
   border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;

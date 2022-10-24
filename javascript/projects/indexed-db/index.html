@@ -1,110 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IndexedDB</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./script.js" defer></script>
-  </head>
 
-  <body>
-    <header class="header">
-      <nav class="nav">
-        <ul class="nav-list">
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript">Home</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/clock">Clock</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/drag">Drag</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/gps">GPS</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/history">History</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/modal">Modal</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/file">File</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/indexed-db">Indexed DB</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/lazy-load">Lazy Load</a>
-          </li>
-        </ul>
-        <div class="nav-right">
-          <label class="switch">
-            <input class="switch-checkbox" type="checkbox" />
-            <div class="switch-circle"></div>
-          </label>
-        </div>
-      </nav>
-    </header>
-    <main class="main">
-      <h1 class="main-title">IndexedDB</h1>
-      <div class="main-content">
-        <section class="indexed-db">
-          <form class="indexed-db-form">
-            <input
-              autocomplete="off"
-              class="indexed-db-form-input language"
-              type="text"
-              placeholder="Language"
-              required
-              name="language"
-            />
-            <input
-              autocomplete="off"
-              class="indexed-db-form-input rating"
-              type="number"
-              placeholder="Rating"
-              required
-              name="rating"
-            />
-            <input class="indexed-db-form-input-submit" type="submit" value="Save" />
-          </form>
-          <div class="indexed-db-table-scroll">
-            <table class="indexed-db-table">
-              <thead class="indexed-db-table-head">
-                <tr class="indexed-db-table-row">
-                  <th
-                    class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-language"
-                  >
-                    <span>Language</span>
-                  </th>
-                  <th
-                    class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-rating"
-                  >
-                    <span>Rating</span>
-                  </th>
-                  <th
-                    class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-edit"
-                  ></th>
-                  <th
-                    class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-delete"
-                  ></th>
-                </tr>
-              </thead>
-              <tbody class="indexed-db-table-body"></tbody>
-              <tfoot class="indexed-db-table-footer"></tfoot>
-            </table>
-          </div>
-        </section>
-      </div>
-    </main>
-    <footer class="footer">
-      <ul class="footer-list">
-        <li class="footer-list-item">All Rights Reserved © 2022 RGDLR</li>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IndexedDB</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript">Home</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/clock">Clock</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/drag">Drag</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/gps">GPS</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/history">History</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/modal">Modal</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/file">File</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/indexed-db">Indexed DB</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/lazy-load">Lazy Load</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/notification">Notification</a>
+        </li>
+        <li class="nav-list-item">
+          <a class="nav-list-item-link" href="/javascript/projects/web-worker">Web Worker</a>
+        </li>
       </ul>
-    </footer>
-  </body>
+      <div class="nav-right">
+        <label class="switch">
+          <input class="switch-checkbox" type="checkbox" />
+          <div class="switch-circle"></div>
+        </label>
+      </div>
+    </nav>
+  </header>
+  <main class="main">
+    <h1 class="main-title">IndexedDB</h1>
+    <div class="main-content">
+      <section class="indexed-db">
+        <form class="indexed-db-form">
+          <input autocomplete="off" class="indexed-db-form-input language" type="text" placeholder="Language" required
+            name="language" />
+          <input autocomplete="off" class="indexed-db-form-input rating" type="number" placeholder="Rating" required
+            name="rating" />
+          <input class="indexed-db-form-input-submit" type="submit" value="Save" />
+        </form>
+        <div class="indexed-db-table-scroll">
+          <table class="indexed-db-table">
+            <thead class="indexed-db-table-head">
+              <tr class="indexed-db-table-row">
+                <th
+                  class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-language">
+                  <span>Language</span>
+                </th>
+                <th class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-rating">
+                  <span>Rating</span>
+                </th>
+                <th class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-edit">
+                </th>
+                <th class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-delete">
+                </th>
+              </tr>
+            </thead>
+            <tbody class="indexed-db-table-body"></tbody>
+            <tfoot class="indexed-db-table-footer"></tfoot>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">
+    <ul class="footer-list">
+      <li class="footer-list-item">All Rights Reserved © 2022 RGDLR</li>
+    </ul>
+  </footer>
+</body>
+
 </html>
