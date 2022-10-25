@@ -5,6 +5,7 @@ import { EVENT, objectClassToSelector } from "./index.js";
 const HISTORY_CLASS = {
   BACK: "history-back",
   FORWARD: "history-forward",
+  QUERY_PARAMETER_FORM: "history-query-parameter-form",
   QUERY_PARAMETER_BUTTON: "history-query-parameter-button",
   QUERY_PARAMETER_INPUT: "history-query-parameter-input",
 };

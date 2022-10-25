@@ -40,9 +40,15 @@
 .history-query-parameter-button {
   background-color: transparent;
   border: none;
+  border-bottom: 1px solid transparent;
   color: var(--color-main);
   margin-top: 0.25rem;
   outline: none;
+}
+
+.history-query-parameter-input:focus,
+.history-query-parameter-button:focus {
+  border-bottom: 1px solid var(--color-main);
 }
 
 .history-query-parameter-input {
