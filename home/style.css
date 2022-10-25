@@ -1,8 +1,8 @@
 /* DOCUMENT */
 
 :root {
-  --d: 700ms;
-  --e: cubic-bezier(0.19, 1, 0.22, 1);
+  --delay: 700ms;
+  --cubic-bezier: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 * {
@@ -37,7 +37,7 @@ html {
   width: min(75rem, 85%);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   color: aliceblue;
 }
@@ -50,109 +50,6 @@ html {
 .cover-subtitle {
   font-size: min(2.9vw, 1.5rem);
   text-align: center;
-}
-
-.cover-code,
-.cover-arrow {
-  height: 10rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-lower,
-.icon-greater,
-.icon-arrow-down {
-  height: 3rem;
-  width: 3rem;
-  aspect-ratio: 1/1;
-  border-top: 0.7rem solid aliceblue;
-  border-left: 0.7rem solid aliceblue;
-}
-
-.icon-lower {
-  rotate: -45deg;
-  translate: 1.5rem;
-  animation: code-icon-lower 1s ease-in-out 1s forwards;
-}
-
-@keyframes code-icon-lower {
-  to {
-    rotate: calc(360deg - 45deg);
-    translate: 0rem;
-  }
-}
-
-.icon-greater {
-  rotate: 135deg;
-  translate: -1.5rem;
-  animation: code-icon-greater 1s ease-in-out 1s forwards;
-}
-
-@keyframes code-icon-greater {
-  to {
-    rotate: calc(360deg + 135deg);
-    translate: 0rem;
-  }
-}
-
-.icon-bar {
-  height: 5rem;
-  border-top: 0.7rem solid aliceblue;
-  border-left: 0.7rem solid aliceblue;
-  rotate: -360deg;
-  animation: code-icon-bar 1s ease-in-out 1s forwards;
-}
-
-@keyframes code-icon-bar {
-  to {
-    rotate: 20deg;
-  }
-}
-
-.icon-text {
-  width: 0rem;
-  overflow: hidden;
-  font-size: 5rem;
-  animation: code-icon-text 1s ease-in-out 1s forwards;
-}
-
-@keyframes code-icon-text {
-  to {
-    width: 20rem;
-  }
-}
-
-.icon-arrow-circle {
-  opacity: 0;
-  padding: 2rem;
-  border: 5px solid aliceblue;
-  border-radius: 50%;
-  scale: 0.35;
-  animation: code-icon-arrow-circle 1.75s ease-in-out 2s infinite;
-}
-
-.icon-arrow-down {
-  rotate: 225deg;
-  translate: 0 -0.5rem;
-}
-
-@keyframes code-icon-arrow-circle {
-  50% {
-    opacity: 0.5;
-    transform: translateY(1rem);
-  }
-}
-
-@media (max-width: 600px) {
-  .cover-arrow,
-  .cover-code {
-    scale: 0.5;
-  }
-  .icon-text {
-    font-size: 3rem;
-  }
 }
 
 /* NAVIGATIONs */
@@ -235,6 +132,7 @@ html {
   .nav-bar a:hover {
     color: #252525;
   }
+
   .nav-bar-mobile {
     display: none;
   }
@@ -245,7 +143,7 @@ html {
 .about,
 .portfolio,
 .contact {
-  width: min(75rem, 85%);
+  width: min(80rem, 85%);
   margin: 0rem auto;
   color: #505050;
   z-index: 1;
@@ -256,7 +154,6 @@ html {
 .contact h2 {
   font-size: 2rem;
   margin: 5rem 0rem 2rem 0rem;
-  /* padding: 0.5rem 1rem 0.5rem 0.5rem; */
 }
 
 /* [CONTENT] ABOUT */
@@ -332,7 +229,7 @@ hr {
 .card:hover .card-content > * {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: calc(var(--d) / 8);
+  transition-delay: calc(var(--delay) / 8);
 }
 
 .card:before {
@@ -344,7 +241,7 @@ hr {
   height: 110%;
   background-size: cover;
   background-position: 0 0;
-  transition: transform calc(var(--d) * 1.5 var(--e));
+  transition: transform calc(var(--delay) * 1.5 var(--cubic-bezier));
   pointer-events: none;
 }
 
@@ -363,13 +260,12 @@ hr {
   height: 200%;
   pointer-events: none;
   background-image: linear-gradient(
-    to bottom,
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0) 35%,
     rgba(0, 0, 0, 0.8) 100%
   );
   transform: translateY(-50%);
-  transition: transform calc(var(--d) * 2 var(--e));
+  transition: transform calc(var(--delay) * 2 var(--cubic-bezier));
 }
 
 .card:hover:after {
@@ -412,7 +308,7 @@ hr {
   align-items: center;
   width: 100%;
   padding: 1rem;
-  transition: transform var(--d) var(--e);
+  transition: transform var(--delay) var(--cubic-bezier);
   z-index: 1;
 }
 
@@ -445,7 +341,7 @@ hr {
 .card-button:hover {
   background-color: rgb(29, 26, 26);
   color: #fff;
-  transition: transform var(--d) var(--e), opacity var(--d) var(--e);
+  transition: transform var(--delay) var(--cubic-bezier), opacity var(--delay) var(--cubic-bezier);
 }
 
 .card-button:focus {
@@ -460,7 +356,7 @@ hr {
 .card-content > * {
   opacity: 0;
   transform: translateY(1rem);
-  transition: transform var(--d) var(--e), opacity var(--d) var(--e);
+  transition: transform var(--delay) var(--cubic-bezier), opacity var(--delay) var(--cubic-bezier);
 }
 
 /* [CONTENT] CONTACT */
@@ -629,7 +525,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8rem;
+  margin-top: 10rem;
   padding: 2rem 0rem;
 }
 
