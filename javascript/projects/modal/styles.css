@@ -61,6 +61,11 @@ body:has(.modal.hidden) {
   width: min(50rem, 95%);
 }
 
+.modal-window.modal-window-fit-content {
+  height: fit-content;
+  width: fit-content;
+}
+
 .modal-window-header,
 .modal-window-footer {
   align-items: center;
