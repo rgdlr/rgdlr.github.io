@@ -5,6 +5,8 @@ export * from "./event.js";
 
 import "./attribute.js";
 export * from "./attribute.js";
+import "./callback.js";
+export * from "./callback.js";
 import "./device.js";
 export * from "./device.js";
 import "./dragAndDrop.js";

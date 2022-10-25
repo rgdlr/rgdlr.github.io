@@ -1,6 +1,6 @@
 "use strict";
 
-import { EVENT } from "./index.js";
+import { EVENT, throwEventCallback } from "./index.js";
 
 const NOTIFICATION = {
   PERMISSION: {
@@ -12,7 +12,7 @@ const NOTIFICATION = {
   OPTIONS: {
     body: "Notification body",
     icon: "",
-    dir: "ltr",
+    dir: "ltr" | "rtl" | "auto",
   },
 };
 
@@ -38,13 +38,20 @@ export async function checkNotification() {
   }
 }
 
-export function notify(title = NOTIFICATION.TITLE, options = NOTIFICATION.OPTIONS) {
+export function notify(
+  title = NOTIFICATION.TITLE,
+  options = NOTIFICATION.OPTIONS,
+  callbacks = { onClick: () => {}, onClose: () => {}, onError: () => {}, onShow: () => {} }
+) {
   checkNotification();
   const notification = new Notification(title, options);
   notification.addEventListener(EVENT.CLICK, (event) => {
     window.parent.focus();
     notification.close();
+    throwEventCallback(onClick, event);
   });
+  notification.addEventListener(EVENT.CLOSE, (event) => throwEventCallback(onClose, event));
+  notification.addEventListener(EVENT.ERROR, (event) => throwEventCallback(onError, event));
 }
 
 export function useNotification(title = NOTIFICATION.TITLE, options = NOTIFICATION.OPTIONS) {

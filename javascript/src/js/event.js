@@ -5,6 +5,7 @@ export const EVENT = {
   BLUR: "blur",
   CHANGE: "change",
   CLICK: "click",
+  CLOSE: "close",
   COMPLETE: "complete",
   DRAG: "drag",
   DRAG_END: "dragend",
