@@ -15,18 +15,24 @@ export const CLOCK = {
   SELECTOR: { ...CLOCK_CLASS, ...objectClassToSelector(CLOCK_CLASS) },
 };
 
-export function formatNumberDigits(number, minimumIntegerDigits = 2) {
-  // const PAD_STRING = "0";
-  // return number.toString().padStart(minimumIntegerDigits, PAD_STRING);
-  return number.toLocaleString("en-US", { minimumIntegerDigits, useGrouping: false });
+// TODO : decouple functionality, elements as arguments, classes outside, etc.
+
+export function formatNumberDigitsFromNumber(number, minimumIntegerDigits = 2) {
+  const LOCALES = "en-US";
+  return number.toLocaleString(LOCALES, { minimumIntegerDigits, useGrouping: false });
+}
+
+export function formatNumberDigitsFromString(number, minimumIntegerDigits = 2) {
+  const FILL_STRING = "0";
+  return number.toString().padStart(minimumIntegerDigits, FILL_STRING);
 }
 
 export function getCurrentTime() {
   const time = new Date();
   return {
-    hours: formatNumberDigits(time.getHours()),
-    minutes: formatNumberDigits(time.getMinutes()),
-    seconds: formatNumberDigits(time.getSeconds()),
+    hours: formatNumberDigitsFromNumber(time.getHours()),
+    minutes: formatNumberDigitsFromNumber(time.getMinutes()),
+    seconds: formatNumberDigitsFromNumber(time.getSeconds()),
   };
 }
 

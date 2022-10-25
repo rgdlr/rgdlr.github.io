@@ -22,6 +22,8 @@ export const MODAL = {
   SELECTOR: { ...MODAL_CLASS, ...objectClassToSelector(MODAL_CLASS) },
 };
 
+// TODO : decouple functionality, elements as arguments, classes outside, etc.
+
 export function initializeModal({ accept, cancel, close, modal, open }) {
   accept.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
   cancel.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));

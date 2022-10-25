@@ -20,6 +20,8 @@ export const HISTORY = {
   SELECTOR: { ...HISTORY_CLASS, ...objectClassToSelector(HISTORY_CLASS) },
 };
 
+// TODO : decouple functionality, elements as arguments, classes outside, etc.
+
 export function initializeHistory({ back, forward, queryParameterButton, queryParameterInput }) {
   back.addEventListener(EVENT.CLICK, (_event) => {
     historyGoBack();

@@ -18,6 +18,7 @@ const NOTIFICATION = {
 
 // NOTE : user should have OS notification turned on to work properly
 // TODO : could use "alert" function when "Notification" is DENIED
+// TODO : decouple functionality, elements as arguments, classes outside, etc.
 
 export async function checkNotification() {
   const notification = window.Notification;

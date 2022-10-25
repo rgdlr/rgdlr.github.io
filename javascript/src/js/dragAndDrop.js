@@ -13,6 +13,8 @@ export const DRAG = {
   IS_DROPPED: false,
 };
 
+// TODO : decouple functionality, elements as arguments, classes outside, etc.
+
 export function initializeDrag({ container, source, target, primary, secondary }) {
   source.addEventListener(EVENT.DRAG_START, (_event) => {
     DRAG.IS_DROPPED = false;
