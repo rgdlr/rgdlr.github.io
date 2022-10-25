@@ -1,23 +1,40 @@
 @import url(../../src/css/index.css);
 
+/* GRID LAYOUT */
+
 .lazy-load {
   width: 100%;
+}
+
+.lazy-load.lazy-load-flex {
   display: flex;
   flex-wrap: wrap;
+  gap: 2rem;
   justify-content: center;
-  gap: 1rem;
+}
+
+.lazy-load.lazy-load-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
 }
 
 .card {
   background: var(--background-color-gradient);
-  border: var(--border-size) solid var(--color-main);
   border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 1rem;
+  justify-content: space-between;
   padding: 1rem;
-  width: min(25rem, 100%);
+}
+
+.card.card-flex {
+  width: min(23rem, 100%);
+}
+
+.card.card-grid {
+  margin: 1rem;
 }
 
 .card-header {

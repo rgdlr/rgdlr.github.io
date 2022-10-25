@@ -90,6 +90,7 @@ function getProgrammingLanguageCard(programmingLanguage, descriptions) {
 
   const article = window.document.createElement(ELEMENT.ARTICLE);
   article.classList.add("card");
+  article.classList.add("card-flex");
   article.appendChild(cardHeader);
   article.appendChild(cardBody);
   article.appendChild(cardFooter);
