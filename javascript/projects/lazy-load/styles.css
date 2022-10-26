@@ -9,13 +9,14 @@
 .lazy-load.lazy-load-flex {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
 }
 
 .lazy-load.lazy-load-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
 }
 
 .card {
@@ -34,7 +35,7 @@
 }
 
 .card.card-grid {
-  margin: 1rem;
+  margin: 0rem;
 }
 
 .card-header {
