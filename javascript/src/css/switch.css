@@ -12,11 +12,11 @@
 }
 
 .switch-circle {
-  background-color: var(--color-main);
+  background-color: var(--background-color-main);
   border-radius: 50%;
   display: none;
   height: 1.35rem;
-  left: 5%;
+  left: 3.5%;
   place-content: center;
   position: absolute;
   top: 5%;
@@ -27,9 +27,7 @@
 }
 
 .switch-checkbox:checked + .switch-circle {
-  transform: translateX(100%);
-  -webkit-transform: translateX(100%);
-  -moz-transform: translateX(100%);
+  left: 52%;
 }
 
 .switch-checkbox:not(:checked) + .switch-circle::before {
