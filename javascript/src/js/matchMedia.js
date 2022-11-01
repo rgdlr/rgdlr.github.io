@@ -1,10 +1,10 @@
 "use strict";
 
-import { EVENT } from "./index.js";
+import { EVENT, throwCallback } from "./index.js";
 
 function onMediaQueryListMatches(mediaQueryList, callback) {
   if (mediaQueryList.matches) {
-    callback();
+    throwCallback(callback);
   }
 }
 
@@ -14,9 +14,11 @@ export function matchMediaQueryOnMatches(query, callback) {
   mediaQueryList.addEventListener(EVENT.CHANGE, (_event) =>
     onMediaQueryListMatches(mediaQueryList, callback)
   );
+  return mediaQueryList;
 }
 
 export function matchMediaQuery(query, callback) {
   const mediaQueryList = window.matchMedia(query);
   mediaQueryList.addEventListener(EVENT.CHANGE, callback);
+  return mediaQueryList;
 }

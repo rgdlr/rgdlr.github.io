@@ -22,7 +22,7 @@ export function getCoordinates(successCallback, errorCallback, options) {
     maximumAge: 0,
     timeout: 1000,
   };
-  window.navigator.geolocation.getCurrentPosition(_successCallback, _errorCallback, _options);
+  return window.navigator.geolocation.getCurrentPosition(_successCallback, _errorCallback, _options);
 }
 
 export function watchPosition() {

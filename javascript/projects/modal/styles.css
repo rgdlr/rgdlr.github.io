@@ -89,8 +89,8 @@ body:has(.modal.hidden) {
   place-items: center;
   position: absolute;
   right: 1rem;
-  top: -1.75rem;
-  width: 3rem;
+  top: -1.5rem;
+  width: 2.5rem;
 }
 
 .modal-window-header-close:hover {

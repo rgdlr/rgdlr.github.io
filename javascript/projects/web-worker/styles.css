@@ -1,1 +1,3 @@
 @import url(../../src/css/index.css);
+@import url(../clock/style.css);
+@import url(../notification/styles.css);

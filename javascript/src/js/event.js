@@ -20,6 +20,7 @@ export const EVENT = {
   KEY_UP: "keyup",
   LOAD: "load",
   LOAD_END: "loadend",
+  MESSAGE: "message",
   MOUSE_DOWN: "mousedown",
   POP_STATE: "popstate",
   PROGRESS: "progress",

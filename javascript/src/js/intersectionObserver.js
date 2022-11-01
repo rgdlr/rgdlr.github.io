@@ -1,7 +1,5 @@
 "use strict";
 
-import {} from "./index.js";
-
 const INTERSECTION_OBSERVER = {
   DEFAULT: {
     CALLBACK: (entries, observer) => {},
@@ -36,4 +34,5 @@ export function addIntersectionObserver({
     });
   }, options);
   elements.forEach((element) => intersectionObserver.observe(element));
+  return intersectionObserver;
 }

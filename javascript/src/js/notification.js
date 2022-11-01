@@ -12,7 +12,7 @@ const NOTIFICATION = {
   OPTIONS: {
     body: "Notification body",
     icon: "",
-    dir: "ltr" | "rtl" | "auto",
+    dir: "ltr" || "rtl" || "auto",
   },
 };
 

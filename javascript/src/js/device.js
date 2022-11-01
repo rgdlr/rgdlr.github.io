@@ -1,7 +1,5 @@
 "use strict";
 
-import {} from "./index.js";
-
 export const DEVICE = {
   MAX_WIDTH: {
     MOBILE: {
