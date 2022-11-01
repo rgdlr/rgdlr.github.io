@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Web Worker</title>
   <link rel="icon" type="image/png" href="/home/images/icon.png" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./style.css" />
   <script type="module" src="./script.js" defer></script>
 </head>
 
@@ -61,13 +61,21 @@
     <h1 class="main-title">Web Worker</h1>
     <div class="main-content">
       <section class="clock">
-        <div class="clock-hours" contenteditable>00</div>
-        <div class="clock-minutes" contenteditable>00</div>
-        <div class="clock-seconds" contenteditable>00</div>
+        <div class="clock-hours">00</div>
+        <div class="clock-minutes">00</div>
+        <div class="clock-seconds">00</div>
       </section>
-      <section class="timer">
-        <button class="timer-button">START</button>
-      </section>
+      <br />
+      <form class="indexed-db-form">
+        <input autocomplete="off" class="indexed-db-form-input" type="text" placeholder="Fibonacci main" required
+          name="fibonacciMain" />
+        <input class="indexed-db-form-input-submit" type="submit" value="Calculate" />
+      </form>
+      <form class="indexed-db-form">
+        <input autocomplete="off" class="indexed-db-form-input" type="text" placeholder="Fibonacci worker" required
+          name="fibonacciWorker" />
+        <input class="indexed-db-form-input-submit" type="submit" value="Calculate" />
+      </form>
     </div>
   </main>
   <footer class="footer">

@@ -33,4 +33,14 @@ const worker = dedicatedWorker({
   },
 });
 
+const fibonacciWorker = dedicatedWorker({
+  scriptUrl: "http://localhost:5500/javascript/projects/web-worker/workers/worker.js",
+  message: { fibonacciRequest: 40 },
+  callback: (event) => {
+    console.log("fibonacciWorker:", event.data.fibonacciResponse);
+    fibonacciWorker.terminate();
+    console.log("fibonacciWorker terminated by script");
+  },
+});
+
 // TODO : same origin politic - when port is different from 5500

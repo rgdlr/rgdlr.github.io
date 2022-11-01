@@ -1,6 +1,6 @@
 @import url(../../src/css/index.css);
-@import url(../drag/styles.css);
-@import url(../modal/styles.css);
+@import url(../drag/style.css);
+@import url(../modal/style.css);
 
 .file {
   align-items: center;
