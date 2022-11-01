@@ -1,12 +1,6 @@
 "use strict";
 
-import {
-  dedicatedWorker,
-  EVENT,
-  fibonacci,
-  measureCallbackTime,
-  sleep,
-} from "../../src/js/index.js";
+import { dedicatedWorker, EVENT, fibonacci, Memoization, sleep } from "../../src/js/index.js";
 
 // TODO : same origin politic - when port is different from 5500
 // const worker = dedicatedWorker({
@@ -18,16 +12,20 @@ import {
 //   },
 // });
 
+const memoization = new Memoization();
+
 function showLoader(show, text) {
   const loader = window.document.querySelector(".web-worker-loader");
   show ? loader.removeAttribute("hidden") : loader.setAttribute("hidden", true);
   loader.querySelector(".web-worker-loader-text").textContent = text;
 }
 
-function showResult(number, result, time) {
+function showResult(number, result, time, cached) {
   window.document.querySelector(".fibonacci-number").textContent = number;
   window.document.querySelector(".fibonacci-result").textContent = result;
   window.document.querySelector(".fibonacci-time").textContent = time;
+  const cache = window.document.querySelector(".fibonacci-cached");
+  cached ? cache.removeAttribute("hidden") : cache.setAttribute("hidden", true);
   showLoader(false, "");
 }
 
@@ -38,16 +36,17 @@ window.document
     showLoader(true, "As operation is running in Main, you can not continue interacting");
     sleep(1).then(() => {
       const fibonacciMainInput = event.target.elements.fibonacciMain;
-      const { result, time } = measureCallbackTime(fibonacci, fibonacciMainInput.value);
-      showResult(fibonacciMainInput.value, result, time);
+      const fibonacciNumber = fibonacciMainInput.value;
+      const { cached, result, time } = memoization.measureUseMemo(fibonacci, fibonacciNumber);
+      showResult(fibonacciNumber, result, time, cached);
       fibonacciMainInput.value = "";
     });
   });
 
 const fibonacciWorker = dedicatedWorker({
   scriptUrl: "/javascript/projects/web-worker/workers/worker.js",
-  callback: (event) =>
-    showResult(event.data.fibonacciRequest, event.data.fibonacciResponse, event.data.time),
+  callback: ({ data: { fibonacciRequest, fibonacciResponse, time, cached } }) =>
+    showResult(fibonacciRequest, fibonacciResponse, time, cached),
 });
 
 window.document
@@ -56,6 +55,6 @@ window.document
     event.preventDefault();
     showLoader(true, "As operation is running in Worker, you can continue interacting");
     const fibonacciWorkerInput = event.target.elements.fibonacciWorker;
-    fibonacciWorker.postMessage({ fibonacciRequest: fibonacciWorkerInput.value });
+    fibonacciWorker.postMessage({ fibonacciRequest: fibonacciWorkerInput.value, memoization });
     fibonacciWorkerInput.value = "";
   });

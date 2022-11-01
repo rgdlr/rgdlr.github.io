@@ -2,6 +2,24 @@
 @import url(../clock/style.css);
 @import url(../indexed-db/style.css);
 
+.clock {
+  font-size: 1rem;
+  margin: 1rem;
+  position: relative;
+}
+
+.fibonacci-cached {
+  background-color: var(--background-color-main);
+  border-radius: 5rem;
+  border: var(--border-size) solid var(--color-main);
+  font-size: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  right: -1rem;
+  text-transform: uppercase;
+  top: -0.95rem;
+}
+
 .web-worker-loader:not([hidden]) {
   align-items: center;
   display: flex;
