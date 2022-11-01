@@ -36,7 +36,7 @@ window.document
   .addEventListener(EVENT.SUBMIT, (event) => {
     event.preventDefault();
     showLoader(true, "As operation is running in Main, you can not continue interacting");
-    sleep(0).then(() => {
+    sleep(1).then(() => {
       const fibonacciMainInput = event.target.elements.fibonacciMain;
       const { result, time } = measureCallbackTime(fibonacci, fibonacciMainInput.value);
       showResult(fibonacciMainInput.value, result, time);
