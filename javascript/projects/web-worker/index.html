@@ -60,22 +60,32 @@
   <main class="main">
     <h1 class="main-title">Web Worker</h1>
     <div class="main-content">
+      <form class="indexed-db-form fibonacci-main">
+        <input autocomplete="off" class="indexed-db-form-input" type="number" placeholder="Fibonacci main" required
+          name="fibonacciMain" max="45" />
+        <input class="indexed-db-form-input-submit" type="submit" value="Calculate" />
+      </form>
+      <form class="indexed-db-form fibonacci-worker">
+        <input autocomplete="off" class="indexed-db-form-input" type="number" placeholder="Fibonacci worker" required
+          name="fibonacciWorker" max="45" />
+        <input class=" indexed-db-form-input-submit" type="submit" value="Calculate" />
+      </form>
       <section class="clock">
-        <div class="clock-hours">00</div>
-        <div class="clock-minutes">00</div>
-        <div class="clock-seconds">00</div>
+        <div class="clock-hours">
+          <span class="fibonacci-number">00</span>
+        </div>
+        <div class="clock-minutes">
+          <span class="fibonacci-result">00</span>
+        </div>
+        <div class="clock-seconds">
+          <span class="fibonacci-time">00</span>
+          <span>ms</span>
+        </div>
       </section>
-      <br />
-      <form class="indexed-db-form">
-        <input autocomplete="off" class="indexed-db-form-input" type="text" placeholder="Fibonacci main" required
-          name="fibonacciMain" />
-        <input class="indexed-db-form-input-submit" type="submit" value="Calculate" />
-      </form>
-      <form class="indexed-db-form">
-        <input autocomplete="off" class="indexed-db-form-input" type="text" placeholder="Fibonacci worker" required
-          name="fibonacciWorker" />
-        <input class="indexed-db-form-input-submit" type="submit" value="Calculate" />
-      </form>
+      <div class="web-worker-loader" hidden>
+        <div class="web-worker-loader-spinner"></div>
+        <div class="web-worker-loader-text"></div>
+      </div>
     </div>
   </main>
   <footer class="footer">

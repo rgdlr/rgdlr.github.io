@@ -1,6 +1,6 @@
 "use strict";
 
-import { EVENT, throwCallback, throwEventCallback } from "./index.js";
+import { EVENT, throwEventCallback } from "./index.js";
 
 export function dedicatedWorker({
   scriptUrl,

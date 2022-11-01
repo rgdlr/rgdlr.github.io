@@ -1,19 +1,17 @@
 "use strict";
 
+import { measureCallbackTime } from "../../../src/js/callback.js";
 import { EVENT } from "../../../src/js/event.js";
-
-function fibonacci(number) {
-  if (number < 2) return number;
-  return fibonacci(number - 1) + fibonacci(number - 2);
-}
+import { fibonacci } from "../../../src/js/util.js";
 
 addEventListener(EVENT.MESSAGE, (event) => {
-  if (event.data.START && event.data.STOP) {
-    console.log(event.data, "received by worker");
-    postMessage(event.data);
-    console.log(event.data, "send by worker");
+  if (!event.data.fibonacciRequest) {
+    return postMessage({
+      error: "Unknown request",
+      receivedRequest: event.data,
+      exampleRequest: { fibonacciRequest: 10 },
+    });
   }
-  if (event.data.fibonacciRequest) {
-    postMessage({ fibonacciResponse: fibonacci(event.data.fibonacciRequest) });
-  }
+  const { result, time } = measureCallbackTime(fibonacci, event.data.fibonacciRequest);
+  postMessage({ fibonacciRequest: event.data.fibonacciRequest, fibonacciResponse: result, time });
 });

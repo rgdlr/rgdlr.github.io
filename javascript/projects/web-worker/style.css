@@ -1,3 +1,33 @@
 @import url(../../src/css/index.css);
 @import url(../clock/style.css);
 @import url(../indexed-db/style.css);
+
+.web-worker-loader:not([hidden]) {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20rem;
+}
+
+.web-worker-loader-spinner {
+  animation: web-worker-loader-spinner-animation 2s linear infinite;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 0.5rem dotted var(--color-main);
+  margin: 2rem;
+  width: 3rem;
+}
+
+@keyframes web-worker-loader-spinner-animation {
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.web-worker-loader-text {
+  text-align: center;
+}

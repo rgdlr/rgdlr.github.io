@@ -17,6 +17,13 @@ export function throwEventCallback(callback, event) {
   return callback(event);
 }
 
+export function measureCallbackTime(callback, parameters) {
+  const start = new Date().getTime();
+  const result = throwEventCallback(callback, parameters);
+  const end = new Date().getTime();
+  return { result, time: end - start };
+}
+
 export function delayCallback({ callback = () => {}, delay = 0, promise = false }) {
   if (promise) {
     return new Promise((resolve, _reject) =>

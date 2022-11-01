@@ -29,6 +29,8 @@ import "./localStorage.js";
 export * from "./localStorage.js";
 import "./matchMedia.js";
 export * from "./matchMedia.js";
+import "./memoization.js";
+export * from "./memoization.js";
 import "./modal.js";
 export * from "./modal.js";
 import "./node.js";
@@ -45,6 +47,8 @@ import "./sessionStorage.js";
 export * from "./sessionStorage.js";
 import "./time.js";
 export * from "./time.js";
+import "./util.js";
+export * from "./util.js";
 import "./webWorker.js";
 export * from "./webWorker.js";
 
