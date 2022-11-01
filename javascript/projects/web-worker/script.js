@@ -12,7 +12,7 @@ import { dedicatedWorker, EVENT, fibonacci, Memoization, sleep } from "../../src
 //   },
 // });
 
-const memoization = new Memoization();
+const memoizedFibonacci = new Memoization().measureUseCallback(fibonacci);
 
 function showLoader(show, text) {
   const loader = window.document.querySelector(".web-worker-loader");
@@ -37,7 +37,7 @@ window.document
     sleep(1).then(() => {
       const fibonacciMainInput = event.target.elements.fibonacciMain;
       const fibonacciNumber = fibonacciMainInput.value;
-      const { cached, result, time } = memoization.measureUseMemo(fibonacci, fibonacciNumber);
+      const { cached, result, time } = memoizedFibonacci(fibonacciNumber);
       showResult(fibonacciNumber, result, time, cached);
       fibonacciMainInput.value = "";
     });
@@ -55,6 +55,6 @@ window.document
     event.preventDefault();
     showLoader(true, "As operation is running in Worker, you can continue interacting");
     const fibonacciWorkerInput = event.target.elements.fibonacciWorker;
-    fibonacciWorker.postMessage({ fibonacciRequest: fibonacciWorkerInput.value, memoization });
+    fibonacciWorker.postMessage({ fibonacciRequest: fibonacciWorkerInput.value });
     fibonacciWorkerInput.value = "";
   });

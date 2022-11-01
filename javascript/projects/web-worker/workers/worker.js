@@ -4,7 +4,7 @@ import { EVENT } from "../../../src/js/event.js";
 import { Memoization } from "../../../src/js/memoization.js";
 import { fibonacci } from "../../../src/js/util.js";
 
-const memoization = new Memoization();
+const memoizedFibonacci = new Memoization().measureUseCallback(fibonacci);
 
 addEventListener(EVENT.MESSAGE, ({ data: { fibonacciRequest } }) => {
   if (!fibonacciRequest) {
@@ -14,6 +14,6 @@ addEventListener(EVENT.MESSAGE, ({ data: { fibonacciRequest } }) => {
       exampleRequest: { fibonacciRequest: 10 },
     });
   }
-  const { cached, result, time } = memoization.measureUseMemo(fibonacci, fibonacciRequest);
+  const { cached, result, time } = memoizedFibonacci(fibonacciRequest);
   postMessage({ cached, fibonacciRequest, fibonacciResponse: result, time });
 });
