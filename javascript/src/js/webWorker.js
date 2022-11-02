@@ -28,7 +28,7 @@ export function sharedWorker({
   callback,
   message,
 }) {
-  // TODO : auto-generated method stub
+  // TODO : get differences between "dedicatedWorker" and "sharedWorker"
   const sharedWorker = new window.SharedWorker(scriptUrl, options);
   message ? sharedWorker.postMessage(message) : undefined;
   sharedWorker.addEventListener(EVENT.MESSAGE, (event) => throwEventCallback(callback, event));

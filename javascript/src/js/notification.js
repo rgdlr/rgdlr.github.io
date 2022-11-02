@@ -17,6 +17,7 @@ const NOTIFICATION = {
 };
 
 // NOTE : user should have OS notification turned on to work properly
+// TODO : should work in mobile devices
 // TODO : could use "alert" function when "Notification" is DENIED
 // TODO : decouple functionality, elements as arguments, classes outside, etc.
 
