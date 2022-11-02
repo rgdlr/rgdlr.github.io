@@ -221,12 +221,21 @@ function uploadFile() {
 
 let lastPosition = 0;
 
-window.addEventListener("scroll", (event) => {
-  const { bottom } = document.getElementById("budget-container").getBoundingClientRect();
-  if (lastPosition === bottom) {
-    document.getElementById("budget-container").classList.add("shadow-lg");
+window.addEventListener("scroll", (_event) => {
+  const budget = document.getElementById("budget-container");
+  const { bottom } = budget.getBoundingClientRect();
+
+  if (window.scrollY > 150) {
+    budget.classList.remove("invisible");
   } else {
-    document.getElementById("budget-container").classList.remove("shadow-lg");
+    budget.classList.add("invisible");
   }
+
+  if (lastPosition === bottom) {
+    budget.classList.add("shadow-lg");
+  } else {
+    budget.classList.remove("shadow-lg");
+  }
+
   lastPosition = bottom;
 });
