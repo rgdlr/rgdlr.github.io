@@ -5,8 +5,12 @@ export * from "./event.js";
 
 import "./attribute.js";
 export * from "./attribute.js";
+import "./cache.js";
+export * from "./cache.js";
 import "./callback.js";
 export * from "./callback.js";
+import "./cookie.js";
+export * from "./cookie.js";
 import "./device.js";
 export * from "./device.js";
 import "./dragAndDrop.js";
