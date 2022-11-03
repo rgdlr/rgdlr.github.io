@@ -35,8 +35,32 @@ export function sharedWorker({
   return sharedWorker;
 }
 
-export function serviceWorker({ scriptUrl, options }) {
-  // TODO : auto-generated method stub
+export async function serviceWorker({
+  scriptUrl,
+  options = {
+    scope: undefined,
+    type: "module" || "classic",
+    updateViaCache: "all" || "imports" || "none",
+  },
+  callback,
+  message,
+}) {
+  // TODO : improve service worker
+  if (!("serviceWorker" in window.navigator)) {
+    throw Error("service worker is not supported by navigator");
+  }
+  const worker = window.navigator.serviceWorker;
+
+  const registerRegistration = await worker.register(scriptUrl, options);
+  const readyRegistration = await worker.ready;
+
+  console.log(registerRegistration, readyRegistration);
+
+  const serviceWorker = readyRegistration.active;
+  message ? serviceWorker.postMessage(message) : undefined;
+  serviceWorker.addEventListener(EVENT.MESSAGE, (event) => throwEventCallback(callback, event));
+
+  return worker;
 }
 
 export function abstractWorker({ scriptUrl, options }) {

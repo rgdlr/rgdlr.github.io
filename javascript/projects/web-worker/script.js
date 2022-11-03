@@ -4,7 +4,7 @@ import { dedicatedWorker, EVENT, fibonacci, Memoization, sleep } from "../../src
 
 // TODO : same origin politic - when port is different from 5500
 // const worker = dedicatedWorker({
-//   scriptUrl: "http://localhost:5500/javascript/projects/web-worker/workerworker.js",
+//   scriptUrl: "http://localhost:5500/javascript/projects/web-worker/dedicatedWorkerworker.js",
 //   message: { error: "error" },
 //   callback: (event) => {
 //     worker.terminate();
@@ -44,7 +44,7 @@ window.document
   });
 
 const fibonacciWorker = dedicatedWorker({
-  scriptUrl: "/javascript/projects/web-worker/worker/worker.js",
+  scriptUrl: "/javascript/projects/web-worker/worker/dedicatedWorker.js",
   callback: ({ data: { fibonacciRequest, fibonacciResponse, time, cached } }) =>
     showResult(fibonacciRequest, fibonacciResponse, time, cached),
 });

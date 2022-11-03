@@ -1,5 +1,6 @@
 "use strict";
 
+// TODO : try changing to a function returning a function after type checking - similar to useMemo
 export function throwCallback(callback) {
   if (typeof callback !== "function") {
     throw Error("callback is not a function");
