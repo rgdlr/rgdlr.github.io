@@ -52,5 +52,6 @@ input,
 button,
 textarea,
 select {
+  appearance: none;
   font: inherit;
 }

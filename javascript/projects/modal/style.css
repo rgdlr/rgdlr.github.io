@@ -55,7 +55,7 @@ body:has(.modal.hidden) {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: min(40rem, 90%);
+  height: min(50rem, 90%);
   justify-content: space-between;
   margin-top: 5%;
   padding: 1rem;
@@ -79,18 +79,18 @@ body:has(.modal.hidden) {
 }
 
 .modal-window-header-close {
-  aspect-ratio: 1/1;
   background-color: var(--background-color-main);
   border: var(--border-size) solid var(--color-main);
   border-radius: 50%;
   cursor: default;
   display: grid;
   font-size: 1.25rem;
+  height: 2.75rem;
   place-items: center;
   position: absolute;
   right: 1rem;
-  top: -1.75rem;
-  width: 3rem;
+  top: -1.5rem;
+  width: 2.75rem;
 }
 
 .modal-window-header-close:hover {

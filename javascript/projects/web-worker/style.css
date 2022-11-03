@@ -30,9 +30,9 @@
 
 .web-worker-loader-spinner {
   animation: web-worker-loader-spinner-animation 2s linear infinite;
-  aspect-ratio: 1/1;
   border-radius: 50%;
   border: 0.5rem dotted var(--color-main);
+  height: 3rem;
   margin: 2rem;
   width: 3rem;
 }
