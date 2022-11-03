@@ -1,5 +1,6 @@
 html {
     scroll-padding-top: 5rem;
+    scroll-behavior: smooth;
 }
 
 .cover-title {
@@ -10,12 +11,14 @@ html {
 }
 
 .cover-image {
-    filter: brightness(0.75) hue-rotate(15deg);
+    filter: brightness(0.75) hue-rotate(10deg);
+    height: min(10rem, 100%);
+    width: auto;
 }
 
 .cover-logo {
     filter: invert();
-    width: 35%;
+    width: min(10rem, 20vw);
 }
 
 .carousel-image {
