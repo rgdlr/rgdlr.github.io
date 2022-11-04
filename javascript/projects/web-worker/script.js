@@ -1,6 +1,13 @@
 "use strict";
 
-import { dedicatedWorker, EVENT, fibonacci, Memoization, sleep } from "../../src/js/index.js";
+import {
+  getDedicatedWorker,
+  EVENT,
+  fibonacci,
+  Memoization,
+  sleep,
+  getServiceWorker,
+} from "../../src/js/index.js";
 
 // TODO : same origin politic - when port is different from 5500
 // const worker = dedicatedWorker({
@@ -43,7 +50,7 @@ window.document
     });
   });
 
-const fibonacciWorker = dedicatedWorker({
+const dedicatedWorker = getDedicatedWorker({
   scriptUrl: "/javascript/projects/web-worker/worker/dedicatedWorker.js",
   callback: ({ data: { fibonacciRequest, fibonacciResponse, time, cached } }) =>
     showResult(fibonacciRequest, fibonacciResponse, time, cached),
@@ -55,6 +62,13 @@ window.document
     event.preventDefault();
     showLoader(true, "As operation is running in Worker, you can continue interacting");
     const fibonacciWorkerInput = event.target.elements.fibonacciWorker;
-    fibonacciWorker.postMessage({ fibonacciRequest: fibonacciWorkerInput.value });
+    dedicatedWorker.postMessage({ fibonacciRequest: fibonacciWorkerInput.value });
     fibonacciWorkerInput.value = "";
   });
+
+// TODO : enable ServiceWorker
+// const serviceWorker = await getServiceWorker({
+//   scriptUrl: "./sw.js",
+//   callback: (event) => console.log(`Script received message response : ${event.data}`),
+//   message: "Message to ServiceWorker",
+// });

@@ -1,8 +1,8 @@
 "use strict";
 
-import { EVENT, throwEventCallback } from "./index.js";
+import { EVENT, throwEventCallback, watchPosition } from "./index.js";
 
-export function dedicatedWorker({
+export function getDedicatedWorker({
   scriptUrl,
   options = {
     type: "module" || "classic",
@@ -18,7 +18,7 @@ export function dedicatedWorker({
   return worker;
 }
 
-export function sharedWorker({
+export function getSharedWorker({
   scriptUrl,
   options = {
     type: "module" || "classic",
@@ -35,34 +35,33 @@ export function sharedWorker({
   return sharedWorker;
 }
 
-export async function serviceWorker({
+export async function getServiceWorker({
   scriptUrl,
   options = {
     scope: undefined,
     type: "module" || "classic",
-    updateViaCache: "all" || "imports" || "none",
+    updateViaCache: "imports" || "all" || "none",
   },
   callback,
   message,
 }) {
-  // TODO : improve service worker
-  if (!("serviceWorker" in window.navigator)) {
+  if (!window.navigator.serviceWorker) {
     throw Error("service worker is not supported by navigator");
   }
+
   const worker = window.navigator.serviceWorker;
+  const workerRegistration =
+    (await worker.getRegistration(scriptUrl)) ?? (await worker.register(scriptUrl, options));
 
-  const registerRegistration = await worker.register(scriptUrl, options);
-  const readyRegistration = await worker.ready;
+  const workerReady = await worker.ready;
+  const serviceWorker = workerRegistration.active;
 
-  console.log(registerRegistration, readyRegistration);
-
-  const serviceWorker = readyRegistration.active;
+  worker.addEventListener(EVENT.MESSAGE, (event) => throwEventCallback(callback, event));
   message ? serviceWorker.postMessage(message) : undefined;
-  serviceWorker.addEventListener(EVENT.MESSAGE, (event) => throwEventCallback(callback, event));
 
-  return worker;
+  return serviceWorker;
 }
 
-export function abstractWorker({ scriptUrl, options }) {
+export function getAbstractWorker({ scriptUrl, options }) {
   // TODO : auto-generated method stub
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-import { getTextFromArray } from "./index.js";
+import { getTextFromArray } from "./util.js";
 
 export const CACHE_OPERATIONS_CRUD = {
   CREATE: "create",
@@ -43,11 +43,13 @@ function getCacheOperation({ multiple, operation, request }) {
 }
 
 export async function getCache(cacheName) {
-  return await window.caches.open(cacheName);
+  // return await window.caches.open(cacheName);
+  return await caches.open(cacheName);
 }
 
 export async function deleteCache(cacheName) {
-  return await window.caches.delete(cacheName);
+  // return await window.caches.delete(cacheName);
+  return await caches.delete(cacheName);
 }
 
 export async function useCache({
@@ -58,6 +60,16 @@ export async function useCache({
   request,
   response,
 }) {
+  // TODO : improve first 2 conditional checkings + operations
+  if (!cacheName && operation === CACHE_OPERATIONS_CRUD.READ) {
+    // return await window.caches.keys();
+    return await caches.keys();
+  }
+  if (cacheName && !request && operation === CACHE_OPERATIONS_CRUD.DELETE) {
+    // return await window.caches.delete(cacheName);
+    return await caches.delete(cacheName);
+  }
+
   const cache = await getCache(cacheName);
   if (!isCacheOperation(operation)) {
     throw Error(
@@ -77,7 +89,7 @@ export async function useCache({
   // TODO : improve "cache.put()" function as done with "cache.delete()" making it possible to be multiple
   // TODO : could extend cache prototype with "cache.deleteAll()" and "cache.updateAll()" methods
   if (multiple && operation === CACHE_OPERATIONS_CRUD.DELETE) {
-    return request.forEach(async (element) => await cache.delete(element, options));
+    return await request.forEach(async (element) => await cache.delete(element, options));
   }
 
   const cacheOperation = getCacheOperation({ multiple, operation, request });

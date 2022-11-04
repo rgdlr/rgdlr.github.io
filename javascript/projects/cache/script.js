@@ -2,6 +2,8 @@
 
 import { CACHE_OPERATIONS_CRUD, deleteCache, useCache } from "../../src/js/index.js";
 
+// TODO : create cached website with offline access -> bring "../web-worker/sw.js" "./" + "ServiceWorker" creation to this script
+
 // const cacheName = "cache-test";
 
 // const cacheCreate = await useCache({
