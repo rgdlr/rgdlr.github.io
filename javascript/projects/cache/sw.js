@@ -3,7 +3,7 @@
 import { CACHE_OPERATIONS_CRUD, useCache } from "../../src/js/cache.js";
 import { EVENT } from "../../src/js/event.js";
 
-const cacheName = "javascript/projects/web-worker/v1";
+const cacheName = "cache/v1";
 
 self.addEventListener(EVENT.INSTALL, async (event) => {
   console.log("Service worker intercepted install");
