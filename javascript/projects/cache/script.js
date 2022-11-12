@@ -1,8 +1,13 @@
 "use strict";
 
-import { CACHE_OPERATIONS_CRUD, deleteCache, useCache } from "../../src/js/index.js";
+import { CACHE_OPERATIONS_CRUD, deleteCache, getServiceWorker, useCache } from "../../src/js/index.js";
 
-// TODO : create cached website with offline access -> bring "../web-worker/sw.js" "./" + "ServiceWorker" creation to this script
+// TODO : create cached website with offline access
+// const serviceWorker = await getServiceWorker({
+//   scriptUrl: "./sw.js",
+//   callback: (event) => console.log(`Script received message response : ${event.data}`),
+//   message: "Message to ServiceWorker",
+// });
 
 // const cacheName = "cache-test";
 

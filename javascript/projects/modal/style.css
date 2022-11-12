@@ -57,7 +57,7 @@ body:has(.modal.hidden) {
   gap: 1rem;
   height: min(50rem, 90%);
   justify-content: space-between;
-  margin-top: 5%;
+  margin-top: 1rem;
   padding: 1rem;
   position: relative;
   width: min(50rem, 95%);
