@@ -37,7 +37,7 @@ function setCookieStatus(status) {
     cookieModal.classList.remove("hidden");
     cookieStatus.style.color = "orange";
     cookieStatus.style.fontWeight = "bold";
-    cookieStatus.textContent = "Cookie is pending";
+    cookieStatus.textContent = "Cookie usage is pending";
     cookieReset.addEventListener(EVENT.CLICK, (_event) => {
       removeCookie("usecookies");
       setCookieStatus();
