@@ -1,2 +1,15 @@
 @import url(../../src/css/index.css);
 @import url(../modal/style.css);
+
+.cookie-reset {
+  background-color: var(--color-main);
+  border-radius: var(--border-radius);
+  color: var(--background-color-main);
+  cursor: default;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+}
+
+.cookie-reset:hover {
+  opacity: 0.8;
+}
