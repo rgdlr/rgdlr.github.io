@@ -1,6 +1,6 @@
 "use strict";
 
-import { EVENT, KEYBOARD, objectClassToSelector } from "./index.js";
+import { EVENT, KEYBOARD, objectClassToSelector, throwCallback } from "./index.js";
 
 const MODAL_CLASS = {
   ACCEPT: "modal-window-footer-accept",
@@ -24,11 +24,37 @@ export const MODAL = {
 
 // TODO : decouple functionality, elements as arguments, classes outside, etc.
 
-export function initializeModal({ accept, cancel, close, modal, open }) {
-  accept.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
-  cancel.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
-  close.addEventListener(EVENT.CLICK, (event) => closeModal(event, { modal }));
-  open.addEventListener(EVENT.CLICK, (event) => openModal(event, { modal }));
+export function initializeModal({
+  accept,
+  acceptCallback,
+  cancel,
+  cancelCallback,
+  close,
+  closeCallback,
+  modal,
+  open,
+  openCallback,
+}) {
+  accept &&
+    accept.addEventListener(EVENT.CLICK, (event) => {
+      acceptCallback && throwCallback(acceptCallback);
+      closeModal(event, { modal });
+    });
+  cancel &&
+    cancel.addEventListener(EVENT.CLICK, (event) => {
+      cancelCallback && throwCallback(cancelCallback);
+      closeModal(event, { modal });
+    });
+  close &&
+    close.addEventListener(EVENT.CLICK, (event) => {
+      closeCallback && throwCallback(closeCallback);
+      closeModal(event, { modal });
+    });
+  open &&
+    open.addEventListener(EVENT.CLICK, (event) => {
+      openCallback && throwCallback(openCallback);
+      openModal(event, { modal });
+    });
 
   window.addEventListener(EVENT.KEY_DOWN, (event) => closeModal(event, { modal }));
 }
