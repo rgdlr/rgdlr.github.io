@@ -10,8 +10,8 @@ import {
 } from "../../src/js/index.js";
 
 const cookieModal = window.document.querySelector(".modal");
-const cookieStatus = window.document.querySelector(".main-paragraph.cookie-status");
-const cookieReset = window.document.querySelector(".main-paragraph.cookie-reset");
+const cookieStatus = window.document.querySelector(".cookie-status");
+const cookieReset = window.document.querySelector(".cookie-reset");
 
 // TODO : make useCookieStatus a generic function in "javascript/src/js/cookie.js"
 function setCookieStatus(status) {

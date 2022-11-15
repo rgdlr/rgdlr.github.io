@@ -4,6 +4,7 @@
 .cookie-reset {
   background-color: var(--color-main);
   border-radius: var(--border-radius);
+  border: none;
   color: var(--background-color-main);
   cursor: default;
   padding: 0.5rem 1rem;

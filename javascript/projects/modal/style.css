@@ -65,6 +65,7 @@ body:has(.modal.hidden) {
 
 .modal-window.modal-window-fit-content {
   height: fit-content;
+  max-width: min(50rem, 95%);
   width: fit-content;
 }
 
