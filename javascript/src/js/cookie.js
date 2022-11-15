@@ -1,9 +1,6 @@
 "use strict";
 
-import {} from "./index.js";
-
 // TODO : cookie RGPD and ePrivacy fulfillment
-
 // TODO : parse options - example: maxAge should be set as "max-age=seconds"
 export function setCookie(
   name,

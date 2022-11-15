@@ -47,6 +47,8 @@ import "./object.js";
 export * from "./object.js";
 import "./prototype.js";
 export * from "./prototype.js";
+import "./screen.js";
+export * from "./screen.js";
 import "./sessionStorage.js";
 export * from "./sessionStorage.js";
 import "./time.js";

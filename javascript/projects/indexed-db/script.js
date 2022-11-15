@@ -104,8 +104,8 @@ indexedDbForm.addEventListener(EVENT.SUBMIT, (event) => {
   const form = event.target;
   const formControls = form.elements;
   const formData = new FormData(form);
-  const formProps = Object.fromEntries(formData);
-  const { language, rating } = formProps;
+  const formProperties = Object.fromEntries(formData);
+  const { language, rating } = formProperties;
 
   const indexedDb = new IndexedDbTools(INDEXED_DB.DATABASE, INDEXED_DB.VERSION);
   indexedDb.updateObjectStoreObject({

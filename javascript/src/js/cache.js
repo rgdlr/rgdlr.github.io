@@ -1,5 +1,6 @@
 "use strict";
 
+// TODO : can not import from "./index.js" if using in workers
 import { getTextFromArray } from "./util.js";
 
 export const CACHE_OPERATIONS_CRUD = {
