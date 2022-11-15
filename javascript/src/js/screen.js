@@ -1,8 +1,8 @@
 "use strict";
 
 export function getScreenProperties() {
-  const { availHeight, availWidth, colorDepth, height, pixelDepth, width } = window.screen;
   const { innerHeight, innerWidth } = window;
+  const { availHeight, availWidth, colorDepth, height, pixelDepth, width } = window.screen;
   return {
     availHeight,
     availWidth,
