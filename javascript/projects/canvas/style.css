@@ -1,1 +1,30 @@
 @import url(../../src/css/index.css);
+
+.canvas {
+}
+
+.canvas-panel {
+  margin: 1rem;
+}
+
+.canvas-paint {
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
+  margin: 1rem;
+}
+
+.canvas-tools {
+  margin: 1rem;
+}
+
+.canvas-color,
+.canvas-width {
+  border: none;
+  background-color: transparent;
+}
+
+.canvas-color {
+}
+
+.canvas-width {
+}

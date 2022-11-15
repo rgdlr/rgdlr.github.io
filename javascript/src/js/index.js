@@ -9,6 +9,8 @@ import "./cache.js";
 export * from "./cache.js";
 import "./callback.js";
 export * from "./callback.js";
+import "./canvas.js";
+export * from "./canvas.js";
 import "./cookie.js";
 export * from "./cookie.js";
 import "./device.js";
