@@ -3,28 +3,42 @@
 .canvas {
 }
 
-.canvas-panel {
-  margin: 1rem;
-}
-
+.canvas-panel,
 .canvas-paint {
+  background-color: var(--background-color-main);
   border-radius: var(--border-radius);
   border: var(--border-size) solid var(--color-main);
   margin: 1rem;
 }
 
 .canvas-tools {
+  display: flex;
+  gap: 1rem;
   margin: 1rem;
 }
 
 .canvas-color,
 .canvas-width {
-  border: none;
-  background-color: transparent;
+  background-color: var(--color-main);
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
 }
 
 .canvas-color {
 }
 
 .canvas-width {
+  padding: 0rem 0.5rem;
+  width: 100%;
+}
+
+.canvas-width::-webkit-slider-runnable-track {
+  background: var(--background-color-main);
+  border-radius: 1rem;
+  height: 0.5rem;
+}
+
+.canvas-width::-webkit-slider-thumb {
+  margin-top: -0.25rem;
+  background: var(--background-color-main);
 }
