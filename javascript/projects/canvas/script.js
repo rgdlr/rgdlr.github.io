@@ -58,3 +58,10 @@ canvas.drawPolygon({
   lineColor: "#75A",
   fillColor: "#A57",
 });
+
+const canvasPaint = window.document.querySelector(".canvas-paint");
+const paintBrushColor = window.document.querySelector(".paint-brush-color");
+const paintBrushSize = window.document.querySelector(".paint-brush-size");
+const canvasWithPaint = new Canvas(canvasPaint, Canvas.CONTEXT._2D);
+
+canvasWithPaint.allowPainting({ paintBrushColor, paintBrushSize });

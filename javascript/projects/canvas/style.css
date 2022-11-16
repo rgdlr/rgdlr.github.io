@@ -5,40 +5,40 @@
 
 .canvas-panel,
 .canvas-paint {
-  background-color: var(--background-color-main);
+  margin-bottom: 1rem;
+}
+
+.canvas-paint {
+  background-color: var(--color-main);
   border-radius: var(--border-radius);
   border: var(--border-size) solid var(--color-main);
-  margin: 1rem;
+  cursor: crosshair;
 }
 
-.canvas-tools {
+.paint-brush {
   display: flex;
   gap: 1rem;
-  margin: 1rem;
 }
 
-.canvas-color,
-.canvas-width {
+.paint-brush-color,
+.paint-brush-size {
   background-color: var(--color-main);
   border-radius: var(--border-radius);
   border: var(--border-size) solid var(--color-main);
 }
 
-.canvas-color {
-}
-
-.canvas-width {
+.paint-brush-size {
   padding: 0rem 0.5rem;
   width: 100%;
 }
 
-.canvas-width::-webkit-slider-runnable-track {
+.paint-brush-size::-webkit-slider-runnable-track {
   background: var(--background-color-main);
   border-radius: 1rem;
   height: 0.5rem;
 }
 
-.canvas-width::-webkit-slider-thumb {
+.paint-brush-size::-webkit-slider-thumb {
   margin-top: -0.25rem;
   background: var(--background-color-main);
 }
