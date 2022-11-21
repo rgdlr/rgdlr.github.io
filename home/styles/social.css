@@ -1,0 +1,79 @@
+.social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  padding: 2rem 0rem;
+}
+
+.social-title {
+  font-size: 1.5rem;
+  margin: 0rem 0.5rem;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 1.35rem;
+  margin: 0.3rem;
+  font-size: 1.5rem;
+  color: var(--color-palette-primary);
+  position: relative;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 1rem;
+  color: var(--color-palette-primary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.email:hover,
+.email .tooltip,
+.email .tooltip::before {
+  background-color: #d43;
+  color: var(--color-primary);
+}
+
+.linkedin:hover,
+.linkedin .tooltip,
+.linkedin .tooltip::before {
+  background-color: #07a;
+  color: var(--color-primary);
+}
+
+.github:hover,
+.github .tooltip,
+.github .tooltip::before {
+  background-color: #333;
+  color: var(--color-primary);
+}
+
+.icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}

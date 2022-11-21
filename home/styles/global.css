@@ -1,0 +1,32 @@
+:root {
+  --delay: 700ms;
+  --cubic-bezier: cubic-bezier(0.19, 1, 0.22, 1);
+
+  --color-palette-primary: #252525;
+  --color-palette-secondary: #bba078;
+  --color-palette-tertiary: #d5bb73;
+  --color-palette-quaternary: #505050;
+  --color-palette-quinary: #a0a0a0;
+
+  --color-primary: #ffffff;
+  --color-secondary: #252525;
+  --color-tertiary: #505050;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Varela", sans-serif;
+}
+
+*::selection {
+  background: var(--color-palette-tertiary);
+  color: var(--color-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
