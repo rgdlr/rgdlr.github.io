@@ -79,10 +79,12 @@ function outputVideoFile(event, file, index, output) {
   const blob = new Blob(blobArguments.blobParts, blobArguments.options);
   const video = window.document.createElement(ELEMENT.VIDEO);
   video.setAttribute(ATTRIBUTE.SRC, URL.createObjectURL(blob));
+  video.toggleAttribute("controls");
   appendChildToModal(output, video, index);
-  video.onclick = () => {
-    video.currentTime === 0 || video.paused || video.ended ? video.play() : video.pause();
-  };
+
+  // video.onclick = () => {
+  //   video.currentTime === 0 || video.paused || video.ended ? video.play() : video.pause();
+  // };
 }
 
 function outputDocumentFile(event, file, index, output) {
