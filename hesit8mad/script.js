@@ -239,3 +239,6 @@ window.addEventListener("scroll", (_event) => {
 
   lastPosition = bottom;
 });
+
+
+document.getElementById("footer-year").textContent = new Date().getFullYear();
