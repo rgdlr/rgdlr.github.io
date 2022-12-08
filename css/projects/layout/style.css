@@ -1,0 +1,62 @@
+@import url("../../src/css/index.css");
+
+body {
+  color: #eee;
+  display: grid;
+  grid:
+    "header" min-content
+    "nav" min-content
+    "main" auto
+    "aside" min-content
+    "footer" min-content;
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    grid:
+      "header header" min-content
+      "nav main" min-content
+      "aside main" auto
+      "footer footer" min-content
+      / min-content auto;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  body {
+    grid:
+      "header header header" min-content
+      "nav main aside" auto
+      "footer footer footer" min-content
+      / max-content auto max-content;
+  }
+}
+
+.header,
+.nav,
+.aside,
+.main,
+.footer {
+  height: 100%;
+}
+
+.header {
+  grid-area: header;
+}
+
+.nav {
+  grid-area: nav;
+  justify-content: flex-start;
+}
+
+.aside {
+  grid-area: aside;
+}
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}

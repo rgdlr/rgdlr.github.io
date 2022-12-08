@@ -41,3 +41,7 @@ body {
 .sticky.footer {
   bottom: 0;
 }
+
+.aside {
+  background-color: var(--background-color-primary);
+}

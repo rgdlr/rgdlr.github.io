@@ -2,6 +2,8 @@
 
 import { EVENT, getTheme, setTheme, THEME } from "./index.js";
 
+window.document.getElementById("footer-year").innerText = new Date().getFullYear();
+
 export function getThemeFromSwitch(themeSwitch) {
   return themeSwitch.checked ? THEME.VALUES.DARK : THEME.VALUES.LIGHT;
 }

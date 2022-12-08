@@ -1,0 +1,11 @@
+@import url("../../src/css/index.css");
+
+.avatar {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 10rem;
+}
+
+.avatar--circle {
+  border-radius: 50%;
+}
