@@ -1,1 +1,1 @@
-window.document.getElementById("copyright-year").innerText = new Date().getFullYear();
+window.document.getElementById("footer-year").innerText = new Date().getFullYear();
