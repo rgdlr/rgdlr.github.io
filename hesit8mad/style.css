@@ -73,6 +73,28 @@ textarea:focus {
     border-color: darkslategray !important;
 }
 
+#duration:before {
+    content: "min";
+    position: absolute;
+    right: 60%;
+    color: gray;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#duration:after {
+    content: "seg";
+    position: absolute;
+    right: 7%;
+    color: gray;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
 /* Format file input check */
 #file-spinner,
 #file-check {
