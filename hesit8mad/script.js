@@ -16,7 +16,8 @@ function calculateBudget() {
   let recording = document.getElementById("recording").value;
   let location = document.getElementById("location").value;
   let displacement = document.getElementById("displacement").innerText;
-  let duration = document.getElementById("duration").value;
+  let durationMinutes = document.getElementById("duration-minutes").value;
+  let durationSeconds = document.getElementById("duration-seconds").value;
   let edition = document.getElementById("edition").value;
 
   let illumination = document.getElementById("illumination").checked;
@@ -39,8 +40,7 @@ function calculateBudget() {
       : parseInt(displacement[0]);
   }
 
-  duration = duration.split(":");
-  duration = parseInt(duration[0]) + parseInt(duration[1]) / 60;
+  let duration = parseInt(durationMinutes) + parseInt(durationSeconds) / 60;
 
   let budget =
     recording * 90 +
@@ -69,7 +69,10 @@ function calculateBudget() {
                 ${(budget * 0.85).toFixed(2)} EUR
             </p>
         </div>`;
+    document.getElementById("discount").classList.add("is-valid");
+    document.getElementById("discount").classList.remove("is-invalid");
     document.getElementById("discount").style.color = "darkgreen";
+    document.getElementById("discount").style.paddingRight = "12px";
   } else if (discount == "4FREE") {
     document.getElementById("budget").innerHTML = `
         <div>
@@ -80,10 +83,16 @@ function calculateBudget() {
                 ${(0).toFixed(2)} EUR
             </p>
         </div>`;
+    document.getElementById("discount").classList.add("is-valid");
+    document.getElementById("discount").classList.remove("is-invalid");
     document.getElementById("discount").style.color = "darkgreen";
+    document.getElementById("discount").style.paddingRight = "12px";
   } else {
     document.getElementById("budget").innerHTML = `${budget.toFixed(2)} EUR`;
+    document.getElementById("discount").classList.add("is-invalid");
+    document.getElementById("discount").classList.remove("is-valid");
     document.getElementById("discount").style.color = "darkred";
+    document.getElementById("discount").style.paddingRight = "12px";
   }
 }
 
@@ -107,10 +116,10 @@ function initMap() {
 
     const distanceMatrixService = new google.maps.DistanceMatrixService();
     distanceMatrixService.getDistanceMatrix(request).then((response) => {
-      // document.getElementById("request").innerText = JSON.stringify(request, null, 2);
-      document.getElementById("displacement").innerText = response.rows[0].elements[0].duration.text
-        .replace(/[^0-9\s]/g, "")
-        .replace(/\s{2,}/g, " ");
+      document.getElementById("displacement").innerText =
+        response.rows[0].elements[0].duration.text
+          .replace(/[^0-9\s]/g, "")
+          .replace(/\s{2,}/g, " ");
       calculateBudget();
     });
   });
@@ -141,7 +150,8 @@ form.addEventListener("submit", () => {
 function uploadFile() {
   const UPLOAD_FILE_SIZE_LIMIT = 150 * 1024 * 1024;
   var dbx = new Dropbox.Dropbox({
-    accessToken: "wDcMa-Jc35IAAAAAAAAAAadab0gWZ5w1rfNTzZsmGS-b9BsVlvwayJE_UuBGJQvX",
+    accessToken:
+      "wDcMa-Jc35IAAAAAAAAAAadab0gWZ5w1rfNTzZsmGS-b9BsVlvwayJE_UuBGJQvX",
   });
   var fileInput = document.getElementById("file-upload");
   var file = fileInput.files[0];
@@ -192,15 +202,31 @@ function uploadFile() {
           return acc.then(function (sessionId) {
             var cursor = { session_id: sessionId, offset: idx * maxBlob };
             return dbx
-              .filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob })
+              .filesUploadSessionAppendV2({
+                cursor: cursor,
+                close: false,
+                contents: blob,
+              })
               .then(() => sessionId);
           });
         } else {
           // Last chunk of data, close session
           return acc.then(function (sessionId) {
-            var cursor = { session_id: sessionId, offset: file.size - blob.size };
-            var commit = { path: "/" + file.name, mode: "add", autorename: true, mute: false };
-            return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob });
+            var cursor = {
+              session_id: sessionId,
+              offset: file.size - blob.size,
+            };
+            var commit = {
+              path: "/" + file.name,
+              mode: "add",
+              autorename: true,
+              mute: false,
+            };
+            return dbx.filesUploadSessionFinish({
+              cursor: cursor,
+              commit: commit,
+              contents: blob,
+            });
           });
         }
       }, Promise.resolve());
@@ -225,7 +251,7 @@ window.addEventListener("scroll", (_event) => {
   const budget = document.getElementById("budget-container");
   const { bottom } = budget.getBoundingClientRect();
 
-  if (window.scrollY > 150) {
+  if (window.scrollY > 50) {
     budget.classList.remove("invisible");
   } else {
     budget.classList.add("invisible");
@@ -239,6 +265,5 @@ window.addEventListener("scroll", (_event) => {
 
   lastPosition = bottom;
 });
-
 
 document.getElementById("footer-year").textContent = new Date().getFullYear();
