@@ -11,26 +11,47 @@ export class Canvas {
   #canvas;
   #context;
 
-  constructor(canvas, context) {
+  constructor(canvas, context, dimensions) {
     // TODO : method : resize canvas - adapt and make responsive - use height and width attributes (use from gps)
+    // https://stackoverflow.com/questions/60688935/my-canvas-drawing-app-wont-work-on-mobile
     this.#canvas = canvas;
     this.#context = this.#canvas.getContext(context);
+
+    // const { height, width } = dimensions;
   }
 
   #paintingDraw(previousX, previousY, currentX, currentY, paintBrush) {
     this.#context.strokeStyle = paintBrush.color;
+    this.#context.lineCap = paintBrush.cap;
     this.#context.lineWidth = paintBrush.size;
     this.#context.moveTo(previousX, previousY);
     this.#context.lineTo(currentX, currentY);
     this.#context.stroke();
   }
 
+  #getClientCoordinates(event) {
+    if ([EVENT.TOUCH_START, EVENT.TOUCH_MOVE, EVENT.TOUCH_END].includes(event.type)) {
+      const { clientX, clientY } = event.touches[0];
+      return { clientX, clientY };
+    }
+    const { clientX, clientY } = event;
+    return { clientX, clientY };
+  }
+
   allowPainting({ paintBrushColor, paintBrushSize }) {
     const { left, top } = this.#canvas.getBoundingClientRect();
-    const paintBrush = { color: "#000", isPainting: false, isInCanvas: false, size: 1, x: 0, y: 0 };
+    const paintBrush = {
+      cap: "round",
+      color: "#000",
+      isPainting: false,
+      isInCanvas: false,
+      size: 1,
+      x: 0,
+      y: 0,
+    };
 
-    this.#canvas.addEventListener(EVENT.MOUSE_DOWN, (event) => {
-      const { clientX, clientY } = event;
+    const startPosition = (event) => {
+      const { clientX, clientY } = this.#getClientCoordinates(event);
 
       paintBrush.x = clientX - left;
       paintBrush.y = clientY - top;
@@ -39,26 +60,39 @@ export class Canvas {
       paintBrush.size = paintBrushSize.value;
 
       this.#context.beginPath();
-    });
+    };
 
-    this.#canvas.addEventListener(EVENT.MOUSE_MOVE, (event) => {
+    const draw = (event) => {
       if (!(paintBrush.isPainting && paintBrush.isInCanvas)) {
         return;
       }
 
-      const { clientX, clientY } = event;
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { clientX, clientY } = this.#getClientCoordinates(event);
       const { currentX, currentY } = { currentX: clientX - left, currentY: clientY - top };
       const { x, y } = paintBrush;
 
       this.#paintingDraw(x, y, currentX, currentY, paintBrush);
       paintBrush.x = currentX;
       paintBrush.y = currentY;
-    });
+    };
 
-    this.#canvas.addEventListener(EVENT.MOUSE_UP, (_event) => {
+    const endPosition = (_event) => {
       paintBrush.isPainting = false;
       this.#context.closePath();
-    });
+    };
+
+    // TODO : listen events only in mobile/table
+    this.#canvas.addEventListener(EVENT.TOUCH_START, startPosition);
+    this.#canvas.addEventListener(EVENT.TOUCH_END, endPosition);
+    this.#canvas.addEventListener(EVENT.TOUCH_MOVE, draw);
+
+    // TODO : listen events only in desktop
+    this.#canvas.addEventListener(EVENT.MOUSE_DOWN, startPosition);
+    this.#canvas.addEventListener(EVENT.MOUSE_UP, endPosition);
+    this.#canvas.addEventListener(EVENT.MOUSE_MOVE, draw);
 
     this.#canvas.addEventListener(EVENT.MOUSE_LEAVE, (_event) => {
       // TODO : if mouse leaves outside from canvas, when enters, continues painting
