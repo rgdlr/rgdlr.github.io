@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 5em;
+}
+
+.form__group {
+  background-color: var(--color-primary-500);
+  border-radius: 0.25em;
+  display: grid;
+  gap: 0.75em;
+  grid-template-columns: repeat(auto-fill, minmax(max(12em, 45%), 1fr));
+  padding: 1em;
+}
+
+.form__control {
+  display: flex;
+}

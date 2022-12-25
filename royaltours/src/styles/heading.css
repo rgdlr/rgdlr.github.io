@@ -1,0 +1,56 @@
+.h1,
+.h2,
+.h3 {
+  color: var(--color-light-300);
+  font-weight: bold;
+  position: relative;
+}
+
+.h1 {
+  font-family: var(--font-family-secondaryI);
+  font-size: 1.75em;
+}
+
+.h1--margin {
+  margin-bottom: 1.25em;
+}
+
+.h2 {
+  border-left: 0.2em solid var(--color-light-300);
+  font-size: 1.5em;
+  padding-left: 1em;
+}
+
+.h2--margin {
+  margin-bottom: 1em;
+}
+
+.h3 {
+  font-size: 1.25em;
+  padding-bottom: 0.75em;
+}
+
+.h3::before {
+  background-color: var(--color-primary-700);
+  bottom: 0;
+  content: "";
+  height: 0.2em;
+  position: absolute;
+  width: 2em;
+}
+
+.h3--margin {
+  margin-bottom: 0.75em;
+}
+
+.h3 i {
+  font-size: 1em;
+  padding-inline: 0.5em;
+}
+
+.h1--light,
+.h2--light,
+.h3--light {
+  border-color: var(--color-dark-300);
+  color: var(--color-dark-300);
+}

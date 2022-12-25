@@ -1,0 +1,33 @@
+.header {
+  align-items: center;
+  background-color: var(--color-primary-500);
+  box-shadow: 0 0 0.5em 0 var(--color-primary-300);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  left: 0;
+  min-height: calc(1em + 1.75em + 1em);
+  padding: 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.header--link-right .link {
+  margin-left: auto;
+}
+
+.header__skip-navigation {
+  background-color: var(--color-primary-500);
+  box-shadow: 0 0 0.5rem 0.5rem var(--color-primary-500);
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+  top: -50%;
+  transition: top 500ms ease;
+}
+
+.header__skip-navigation:focus {
+  top: 50%;
+}

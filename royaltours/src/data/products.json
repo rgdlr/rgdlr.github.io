@@ -1,0 +1,36 @@
+{
+  "web-development": "Desarrollo web",
+  "creation": "Creación",
+  "optimization": "Optimización",
+  "domain": "Dominio",
+  "hosting": "Alojamiento",
+  "booking": "Reservas",
+  "payments": "Pagos",
+
+  "virtual-tours": "Visitas virtuales",
+  "google-street-view": "Google Street View",
+  "web-integration": "Integración web",
+  "3d-map": "Mapa 3D",
+  "video-tour": "Video tour",
+  "image-amount": "Cantidad de imágenes",
+  "interactive-elements-amount": "Cantidad de elementos interactivos",
+
+  "audio-visual": "Audiovisual",
+  "image-gallery-standard": "Galería de imágenes estándar",
+  "image-gallery-lightning": "Galería de imágenes interactiva",
+  "image-gallery-amount": "Cantidad de imágenes de la galería",
+  "video-gallery-standard": "Galería de vídeos estándar",
+  "video-gallery-lightning": "Galería de vídeos con iluminación variable",
+  "video-gallery-amount": "Cantidad de vídeos de la galería",
+  "social-media": "Material para redes sociales",
+  "promotional-video": "Vídeo promocional",
+  "drone-video": "Escenas aéreas con drone",
+
+  "graphic-design": "Diseño gráfico",
+  "logo": "Logo",
+  "customized": "Personalizado",
+
+  "marketing-advertising": "Marketing y publicidad",
+  "google-search": "Promoción en búsquedas de Google",
+  "social-advert": "Promoción en redes sociales"
+}

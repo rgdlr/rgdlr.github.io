@@ -1,0 +1,31 @@
+{
+  "web-development__creation": 100.0,
+  "web-development__optimization": 50.0,
+  "web-development__domain": 10.0,
+  "web-development__hosting": 25.0,
+  "web-development__booking": 50.0,
+  "web-development__payments": 50.0,
+
+  "virtual-tours__google-street-view": 75.0,
+  "virtual-tours__web-integration": 50.0,
+  "virtual-tours__3d-map": 200.0,
+  "virtual-tours__video-tour": 75.0,
+  "virtual-tours__image-amount": 10.0,
+  "virtual-tours__interactive-elements-amount": 10.0,
+
+  "audio-visual__image-gallery-standard": 50.0,
+  "audio-visual__image-gallery-lightning": 100.0,
+  "audio-visual__image-gallery-amount": 10.0,
+  "audio-visual__video-gallery-standard": 100.0,
+  "audio-visual__video-gallery-lightning": 200.0,
+  "audio-visual__video-gallery-amount": 20.0,
+  "audio-visual__social-media": 35.0,
+  "audio-visual__promotional-video": 100.0,
+  "audio-visual__drone-video": 150.0,
+
+  "graphic-design__logo": 50.0,
+  "graphic-design__customized": 100.0,
+
+  "marketing-advertising__google-search": 50.0,
+  "marketing-advertising__social-advert": 25.0
+}

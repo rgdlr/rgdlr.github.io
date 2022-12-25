@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Royal Tours · Modals</title>
+    <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="/royaltours/src/styles/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
+  </head>
+  <body>
+    <aside class="modal modal--hidden">
+      <div class="modal__window">
+        <button class="modal__close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <header class="modal__header">
+          <p>Header</p>
+        </header>
+        <section class="modal__body">
+          <p>Body</p>
+        </section>
+        <footer class="modal__footer">
+          <p>Footer</p>
+        </footer>
+      </div>
+    </aside>
+    <dialog class="modal modal--hidden">
+      <div class="modal__window modal__window--fit-content">
+        <button class="modal__close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <header class="modal__header">Header</header>
+        <section class="modal__body">Body</section>
+        <footer class="modal__footer">Footer</footer>
+      </div>
+    </dialog>
+  </body>
+</html>

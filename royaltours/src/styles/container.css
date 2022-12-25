@@ -1,0 +1,13 @@
+.container {
+  margin-inline: auto;
+  padding: 1em;
+  width: min(70em, 100%);
+}
+
+.container--sm {
+  width: min(50em, 100%);
+}
+
+.container--xl {
+  width: min(90em, 100%);
+}
