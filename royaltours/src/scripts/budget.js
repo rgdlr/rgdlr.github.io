@@ -6,6 +6,102 @@ import { fetchJson } from "./json.js";
 const products = await fetchJson("/royaltours/src/data/products.json");
 const prices = await fetchJson("/royaltours/src/data/prices.json");
 
+function resetBudgetButtonAnimation(resetBudgetButton) {
+  resetBudgetButton.animate(
+    [
+      {
+        transform: "rotateZ(0deg)",
+      },
+      {
+        transform: "rotateZ(-360deg)",
+      },
+    ],
+    { duration: 500, easing: "ease-in-out" }
+  );
+}
+
+export function resetBudget(sticky, budgetForm, resetBudgetButton) {
+  budgetForm.reset();
+  resetBudgetButtonAnimation(resetBudgetButton);
+  updateBudget(sticky, budgetForm);
+}
+
+function saveBudgetButtonAnimation(saveBudgetButton) {
+  saveBudgetButton.style.transform = "rotateZ(180deg)";
+  saveBudgetButton.style.backgroundColor = "var(--color-secondary-500)";
+
+  setTimeout(() => {
+    saveBudgetButton.innerHTML = ICON.CHECK;
+    saveBudgetButton.style.transform = "rotateZ(0deg)";
+  }, 250);
+
+  setTimeout(() => {
+    saveBudgetButton.style.transform = "rotateY(90deg)";
+    saveBudgetButton.style.backgroundColor = "var(--color-primary-500)";
+  }, 1750);
+
+  setTimeout(() => {
+    saveBudgetButton.innerHTML = ICON.SAVE;
+    saveBudgetButton.style.transform = "rotateY(0deg)";
+  }, 2000);
+}
+
+function reduceBudget(currentBudget, product) {
+  const { checked, id, type, value } = product;
+  const productAmount = Number.parseInt(value);
+
+  if (["checkbox", "radio"].includes(type)) {
+    return currentBudget + (checked ? prices[id] : 0);
+  } else if (!Number.isNaN(productAmount)) {
+    return currentBudget + (value ? productAmount * prices[id] : 0);
+  } else {
+    return currentBudget;
+  }
+}
+
+function getBudget(budgetForm) {
+  return (
+    Array.from(budgetForm).reduce(reduceBudget, BASE_PRICE) * IVA_MULTIPLIER
+  );
+}
+
+function mapBudget(product) {
+  const { checked, id, type, value } = product;
+  const productAmount = Number.parseInt(value);
+
+  if (["checkbox", "radio"].includes(type)) {
+    return { [id]: checked || value === "off" ? prices[id] : 0 };
+  } else if (!Number.isNaN(productAmount)) {
+    return { [id]: value ? productAmount * prices[id] : 0 };
+  } else {
+    return { [id]: 0 };
+  }
+}
+
+export function saveBudget(budgetForm, saveBudgetButton) {
+  const budgetToSave = {
+    amount: getBudget(budgetForm),
+    currency: "EUR",
+    products: Array.from(budgetForm).map(mapBudget),
+  };
+
+  window.localStorage.setItem("budget", JSON.stringify(budgetToSave));
+  saveBudgetButtonAnimation(saveBudgetButton);
+}
+
+function setBudget(sticky, amount) {
+  const stickyBudget = sticky.querySelector(".sticky__budget");
+  stickyBudget.classList.add("sticky__budget--change");
+  stickyBudget.addEventListener("transitionend", (_event) => {
+    stickyBudget.innerHTML = formatCurrency(amount);
+    stickyBudget.classList.remove("sticky__budget--change");
+  });
+}
+
+export function updateBudget(sticky, budgetForm) {
+  setBudget(sticky, getBudget(budgetForm));
+}
+
 function groupProducts(products) {
   return Object.entries(
     products.reduce((productGroups, product) => {
@@ -24,32 +120,6 @@ function groupProducts(products) {
       return productGroups;
     }, {})
   );
-}
-
-function reduceBudget(currentBudget, product) {
-  const { checked, id, type, value } = product;
-  const productAmount = Number.parseInt(value);
-
-  if (["checkbox", "radio"].includes(type)) {
-    return currentBudget + (checked ? prices[id] : 0);
-  } else if (!Number.isNaN(productAmount)) {
-    return currentBudget + (value ? productAmount * prices[id] : 0);
-  } else {
-    return currentBudget;
-  }
-}
-
-function mapBudget(product) {
-  const { checked, id, type, value } = product;
-  const productAmount = Number.parseInt(value);
-
-  if (["checkbox", "radio"].includes(type)) {
-    return { [id]: checked || value === "off" ? prices[id] : 0 };
-  } else if (!Number.isNaN(productAmount)) {
-    return { [id]: value ? productAmount * prices[id] : 0 };
-  } else {
-    return { [id]: 0 };
-  }
 }
 
 function getModal(budget) {
@@ -88,70 +158,6 @@ function getModal(budget) {
   modalBudget.appendChild(modalBudgetProducts);
 
   return modalBudget;
-}
-
-function getBudget(budgetForm) {
-  return (
-    Array.from(budgetForm).reduce(reduceBudget, BASE_PRICE) * IVA_MULTIPLIER
-  );
-}
-
-function setBudget(sticky, amount) {
-  const stickyBudget = sticky.querySelector(".sticky__budget");
-  stickyBudget.classList.add("sticky__budget--change");
-
-  setTimeout(() => {
-    stickyBudget.innerHTML = formatCurrency(amount);
-    stickyBudget.classList.remove("sticky__budget--change");
-  }, 250);
-}
-
-export function resetBudget(sticky, budgetForm, resetBudgetButton) {
-  budgetForm.reset();
-  resetBudgetButton.animate(
-    [
-      {
-        transform: "rotateZ(0deg)",
-      },
-      {
-        transform: "rotateZ(-360deg)",
-      },
-    ],
-    { duration: 500, easing: "ease-in-out" }
-  );
-  updateBudget(sticky, budgetForm);
-}
-
-export function saveBudget(budgetForm, saveBudgetButton) {
-  const budgetToSave = {
-    amount: getBudget(budgetForm),
-    currency: "EUR",
-    products: Array.from(budgetForm).map(mapBudget),
-  };
-
-  window.localStorage.setItem("budget", JSON.stringify(budgetToSave));
-
-  saveBudgetButton.style.transform = "rotateZ(180deg)";
-  saveBudgetButton.style.backgroundColor = "var(--color-secondary-500)";
-
-  setTimeout(() => {
-    saveBudgetButton.innerHTML = ICON.CHECK;
-    saveBudgetButton.style.transform = "rotateZ(0deg)";
-  }, 250);
-
-  setTimeout(() => {
-    saveBudgetButton.style.transform = "rotateY(90deg)";
-    saveBudgetButton.style.backgroundColor = "var(--color-primary-500)";
-  }, 1750);
-
-  setTimeout(() => {
-    saveBudgetButton.innerHTML = ICON.SAVE;
-    saveBudgetButton.style.transform = "rotateY(0deg)";
-  }, 2000);
-}
-
-export function updateBudget(sticky, budgetForm) {
-  setBudget(sticky, getBudget(budgetForm));
 }
 
 export function showSavedBudgetModal(savedBudgetModal, removeBudgetButton) {

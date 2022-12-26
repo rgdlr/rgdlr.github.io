@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Royal Tours · Presupuesto</title>
-    <link rel="shortcut icon" href="/royaltours/royaltours/src/assets/logo.svg" type="image/x-icon" />
+    <title>Royal Tours · Presupuesto personalizado</title>
+    <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -22,7 +22,6 @@
     <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
   </head>
   <body>
-    <!-- TODO : add a recommendation based on a given location area and rooms with a different form using less controls -->
     <header class="header header--link-right">
       <i class="fa-solid fa-crown"></i>
       <a href="/"><h1 class="h1">Royal Tours</h1></a>
@@ -38,10 +37,10 @@
     <main
       class="main"
       id="main"
-      tabindex="0"
+      tabindex="-1"
       aria-label="Contenido principal - Presupuesto"
     >
-      <div class="container">
+      <section class="container">
         <h2 class="h2 h2--margin">Presupuesto personalizado</h2>
         <form class="form" id="budget-form" action="">
           <h3 class="h3"><i class="fa-solid fa-globe"></i> Desarrollo web</h3>
@@ -349,9 +348,11 @@
             </div>
           </div>
         </form>
-      </div>
+      </section>
       <section class="sticky" id="sticky">
-        <div class="sticky__budget"></div>
+        <div class="sticky__budget-container">
+          <div class="sticky__budget"></div>
+        </div>
         <button class="sticky__button sticky__button--reset" id="reset-budget">
           <i class="fa-solid fa-arrow-rotate-left"></i>
         </button>
@@ -369,24 +370,19 @@
       </ul>
     </footer>
 
-    <!-- TODO : check behavior in Safari -->
     <aside
       class="modal modal--hidden"
       id="saved-budget-modal"
       data-modal-target="saved-budget"
     >
-      <div class="modal__window modal__window--fit-content" tabindex="0">
-        <!-- TODO : check behavior in Firefox -->
+      <div class="modal__window modal__window--fit-content">
         <button class="modal__close">
           <i class="fa-solid fa-xmark"></i>
         </button>
         <header class="modal__header">
           <h2 class="h2 h2--light">Presupuesto</h2>
         </header>
-        <section class="modal__body"></section>
-        <footer>
-          <br />
-        </footer>
+        <section class="modal__body modal__body--no-padding-top"></section>
         <button class="modal__budget-remove" id="remove-budget">
           <i class="fa-solid fa-trash"></i>
         </button>

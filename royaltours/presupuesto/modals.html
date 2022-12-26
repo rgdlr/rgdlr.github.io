@@ -20,9 +20,23 @@
       referrerpolicy="no-referrer"
     />
     <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
+    <script defer type="module">
+      import { initModals } from "/royaltours/src/scripts/modal.js";
+      initModals();
+    </script>
   </head>
   <body>
-    <aside class="modal modal--hidden">
+    <main class="main">
+      <section class="container">
+        <h2 class="h2 h2--margin">Modal 1</h2>
+        <a href="#" data-modal-trigger="modal-1">Abrir modal 1</a>
+      </section>
+      <section class="container">
+        <h2 class="h2 h2--margin">Modal 2</h2>
+        <a href="#" data-modal-trigger="modal-2">Abrir modal 2</a>
+      </section>
+    </main>
+    <aside class="modal modal--hidden" data-modal-target="modal-1">
       <div class="modal__window">
         <button class="modal__close">
           <i class="fa-solid fa-xmark"></i>
@@ -38,7 +52,7 @@
         </footer>
       </div>
     </aside>
-    <dialog class="modal modal--hidden">
+    <dialog class="modal modal--hidden" data-modal-target="modal-2">
       <div class="modal__window modal__window--fit-content">
         <button class="modal__close">
           <i class="fa-solid fa-xmark"></i>

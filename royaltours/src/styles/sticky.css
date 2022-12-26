@@ -6,7 +6,6 @@
   font-weight: bold;
   min-height: calc(1em + 2em + 1em);
   left: 0;
-  padding: 1.25em 1em;
   position: sticky;
   text-align: center;
   width: 100%;
@@ -17,6 +16,11 @@
 
 .sticky--show {
   transform: translateY(0);
+}
+
+.sticky__budget-container {
+  overflow: hidden;
+  padding: 1.25em 1em;
 }
 
 .sticky__budget {
