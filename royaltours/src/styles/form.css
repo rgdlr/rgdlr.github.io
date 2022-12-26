@@ -7,11 +7,19 @@
 
 .form__group {
   background-color: var(--color-primary-500);
-  border-radius: 0.25em;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+
+.form__group-header {
+  margin-bottom: 0.75em;
+  font-weight: bold;
+}
+
+.form__group-body {
   display: grid;
   gap: 0.75em;
   grid-template-columns: repeat(auto-fill, minmax(max(12em, 45%), 1fr));
-  padding: 1em;
 }
 
 .form__control {
