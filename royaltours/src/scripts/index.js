@@ -6,7 +6,7 @@ import {
   updateBudget,
 } from "./budget.js";
 import { setFooterYear } from "./footer.js";
-import { hideModal, showModal } from "./modal.js";
+import { allowHideModal, allowShowModal } from "./modal.js";
 import { $ } from "./selector.js";
 import { showSticky, showStickyButtons } from "./sticky.js";
 
@@ -44,10 +44,10 @@ if (resetBudgetButton || saveBudgetButton) {
 }
 
 if (savedBudgetModal) {
-  showModal(savedBudgetModal, () =>
+  allowShowModal(savedBudgetModal, () =>
     showSavedBudgetModal(savedBudgetModal, removeBudgetButton)
   );
-  hideModal(savedBudgetModal);
+  allowHideModal(savedBudgetModal);
 }
 
 if (removeBudgetButton) {

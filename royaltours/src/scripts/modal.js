@@ -1,12 +1,12 @@
 import { $ } from "./selector.js";
 
-function focusElementsOnToggleModal(modal, modalWindow, trigger) {
+function changeFocusOnToggleModal(modal, modalWindow, trigger) {
+  modalWindow.setAttribute("tabindex", "-1");
   modal.addEventListener("transitionend", (_event) => {
-    if (trigger === window.document.activeElement) {
-      modalWindow.focus();
-    }
     if (modal.classList.contains("modal--hidden")) {
       trigger.focus();
+    } else if (trigger === window.document.activeElement) {
+      modalWindow.focus();
     }
   });
 }
@@ -17,19 +17,19 @@ function getFocusableElements(container = window.document) {
   return container.querySelectorAll(focusableElementsQuery);
 }
 
-function limitFocusableElementsToOpenModal(modalWindow) {
+function limitFocusOnShowModal(modalWindow) {
   modalWindow.addEventListener("keydown", (event) => {
     if (event.key !== "Tab") {
       return;
     }
 
-    const focusable = [
+    const focusableElements = [
       modalWindow,
       ...getFocusableElements(modalWindow),
     ].filter((elem) => !elem.getAttribute("style")?.includes("display: none"));
 
-    const firstFocusable = focusable[0];
-    const lastFocusable = focusable[focusable.length - 1];
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
 
     if (event.target === firstFocusable && event.shiftKey) {
       event.preventDefault();
@@ -42,33 +42,32 @@ function limitFocusableElementsToOpenModal(modalWindow) {
   });
 }
 
-function openModal(modal, trigger, callback) {
-  const modalWindow = modal.firstElementChild;
-  window.document.body.classList.add("body__modal--open");
-  modal.classList.remove("modal--hidden");
-  modalWindow.setAttribute("tabindex", "-1");
+function showModalOnClickTrigger(modal, trigger, callback) {
+  trigger.addEventListener("click", (_event) => {
+    window.document.body.classList.add("body__modal--open");
+    modal.classList.remove("modal--hidden");
 
-  if (typeof callback === "function") {
-    callback();
-  }
-
-  focusElementsOnToggleModal(modal, modalWindow, trigger);
-  limitFocusableElementsToOpenModal(modalWindow);
+    if (typeof callback === "function") {
+      callback();
+    }
+  });
 }
 
-export function showModal(modal, callback) {
+export function allowShowModal(modal, callback) {
+  const modalWindow = modal.firstElementChild;
   const modalId = modal.getAttribute("data-modal-target");
   const modalTrigger = $.attribute(["data-modal-trigger", modalId]);
-  modalTrigger.addEventListener("click", (_event) =>
-    openModal(modal, modalTrigger, callback)
-  );
+
+  showModalOnClickTrigger(modal, modalTrigger, callback);
+  limitFocusOnShowModal(modalWindow);
+  changeFocusOnToggleModal(modal, modalWindow, modalTrigger);
 }
 
-export function showModals(modals) {
-  modals.forEach((modal) => showModal(modal));
+export function allowShowModals(modals) {
+  modals.forEach((modal) => allowShowModal(modal));
 }
 
-function closeModal(modal, callback) {
+function enableHideModal(modal, callback) {
   window.document.body.classList.remove("body__modal--open");
   modal.classList.add("modal--hidden");
 
@@ -77,24 +76,35 @@ function closeModal(modal, callback) {
   }
 }
 
-export function hideModal(modal, callback) {
+export function allowHideModal(modal, callback) {
   const modalClose = modal.querySelector(".modal__close");
-  modalClose.addEventListener("click", (_event) => closeModal(modal, callback));
+  modalClose.addEventListener("click", (_event) =>
+    enableHideModal(modal, callback)
+  );
+
+  // modal.addEventListener("keydown", ({ key }) => {
+  //   enableHideModal(modal, () => {
+  //     if (key !== "Escape" && key !== "Q" && key !== "q") {
+  //       return;
+  //     }
+  //     callback();
+  //   });
+  // });
 
   modal.addEventListener("keydown", ({ key }) => {
     if (key !== "Escape" && key !== "Q" && key !== "q") {
       return;
     }
-    closeModal(modal, callback);
+    enableHideModal(modal, callback);
   });
 }
 
-export function hideModals(modals) {
-  modals.forEach((modal) => hideModal(modal));
+export function allowHideModals(modals) {
+  modals.forEach((modal) => allowHideModal(modal));
 }
 
 export function initModals() {
   const modals = $.all(".modal");
-  showModals(modals);
-  hideModals(modals);
+  allowShowModals(modals);
+  allowHideModals(modals);
 }
