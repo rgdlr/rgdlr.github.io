@@ -22,17 +22,21 @@
     <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
   </head>
   <body>
-    <header class="header header--link-right">
-      <i class="fa-solid fa-crown"></i>
-      <a href="/royaltours/"><h1 class="h1">Royal Tours</h1></a>
-      <a class="link header__skip-navigation" href="#main">Saltar navegación</a>
-      <a
-        class="link"
-        href="#"
-        id="saved-budget-link"
-        data-modal-trigger="saved-budget"
-        >Guardado</a
-      >
+    <header class="header header--links-right">
+      <a class="header__logo link" href="/royaltours/">
+        <i class="fa-solid fa-crown"></i>
+        <h1 class="h1">Royal Tours</h1>
+      </a>
+      <a class="header__skip-navigation link" href="#main">Saltar navegación</a>
+      <nav class="header__links header__links--right">
+        <a
+          class="link"
+          href="#"
+          id="saved-budget-link"
+          data-modal-trigger="saved-budget"
+          >Guardado</a
+        >
+      </nav>
     </header>
     <main
       class="main"
@@ -40,7 +44,7 @@
       tabindex="-1"
       aria-label="Contenido principal - Presupuesto"
     >
-      <section class="container">
+      <section class="container container--md">
         <h2 class="h2 h2--margin">Presupuesto personalizado</h2>
         <form class="form" id="budget-form" action="">
           <h3 class="h3"><i class="fa-solid fa-globe"></i> Desarrollo web</h3>
@@ -166,7 +170,7 @@
                 type="tel"
                 maxlength="2"
                 name="virtual-tours__image-amount"
-                placeholder="0"
+                placeholder="00"
               />
               <label class="label" for="virtual-tours__image-amount"
                 >Cantidad de imágenes</label
@@ -179,7 +183,7 @@
                 type="tel"
                 maxlength="2"
                 name="virtual-tours__interactive-elements-amount"
-                placeholder="0"
+                placeholder="00"
               />
               <label
                 class="label"
@@ -221,7 +225,7 @@
                 type="tel"
                 maxlength="2"
                 name="audio-visual__image-gallery-amount"
-                placeholder="0"
+                placeholder="00"
               />
               <label class="label" for="audio-visual__image-gallery-amount">
                 Cantidad de imágenes de la galería
@@ -256,7 +260,7 @@
                 type="tel"
                 maxlength="2"
                 name="audio-visual__video-gallery-amount"
-                placeholder="0"
+                placeholder="00"
               />
               <label class="label" for="audio-visual__video-gallery-amount">
                 Cantidad de vídeos de la galería
@@ -382,7 +386,7 @@
       data-modal-target="saved-budget"
     >
       <div class="modal__window modal__window--fit-content">
-        <button class="modal__close">
+        <button class="modal__close" id="close-modal">
           <i class="fa-solid fa-xmark"></i>
         </button>
         <header class="modal__header">

@@ -7,14 +7,23 @@
   gap: 1em;
   left: 0;
   min-height: calc(1em + 1.75em + 1em);
+  overflow: hidden;
   padding: 1em;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
-.header--link-right .link {
-  margin-left: auto;
+.header__links {
+  margin-inline: 0;
+}
+
+.header__links--center {
+  margin-inline: auto;
+}
+
+.header__links--right {
+  margin-inline: auto 0;
 }
 
 .header__skip-navigation {

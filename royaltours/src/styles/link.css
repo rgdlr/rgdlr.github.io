@@ -1,4 +1,11 @@
-.link:hover {
+.link {
+  align-items: center;
+  display: flex;
+  gap: 1em;
+}
+
+.link:hover:not(:has(i)),
+.link:hover :not(i) {
   cursor: pointer;
   text-decoration: underline;
 }

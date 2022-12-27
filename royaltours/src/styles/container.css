@@ -1,13 +1,33 @@
 .container {
   margin-inline: auto;
   padding: 1em;
-  width: min(70em, 100%);
+  width: min(60em, 100%);
+}
+
+.container--xs {
+  width: min(30em, 100%);
 }
 
 .container--sm {
+  width: min(40em, 100%);
+}
+
+.container--md {
   width: min(50em, 100%);
 }
 
+.container--lg {
+  width: min(70em, 100%);
+}
+
 .container--xl {
-  width: min(90em, 100%);
+  width: min(100em, 100%);
+}
+
+.container--xxl {
+  width: min(150em, 100%);
+}
+
+.container--100 {
+  width: 100%;
 }
