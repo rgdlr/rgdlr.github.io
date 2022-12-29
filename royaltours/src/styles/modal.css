@@ -13,7 +13,8 @@ body.body__modal--open {
 }
 
 .modal {
-  background-color: #0008;
+  backdrop-filter: blur(0.05em);
+  background-color: #0005;
   display: grid;
   height: 100%;
   left: 0;
@@ -22,14 +23,15 @@ body.body__modal--open {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
 
   opacity: 1;
   visibility: visible;
-  transition: opacity 500ms ease, visibility 500ms ease;
+  transition: backdrop-filter 500ms ease, opacity 500ms ease, visibility 500ms ease;
 }
 
 .modal--hidden {
+  backdrop-filter: blur(0);
   opacity: 0;
   visibility: hidden;
 }
