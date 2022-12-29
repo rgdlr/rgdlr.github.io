@@ -13,8 +13,7 @@ body.body__modal--open {
 }
 
 .modal {
-  backdrop-filter: blur(0.05em);
-  background-color: #0005;
+  background-color: #0003;
   display: grid;
   height: 100%;
   left: 0;
@@ -25,12 +24,15 @@ body.body__modal--open {
   width: 100%;
   z-index: 1;
 
+  -webkit-backdrop-filter: blur(0.2em);
+  backdrop-filter: blur(0.2em);
   opacity: 1;
   visibility: visible;
-  transition: backdrop-filter 500ms ease, opacity 500ms ease, visibility 500ms ease;
+  transition: -webkit-backdrop-filter 500ms ease, backdrop-filter 500ms ease, opacity 500ms ease, visibility 500ms ease;
 }
 
 .modal--hidden {
+  -webkit-backdrop-filter: blur(0.2em);
   backdrop-filter: blur(0);
   opacity: 0;
   visibility: hidden;
