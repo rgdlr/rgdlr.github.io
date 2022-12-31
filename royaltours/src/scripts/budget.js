@@ -3,8 +3,8 @@ import { formatCurrency } from "./formatter.js";
 import { ICON } from "./icon.js";
 import { fetchJson } from "./json.js";
 
-const products = await fetchJson("/royaltours/src/data/products.json");
-const prices = await fetchJson("/royaltours/src/data/prices.json");
+const products = await fetchJson("/src/royaltours/data/products.json");
+const prices = await fetchJson("/src/royaltours/data/prices.json");
 
 function resetBudgetButtonAnimation(resetBudgetButton) {
   resetBudgetButton.animate(

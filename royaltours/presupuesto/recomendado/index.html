@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Royal Tours · Presupuesto recomendado</title>
-    <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="/src/royaltours/assets/logo.svg" type="image/x-icon" />
     <link
       rel="stylesheet"
       type="text/css"
       media="screen"
-      href="/royaltours/src/styles/index.css"
+      href="/src/royaltours/styles/index.css"
     />
     <link
       rel="stylesheet"
@@ -19,11 +19,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
+    <script defer type="module" src="/src/royaltours/scripts/index.js"></script>
   </head>
   <body>
     <header class="header header--links-right">
-      <a class="header__logo link" href="/royaltours/">
+      <a class="header__logo link" href="/royaltours">
         <i class="fa-solid fa-crown"></i>
         <h1 class="h1">Royal Tours</h1>
       </a>
@@ -35,154 +35,8 @@
       tabindex="-1"
       aria-label="Contenido principal - Presupuesto"
     >
-      <section class="container container--lg">
+      <section class="container container--md">
         <h2 class="h2 h2--margin h--line-left">Presupuesto recomendado</h2>
-        <section class="cards">
-          <section class="card">
-            <header class="card__header">
-              <div class="card__title">
-                <i class="fa-solid fa-star font-size--sm"></i>
-                <h3 class="h3">BÁSICO</h3>
-              </div>
-              <div class="card__subtitle font-style--italic">
-                <span class="font-size--sm">DESDE</span>
-                <span class="font-weight--bold">1.000 €</span>
-              </div>
-            </header>
-            <div class="card__body">
-              <ul class="card__ul">
-                <li class="card__li card__li--included">Web</li>
-                <li class="card__li card__li--included">Dominio</li>
-                <li class="card__li card__li--included">Alojamiento</li>
-                <li class="card__li card__li--excluded">Reservas</li>
-                <li class="card__li card__li--excluded">Pagos</li>
-                <li class="card__li card__li--excluded">Google Street View</li>
-                <li class="card__li card__li--excluded">Mapa 3D</li>
-                <li class="card__li card__li--included">
-                  Galería de imágenes
-                  <span class="font-size--sm">[*<sup>1</sup>]</span>
-                </li>
-                <li class="card__li card__li--included">
-                  Galería de vídeos
-                  <span class="font-size--sm">[*<sup>2</sup>]</span>
-                </li>
-                <li class="card__li card__li--excluded">Vídeo promocional</li>
-                <li class="card__li card__li--excluded">Logo</li>
-              </ul>
-            </div>
-            <footer class="card__footer">
-              <ul class="font-size--sm">
-                <li>
-                  [*<sup>1</sup>]
-                  <strong class="font-weight--bold">10 imágenes</strong>
-                  incluídas <sub>(+10€/extra)</sub>
-                </li>
-                <li>
-                  [*<sup>2</sup>]
-                  <strong class="font-weight--bold">05 vídeos</strong>
-                  incluídos <sub>(+20€/extra)</sub>
-                </li>
-              </ul>
-            </footer>
-          </section>
-          <section class="card">
-            <header class="card__header">
-              <div class="card__title">
-                <i class="fa-solid fa-star font-size--sm"></i>
-                <i class="fa-solid fa-star font-size--sm"></i>
-                <h3 class="h3">MEDIO</h3>
-              </div>
-              <div class="card__subtitle font-style--italic">
-                <span class="font-size--sm">DESDE</span>
-                <span class="font-weight--bold">2.000 €</span>
-              </div>
-            </header>
-            <div class="card__body">
-              <ul class="card__ul">
-                <li class="card__li card__li--included">Web</li>
-                <li class="card__li card__li--included">Dominio</li>
-                <li class="card__li card__li--included">Alojamiento</li>
-                <li class="card__li card__li--included">Reservas</li>
-                <li class="card__li card__li--included">Pagos</li>
-                <li class="card__li card__li--excluded">Google Street View</li>
-                <li class="card__li card__li--excluded">Mapa 3D</li>
-                <li class="card__li card__li--included">
-                  Galería de imágenes
-                  <span class="font-size--sm">[*<sup>1</sup>]</span>
-                </li>
-                <li class="card__li card__li--included">
-                  Galería de vídeos
-                  <span class="font-size--sm">[*<sup>2</sup>]</span>
-                </li>
-                <li class="card__li card__li--excluded">Vídeo promocional</li>
-                <li class="card__li card__li--excluded">Logo</li>
-              </ul>
-            </div>
-            <footer class="card__footer">
-              <ul class="font-size--sm">
-                <li>
-                  [*<sup>1</sup>]
-                  <strong class="font-weight--bold">10 imágenes</strong>
-                  incluídas <sub>(+10€/extra)</sub>
-                </li>
-                <li>
-                  [*<sup>2</sup>]
-                  <strong class="font-weight--bold">05 vídeos</strong>
-                  incluídos <sub>(+20€/extra)</sub>
-                </li>
-              </ul>
-            </footer>
-          </section>
-          <section class="card">
-            <header class="card__header">
-              <div class="card__title">
-                <i class="fa-solid fa-star font-size--sm"></i>
-                <i class="fa-solid fa-star font-size--sm"></i>
-                <i class="fa-solid fa-star font-size--sm"></i>
-                <h3 class="h3">COMPLETO</h3>
-              </div>
-              <div class="card__subtitle font-style--italic">
-                <span class="font-size--sm">DESDE</span>
-                <span class="font-weight--bold">3.000 €</span>
-              </div>
-            </header>
-            <div class="card__body">
-              <ul class="card__ul">
-                <li class="card__li card__li--included">Web</li>
-                <li class="card__li card__li--included">Dominio</li>
-                <li class="card__li card__li--included">Alojamiento</li>
-                <li class="card__li card__li--included">Reservas</li>
-                <li class="card__li card__li--included">Pagos</li>
-                <li class="card__li card__li--included">Google Street View</li>
-                <li class="card__li card__li--included">Mapa 3D</li>
-                <li class="card__li card__li--included">
-                  Galería de imágenes
-                  <span class="font-size--sm">[*<sup>1</sup>]</span>
-                </li>
-                <li class="card__li card__li--included">
-                  Galería de vídeos
-                  <span class="font-size--sm">[*<sup>2</sup>]</span>
-                </li>
-                <li class="card__li card__li--included">Vídeo promocional</li>
-                <li class="card__li card__li--included">Logo</li>
-              </ul>
-            </div>
-            <footer class="card__footer">
-              <ul class="font-size--sm">
-                <li>
-                  [*<sup>1</sup>]
-                  <strong class="font-weight--bold">10 imágenes</strong>
-                  incluídas <sub>(+10€/extra)</sub>
-                </li>
-                <li>
-                  [*<sup>2</sup>]
-                  <strong class="font-weight--bold">05 vídeos</strong>
-                  incluídos <sub>(+20€/extra)</sub>
-                </li>
-              </ul>
-            </footer>
-          </section>
-        </section>
       </section>
     </main>
     <footer class="footer">
