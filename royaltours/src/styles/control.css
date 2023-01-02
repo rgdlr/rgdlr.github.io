@@ -62,7 +62,7 @@
 
 .checkbox:checked::before,
 .radio:checked::before {
-  background-color: var(--color-primary-300);
+  background-color: var(--color-primary-500);
   content: "";
   height: 80%;
   left: 10%;

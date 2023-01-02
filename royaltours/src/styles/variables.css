@@ -9,44 +9,48 @@
   --color-dark-200: #222;
   --color-dark-300: #333;
 
-  --color-primary-000: #001;
-  --color-primary-100: #112;
-  --color-primary-200: #223;
-  --color-primary-300: #334;
-  --color-primary-400: #445;
-  --color-primary-500: #556;
-  --color-primary-600: #667;
-  --color-primary-700: #778;
-  --color-primary-800: #889;
-  --color-primary-900: #99a;
+  --color-primary-000: #006;
+  --color-primary-100: #117;
+  --color-primary-200: #228;
+  --color-primary-300: #339;
+  --color-primary-400: #44a;
+  --color-primary-500: #55b;
+  --color-primary-600: #66c;
+  --color-primary-700: #77d;
+  --color-primary-800: #88e;
+  --color-primary-900: #99f;
 
-  --color-secondary-000: #010;
-  --color-secondary-100: #121;
-  --color-secondary-200: #232;
-  --color-secondary-300: #343;
-  --color-secondary-400: #454;
-  --color-secondary-500: #565;
-  --color-secondary-600: #676;
-  --color-secondary-700: #787;
-  --color-secondary-800: #898;
-  --color-secondary-900: #9a9;
+  --color-secondary-000: #060;
+  --color-secondary-100: #171;
+  --color-secondary-200: #282;
+  --color-secondary-300: #393;
+  --color-secondary-400: #4a4;
+  --color-secondary-500: #5b5;
+  --color-secondary-600: #6c6;
+  --color-secondary-700: #7d7;
+  --color-secondary-800: #8e8;
+  --color-secondary-900: #9f9;
 
-  --color-tertiary-000: #100;
-  --color-tertiary-100: #211;
-  --color-tertiary-200: #322;
-  --color-tertiary-300: #433;
-  --color-tertiary-400: #544;
-  --color-tertiary-500: #655;
-  --color-tertiary-600: #766;
-  --color-tertiary-700: #877;
-  --color-tertiary-800: #988;
-  --color-tertiary-900: #a99;
+  --color-tertiary-000: #600;
+  --color-tertiary-100: #711;
+  --color-tertiary-200: #822;
+  --color-tertiary-300: #933;
+  --color-tertiary-400: #a44;
+  --color-tertiary-500: #b55;
+  --color-tertiary-600: #c66;
+  --color-tertiary-700: #d77;
+  --color-tertiary-800: #e88;
+  --color-tertiary-900: #f99;
 
   --font-family-primary: system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   --font-family-secondary: serif;
   --font-family-tertiary: monospace;
+
+  --font-size--sm: 0.7em;
+  --font-size--md: 1em;
+  --font-size--ld: 1.2em;
 
   --scroll-padding-top: calc(1em + 1.75em + 1em);
 }

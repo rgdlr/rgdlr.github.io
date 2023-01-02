@@ -18,7 +18,7 @@
 }
 
 .cards:has(.card:hover) .card:not(:hover) {
-  /* filter: blur(0.05em) saturate(0.85); */
+  filter: blur(0.05em) saturate(0.85);
 }
 
 .card__header {
@@ -40,17 +40,17 @@
 }
 
 .card__header i {
-  color: #995;
+  color: #cc5;
 
   transition: color 250ms all;
 }
 
 .card__header:hover i {
-  color: #cc5;
+  color: #ff3;
 }
 
 .card__subtitle {
-  background-color: var(--color-primary-900);
+  background-color: var(--color-primary-700);
   border-radius: 5em;
   display: flex;
   gap: 0.5em;
@@ -59,8 +59,8 @@
 }
 
 .card__body {
-  border-bottom: 0.1em dotted var(--color-primary-900);
-  border-top: 0.1em dotted var(--color-primary-900);
+  border-bottom: 0.1em dotted var(--color-primary-700);
+  border-top: 0.1em dotted var(--color-primary-700);
   padding-block: 1em 0.25em;
   padding: 1em;
   flex-grow: 1;
@@ -80,7 +80,7 @@
 
 .card__li::before {
   border-radius: 50%;
-  color: var(--color-primary-900);
+  color: var(--color-primary-700);
   content: "\f054";
   display: grid;
   font-family: "FontAwesome";
@@ -95,7 +95,7 @@
 }
 
 .card__li.card__li--included::before {
-  color: var(--color-secondary-900);
+  color: var(--color-secondary-700);
   content: "\f00c";
 }
 
@@ -105,15 +105,45 @@
 }
 
 .card__li.card__li--excluded::before {
-  color: var(--color-tertiary-900);
+  color: var(--color-tertiary-700);
   content: "\f00d";
 }
 
 .card__li:hover::before {
   background-color: var(--color-dark-300);
-  filter: saturate(8);
+  filter: saturate(1.75);
+}
+
+.card__asterisk {
+  background-color: var(--color-primary-700);
+  color: var(--color-primary-300);
+  border-radius: 50%;
+  font-size: var(--font-size--sm);
+  margin-inline: 0.5em;
+  padding: 0.25em;
 }
 
 .card__footer {
   padding: 1em;
+}
+
+.card__ol {
+  counter-reset: card__li--asterisk;
+}
+
+.card__ol.card__ol--asterisk {
+  font-size: var(--font-size--sm);
+}
+
+.card__li.card__li--asterisk {
+  padding-left: 2.5em;
+  counter-increment: card__li--asterisk;
+}
+
+.card__li.card__li--asterisk::before {
+  font-size: var(--font-size--sm);
+  color: var(--color-primary-700);
+  height: 2em;
+  width: 2em;
+  content: "* " counter(card__li--asterisk);
 }

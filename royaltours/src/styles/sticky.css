@@ -27,7 +27,7 @@
   font-size: 2em;
 
   transform: translateY(0);
-  transition: transform 250ms ease;
+  transition: transform 200ms ease;
 }
 
 .sticky__budget--change {

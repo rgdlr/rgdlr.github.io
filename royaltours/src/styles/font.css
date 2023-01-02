@@ -1,5 +1,5 @@
 .font-size--sm {
-  font-size: 0.7em;
+  font-size: var(--font-size--sm);
 }
 
 .font-style--italic {
