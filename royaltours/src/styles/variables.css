@@ -1,46 +1,50 @@
 :root {
-  --color-light-000: #ccc;
-  --color-light-100: #ddd;
-  --color-light-200: #eee;
-  --color-light-300: #fff;
+  --color-light-000: #aaa;
+  --color-light-100: #bbb;
+  --color-light-200: #ccc;
+  --color-light-300: #ddd;
+  --color-light-400: #eee;
+  --color-light-500: #fff;
 
   --color-dark-000: #000;
   --color-dark-100: #111;
   --color-dark-200: #222;
   --color-dark-300: #333;
+  --color-dark-400: #444;
+  --color-dark-500: #555;
 
-  --color-primary-000: #006;
-  --color-primary-100: #117;
-  --color-primary-200: #228;
-  --color-primary-300: #339;
-  --color-primary-400: #44a;
-  --color-primary-500: #55b;
-  --color-primary-600: #66c;
-  --color-primary-700: #77d;
-  --color-primary-800: #88e;
-  --color-primary-900: #99f;
+  --color-primary-000: #004;
+  --color-primary-100: #115;
+  --color-primary-200: #226;
+  --color-primary-300: #337;
+  --color-primary-400: #448;
+  --color-primary-500: #559;
+  --color-primary-600: #66a;
+  --color-primary-700: #77b;
+  --color-primary-800: #88c;
+  --color-primary-900: #99d;
 
-  --color-secondary-000: #060;
-  --color-secondary-100: #171;
-  --color-secondary-200: #282;
-  --color-secondary-300: #393;
-  --color-secondary-400: #4a4;
-  --color-secondary-500: #5b5;
-  --color-secondary-600: #6c6;
-  --color-secondary-700: #7d7;
-  --color-secondary-800: #8e8;
-  --color-secondary-900: #9f9;
+  --color-secondary-000: #040;
+  --color-secondary-100: #151;
+  --color-secondary-200: #262;
+  --color-secondary-300: #373;
+  --color-secondary-400: #484;
+  --color-secondary-500: #595;
+  --color-secondary-600: #6a6;
+  --color-secondary-700: #7b7;
+  --color-secondary-800: #8c8;
+  --color-secondary-900: #9d9;
 
-  --color-tertiary-000: #600;
-  --color-tertiary-100: #711;
-  --color-tertiary-200: #822;
-  --color-tertiary-300: #933;
-  --color-tertiary-400: #a44;
-  --color-tertiary-500: #b55;
-  --color-tertiary-600: #c66;
-  --color-tertiary-700: #d77;
-  --color-tertiary-800: #e88;
-  --color-tertiary-900: #f99;
+  --color-tertiary-000: #400;
+  --color-tertiary-100: #511;
+  --color-tertiary-200: #622;
+  --color-tertiary-300: #733;
+  --color-tertiary-400: #844;
+  --color-tertiary-500: #955;
+  --color-tertiary-600: #a66;
+  --color-tertiary-700: #b77;
+  --color-tertiary-800: #c88;
+  --color-tertiary-900: #d99;
 
   --font-family-primary: system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",

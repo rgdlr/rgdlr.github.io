@@ -17,9 +17,9 @@
   scale: 1.02;
 }
 
-.cards:has(.card:hover) .card:not(:hover) {
+/* .cards:has(.card:hover) .card:not(:hover) {
   filter: blur(0.05em) saturate(0.85);
-}
+} */
 
 .card__header {
   align-items: center;
@@ -40,13 +40,13 @@
 }
 
 .card__header i {
-  color: #cc5;
+  color: #aa3;
 
   transition: color 250ms all;
 }
 
-.card__header:hover i {
-  color: #ff3;
+.card:hover .card__header i {
+  color: #dd3;
 }
 
 .card__subtitle {
@@ -99,9 +99,14 @@
   content: "\f00c";
 }
 
+.card__li.card__li--semi-included::before {
+  color: #bb3;
+  content: "\25";
+}
+
 .card__li.card__li--excluded {
   text-decoration: line-through;
-  color: var(--color-dark-300);
+  color: var(--color-light-000);
 }
 
 .card__li.card__li--excluded::before {
@@ -111,16 +116,21 @@
 
 .card__li:hover::before {
   background-color: var(--color-dark-300);
-  filter: saturate(1.75);
+  filter: saturate(3);
 }
 
 .card__asterisk {
+  align-items: center;
   background-color: var(--color-primary-700);
-  color: var(--color-primary-300);
   border-radius: 50%;
+  color: var(--color-primary-300);
+  display: inline-flex;
   font-size: var(--font-size--sm);
+  height: 1.5em;
+  justify-content: center;
   margin-inline: 0.5em;
   padding: 0.25em;
+  width: 1.5em;
 }
 
 .card__footer {

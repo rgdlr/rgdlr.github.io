@@ -2,7 +2,7 @@
   background-color: var(--color-primary-500);
   bottom: 0;
   box-shadow: 0 -0.5em 0.5em -0.5em var(--color-primary-300);
-  color: var(--color-light-300);
+  color: var(--color-light-500);
   font-weight: bold;
   min-height: calc(1em + 2em + 1em);
   left: 0;
@@ -73,7 +73,7 @@
 }
 
 .sticky__button:focus::before {
-  border: 0.05em dashed var(--color-light-300);
+  border: 0.05em dashed var(--color-light-500);
 }
 
 .sticky__button--reset {

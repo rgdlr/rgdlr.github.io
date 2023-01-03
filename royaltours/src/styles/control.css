@@ -5,7 +5,7 @@
 .input,
 .checkbox,
 .radio {
-  background-color: var(--color-light-300);
+  background-color: var(--color-light-500);
   border: 0.1em solid var(--color-light-000);
   border-radius: 0.2em;
   color: var(--color-dark-300);
@@ -32,7 +32,7 @@
 .checkbox:focus,
 .radio:focus {
   outline-offset: 0.1em;
-  outline: 0.1em dotted var(--color-light-300);
+  outline: 0.1em dotted var(--color-light-500);
 }
 
 .input {
@@ -40,7 +40,7 @@
 }
 
 .checkbox {
-  accent-color: var(--color-light-300);
+  accent-color: var(--color-light-500);
 }
 
 .radio {
@@ -76,7 +76,7 @@
 }
 
 .checkbox--indeterminate::after {
-  background-color: var(--color-light-300);
+  background-color: var(--color-light-500);
   content: "";
   height: 12%;
   left: 50%;

@@ -39,7 +39,7 @@ body.body__modal--open {
 }
 
 .modal__window {
-  background-color: var(--color-light-300);
+  background-color: var(--color-light-500);
   border-radius: 0.75em;
   display: flex;
   flex-direction: column;
@@ -128,7 +128,7 @@ body.body__modal--open {
   width: 2em;
   z-index: 1;
 
-  background-color: var(--color-light-300);
+  background-color: var(--color-light-500);
   color: var(--color-dark-300);
   transition: background-color 250ms ease, color 250ms ease;
 }
@@ -148,7 +148,7 @@ body.body__modal--open {
 .modal__close:focus,
 .modal__budget-remove:focus {
   background-color: var(--color-dark-300);
-  color: var(--color-light-300);
+  color: var(--color-light-500);
 }
 
 .modal__budget {
