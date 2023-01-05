@@ -5,6 +5,7 @@ import {
   showSavedBudgetModal,
   updateBudget,
 } from "./budget.js";
+import { animateCards } from "./cards.js";
 import { setFooterYear } from "./footer.js";
 import { allowHideModal, allowShowModal } from "./modal.js";
 import { $ } from "./selector.js";
@@ -58,4 +59,10 @@ if (removeBudgetButton) {
 
 if (footerYear) {
   setFooterYear(footerYear);
+}
+
+const cards = $.one(".cards");
+
+if (cards) {
+  animateCards(cards);
 }

@@ -1,4 +1,4 @@
-import { BASE_PRICE, IVA_MULTIPLIER } from "./constant.js";
+import { BASE_PRICE } from "./constant.js";
 import { formatCurrency } from "./formatter.js";
 import { ICON } from "./icon.js";
 import { fetchJson } from "./json.js";
@@ -60,9 +60,7 @@ function reduceBudget(currentBudget, product) {
 }
 
 function getBudget(budgetForm) {
-  return (
-    Array.from(budgetForm).reduce(reduceBudget, BASE_PRICE) * IVA_MULTIPLIER
-  );
+  return Array.from(budgetForm).reduce(reduceBudget, BASE_PRICE);
 }
 
 function mapBudget(product) {

@@ -101,7 +101,7 @@
 
 .card__li.card__li--semi-included::before {
   color: #bb3;
-  content: "\25";
+  content: "\f00c";
 }
 
 .card__li.card__li--excluded {

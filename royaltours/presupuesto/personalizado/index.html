@@ -118,12 +118,34 @@
                 Pagos
               </label>
             </div>
+            <div class="form__control">
+              <input
+                class="checkbox"
+                id="web-development__yearly-maintenance"
+                type="checkbox"
+                name="web-development__yearly-maintenance"
+              />
+              <label class="label" for="web-development__yearly-maintenance">
+                Mantenimiento anual
+              </label>
+            </div>
           </div>
 
           <h3 class="h3 h--line-bottom">
             <i class="fa-solid fa-street-view"></i> Visitas virtuales 360
           </h3>
           <div class="form__group form__group-body">
+            <div class="form__control">
+              <input
+                class="checkbox"
+                id="virtual-tours__tour-360"
+                type="checkbox"
+                name="virtual-tours__tour-360"
+              />
+              <label class="label" for="virtual-tours__tour-360">
+                Tour 360
+              </label>
+            </div>
             <div class="form__control">
               <input
                 class="checkbox"
@@ -215,11 +237,14 @@
             <div class="form__control">
               <input
                 class="radio"
-                id="audio-visual__image-gallery-lightning"
+                id="audio-visual__image-gallery-interactive"
                 type="radio"
                 name="audio-visual__image-gallery-standard-lightning"
               />
-              <label class="label" for="audio-visual__image-gallery-lightning">
+              <label
+                class="label"
+                for="audio-visual__image-gallery-interactive"
+              >
                 Galería de imágenes interactiva
               </label>
             </div>
@@ -250,12 +275,15 @@
             <div class="form__control">
               <input
                 class="radio"
-                id="audio-visual__video-gallery-lightning"
+                id="audio-visual__video-gallery-interactive"
                 type="radio"
                 name="audio-visual__video-gallery-standard-lightning"
               />
-              <label class="label" for="audio-visual__video-gallery-lightning">
-                Galería de vídeos con iluminación variable
+              <label
+                class="label"
+                for="audio-visual__video-gallery-interactive"
+              >
+                Galería de vídeos interactiva
               </label>
             </div>
             <div class="form__control">
@@ -280,6 +308,19 @@
               />
               <label class="label" for="audio-visual__social-media">
                 Material para redes sociales
+              </label>
+            </div>
+            <div class="form__control">
+              <input
+                class="input"
+                id="audio-visual__social-media-amount"
+                type="tel"
+                maxlength="2"
+                name="audio-visual__social-media-amount"
+                placeholder="00"
+              />
+              <label class="label" for="audio-visual__social-media-amount">
+                Cantidad de publicaciones
               </label>
             </div>
             <div class="form__control">
@@ -312,22 +353,22 @@
           <div class="form__group form__group-body">
             <div class="form__control">
               <input
-                class="checkbox"
+                class="radio"
                 id="graphic-design__logo"
-                type="checkbox"
-                name="graphic-design__logo"
+                type="radio"
+                name="graphic-design__logo-brand-book"
               />
               <label class="label" for="graphic-design__logo">Logo</label>
             </div>
             <div class="form__control">
               <input
-                class="checkbox"
-                id="graphic-design__customized"
-                type="checkbox"
-                name="graphic-design__customized"
+                class="radio"
+                id="graphic-design__brand-book"
+                type="radio"
+                name="graphic-design__logo-brand-book"
               />
-              <label class="label" for="graphic-design__customized">
-                Personalizado
+              <label class="label" for="graphic-design__brand-book">
+                Brandbook
               </label>
             </div>
           </div>
@@ -337,6 +378,17 @@
             publicidad
           </h3>
           <div class="form__group form__group-body">
+            <div class="form__control">
+              <input
+                class="checkbox"
+                id="marketing-advertising__google-business"
+                type="checkbox"
+                name="marketing-advertising__google-business"
+              />
+              <label class="label" for="marketing-advertising__google-business">
+                Implementación en Google Business
+              </label>
+            </div>
             <div class="form__control">
               <input
                 class="checkbox"
@@ -367,6 +419,7 @@
         <div class="sticky__budget-container">
           <div class="sticky__budget"></div>
         </div>
+        <!-- TODO : MOSTRAR PRECIO SIN IVA -->
         <button class="sticky__button sticky__button--reset" id="reset-budget">
           <i class="fa-solid fa-arrow-rotate-left"></i>
         </button>

@@ -6,8 +6,10 @@
   "hosting": "Alojamiento",
   "booking": "Reservas",
   "payments": "Pagos",
+  "yearly-maintenance": "Mantenimiento anual",
 
   "virtual-tours": "Visitas virtuales",
+  "tour-360": "Tour 360",
   "google-street-view": "Google Street View",
   "web-integration": "Integración web",
   "3d-map": "Mapa 3D",
@@ -17,20 +19,22 @@
 
   "audio-visual": "Audiovisual",
   "image-gallery-standard": "Galería de imágenes estándar",
-  "image-gallery-lightning": "Galería de imágenes interactiva",
+  "image-gallery-interactive": "Galería de imágenes interactiva",
   "image-gallery-amount": "Cantidad de imágenes de la galería",
   "video-gallery-standard": "Galería de vídeos estándar",
-  "video-gallery-lightning": "Galería de vídeos con iluminación variable",
+  "video-gallery-interactive": "Galería de vídeos interactiva",
   "video-gallery-amount": "Cantidad de vídeos de la galería",
   "social-media": "Material para redes sociales",
+  "social-media-amount": "Cantidad de publicaciones",
   "promotional-video": "Vídeo promocional",
   "drone-video": "Escenas aéreas con drone",
 
   "graphic-design": "Diseño gráfico",
   "logo": "Logo",
-  "customized": "Personalizado",
+  "brand-book": "Brandbook",
 
   "marketing-advertising": "Marketing y publicidad",
+  "google-business": "Implementación en Google Business",
   "google-search": "Promoción en búsquedas de Google",
   "social-advert": "Promoción en redes sociales"
 }
