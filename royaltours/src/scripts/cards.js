@@ -1,62 +1,127 @@
-// TODO : improve cards animation
-// TODO : option 2 - make window appear from window center, from width 0
-export function animateCards(cards) {
-  const cardsCollection = Array.from(cards.children);
-  cardsCollection.forEach((pack) => {
-    pack.addEventListener("click", (_event) => {
-      if (!["", "unset"].includes(pack.style.boxShadow)) {
-        pack.style.boxShadow = "unset";
-        pack.style.left = "unset";
-        pack.style.position = "unset";
-        pack.style.top = "unset";
-        pack.style.transform = "unset";
-        pack.style.width = "unset";
-        pack.style.zIndex = "unset";
-      } else {
-        const packOriginTop = pack.getBoundingClientRect().top;
-        const packOriginLeft = pack.getBoundingClientRect().left;
-        const packOriginWidth = pack.getBoundingClientRect().width;
+// TODO : new option - make window appear from window center, from width 0
+function getCssGapProperty(element) {
+  if (element.getBoundingClientRect().width > window.innerWidth / 3) {
+    return 0;
+  }
+  return (
+    Number(window.getComputedStyle(element.parentElement).gap.slice(0, -2)) / 2
+  );
+}
 
-        const packClone = pack.cloneNode(true);
-        packClone.style.left = `${packOriginLeft}px`;
-        packClone.style.position = "fixed";
-        packClone.style.top = `${packOriginTop}px`;
-        packClone.style.transition = "all 500ms ease";
-        packClone.style.width = `${packOriginWidth}px`;
-        packClone.style.zIndex = "5";
-        pack.style.opacity = 0;
+function transformToCenter(element, { onResizeWindow }) {
+  const { height, left, top, width } = element.getBoundingClientRect();
+  const { innerHeight, innerWidth, pageYOffset } = window;
+  const gap = getCssGapProperty(element);
 
-        setTimeout(() => {
-          packClone.style.boxShadow =
-            "0 0 0 100em #0003, 0 0 0.75em 0.25em #0005";
-          packClone.style.left = `${window.innerWidth / 2}px`;
-          packClone.style.top = `${window.innerHeight / 2}px`;
-          packClone.style.transform = "translate(-50%, -50%)";
-          packClone.style.width = "min(30em, 95%)";
-          document.body.classList.add("body__modal--open");
-        }, 250);
+  const translateX = `${innerWidth / 2 - width / 2 - left - gap}px`;
+  const translateY = `${
+    innerHeight / 2 - height / 2 - top - gap - pageYOffset
+  }px`;
 
-        cards.appendChild(packClone);
+  window.document.body.classList.add("body__modal--open");
+  element.style.transform = `translate(${translateX}, ${translateY})`;
 
-        window.addEventListener("resize", () => {
-          packClone.style.left = `${window.innerWidth / 2}px`;
-          packClone.style.top = `${window.innerHeight / 2}px`;
-        });
+  if (typeof onResizeWindow !== "function") {
+    return;
+  }
 
-        packClone.addEventListener("click", () => {
-          document.body.classList.remove("body__modal--open");
-          packClone.style.boxShadow = "none";
-          packClone.style.top = `${packOriginTop}px`;
-          packClone.style.left = `${packOriginLeft}px`;
-          packClone.style.transform = "translate(0%, 0%)";
-          packClone.style.width = `${packOriginWidth}px`;
-          setTimeout(() => {
-            cardsCollection.forEach((pack) => pack.removeAttribute("style"));
-            packClone.remove();
-          }, 500);
-        });
+  element.style.boxShadow = "0 0 0 100em #0003, 0 0 0.75em 0.25em #0005";
+  element.style.zIndex = "1";
+
+  setTimeout(() => {
+    window.addEventListener("resize", onResizeWindow);
+    Array.from(element.parentElement.children).forEach((child) => {
+      if (child !== element) {
+        child.style.pointerEvents = "none";
       }
-      cardsCollection.forEach((pack) => (pack.style.pointerEvents = "none"));
+    });
+  }, 500);
+}
+
+function resetTransformToCenter(element, { onResizeWindow }) {
+  element.style.boxShadow = "";
+  element.style.transform = "";
+
+  if (typeof onResizeWindow !== "function") {
+    return;
+  }
+
+  setTimeout(() => {
+    element.style.zIndex = "";
+    window.document.body.classList.remove("body__modal--open");
+    window.removeEventListener("resize", onResizeWindow);
+    Array.from(element.parentElement.children).forEach((sibling) => {
+      sibling.removeAttribute("style");
+    });
+  }, 500);
+}
+
+export function animateCardsWithTransform(cards) {
+  Array.from(cards.children).forEach((card) => {
+    const onResizeWindow = (_event) => transformToCenter(card, {});
+    card.addEventListener("click", (_event) => {
+      if (card.style.boxShadow === "") {
+        transformToCenter(card, { onResizeWindow });
+      } else {
+        resetTransformToCenter(card, { onResizeWindow });
+      }
+    });
+  });
+}
+
+function positionToCenter(element, { onResizeWindow }) {
+  const { height, left, top, width } = element.getBoundingClientRect();
+  const { innerHeight, innerWidth, pageYOffset } = window;
+  const gap = getCssGapProperty(element);
+
+  window.document.body.classList.add("body__modal--open");
+  element.style.left = `${innerWidth / 2 - width / 2 - left - gap}px`;
+  element.style.top = `${
+    innerHeight / 2 - height / 2 - top - gap - pageYOffset
+  }px`;
+
+  if (typeof onResizeWindow !== "function") {
+    return;
+  }
+
+  element.style.boxShadow = "0 0 0 100em #0003, 0 0 0.75em 0.25em #0005";
+  element.style.zIndex = "1";
+  setTimeout(() => {
+    window.addEventListener("resize", onResizeWindow);
+    Array.from(element.parentElement.children).forEach((child) => {
+      if (child !== element) child.style.pointerEvents = "none";
+    });
+  }, 500);
+}
+
+function resetPositionToCenter(element, { onResizeWindow }) {
+  element.style.boxShadow = "";
+  element.style.left = "";
+  element.style.top = "";
+
+  if (typeof onResizeWindow !== "function") {
+    return;
+  }
+
+  setTimeout(() => {
+    element.style.zIndex = "";
+    window.document.body.classList.remove("body__modal--open");
+    window.removeEventListener("resize", onResizeWindow);
+    Array.from(element.parentElement.children).forEach((sibling) => {
+      sibling.removeAttribute("style");
+    });
+  }, 500);
+}
+
+export function animateCardsWithPosition(cards) {
+  Array.from(cards.children).forEach((card) => {
+    const onResizeWindow = (_event) => positionToCenter(card, {});
+    card.addEventListener("click", (_event) => {
+      if (card.style.boxShadow === "") {
+        positionToCenter(card, { onResizeWindow });
+      } else {
+        resetPositionToCenter(card, { onResizeWindow });
+      }
     });
   });
 }

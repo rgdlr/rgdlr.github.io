@@ -4,9 +4,11 @@ body:has(.modal):not(:has(.modal--hidden)) {
   /* padding-right: 1em; */
 }
 
+/* TODO : check auto scroll to top */
 body.body__modal--open {
   bottom: 0;
   left: 0;
+  overflow: hidden;
   position: fixed;
   right: 0;
   top: 0;
@@ -28,7 +30,8 @@ body.body__modal--open {
   backdrop-filter: blur(0.2em);
   opacity: 1;
   visibility: visible;
-  transition: -webkit-backdrop-filter 500ms ease, backdrop-filter 500ms ease, opacity 500ms ease, visibility 500ms ease;
+  transition: -webkit-backdrop-filter 500ms ease, backdrop-filter 500ms ease,
+    opacity 500ms ease, visibility 500ms ease;
 }
 
 .modal--hidden {
