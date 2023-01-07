@@ -13,8 +13,9 @@
   position: relative;
   top: 0;
 
-  transition: box-shadow 500ms ease, filter 500ms ease, left 500ms ease,
-    scale 500ms ease, top 500ms ease, transform 500ms ease;
+  transition: box-shadow 500ms ease, filter 500ms ease, height 500ms ease,
+    left 500ms ease, scale 500ms ease, top 500ms ease, transform 500ms ease,
+    width 500ms ease;
 }
 
 .card:hover {

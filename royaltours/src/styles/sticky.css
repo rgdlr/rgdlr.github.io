@@ -18,6 +18,14 @@
   transform: translateY(0);
 }
 
+.sticky__checkbox {
+  left: 2em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
 .sticky__budget-container {
   overflow: hidden;
   padding: 1.25em 1em;
@@ -42,7 +50,7 @@
   height: 3em;
   outline: none;
   place-content: center;
-  position: fixed;
+  position: absolute;
   width: 3em;
   z-index: 1;
 

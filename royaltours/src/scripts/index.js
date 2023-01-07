@@ -5,7 +5,7 @@ import {
   showSavedBudgetModal,
   updateBudget,
 } from "./budget.js";
-import { animateCardsWithTransform } from "./cards.js";
+import { animateCardsWithCloneNode } from "./cards.js";
 import { setFooterYear } from "./footer.js";
 import { allowHideModal, allowShowModal } from "./modal.js";
 import { $ } from "./selector.js";
@@ -64,5 +64,5 @@ if (footerYear) {
 const cards = $.one(".cards");
 
 if (cards) {
-  animateCardsWithTransform(cards);
+  animateCardsWithCloneNode(cards);
 }

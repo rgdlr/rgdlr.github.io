@@ -1,6 +1,7 @@
 .container {
   margin-inline: auto;
   padding: 1em;
+  position: relative;
   width: min(60em, 100%);
 }
 
@@ -30,4 +31,8 @@
 
 .container--100 {
   width: 100%;
+}
+
+.container--no-padding {
+  padding: 0;
 }

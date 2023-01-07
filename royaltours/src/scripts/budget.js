@@ -2,6 +2,7 @@ import { BASE_PRICE } from "./constant.js";
 import { formatCurrency } from "./formatter.js";
 import { ICON } from "./icon.js";
 import { fetchJson } from "./json.js";
+import { $ } from "./selector.js";
 
 const products = await fetchJson("/royaltours/src/data/products.json");
 const prices = await fetchJson("/royaltours/src/data/prices.json");
@@ -88,11 +89,16 @@ export function saveBudget(budgetForm, saveBudgetButton) {
 }
 
 function setBudget(sticky, amount) {
+  const stickyCheckbox = sticky.querySelector(".sticky__checkbox .checkbox");
   const stickyBudget = sticky.querySelector(".sticky__budget");
   stickyBudget.classList.add("sticky__budget--change");
   stickyBudget.addEventListener("transitionend", (_event) => {
-    stickyBudget.innerHTML = formatCurrency(amount);
+    const { checked } = stickyCheckbox;
+    stickyBudget.innerHTML = formatCurrency(amount / (checked ? 1 : 1.21));
     stickyBudget.classList.remove("sticky__budget--change");
+  });
+  stickyCheckbox.addEventListener("change", (_event) => {
+    stickyBudget.classList.add("sticky__budget--change");
   });
 }
 

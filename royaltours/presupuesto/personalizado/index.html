@@ -29,14 +29,13 @@
       </a>
       <a class="header__skip-navigation link" href="#main">Saltar navegación</a>
       <nav class="header__links header__links--right">
-        <a
+        <button
           class="link"
-          href="#"
           id="saved-budget-link"
           data-modal-trigger="saved-budget"
         >
           Guardado
-        </a>
+        </button>
       </nav>
     </header>
     <main
@@ -416,16 +415,30 @@
       </section>
 
       <section class="sticky" id="sticky">
-        <div class="sticky__budget-container">
-          <div class="sticky__budget"></div>
+        <div class="container container--md container--no-padding">
+          <div class="sticky__checkbox form__control">
+            <input
+              class="checkbox"
+              id="sticky__budget--iva"
+              type="checkbox"
+              name="sticky__budget--iva"
+              checked
+            />
+            <label class="label" for="sticky__budget--iva">IVA</label>
+          </div>
+          <div class="sticky__budget-container">
+            <div class="sticky__budget"></div>
+          </div>
+          <button
+            class="sticky__button sticky__button--reset"
+            id="reset-budget"
+          >
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+          </button>
+          <button class="sticky__button sticky__button--save" id="save-budget">
+            <i class="fa-regular fa-floppy-disk"></i>
+          </button>
         </div>
-        <!-- TODO : MOSTRAR PRECIO SIN IVA -->
-        <button class="sticky__button sticky__button--reset" id="reset-budget">
-          <i class="fa-solid fa-arrow-rotate-left"></i>
-        </button>
-        <button class="sticky__button sticky__button--save" id="save-budget">
-          <i class="fa-regular fa-floppy-disk"></i>
-        </button>
       </section>
     </main>
 
