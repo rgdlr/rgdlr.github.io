@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Royal Tours · Calendar Table</title>
+    <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="/royaltours/src/styles/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
+  </head>
+  <body>
+    <header class="header header--links-right">
+      <a class="header__logo link" href="/royaltours/">
+        <i class="fa-solid fa-crown"></i>
+        <h1 class="h1">Royal Tours</h1>
+      </a>
+      <a class="header__skip-navigation link" href="#main">Saltar navegación</a>
+    </header>
+    <main class="main">
+      <section class="container container--md">
+        <h2 class="h2 h2--margin">Calendar Table</h2>
+        <style>
+          .calendar {
+            --calendar-cell-height: 3em;
+            --calendar-cell-width: 3em;
+            background-color: var(--color-primary-200);
+            width: fit-content;
+          }
+
+          .calendar__header {
+            align-items: center;
+            background-color: var(--color-primary-000);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+
+          .calendar__current-date {
+            font-size: calc(var(--calendar-cell-width) / 2.5);
+          }
+
+          thead {
+            background-color: var(--color-primary-100);
+          }
+
+          button,
+          td,
+          th {
+            align-items: center;
+            cursor: default;
+            display: inline-flex;
+            height: var(--calendar-cell-height);
+            justify-content: center;
+            width: var(--calendar-cell-width);
+          }
+
+          button:hover,
+          button:focus,
+          .calendar__weekday:hover,
+          .calendar__weekday--selected {
+            background-color: var(--color-primary-500);
+          }
+        </style>
+        <article class="calendar"></article>
+        <script type="module">
+          import { getCalendar, getWeekdays } from "/royaltours/src/scripts/calendar.js";
+
+          createCalendar(window.document.querySelector(".calendar"));
+
+          function createCalendar(container, date) {
+            const documentFragment = window.document.createDocumentFragment();
+
+            const calendarHeader = createCalendarHeader(date);
+            const calendarBody = createCalendarBody(date);
+            const calendarFooter = createCalendarFooter();
+
+            documentFragment.appendChild(calendarHeader);
+            documentFragment.appendChild(calendarBody);
+            documentFragment.appendChild(calendarFooter);
+
+            Array.from(container.children).forEach((child) =>
+              container.removeChild(child)
+            );
+            container.appendChild(documentFragment);
+          }
+
+          function createCalendarHeader(date) {
+            const calendarHeader = window.document.createElement("header");
+            const previousGroup = window.document.createElement("div");
+            const previousYear = window.document.createElement("button");
+            const previousMonth = window.document.createElement("button");
+            const currentDate = window.document.createElement("span");
+            const nextGroup = window.document.createElement("div");
+            const nextMonth = window.document.createElement("button");
+            const nextYear = window.document.createElement("button");
+
+            previousYear.innerHTML = `<i class="fa-solid fa-angles-left"></i>`;
+            previousYear.addEventListener("click", (_event) => {
+              const [day, month, year] = window.document
+                .querySelector(".calendar__current-date")
+                .innerText.split(".");
+
+              createCalendar(
+                window.document.querySelector(".calendar"),
+                new Date(Number(year) - 1, Number(month) - 1, day)
+              );
+            });
+
+            previousMonth.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
+            previousMonth.addEventListener("click", (_event) => {
+              const [day, month, year] = window.document
+                .querySelector(".calendar__current-date")
+                .innerText.split(".");
+
+              createCalendar(
+                window.document.querySelector(".calendar"),
+                new Date(year, Number(month) - 2, day)
+              );
+            });
+
+            nextMonth.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
+            nextMonth.addEventListener("click", (_event) => {
+              const [day, month, year] = window.document
+                .querySelector(".calendar__current-date")
+                .innerText.split(".");
+
+              createCalendar(
+                window.document.querySelector(".calendar"),
+                new Date(year, month, day)
+              );
+            });
+
+            nextYear.innerHTML = `<i class="fa-solid fa-angles-right"></i>`;
+            nextYear.addEventListener("click", (_event) => {
+              const [day, month, year] = window.document
+                .querySelector(".calendar__current-date")
+                .innerText.split(".");
+
+              createCalendar(
+                window.document.querySelector(".calendar"),
+                new Date(Number(year) + 1, Number(month) - 1, day)
+              );
+            });
+
+            const { day, month, year } = getCalendar(date);
+
+            previousGroup.appendChild(previousYear);
+            previousGroup.appendChild(previousMonth);
+
+            currentDate.classList.add("calendar__current-date");
+            currentDate.innerText = `${day}.${month + 1}.${year}`;
+
+            nextGroup.appendChild(nextMonth);
+            nextGroup.appendChild(nextYear);
+
+            calendarHeader.classList.add("calendar__header");
+            calendarHeader.appendChild(previousGroup);
+            calendarHeader.appendChild(currentDate);
+            calendarHeader.appendChild(nextGroup);
+
+            return calendarHeader;
+          }
+
+          function createCalendarBody(date) {
+            const calendarBody = window.document.createElement("div");
+            const calendarTable = createCalendarTable(date);
+
+            calendarBody.classList.add("calendar__body");
+            calendarBody.appendChild(calendarTable);
+
+            return calendarBody;
+          }
+
+          function createCalendarFooter() {
+            const calendarFooter = window.document.createElement("footer");
+            calendarFooter.classList.add("calendar__footer");
+            return calendarFooter;
+          }
+
+          function createCalendarTable(date) {
+            const calendarTable = window.document.createElement("table");
+
+            const calendarTableHead = createCalendarTableHead();
+            const calendarTableBody = createCalendarTableBody(date);
+            const calendarTableFooter = createCalendarTableFooter();
+
+            calendarTable.appendChild(calendarTableHead);
+            calendarTable.appendChild(calendarTableBody);
+            calendarTable.appendChild(calendarTableFooter);
+
+            return calendarTable;
+          }
+
+          function createCalendarTableHead() {
+            const calendarTableHead = window.document.createElement("thead");
+            const calendarTableHeadRow = window.document.createElement("tr");
+
+            getWeekdays({ locale: "en-US" }).forEach((weekday) => {
+              const calendarTableHeadHead = window.document.createElement("th");
+              calendarTableHeadHead.innerText = weekday.name.charAt(0);
+              calendarTableHeadRow.appendChild(calendarTableHeadHead);
+            });
+
+            calendarTableHead.appendChild(calendarTableHeadRow);
+            return calendarTableHead;
+          }
+
+          function getCalendarTableWeek(week, daysInMonth, offset) {
+            const { day } = getCalendar();
+
+            const calendarTableWeekRow = window.document.createElement("tr");
+            for (let weekDay = 1; weekDay <= 7; weekDay++) {
+              const monthDay = weekDay + week * 7 - offset;
+              if (monthDay > daysInMonth) break;
+
+              const calendarTableBodyData = window.document.createElement("td");
+              calendarTableBodyData.tabIndex = "0";
+              calendarTableBodyData.innerText = "·";
+
+              if (week !== 0 || weekDay > offset) {
+                calendarTableBodyData.innerText = monthDay;
+                calendarTableBodyData.classList.add("calendar__weekday");
+              }
+
+              if (monthDay === day) {
+                calendarTableBodyData.classList.add(
+                  "calendar__weekday--selected"
+                );
+              }
+
+              calendarTableWeekRow.appendChild(calendarTableBodyData);
+            }
+            return calendarTableWeekRow;
+          }
+
+          function createCalendarTableBody(date) {
+            const calendarTableBody = window.document.createElement("tbody");
+
+            const { daysInMonth, firstWeekday, weeksInMonth } =
+              getCalendar(date);
+            for (let week = 0; week < weeksInMonth; week++) {
+              const calendarTableBodyRow = getCalendarTableWeek(
+                week,
+                daysInMonth,
+                firstWeekday
+              );
+              calendarTableBody.appendChild(calendarTableBodyRow);
+            }
+
+            return calendarTableBody;
+          }
+
+          function createCalendarTableFooter() {
+            const calendarTableFooter = window.document.createElement("tfoot");
+            return calendarTableFooter;
+          }
+        </script>
+      </section>
+    </main>
+  </body>
+</html>
+
+<!-- <iframe src="http://localhost:5500/royaltours/src/components/calendar-iframe.html" height="384px" style="border: none;" width="336px"></iframe> -->

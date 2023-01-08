@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Royal Tours · Calendar</title>
+    <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="/royaltours/src/styles/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
+  </head>
+  <body>
+    <header class="header header--links-right">
+      <a class="header__logo link" href="/royaltours/">
+        <i class="fa-solid fa-crown"></i>
+        <h1 class="h1">Royal Tours</h1>
+      </a>
+      <a class="header__skip-navigation link" href="#main">Saltar navegación</a>
+    </header>
+    <main class="main">
+      <section class="container container--md">
+        <h2 class="h2 h2--margin">Calendar</h2>
+        <!-- TODO : use an input to save and query selected dates -->
+        <style>
+          .calendar {
+            --calendar-cell-height: 3em;
+            --calendar-cell-width: 3em;
+            width: fit-content;
+          }
+
+          .calendar__header {
+            background-color: var(--color-primary-000);
+            display: flex;
+            gap: 1em;
+            justify-content: space-between;
+          }
+
+          .calendar__button-group {
+            display: flex;
+          }
+
+          .calendar__date {
+            display: flex;
+            place-items: center;
+          }
+
+          .calendar__date {
+            font-size: calc(var(--calendar-cell-width) / 2.5);
+          }
+
+          .calendar__picker {
+            background-color: var(--color-primary-200);
+            display: grid;
+            grid-template-columns: repeat(7, var(--calendar-cell-width, 1fr));
+          }
+
+          .calendar__weekday {
+            background-color: var(--color-primary-100);
+            font-weight: bold;
+          }
+
+          /* .calendar__monthday {
+            background-color: var(--color-primary-200);
+          } */
+
+          .calendar__monthday--start,
+          .calendar__monthday--end {
+            background-color: var(--color-primary-500);
+          }
+
+          .calendar__button,
+          .calendar__weekday,
+          .calendar__monthday {
+            display: grid;
+            height: var(--calendar-cell-height, auto);
+            place-items: center;
+            width: var(--calendar-cell-width, auto);
+          }
+
+          .calendar__button:focus,
+          .calendar__button:hover,
+          .calendar__monthday:focus,
+          .calendar__monthday:hover {
+            background-color: var(--color-primary-500);
+          }
+
+          .calendar__monthday--first {
+            grid-column-start: var(--monthday-first);
+          }
+        </style>
+        <article class="calendar">
+          <header class="calendar__header">
+            <div class="calendar__button-group">
+              <button class="calendar__button calendar__button--previous-year">
+                <i class="fa-solid fa-angles-left"></i>
+              </button>
+              <button class="calendar__button calendar__button--previous-month">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+            </div>
+            <div class="calendar__date">
+              <span class="calendar__day" contenteditable>01</span>
+              <span class="calendar__separator">.</span>
+              <span class="calendar__month" contenteditable>01</span>
+              <span class="calendar__separator">.</span>
+              <span class="calendar__year" contenteditable>2023</span>
+            </div>
+            <div class="calendar__button-group">
+              <button class="calendar__button calendar__button--next-month">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <button class="calendar__button calendar__button--next-year">
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+          </header>
+          <ol class="calendar__picker">
+            <li class="calendar__weekday">L</li>
+            <li class="calendar__weekday">M</li>
+            <li class="calendar__weekday">M</li>
+            <li class="calendar__weekday">J</li>
+            <li class="calendar__weekday">V</li>
+            <li class="calendar__weekday">S</li>
+            <li class="calendar__weekday">D</li>
+            <li
+              class="calendar__monthday calendar__monthday--first"
+              tabindex="0"
+            >
+              1
+            </li>
+            <li class="calendar__monthday" tabindex="0">2</li>
+            <li class="calendar__monthday" tabindex="0">3</li>
+            <li class="calendar__monthday" tabindex="0">4</li>
+            <li class="calendar__monthday" tabindex="0">5</li>
+            <li class="calendar__monthday" tabindex="0">6</li>
+            <li class="calendar__monthday" tabindex="0">7</li>
+            <li class="calendar__monthday" tabindex="0">8</li>
+            <li class="calendar__monthday" tabindex="0">9</li>
+            <li class="calendar__monthday" tabindex="0">10</li>
+            <li class="calendar__monthday" tabindex="0">11</li>
+            <li class="calendar__monthday" tabindex="0">12</li>
+            <li class="calendar__monthday" tabindex="0">13</li>
+            <li class="calendar__monthday" tabindex="0">14</li>
+            <li class="calendar__monthday" tabindex="0">15</li>
+            <li class="calendar__monthday" tabindex="0">16</li>
+            <li class="calendar__monthday" tabindex="0">17</li>
+            <li class="calendar__monthday" tabindex="0">18</li>
+            <li class="calendar__monthday" tabindex="0">19</li>
+            <li class="calendar__monthday" tabindex="0">20</li>
+            <li class="calendar__monthday" tabindex="0">21</li>
+            <li class="calendar__monthday" tabindex="0">22</li>
+            <li class="calendar__monthday" tabindex="0">23</li>
+            <li class="calendar__monthday" tabindex="0">24</li>
+            <li class="calendar__monthday" tabindex="0">25</li>
+            <li class="calendar__monthday" tabindex="0">26</li>
+            <li class="calendar__monthday" tabindex="0">27</li>
+            <li class="calendar__monthday" tabindex="0">28</li>
+            <li class="calendar__monthday" tabindex="0">29</li>
+            <li class="calendar__monthday" tabindex="0">30</li>
+            <li class="calendar__monthday" tabindex="0">31</li>
+          </ol>
+        </article>
+        <script type="module">
+          import { $ } from "/royaltours/src/scripts/selector.js";
+          import { getMonths, getWeekdays } from "/royaltours/src/scripts/calendar.js";
+
+          const months = getMonths({ locale: "es-ES" });
+          const weekdays = getWeekdays({ locale: "es-ES" });
+
+          {
+            // TODO : could be improved
+            const calendarDateElementsAllowedSpecialKeys = [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "0",
+              "ArrowDown",
+              "ArrowLeft",
+              "ArrowRight",
+              "ArrowUp",
+              "Backspace",
+              "Delete",
+              "Tab",
+            ];
+
+            const specialKeyFunctions = {
+              ArrowDown: function (element) {
+                element.innerText = Number(element.innerText) - 1;
+              },
+              ArrowUp: function (element) {
+                element.innerText = Number(element.innerText) + 1;
+              },
+            };
+
+            function applySpecialKeyToNumericElement(element, key) {
+              const specialKeyFunction = specialKeyFunctions[key];
+              if (typeof specialKeyFunction === "function") {
+                specialKeyFunction(element);
+              }
+            }
+
+            function addEventListenerForContentEditableNumbers(element) {
+              element.addEventListener("keydown", (event) => {
+                const { key, target } = event;
+                if (!calendarDateElementsAllowedSpecialKeys.includes(key)) {
+                  event.preventDefault();
+                }
+                applySpecialKeyToNumericElement(target, key);
+              });
+            }
+
+            const calendarDateElements = $.all(
+              ".calendar__date [contenteditable]"
+            );
+
+            calendarDateElements.forEach((calendarDateElement) =>
+              addEventListenerForContentEditableNumbers(calendarDateElement)
+            );
+          }
+        </script>
+      </section>
+    </main>
+  </body>
+</html>

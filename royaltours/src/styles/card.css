@@ -72,16 +72,24 @@
 }
 
 .card__ul {
+  counter-reset: card__asterisk;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
 
 .card__li {
+  align-items: center;
+  cursor: default;
+  display: inline-block;
   padding-left: 2em;
   position: relative;
-  cursor: default;
 }
+
+/* .card__li::marker {
+  content: "\f054";
+  font-family: "FontAwesome";
+} */
 
 .card__li::before {
   border-radius: 50%;
@@ -131,11 +139,18 @@
   color: var(--color-primary-300);
   display: inline-flex;
   font-size: var(--font-size--sm);
-  height: 1.5em;
+  height: 1.75em;
   justify-content: center;
   margin-inline: 0.5em;
   padding: 0.25em;
-  width: 1.5em;
+  width: 1.75em;
+  counter-increment: card__asterisk;
+}
+
+.card__asterisk::before {
+  content: "* " counter(card__asterisk);
+  font-family: "FontAwesome";
+  font-size: var(--font-size--sm);
 }
 
 .card__footer {
