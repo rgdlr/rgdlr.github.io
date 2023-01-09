@@ -1,3 +1,5 @@
+import { $ } from "./selector.js";
+
 // ------------------------- CALENDAR FUNCTIONS -------------------------
 
 export function getCalendar(
@@ -111,11 +113,14 @@ function getCalendarDate(
 
 // ------------------------- CALENDAR GRID -------------------------
 
-
-
 // ------------------------- CALENDAR TABLE -------------------------
 
-export function createCalendarWithTable(container, date) {
+export function createCalendarWithTable(
+  { container = $.one(".calendar--table"), date = new Date() } = {
+    container: $.one(".calendar--table"),
+    date: new Date(),
+  }
+) {
   const documentFragment = window.document.createDocumentFragment();
 
   const calendarHeader = createCalendarHeader(date);
@@ -150,10 +155,9 @@ function createCalendarHeader(date) {
       .querySelector(".calendar__date")
       .innerText.split("·");
 
-    createCalendarWithTable(
-      window.document.querySelector(".calendar"),
-      new Date(Number(year) - 1, Number(month) - 1, day)
-    );
+    createCalendarWithTable({
+      date: new Date(Number(year) - 1, Number(month) - 1, day),
+    });
   });
 
   previousMonth.classList.add("calendar__button");
@@ -164,10 +168,9 @@ function createCalendarHeader(date) {
       .querySelector(".calendar__date")
       .innerText.split("·");
 
-    createCalendarWithTable(
-      window.document.querySelector(".calendar"),
-      new Date(year, Number(month) - 1 - 1, day)
-    );
+    createCalendarWithTable({
+      date: new Date(year, Number(month) - 1 - 1, day),
+    });
   });
 
   nextMonth.classList.add("calendar__button");
@@ -178,10 +181,7 @@ function createCalendarHeader(date) {
       .querySelector(".calendar__date")
       .innerText.split("·");
 
-    createCalendarWithTable(
-      window.document.querySelector(".calendar"),
-      new Date(year, month, day)
-    );
+    createCalendarWithTable({ date: new Date(year, month, day) });
   });
 
   nextYear.classList.add("calendar__button");
@@ -192,10 +192,9 @@ function createCalendarHeader(date) {
       .querySelector(".calendar__date")
       .innerText.split("·");
 
-    createCalendarWithTable(
-      window.document.querySelector(".calendar"),
-      new Date(Number(year) + 1, Number(month) - 1, day)
-    );
+    createCalendarWithTable({
+      date: new Date(Number(year) + 1, Number(month) - 1, day),
+    });
   });
 
   const { day, month, year } = getCalendar({ date });

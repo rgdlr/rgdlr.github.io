@@ -21,11 +21,11 @@
     />
     <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
     <script defer type="module">
-      // TODO : divide calendars
+      // TODO : avoid collision - divide calendars properly - could be improved
       import { createCalendarWithTable } from "/royaltours/src/scripts/calendar.js";
-      createCalendarWithTable(
-        window.document.querySelector(".calendar--table")
-      );
+      createCalendarWithTable({
+        container: window.document.querySelector(".calendar--table"),
+      });
     </script>
   </head>
   <body>
@@ -89,8 +89,8 @@
           createCalendar({ container: $.one(".calendar--grid") });
 
           function createCalendar(
-            { container = $.one(".calendar"), date = new Date() } = {
-              container: $.one(".calendar"),
+            { container = $.one(".calendar--grid"), date = new Date() } = {
+              container: $.one(".calendar--grid"),
               date: new Date(),
             }
           ) {
@@ -115,6 +115,39 @@
                 calendarWeekDays.appendChild(weekday);
               });
 
+              // TODO : could be improved
+              const calendarDateElements = $.all(
+                ".calendar__date [contenteditable]"
+              );
+              calendarDateElements.forEach((calendarDateElement) => {
+                calendarDateElement.addEventListener("keydown", ({ key }) => {
+                  const navigationKeys = [
+                    "ArrowLeft",
+                    "ArrowRight",
+                    "Backspace",
+                    "Delete",
+                    "End",
+                    "Home",
+                    "Tab",
+                  ];
+                  if (navigationKeys.includes(key)) {
+                    return;
+                  }
+                  setTimeout(() => {
+                    const [calendarYear, calendarMonth, calendarDay] = $.all(
+                      ".calendar__date [contenteditable]"
+                    );
+                    createCalendar({
+                      date: new Date(
+                        Number(calendarYear.innerText),
+                        Number(calendarMonth.innerText) - 1,
+                        calendarDay.innerText
+                      ),
+                    });
+                  }, 0);
+                });
+              });
+
               const previousYear = container.querySelector(
                 ".calendar__button--previous-year"
               );
@@ -122,12 +155,13 @@
                 const [calendarYear, calendarMonth, calendarDay] = $.all(
                   ".calendar__date [contenteditable]"
                 );
-                const date = new Date(
-                  Number(calendarYear.innerText) - 1,
-                  Number(calendarMonth.innerText) - 1,
-                  calendarDay.innerText
-                );
-                createCalendar({ date });
+                createCalendar({
+                  date: new Date(
+                    Number(calendarYear.innerText) - 1,
+                    Number(calendarMonth.innerText) - 1,
+                    calendarDay.innerText
+                  ),
+                });
               });
 
               const previousMonth = container.querySelector(
@@ -137,12 +171,13 @@
                 const [calendarYear, calendarMonth, calendarDay] = $.all(
                   ".calendar__date [contenteditable]"
                 );
-                const date = new Date(
-                  Number(calendarYear.innerText),
-                  Number(calendarMonth.innerText) - 1 - 1,
-                  calendarDay.innerText
-                );
-                createCalendar({ date });
+                createCalendar({
+                  date: new Date(
+                    Number(calendarYear.innerText),
+                    Number(calendarMonth.innerText) - 1 - 1,
+                    calendarDay.innerText
+                  ),
+                });
               });
 
               const nextMonth = container.querySelector(
@@ -152,12 +187,13 @@
                 const [calendarYear, calendarMonth, calendarDay] = $.all(
                   ".calendar__date [contenteditable]"
                 );
-                const date = new Date(
-                  Number(calendarYear.innerText),
-                  Number(calendarMonth.innerText),
-                  calendarDay.innerText
-                );
-                createCalendar({ date });
+                createCalendar({
+                  date: new Date(
+                    Number(calendarYear.innerText),
+                    Number(calendarMonth.innerText),
+                    calendarDay.innerText
+                  ),
+                });
               });
 
               const nextYear = container.querySelector(
@@ -167,12 +203,13 @@
                 const [calendarYear, calendarMonth, calendarDay] = $.all(
                   ".calendar__date [contenteditable]"
                 );
-                const date = new Date(
-                  Number(calendarYear.innerText) + 1,
-                  Number(calendarMonth.innerText) - 1,
-                  calendarDay.innerText
-                );
-                createCalendar({ date });
+                createCalendar({
+                  date: new Date(
+                    Number(calendarYear.innerText) + 1,
+                    Number(calendarMonth.innerText) - 1,
+                    calendarDay.innerText
+                  ),
+                });
               });
             }
 
@@ -193,7 +230,16 @@
 
           {
             // TODO : could be improved
-            const calendarDateElementsAllowedSpecialKeys = [
+            const calendarDateElementsAllowedSpecialNavigationKeys = [
+              "ArrowLeft",
+              "ArrowRight",
+              "Backspace",
+              "Delete",
+              "End",
+              "Home",
+              "Tab",
+            ];
+            const calendarDateElementsAllowedSpecialModifierKeys = [
               "1",
               "2",
               "3",
@@ -205,12 +251,11 @@
               "9",
               "0",
               "ArrowDown",
-              "ArrowLeft",
-              "ArrowRight",
               "ArrowUp",
-              "Backspace",
-              "Delete",
-              "Tab",
+            ];
+            const calendarDateElementsAllowedSpecialKeys = [
+              ...calendarDateElementsAllowedSpecialNavigationKeys,
+              ...calendarDateElementsAllowedSpecialModifierKeys,
             ];
 
             const specialKeyFunctions = {
