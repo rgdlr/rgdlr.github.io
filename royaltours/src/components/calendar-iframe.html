@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Royal Tours · Calendar</title>
-    <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="/royaltours/src/assets/logo.svg"
+      type="image/x-icon"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -21,13 +25,13 @@
     />
     <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
     <script defer type="module">
-      import { createCalendarWithTable } from "/royaltours/src/scripts/calendar.js";
+      import { createCalendarWithTable } from "/src/scripts/calendar.js";
       createCalendarWithTable({
-        container: window.document.querySelector(".calendar"),
+        container: window.document.querySelector(".calendar--table"),
       });
     </script>
   </head>
   <body style="background-color: var(--color-primary-200); width: fit-content">
-    <article class="calendar"></article>
+    <article class="calendar calendar--table"></article>
   </body>
 </html>
