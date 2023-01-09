@@ -20,6 +20,13 @@
       referrerpolicy="no-referrer"
     />
     <script defer type="module" src="/royaltours/src/scripts/index.js"></script>
+    <script defer type="module">
+      // TODO : divide calendars
+      import { createCalendarWithTable } from "/royaltours/src/scripts/calendar.js";
+      createCalendarWithTable(
+        window.document.querySelector(".calendar--table")
+      );
+    </script>
   </head>
   <body>
     <header class="header header--links-right">
@@ -31,76 +38,13 @@
     </header>
     <main class="main">
       <section class="container container--md">
-        <h2 class="h2 h2--margin">Calendar</h2>
+        <h2 class="h2 h2--margin">Calendar 1</h2>
+        <article class="calendar calendar--table"></article>
+      </section>
+      <section class="container container--md">
+        <h2 class="h2 h2--margin">Calendar 2</h2>
         <!-- TODO : use an input to save and query selected dates -->
-        <style>
-          .calendar {
-            --calendar-cell-height: 3em;
-            --calendar-cell-width: 3em;
-            width: fit-content;
-          }
-
-          .calendar__header {
-            background-color: var(--color-primary-000);
-            display: flex;
-            gap: 1em;
-            justify-content: space-between;
-          }
-
-          .calendar__button-group {
-            display: flex;
-          }
-
-          .calendar__date {
-            display: flex;
-            place-items: center;
-          }
-
-          .calendar__date {
-            font-size: calc(var(--calendar-cell-width) / 2.5);
-          }
-
-          .calendar__picker {
-            background-color: var(--color-primary-200);
-            display: grid;
-            grid-template-columns: repeat(7, var(--calendar-cell-width, 1fr));
-          }
-
-          .calendar__weekday {
-            background-color: var(--color-primary-100);
-            font-weight: bold;
-          }
-
-          /* .calendar__monthday {
-            background-color: var(--color-primary-200);
-          } */
-
-          .calendar__monthday--start,
-          .calendar__monthday--end {
-            background-color: var(--color-primary-500);
-          }
-
-          .calendar__button,
-          .calendar__weekday,
-          .calendar__monthday {
-            display: grid;
-            height: var(--calendar-cell-height, auto);
-            place-items: center;
-            width: var(--calendar-cell-width, auto);
-          }
-
-          .calendar__button:focus,
-          .calendar__button:hover,
-          .calendar__monthday:focus,
-          .calendar__monthday:hover {
-            background-color: var(--color-primary-500);
-          }
-
-          .calendar__monthday--first {
-            grid-column-start: var(--monthday-first);
-          }
-        </style>
-        <article class="calendar">
+        <article class="calendar calendar--grid">
           <header class="calendar__header">
             <div class="calendar__button-group">
               <button class="calendar__button calendar__button--previous-year">
@@ -111,11 +55,11 @@
               </button>
             </div>
             <div class="calendar__date">
-              <span class="calendar__day" contenteditable>01</span>
-              <span class="calendar__separator">.</span>
-              <span class="calendar__month" contenteditable>01</span>
-              <span class="calendar__separator">.</span>
-              <span class="calendar__year" contenteditable>2023</span>
+              <span class="calendar__year" contenteditable></span>
+              <span class="calendar__separator">·</span>
+              <span class="calendar__month" contenteditable></span>
+              <span class="calendar__separator">·</span>
+              <span class="calendar__day" contenteditable></span>
             </div>
             <div class="calendar__button-group">
               <button class="calendar__button calendar__button--next-month">
@@ -126,58 +70,126 @@
               </button>
             </div>
           </header>
-          <ol class="calendar__picker">
-            <li class="calendar__weekday">L</li>
-            <li class="calendar__weekday">M</li>
-            <li class="calendar__weekday">M</li>
-            <li class="calendar__weekday">J</li>
-            <li class="calendar__weekday">V</li>
-            <li class="calendar__weekday">S</li>
-            <li class="calendar__weekday">D</li>
-            <li
-              class="calendar__monthday calendar__monthday--first"
-              tabindex="0"
-            >
-              1
-            </li>
-            <li class="calendar__monthday" tabindex="0">2</li>
-            <li class="calendar__monthday" tabindex="0">3</li>
-            <li class="calendar__monthday" tabindex="0">4</li>
-            <li class="calendar__monthday" tabindex="0">5</li>
-            <li class="calendar__monthday" tabindex="0">6</li>
-            <li class="calendar__monthday" tabindex="0">7</li>
-            <li class="calendar__monthday" tabindex="0">8</li>
-            <li class="calendar__monthday" tabindex="0">9</li>
-            <li class="calendar__monthday" tabindex="0">10</li>
-            <li class="calendar__monthday" tabindex="0">11</li>
-            <li class="calendar__monthday" tabindex="0">12</li>
-            <li class="calendar__monthday" tabindex="0">13</li>
-            <li class="calendar__monthday" tabindex="0">14</li>
-            <li class="calendar__monthday" tabindex="0">15</li>
-            <li class="calendar__monthday" tabindex="0">16</li>
-            <li class="calendar__monthday" tabindex="0">17</li>
-            <li class="calendar__monthday" tabindex="0">18</li>
-            <li class="calendar__monthday" tabindex="0">19</li>
-            <li class="calendar__monthday" tabindex="0">20</li>
-            <li class="calendar__monthday" tabindex="0">21</li>
-            <li class="calendar__monthday" tabindex="0">22</li>
-            <li class="calendar__monthday" tabindex="0">23</li>
-            <li class="calendar__monthday" tabindex="0">24</li>
-            <li class="calendar__monthday" tabindex="0">25</li>
-            <li class="calendar__monthday" tabindex="0">26</li>
-            <li class="calendar__monthday" tabindex="0">27</li>
-            <li class="calendar__monthday" tabindex="0">28</li>
-            <li class="calendar__monthday" tabindex="0">29</li>
-            <li class="calendar__monthday" tabindex="0">30</li>
-            <li class="calendar__monthday" tabindex="0">31</li>
-          </ol>
+          <div class="calendar__body">
+            <ol class="calendar__weekdays"></ol>
+            <ol class="calendar__monthdays"></ol>
+          </div>
+          <footer class="container__footer"></footer>
         </article>
         <script type="module">
           import { $ } from "/royaltours/src/scripts/selector.js";
-          import { getMonths, getWeekdays } from "/royaltours/src/scripts/calendar.js";
+          import {
+            getCalendar,
+            getMonths,
+            getWeekdays,
+          } from "/royaltours/src/scripts/calendar.js";
 
           const months = getMonths({ locale: "es-ES" });
-          const weekdays = getWeekdays({ locale: "es-ES" });
+
+          createCalendar({ container: $.one(".calendar--grid") });
+
+          function createCalendar(
+            { container = $.one(".calendar"), date = new Date() } = {
+              container: $.one(".calendar"),
+              date: new Date(),
+            }
+          ) {
+            const calendarDay = container.querySelector(".calendar__day");
+            const calendarMonth = container.querySelector(".calendar__month");
+            const calendarYear = container.querySelector(".calendar__year");
+            const { day, month, year } = getCalendar({ date });
+
+            calendarDay.innerText = day;
+            calendarMonth.innerText = month + 1;
+            calendarYear.innerText = year;
+
+            const calendarWeekDays = container.querySelector(
+              ".calendar__weekdays"
+            );
+            const weekdays = getWeekdays({ locale: "es-ES" });
+            if (calendarWeekDays.innerText === "") {
+              weekdays.forEach(({ name }) => {
+                const weekday = window.document.createElement("li");
+                weekday.innerText = name.slice(0, 3);
+                weekday.classList.add("calendar__weekday");
+                calendarWeekDays.appendChild(weekday);
+              });
+
+              const previousYear = container.querySelector(
+                ".calendar__button--previous-year"
+              );
+              previousYear.addEventListener("click", (_event) => {
+                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                  ".calendar__date [contenteditable]"
+                );
+                const date = new Date(
+                  Number(calendarYear.innerText) - 1,
+                  Number(calendarMonth.innerText) - 1,
+                  calendarDay.innerText
+                );
+                createCalendar({ date });
+              });
+
+              const previousMonth = container.querySelector(
+                ".calendar__button--previous-month"
+              );
+              previousMonth.addEventListener("click", (_event) => {
+                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                  ".calendar__date [contenteditable]"
+                );
+                const date = new Date(
+                  Number(calendarYear.innerText),
+                  Number(calendarMonth.innerText) - 1 - 1,
+                  calendarDay.innerText
+                );
+                createCalendar({ date });
+              });
+
+              const nextMonth = container.querySelector(
+                ".calendar__button--next-month"
+              );
+              nextMonth.addEventListener("click", (_event) => {
+                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                  ".calendar__date [contenteditable]"
+                );
+                const date = new Date(
+                  Number(calendarYear.innerText),
+                  Number(calendarMonth.innerText),
+                  calendarDay.innerText
+                );
+                createCalendar({ date });
+              });
+
+              const nextYear = container.querySelector(
+                ".calendar__button--next-year"
+              );
+              nextYear.addEventListener("click", (_event) => {
+                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                  ".calendar__date [contenteditable]"
+                );
+                const date = new Date(
+                  Number(calendarYear.innerText) + 1,
+                  Number(calendarMonth.innerText) - 1,
+                  calendarDay.innerText
+                );
+                createCalendar({ date });
+              });
+            }
+
+            const calendarMonthDays = container.querySelector(
+              ".calendar__monthdays"
+            );
+            calendarMonthDays.innerHTML = "";
+            const { daysInMonth, firstWeekday } = getCalendar({ date });
+            for (let day = 1; day <= daysInMonth; day++) {
+              const monthDay = window.document.createElement("li");
+              monthDay.tabIndex = "0";
+              monthDay.innerText = day;
+              monthDay.classList.add("calendar__monthday");
+              calendarMonthDays.appendChild(monthDay);
+            }
+            calendarMonthDays.style = `--calendar-monthday-offset: ${firstWeekday}`;
+          }
 
           {
             // TODO : could be improved

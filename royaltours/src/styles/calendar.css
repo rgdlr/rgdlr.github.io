@@ -1,0 +1,104 @@
+.calendar {
+  /* TODO : check for iframe */
+  /* --calendar-cell-height: min(3em, calc((100vw - 2em) / 7)); */
+  --calendar-cell-height: min(3em, calc(100vw / 7));
+  --calendar-cell-width: var(--calendar-cell-height);
+  --calendar-monthday-offset: 0;
+  width: fit-content;
+}
+
+.calendar * {
+  outline: none;
+}
+
+.calendar__header {
+  align-items: center;
+  background-color: var(--color-primary-000);
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar__button-group {
+  display: flex;
+}
+
+.calendar__date {
+  display: flex;
+  font-size: calc(var(--calendar-cell-width) / 2.5);
+  place-items: center;
+}
+
+.calendar__date [contenteditable] {
+  border-bottom: 0.1em solid transparent;
+  padding-inline: 0.25em;
+}
+
+.calendar__date [contenteditable]:focus {
+  outline: none;
+  border-color: var(--color-primary-700);
+}
+
+.calendar__weekdays,
+.calendar__monthdays {
+  display: grid;
+  grid-template-columns: repeat(7, var(--calendar-cell-width, 1fr));
+}
+
+.calendar__weekday {
+  background-color: var(--color-primary-100);
+  font-weight: bold;
+}
+
+.calendar__body,
+.calendar__monthday {
+  background-color: var(--color-primary-200);
+}
+
+.calendar__monthday:first-child {
+  grid-column-start: var(--calendar-monthday-offset);
+}
+
+.calendar__monthday--disabled {
+  background-color: var(--color-dark-500);
+  color: var(--color-light-000);
+}
+
+.calendar__monthday--available {
+  background-color: var(--color-secondary-500);
+}
+
+.calendar__monthday--unavailable {
+  background-color: var(--color-tertiary-500);
+}
+
+.calendar__monthday--selected,
+.calendar__monthday--start,
+.calendar__monthday--end {
+  background-color: var(--color-primary-500);
+}
+
+.calendar__monthday--start {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.calendar__monthday--end {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.calendar__button,
+.calendar__weekday,
+.calendar__monthday {
+  display: grid;
+  height: var(--calendar-cell-height, auto);
+  place-items: center;
+  width: var(--calendar-cell-width, auto);
+}
+
+.calendar__button:focus,
+.calendar__button:hover,
+.calendar__monthday:focus,
+.calendar__monthday:hover {
+  background-color: var(--color-primary-500);
+}

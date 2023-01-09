@@ -133,7 +133,7 @@ function cloneToCenter(element, clone, { onResizeWindow }) {
 
   clone.style.boxShadow = "0 0 0 100em #0003, 0 0 0.75em 0.25em #0005";
   // TODO : set position to window center taking new width
-  // clone.style.width = "min(35em, 92.5%)";
+  // clone.style.width = "min(35em, calc((100vw - 1em)))";
   clone.addEventListener("click", () =>
     resetCloneToCenter(element, clone, { onResizeWindow })
   );
