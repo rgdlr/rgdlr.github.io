@@ -41,8 +41,10 @@
           const style = window.document.createElement("style");
           style.innerHTML = `
           :root {
-            --calendar-cell-height: min(3em, calc(100vw / 7));
             ${index !== 0 ? colors : ""}
+          }
+          .calendar {
+            --calendar-cell-height: min(3em, calc(100vw / 7));
           }
           `;
           contentDocument?.head.appendChild(style);
