@@ -82,13 +82,15 @@
             getCalendar,
             getMonths,
             getWeekdays,
+            monthdayStatusClasses,
           } from "/royaltours/src/scripts/calendar.js";
+          import { fetchJsonPromise } from "/royaltours/src/scripts/json.js";
+          import { getBookings } from "/royaltours/src/scripts/bookings.js";
 
           const months = getMonths({ locale: "es-ES" });
-
           createCalendar({ container: $.one(".calendar--grid") });
 
-          function createCalendar(
+          async function createCalendar(
             { container = $.one(".calendar--grid"), date = new Date() } = {
               container: $.one(".calendar--grid"),
               date: new Date(),
@@ -226,10 +228,29 @@
               calendarMonthDays.appendChild(monthDay);
             }
             calendarMonthDays.style = `--calendar-monthday-offset: ${firstWeekday}`;
+
+            // TODO : could be improved
+            const monthBookings = await getBookings({ date });
+            if (monthBookings) {
+              $.all(".calendar--grid .calendar__monthday").forEach(
+                (calendarMonthday) => {
+                  const foundMonthdayStatus = monthBookings?.days?.find(
+                    (bookingsDay) =>
+                      Number(bookingsDay.day) ===
+                      Number(calendarMonthday.innerText)
+                  )?.status;
+                  if (foundMonthdayStatus) {
+                    calendarMonthday.classList.add(
+                      monthdayStatusClasses[foundMonthdayStatus]
+                    );
+                  }
+                }
+              );
+            }
           }
 
+          // TODO : could be improved
           {
-            // TODO : could be improved
             const calendarDateElementsAllowedSpecialNavigationKeys = [
               "ArrowLeft",
               "ArrowRight",

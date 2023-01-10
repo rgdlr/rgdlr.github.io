@@ -1,0 +1,84 @@
+[
+  {
+    "month": 0,
+    "year": 2023,
+    "days": [
+      { "day": 1, "status": "disabled" },
+      { "day": 2, "status": "disabled" },
+      { "day": 3, "status": "disabled" },
+      { "day": 4, "status": "disabled" },
+      { "day": 5, "status": "disabled" },
+      { "day": 6, "status": "disabled" },
+      { "day": 7, "status": "disabled" },
+      { "day": 8, "status": "disabled" },
+      { "day": 9, "status": "disabled" },
+      { "day": 13, "status": "unavailable" },
+      { "day": 14, "status": "unavailable" },
+      { "day": 15, "status": "unavailable" },
+      { "day": 24, "status": "start" },
+      { "day": 25, "status": "selected" },
+      { "day": 26, "status": "selected" },
+      { "day": 27, "status": "end" }
+    ]
+  },
+  {
+    "month": 1,
+    "year": 2023,
+    "days": [
+      { "day": 5, "status": "unavailable" },
+      { "day": 6, "status": "unavailable" },
+      { "day": 7, "status": "unavailable" },
+      { "day": 8, "status": "unavailable" },
+      { "day": 9, "status": "unavailable" },
+      { "day": 10, "status": "unavailable" },
+      { "day": 11, "status": "unavailable" }
+    ]
+  },
+  {
+    "month": 2,
+    "year": 2023,
+    "days": [
+      { "day": 12, "status": "unavailable" },
+      { "day": 13, "status": "unavailable" },
+      { "day": 14, "status": "unavailable" },
+      { "day": 15, "status": "unavailable" },
+      { "day": 16, "status": "unavailable" }
+    ]
+  },
+  {
+    "month": 3,
+    "year": 2023,
+    "days": [
+      { "day": 9, "status": "unavailable" },
+      { "day": 10, "status": "unavailable" },
+      { "day": 11, "status": "unavailable" },
+      { "day": 26, "status": "unavailable" },
+      { "day": 27, "status": "unavailable" },
+      { "day": 28, "status": "unavailable" },
+      { "day": 29, "status": "unavailable" }
+    ]
+  },
+  {
+    "month": 4,
+    "year": 2023,
+    "days": [
+      { "day": 28, "status": "unavailable" },
+      { "day": 29, "status": "unavailable" },
+      { "day": 30, "status": "unavailable" },
+      { "day": 31, "status": "unavailable" }
+    ]
+  },
+  {
+    "month": 5,
+    "year": 2023,
+    "days": [
+      { "day": 1, "status": "unavailable" },
+      { "day": 2, "status": "unavailable" },
+      { "day": 3, "status": "unavailable" },
+      { "day": 4, "status": "unavailable" },
+      { "day": 24, "status": "unavailable" },
+      { "day": 25, "status": "unavailable" },
+      { "day": 26, "status": "unavailable" }
+    ]
+  }
+]

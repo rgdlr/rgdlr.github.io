@@ -1,7 +1,7 @@
 .calendar {
   /* TODO : check for iframe */
-  /* --calendar-cell-height: min(3em, calc((100vw - 2em) / 7)); */
-  --calendar-cell-height: min(3em, calc(100vw / 7));
+  /* --calendar-cell-height: min(3em, calc(100vw / 7)); */
+  --calendar-cell-height: min(3em, calc((100vw - 2em) / 7));
   --calendar-cell-width: var(--calendar-cell-height);
   --calendar-monthday-offset: 0;
   width: fit-content;
@@ -59,8 +59,7 @@
 }
 
 .calendar__monthday--disabled {
-  background-color: var(--color-dark-500);
-  color: var(--color-light-000);
+  color: var(--color-dark-500);
 }
 
 .calendar__monthday--available {
@@ -98,7 +97,8 @@
 
 .calendar__button:focus,
 .calendar__button:hover,
-.calendar__monthday:focus,
-.calendar__monthday:hover {
+.calendar__monthday:not(
+    :is(.calendar__monthday--disabled, .calendar__monthday--unavailable)
+  ):is(:focus, :hover) {
   background-color: var(--color-primary-500);
 }

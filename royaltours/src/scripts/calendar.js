@@ -111,6 +111,16 @@ function getCalendarDate(
   return { day, month, year };
 }
 
+// TODO : could be improved
+export const monthdayStatusClasses = {
+  available: "calendar__monthday--available",
+  disabled: "calendar__monthday--disabled",
+  end: "calendar__monthday--end",
+  selected: "calendar__monthday--selected",
+  start: "calendar__monthday--start",
+  unavailable: "calendar__monthday--unavailable",
+};
+
 // ------------------------- CALENDAR GRID -------------------------
 
 // ------------------------- CALENDAR TABLE -------------------------
