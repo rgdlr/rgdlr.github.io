@@ -1,0 +1,13 @@
+{
+  "month": 11,
+  "year": 2023,
+  "days": [
+    { "day": 1, "status": "unavailable" },
+    { "day": 2, "status": "unavailable" },
+    { "day": 3, "status": "unavailable" },
+    { "day": 4, "status": "unavailable" },
+    { "day": 24, "status": "unavailable" },
+    { "day": 25, "status": "unavailable" },
+    { "day": 26, "status": "unavailable" }
+  ]
+}

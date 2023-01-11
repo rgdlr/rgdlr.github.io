@@ -5,6 +5,7 @@
   --calendar-cell-width: var(--calendar-cell-height);
   --calendar-monthday-offset: 0;
   width: fit-content;
+  cursor: default;
 }
 
 .calendar * {
@@ -54,6 +55,10 @@
   background-color: var(--color-primary-200);
 }
 
+.calendar__monthday {
+  transition: background-color 500ms ease, border-radius 500ms ease;
+}
+
 .calendar__monthday:first-child {
   grid-column-start: var(--calendar-monthday-offset);
 }
@@ -70,9 +75,7 @@
   background-color: var(--color-tertiary-500);
 }
 
-.calendar__monthday--selected,
-.calendar__monthday--start,
-.calendar__monthday--end {
+.calendar__monthday--selected {
   background-color: var(--color-primary-500);
 }
 
@@ -84,6 +87,11 @@
 .calendar__monthday--end {
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
+}
+
+.calendar__monthday--start:hover,
+.calendar__monthday--end:hover {
+  border-radius: 0;
 }
 
 .calendar__button,

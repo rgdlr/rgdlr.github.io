@@ -1,24 +1,31 @@
 export class $ {
+  static from = (container) => ({
+    all: (selector) => Array.from(container.querySelectorAll(selector)),
+    attribute: ([key, value]) => container.querySelector(`[${key}=${value}]`),
+    class: (selector) => container.getElementsByClassName(selector),
+    id: (selector) => container.getElementById(selector),
+    one: (selector) => container.querySelector(selector),
+  });
+
   static ALL = "all";
-  static all = (element) =>
-    Array.from(window.document.querySelectorAll(element));
+  static all = (selector) => this.from(window.document).all(selector);
 
   static ATTRIBUTE = "attribute";
   static attribute = ([key, value]) =>
-    window.document.querySelector(`[${key}=${value}]`);
+    this.from(window.document).attribute([key, value]);
 
   static CLASS = "class";
-  static class = (element) => window.document.getElementsByClassName(element);
+  static class = (selector) => this.from(window.document).class(selector);
 
   static ID = "id";
-  static id = (element) => window.document.getElementById(element);
+  static id = (selector) => this.from(window.document).id(selector);
 
   static ONE = "one";
-  static one = (element) => window.document.querySelector(element);
+  static one = (selector) => this.from(window.document).one(selector);
 
   static undefined = this.one;
 
-  static _(element, option) {
-    return this[option](element);
+  static _(selector, option) {
+    return this[option](selector);
   }
 }

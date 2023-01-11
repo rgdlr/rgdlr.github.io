@@ -2,7 +2,6 @@ import { BASE_PRICE } from "./constant.js";
 import { formatCurrency } from "./formatter.js";
 import { ICON } from "./icon.js";
 import { fetchJson } from "./json.js";
-import { $ } from "./selector.js";
 
 const products = await fetchJson("/royaltours/src/data/products.json");
 const prices = await fetchJson("/royaltours/src/data/prices.json");

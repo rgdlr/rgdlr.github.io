@@ -1,0 +1,18 @@
+{
+  "month": 0,
+  "year": 2023,
+  "days": [
+    { "day": 1, "status": "disabled" },
+    { "day": 2, "status": "disabled" },
+    { "day": 3, "status": "disabled" },
+    { "day": 4, "status": "disabled" },
+    { "day": 5, "status": "disabled" },
+    { "day": 6, "status": "disabled" },
+    { "day": 7, "status": "disabled" },
+    { "day": 8, "status": "disabled" },
+    { "day": 9, "status": "disabled" },
+    { "day": 13, "status": "unavailable" },
+    { "day": 14, "status": "unavailable" },
+    { "day": 15, "status": "unavailable" }
+  ]
+}

@@ -85,10 +85,52 @@
             monthdayStatusClasses,
           } from "/royaltours/src/scripts/calendar.js";
           import { fetchJsonPromise } from "/royaltours/src/scripts/json.js";
-          import { getBookings } from "/royaltours/src/scripts/bookings.js";
+          import { getBookings } from "/royaltours/src/scripts/booking.js";
 
           const months = getMonths({ locale: "es-ES" });
           createCalendar({ container: $.one(".calendar--grid") });
+
+          function getCalendarSelection(
+            { container = $.one(".calendar--grid") } = {
+              container: $.one(".calendar--grid"),
+            }
+          ) {
+            const start = $.from(container).one(".calendar__monthday--start");
+            const end = $.from(container).one(".calendar__monthday--end");
+            const selected = $.from(container).all(
+              ".calendar__monthday--selected"
+            );
+            return { start, end, selected };
+          }
+
+          function setSelectedMonthDay(monthDay) {
+            monthDay.classList.add("calendar__monthday--selected");
+          }
+
+          function setStartMonthDay(monthDay) {
+            setSelectedMonthDay(monthDay);
+            monthDay.classList.add("calendar__monthday--start");
+          }
+
+          function setEndMonthDay(monthDay) {
+            setSelectedMonthDay(monthDay);
+            monthDay.classList.add("calendar__monthday--end");
+          }
+
+          function resetCalendarMonthDay(monthDay) {
+            monthDay?.classList?.remove("calendar__monthday--selected");
+            monthDay?.classList?.remove("calendar__monthday--start");
+            monthDay?.classList?.remove("calendar__monthday--end");
+          }
+
+          function resetCalendarSelection(
+            { container = $.one(".calendar--grid") } = {
+              container: $.one(".calendar--grid"),
+            }
+          ) {
+            const { selected } = getCalendarSelection({ container });
+            selected.forEach((monthDay) => resetCalendarMonthDay(monthDay));
+          }
 
           async function createCalendar(
             { container = $.one(".calendar--grid"), date = new Date() } = {
@@ -225,23 +267,62 @@
               monthDay.tabIndex = "0";
               monthDay.innerText = day;
               monthDay.classList.add("calendar__monthday");
+
+              // TODO : could be improved - monthday selection
+              // TODO : add keyboard event
+              // TODO : render 3 months ? for previous and later ?
+              monthDay.addEventListener("click", (_event) => {
+                const { start, end } = getCalendarSelection({ container });
+                if (
+                  (!start && !end) ||
+                  (start && (end || start.innerText > monthDay.innerText))
+                ) {
+                  resetCalendarSelection({ container });
+                  setStartMonthDay(monthDay);
+                  return;
+                }
+                if (start && !end) {
+                  let dayInSelection = start.nextSibling;
+                  while (dayInSelection !== monthDay) {
+                    if (
+                      dayInSelection.classList.contains(
+                        "calendar__monthday--unavailable"
+                      )
+                    ) {
+                      resetCalendarSelection({ container });
+                      setStartMonthDay(monthDay);
+                      break;
+                    }
+                    dayInSelection.classList.add(
+                      "calendar__monthday--selected"
+                    );
+                    dayInSelection = dayInSelection.nextSibling;
+                  }
+                  if (dayInSelection === monthDay) {
+                    setEndMonthDay(monthDay);
+                  }
+                  return;
+                }
+              });
               calendarMonthDays.appendChild(monthDay);
             }
             calendarMonthDays.style = `--calendar-monthday-offset: ${firstWeekday}`;
 
-            // TODO : could be improved
+            // TODO : could be improved - calendar painting
+            // const isCurrentMonth = true;   // then disable days until today
+            // const isPreviousMonth = true;  // then disable all days
             const monthBookings = await getBookings({ date });
             if (monthBookings) {
               $.all(".calendar--grid .calendar__monthday").forEach(
-                (calendarMonthday) => {
-                  const foundMonthdayStatus = monthBookings?.days?.find(
+                (calendarMonthDay) => {
+                  const foundMonthDayStatus = monthBookings?.days?.find(
                     (bookingsDay) =>
                       Number(bookingsDay.day) ===
-                      Number(calendarMonthday.innerText)
+                      Number(calendarMonthDay.innerText)
                   )?.status;
-                  if (foundMonthdayStatus) {
-                    calendarMonthday.classList.add(
-                      monthdayStatusClasses[foundMonthdayStatus]
+                  if (foundMonthDayStatus) {
+                    calendarMonthDay.classList.add(
+                      monthdayStatusClasses[foundMonthDayStatus]
                     );
                   }
                 }

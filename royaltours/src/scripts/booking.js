@@ -15,44 +15,35 @@ export function getBookingsWithCache() {
   const cache = {};
   return async function ({ date }) {
     const { month, year } = getCalendar({ date });
-    const months = month < 6 ? "01-06" : "07-12";
-    const endpoint = `${year}:${months}`;
 
-    if (endpoint in cache) {
-      return getBookingsMonth({
-        bookings: cache[endpoint],
-        date,
-      });
+    if (cache[year] && month in cache[year]) {
+      return cache[year][month];
     }
 
     const bookings = await fetchJsonPromise(
-      `/royaltours/src/mocks/bookings/${endpoint}.json`
+      `/royaltours/src/mocks/bookings/years/${year}/months/${month}.json`
     );
-    cache[endpoint] = bookings;
-    return getBookingsMonth({ bookings, date });
+    cache[year] = { ...cache[year], [month]: bookings };
+    return bookings;
   };
 }
 
 export function getBookingsWithSessionStorage() {
   return async function ({ date }) {
     const { month, year } = getCalendar({ date });
-    const months = month < 6 ? "01-06" : "07-12";
-    const endpoint = `${year}:${months}`;
+    const key = `${year}:${month}`;
 
-    const bookingsInSessionStorage = window.sessionStorage.getItem(endpoint);
+    const bookingsInSessionStorage = window.sessionStorage.getItem(key);
     if (bookingsInSessionStorage) {
-      return getBookingsMonth({
-        bookings: JSON.parse(bookingsInSessionStorage),
-        date,
-      });
+      return JSON.parse(bookingsInSessionStorage);
     }
 
     const bookings = await fetchJsonPromise(
-      `/royaltours/src/mocks/bookings/${endpoint}.json`
+      `/royaltours/src/mocks/bookings/years/${year}/months/${month}.json`
     );
 
-    window.sessionStorage.setItem(endpoint, JSON.stringify(bookings));
-    return getBookingsMonth({ bookings, date });
+    window.sessionStorage.setItem(key, JSON.stringify(bookings));
+    return bookings;
   };
 }
 
