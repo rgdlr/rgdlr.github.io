@@ -83,16 +83,17 @@
             getMonths,
             getWeekdays,
             monthdayStatusClasses,
+            getDateFromQueryParams,
           } from "/royaltours/src/scripts/calendar.js";
-          import { fetchJsonPromise } from "/royaltours/src/scripts/json.js";
+          import { fetchJsonWithCache } from "/royaltours/src/scripts/json.js";
           import { getBookings } from "/royaltours/src/scripts/booking.js";
 
           const months = getMonths({ locale: "es-ES" });
-          createCalendar({ container: $.one(".calendar--grid") });
+          createCalendar({ container: $(".calendar--grid") });
 
           function getCalendarSelection(
-            { container = $.one(".calendar--grid") } = {
-              container: $.one(".calendar--grid"),
+            { container = $(".calendar--grid") } = {
+              container: $(".calendar--grid"),
             }
           ) {
             const start = $.from(container).one(".calendar__monthday--start");
@@ -124,8 +125,8 @@
           }
 
           function resetCalendarSelection(
-            { container = $.one(".calendar--grid") } = {
-              container: $.one(".calendar--grid"),
+            { container = $(".calendar--grid") } = {
+              container: $(".calendar--grid"),
             }
           ) {
             const { selected } = getCalendarSelection({ container });
@@ -133,9 +134,12 @@
           }
 
           async function createCalendar(
-            { container = $.one(".calendar--grid"), date = new Date() } = {
-              container: $.one(".calendar--grid"),
-              date: new Date(),
+            {
+              container = $(".calendar--grid"),
+              date = getDateFromQueryParams(),
+            } = {
+              container: $(".calendar--grid"),
+              date: getDateFromQueryParams(),
             }
           ) {
             const calendarDay = container.querySelector(".calendar__day");
@@ -160,7 +164,7 @@
               });
 
               // TODO : could be improved
-              const calendarDateElements = $.all(
+              const calendarDateElements = $.array(
                 ".calendar__date [contenteditable]"
               );
               calendarDateElements.forEach((calendarDateElement) => {
@@ -178,7 +182,7 @@
                     return;
                   }
                   setTimeout(() => {
-                    const [calendarYear, calendarMonth, calendarDay] = $.all(
+                    const [calendarYear, calendarMonth, calendarDay] = $.array(
                       ".calendar__date [contenteditable]"
                     );
                     createCalendar({
@@ -196,7 +200,7 @@
                 ".calendar__button--previous-year"
               );
               previousYear.addEventListener("click", (_event) => {
-                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                const [calendarYear, calendarMonth, calendarDay] = $.array(
                   ".calendar__date [contenteditable]"
                 );
                 createCalendar({
@@ -212,7 +216,7 @@
                 ".calendar__button--previous-month"
               );
               previousMonth.addEventListener("click", (_event) => {
-                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                const [calendarYear, calendarMonth, calendarDay] = $.array(
                   ".calendar__date [contenteditable]"
                 );
                 createCalendar({
@@ -228,7 +232,7 @@
                 ".calendar__button--next-month"
               );
               nextMonth.addEventListener("click", (_event) => {
-                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                const [calendarYear, calendarMonth, calendarDay] = $.array(
                   ".calendar__date [contenteditable]"
                 );
                 createCalendar({
@@ -244,7 +248,7 @@
                 ".calendar__button--next-year"
               );
               nextYear.addEventListener("click", (_event) => {
-                const [calendarYear, calendarMonth, calendarDay] = $.all(
+                const [calendarYear, calendarMonth, calendarDay] = $.array(
                   ".calendar__date [contenteditable]"
                 );
                 createCalendar({
@@ -261,6 +265,7 @@
               ".calendar__monthdays"
             );
             calendarMonthDays.innerHTML = "";
+
             const { daysInMonth, firstWeekday } = getCalendar({ date });
             for (let day = 1; day <= daysInMonth; day++) {
               const monthDay = window.document.createElement("li");
@@ -271,18 +276,80 @@
               // TODO : could be improved - monthday selection
               // TODO : add keyboard event
               // TODO : render 3 months ? for previous and later ?
-              monthDay.addEventListener("click", (_event) => {
+              const onMonthSelected = (event) => {
+                // TODO : improve + decide final functional design
+                // TODO : "?year=2023&month=4" : select 9 - 12 not working properly when 18-19 are unavailable
+                {
+                  if (event.key === "ArrowLeft") {
+                    monthDay.previousSibling.focus();
+                    return;
+                  }
+                  if (event.key === "ArrowRight") {
+                    monthDay.nextSibling.focus();
+                    return;
+                  }
+                  if (event.key === "ArrowDown") {
+                    event.preventDefault();
+                    let nextMonthDay = monthDay.nextSibling;
+                    while (
+                      nextMonthDay &&
+                      (Number(nextMonthDay.innerText) <
+                        Number(monthDay.innerText) + 8 ||
+                        nextMonthDay.previousSibling.classList.contains(
+                          "calendar__monthday--unavailable"
+                        ))
+                    ) {
+                      nextMonthDay.focus();
+                      nextMonthDay = nextMonthDay.nextSibling;
+                    }
+                    return;
+                  }
+                  if (event.key === "ArrowUp") {
+                    event.preventDefault();
+                    let nextMonthDay = monthDay.previousSibling;
+                    while (
+                      nextMonthDay &&
+                      (Number(nextMonthDay.innerText) >
+                        Number(monthDay.innerText) - 8 ||
+                        nextMonthDay.nextSibling.classList.contains(
+                          "calendar__monthday--unavailable"
+                        ))
+                    ) {
+                      nextMonthDay.focus();
+                      nextMonthDay = nextMonthDay.previousSibling;
+                    }
+                    return;
+                  }
+                  if (event.key && ![(" ", "Enter")].includes(event.key)) {
+                    console.log("return");
+                    return;
+                  }
+                }
                 const { start, end } = getCalendarSelection({ container });
+                console.log(
+                  start,
+                  end,
+                  monthDay,
+                  start ? start.innerText : undefined,
+                  monthDay.innerText
+                );
                 if (
                   (!start && !end) ||
                   (start && (end || start.innerText > monthDay.innerText))
                 ) {
                   resetCalendarSelection({ container });
                   setStartMonthDay(monthDay);
+                  // TODO : CUSTOM EVENT (1)
+                  const onDayPicked = new CustomEvent("daypicked", {
+                    bubbles: true,
+                    detail: { start: { day: monthDay.innerText, month, year } },
+                  });
+                  $(".header").dispatchEvent(onDayPicked);
                   return;
                 }
                 if (start && !end) {
                   let dayInSelection = start.nextSibling;
+                  console.log("-->", dayInSelection);
                   while (dayInSelection !== monthDay) {
                     if (
                       dayInSelection.classList.contains(
@@ -300,10 +367,18 @@
                   }
                   if (dayInSelection === monthDay) {
                     setEndMonthDay(monthDay);
+                    // TODO : CUSTOM EVENT (2)
+                    const onDayPicked = new CustomEvent("daypicked", {
+                      bubbles: true,
+                      detail: { end: { day: monthDay.innerText, month, year } },
+                    });
+                    $(".header").dispatchEvent(onDayPicked);
                   }
                   return;
                 }
-              });
+              };
+              monthDay.addEventListener("click", onMonthSelected);
+              monthDay.addEventListener("keydown", onMonthSelected);
               calendarMonthDays.appendChild(monthDay);
             }
             calendarMonthDays.style = `--calendar-monthday-offset: ${firstWeekday}`;
@@ -311,11 +386,14 @@
             // TODO : could be improved - calendar painting
             // const isCurrentMonth = true;   // then disable days until today
             // const isPreviousMonth = true;  // then disable all days
-            const monthBookings = await getBookings({ date });
+            // const monthBookings = await getBookings({ date });
+            const monthBookings = await fetchJsonWithCache(
+              `http://localhost:44380/api/v1/bookings/years/${year}/months/${month}`
+            );
             if (monthBookings) {
-              $.all(".calendar--grid .calendar__monthday").forEach(
+              $.array(".calendar--grid .calendar__monthday").forEach(
                 (calendarMonthDay) => {
-                  const foundMonthDayStatus = monthBookings?.days?.find(
+                  const foundMonthDayStatus = monthBookings?.find(
                     (bookingsDay) =>
                       Number(bookingsDay.day) ===
                       Number(calendarMonthDay.innerText)
@@ -329,6 +407,45 @@
               );
             }
           }
+
+          // TODO : CUSTOM EVENT (3)
+          const header = $(".header");
+          header.addEventListener("daypicked", async (e) => {
+            const { start, end } = event.detail;
+            if (start) {
+              window.sessionStorage.setItem("startDay", start.day);
+              window.sessionStorage.setItem("startMonth", start.month);
+              window.sessionStorage.setItem("startYear", start.year);
+            }
+            if (end) {
+              window.sessionStorage.setItem("endDay", end.day);
+              window.sessionStorage.setItem("endMonth", end.month);
+              window.sessionStorage.setItem("endYear", end.year);
+              $("#book").classList.remove("disabled");
+            }
+          });
+
+          $("#book").addEventListener("click", async () => {
+            const year = sessionStorage.getItem("startYear");
+            const month = sessionStorage.getItem("startMonth");
+            const response = await fetch(
+              "http://localhost:44380/api/v1/bookings",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  year,
+                  month,
+                  start: sessionStorage.getItem("startDay"),
+                  end: sessionStorage.getItem("endDay"),
+                }),
+              }
+            );
+            // TODO : update search params when changing month + prevent default refresh
+            document.location.search = `?year=${year}&month=${month}`;
+          });
 
           // TODO : could be improved
           {
@@ -386,7 +503,7 @@
               });
             }
 
-            const calendarDateElements = $.all(
+            const calendarDateElements = $.array(
               ".calendar__date [contenteditable]"
             );
 
@@ -395,6 +512,9 @@
             );
           }
         </script>
+        <button class="link disabled" id="book">
+          Reservar fechas seleccionadas
+        </button>
       </section>
     </main>
   </body>

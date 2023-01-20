@@ -1,149 +1,152 @@
 [
   {
+    "year": 2023,
     "month": 0,
-    "year": 2023,
-    "days": [
-      { "day": 1, "status": "disabled" },
-      { "day": 2, "status": "disabled" },
-      { "day": 3, "status": "disabled" },
-      { "day": 4, "status": "disabled" },
-      { "day": 5, "status": "disabled" },
-      { "day": 6, "status": "disabled" },
-      { "day": 7, "status": "disabled" },
-      { "day": 8, "status": "disabled" },
-      { "day": 9, "status": "disabled" },
-      { "day": 13, "status": "unavailable" },
-      { "day": 14, "status": "unavailable" },
-      { "day": 15, "status": "unavailable" }
-    ]
+    "day": 13,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   },
   {
+    "year": 2023,
+    "month": 0,
+    "day": 14,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 0,
+    "day": 15,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
     "month": 1,
-    "year": 2023,
-    "days": [
-      { "day": 5, "status": "unavailable" },
-      { "day": 6, "status": "unavailable" },
-      { "day": 7, "status": "unavailable" },
-      { "day": 8, "status": "unavailable" },
-      { "day": 9, "status": "unavailable" },
-      { "day": 10, "status": "unavailable" },
-      { "day": 11, "status": "unavailable" }
-    ]
+    "day": 5,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   },
   {
+    "year": 2023,
+    "month": 1,
+    "day": 6,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 1,
+    "day": 7,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 1,
+    "day": 8,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 1,
+    "day": 9,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 1,
+    "day": 10,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 1,
+    "day": 11,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
     "month": 2,
-    "year": 2023,
-    "days": [
-      { "day": 12, "status": "unavailable" },
-      { "day": 13, "status": "unavailable" },
-      { "day": 14, "status": "unavailable" },
-      { "day": 15, "status": "unavailable" },
-      { "day": 16, "status": "unavailable" }
-    ]
+    "day": 12,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   },
   {
-    "month": 3,
     "year": 2023,
-    "days": [
-      { "day": 9, "status": "unavailable" },
-      { "day": 10, "status": "unavailable" },
-      { "day": 11, "status": "unavailable" },
-      { "day": 26, "status": "unavailable" },
-      { "day": 27, "status": "unavailable" },
-      { "day": 28, "status": "unavailable" },
-      { "day": 29, "status": "unavailable" }
-    ]
+    "month": 2,
+    "day": 13,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   },
   {
-    "month": 4,
     "year": 2023,
-    "days": [
-      { "day": 28, "status": "unavailable" },
-      { "day": 29, "status": "unavailable" },
-      { "day": 30, "status": "unavailable" },
-      { "day": 31, "status": "unavailable" }
-    ]
+    "month": 2,
+    "day": 14,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   },
   {
-    "month": 5,
     "year": 2023,
-    "days": [
-      { "day": 1, "status": "unavailable" },
-      { "day": 2, "status": "unavailable" },
-      { "day": 3, "status": "unavailable" },
-      { "day": 4, "status": "unavailable" },
-      { "day": 24, "status": "unavailable" },
-      { "day": 25, "status": "unavailable" },
-      { "day": 26, "status": "unavailable" }
-    ]
+    "month": 2,
+    "day": 15,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   },
   {
-    "month": 6,
     "year": 2023,
-    "days": [
-      { "day": 13, "status": "unavailable" },
-      { "day": 14, "status": "unavailable" },
-      { "day": 15, "status": "unavailable" }
-    ]
-  },
-  {
-    "month": 7,
-    "year": 2023,
-    "days": [
-      { "day": 5, "status": "unavailable" },
-      { "day": 6, "status": "unavailable" },
-      { "day": 7, "status": "unavailable" },
-      { "day": 8, "status": "unavailable" },
-      { "day": 9, "status": "unavailable" },
-      { "day": 10, "status": "unavailable" },
-      { "day": 11, "status": "unavailable" }
-    ]
-  },
-  {
-    "month": 8,
-    "year": 2023,
-    "days": [
-      { "day": 12, "status": "unavailable" },
-      { "day": 13, "status": "unavailable" },
-      { "day": 14, "status": "unavailable" },
-      { "day": 15, "status": "unavailable" },
-      { "day": 16, "status": "unavailable" }
-    ]
-  },
-  {
-    "month": 9,
-    "year": 2023,
-    "days": [
-      { "day": 9, "status": "unavailable" },
-      { "day": 10, "status": "unavailable" },
-      { "day": 11, "status": "unavailable" },
-      { "day": 26, "status": "unavailable" },
-      { "day": 27, "status": "unavailable" },
-      { "day": 28, "status": "unavailable" },
-      { "day": 29, "status": "unavailable" }
-    ]
-  },
-  {
-    "month": 10,
-    "year": 2023,
-    "days": [
-      { "day": 28, "status": "unavailable" },
-      { "day": 29, "status": "unavailable" },
-      { "day": 30, "status": "unavailable" },
-      { "day": 31, "status": "unavailable" }
-    ]
-  },
-  {
-    "month": 11,
-    "year": 2023,
-    "days": [
-      { "day": 1, "status": "unavailable" },
-      { "day": 2, "status": "unavailable" },
-      { "day": 3, "status": "unavailable" },
-      { "day": 4, "status": "unavailable" },
-      { "day": 24, "status": "unavailable" },
-      { "day": 25, "status": "unavailable" },
-      { "day": 26, "status": "unavailable" }
-    ]
+    "month": 2,
+    "day": 16,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
   }
 ]

@@ -8,6 +8,9 @@
     <link rel="shortcut icon" href="/royaltours/src/assets/logo.svg" type="image/x-icon" />
   </head>
   <body>
+    <!-- TODO : https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog -->
+    <!-- TODO : https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style -->
+    <!-- TODO : https://developer.mozilla.org/en-US/docs/Web/CSS/perspective -->
     <iframe
       src="/royaltours/src/components/calendar-iframe.html"
       style="border: none; min-height: 384px; min-width: 336px"
@@ -37,7 +40,7 @@
             --color-primary-700: #ccc;
             --color-primary-800: #eee;
             --color-primary-900: #fff;
-          `
+          `;
           const style = window.document.createElement("style");
           style.innerHTML = `
           :root {
@@ -49,6 +52,9 @@
           `;
           contentDocument?.head.appendChild(style);
         });
+      });
+      window.addEventListener("auxclick", (event) => {
+        console.log(event);
       });
     </script>
     <!-- <script defer type="module">

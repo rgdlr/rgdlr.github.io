@@ -36,11 +36,37 @@
     <main class="main">
       <section class="container container--md">
         <h2 class="h2 h2--margin">Modal 1</h2>
-        <a class="link" data-modal-trigger="modal-1">Abrir modal</a>
+        <button class="link" data-modal-trigger="modal-1">Abrir modal</button>
       </section>
       <section class="container container--md">
         <h2 class="h2 h2--margin">Modal 2</h2>
-        <a class="link" data-modal-trigger="modal-2">Abrir modal</a>
+        <button class="link" data-modal-trigger="modal-2">Abrir modal</button>
+      </section>
+
+      <!-- TODO : improve modal using dialog + dialog::backdrop - check without rest.css -->
+      <section class="container container--md">
+        <h2 class="h2 h2--margin">Modal dialog</h2>
+        <button id="open-dialog" class="link" data-modal-trigger="modal-2">Abrir modal</button>
+        <dialog id="dialog">
+          Close modal dialog using "Escape" key
+          <form method="dialog">
+            <button>OK</button>
+          </form>
+        </dialog>
+        <dialog open>
+          <p>Greetings, one and all!</p>
+          <form method="dialog">
+            <button>OK</button>
+          </form>
+        </dialog>
+        <script>
+          window.document
+            .getElementById("open-dialog")
+            .addEventListener("click", (e) => {
+              // window.document.getElementById("dialog").show();
+              window.document.getElementById("dialog").showModal();
+            });
+        </script>
       </section>
     </main>
     <aside class="modal modal--hidden" data-modal-target="modal-1">

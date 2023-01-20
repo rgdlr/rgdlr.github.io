@@ -1,11 +1,52 @@
-{
-  "month": 2,
-  "year": 2023,
-  "days": [
-    { "day": 12, "status": "unavailable" },
-    { "day": 13, "status": "unavailable" },
-    { "day": 14, "status": "unavailable" },
-    { "day": 15, "status": "unavailable" },
-    { "day": 16, "status": "unavailable" }
-  ]
-}
+[
+  {
+    "year": 2023,
+    "month": 2,
+    "day": 12,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 2,
+    "day": 13,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 2,
+    "day": 14,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 2,
+    "day": 15,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  },
+  {
+    "year": 2023,
+    "month": 2,
+    "day": 16,
+    "date": "",
+    "start": "",
+    "end": "",
+    "status": "unavailable",
+    "user": "user-id"
+  }
+]

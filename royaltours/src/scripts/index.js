@@ -61,7 +61,7 @@ if (footerYear) {
   setFooterYear(footerYear);
 }
 
-const cards = $.one(".cards");
+const cards = $(".cards");
 
 if (cards) {
   animateCardsWithCloneNode(cards);

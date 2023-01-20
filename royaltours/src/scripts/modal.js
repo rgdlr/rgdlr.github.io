@@ -56,7 +56,7 @@ function showModalOnClickTrigger(modal, trigger, callback) {
 export function allowShowModal(modal, callback) {
   const modalWindow = modal.firstElementChild;
   const modalId = modal.getAttribute("data-modal-target");
-  const modalTrigger = $.attribute(["data-modal-trigger", modalId]);
+  const modalTrigger = $.attribute("data-modal-trigger", modalId);
 
   showModalOnClickTrigger(modal, modalTrigger, callback);
   limitFocusOnShowModal(modalWindow);
@@ -104,7 +104,7 @@ export function allowHideModals(modals) {
 }
 
 export function initModals() {
-  const modals = $.all(".modal");
+  const modals = $.array(".modal");
   allowShowModals(modals);
   allowHideModals(modals);
 }

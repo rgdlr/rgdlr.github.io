@@ -1,3 +1,9 @@
+/* TODO : ... */
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .calendar {
   /* TODO : check for iframe */
   /* --calendar-cell-height: min(3em, calc(100vw / 7)); */

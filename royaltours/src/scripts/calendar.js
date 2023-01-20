@@ -93,12 +93,12 @@ export function getWeekdayName(weekday) {
 // TODO : could be improved
 function getCalendarDate(
   {
-    element = $.one(".calendar__date"),
+    element = $(".calendar__date"),
     order = "yyyy/mm/dd",
     separator = "·",
     type = "number" || "string",
   } = {
-    element: $.one(".calendar__date"),
+    element: $(".calendar__date"),
     order: "yyyy/mm/dd",
     separator: "·",
     type: "number" || "string",
@@ -121,13 +121,23 @@ export const monthdayStatusClasses = {
   unavailable: "calendar__monthday--unavailable",
 };
 
+export function getDateFromQueryParams() {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const year = Number(urlSearchParams.get("year"));
+  const month = Number(urlSearchParams.get("month"));
+  if (year && month) {
+    return new Date(year, month);
+  }
+  return new Date();
+}
+
 // ------------------------- CALENDAR GRID -------------------------
 
 // ------------------------- CALENDAR TABLE -------------------------
 
 export function createCalendarWithTable(
-  { container = $.one(".calendar--table"), date = new Date() } = {
-    container: $.one(".calendar--table"),
+  { container = $(".calendar--table"), date = new Date() } = {
+    container: $(".calendar--table"),
     date: new Date(),
   }
 ) {

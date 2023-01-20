@@ -49,29 +49,20 @@
 
 .checkbox::before,
 .radio::before {
-  background-color: transparent;
+  background-color: var(--color-primary-500);
   content: "";
-  height: 0%;
-  left: 50%;
   position: absolute;
-  top: 50%;
-  width: 0%;
+  inset: 100%;
 
-  transition: all 250ms ease;
+  transition: inset 250ms ease;
 }
 
 .checkbox:checked::before,
 .radio:checked::before {
-  background-color: var(--color-primary-500);
-  content: "";
-  height: 80%;
-  left: 10%;
-  position: absolute;
-  top: 10%;
-  width: 80%;
+  inset: 10%;
 }
 
-.checkbox:checked::before {
+.checkbox::before {
   border-radius: 0.1em;
 }
 
@@ -79,13 +70,12 @@
   background-color: var(--color-light-500);
   content: "";
   height: 12%;
-  left: 50%;
+  inset: 50%;
   position: absolute;
-  top: 50%;
   transform: translate(-50%, -50%);
   width: 45%;
 }
 
-.radio:checked::before {
+.radio::before {
   border-radius: 50%;
 }
