@@ -151,11 +151,16 @@ hr {
   background: url(/home/images/png/javascript.png) center/70%;
 }
 
+.card.css {
+  background: url(/home/images/png/clock.png) center/70%;
+}
+
 .card.film,
 .card.house,
 .card.store,
 .card.wc,
-.card.js {
+.card.js,
+.card.css {
   background-color: var(--color-palette-secondary);
 }
 
