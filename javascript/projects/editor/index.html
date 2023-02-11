@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Javascript</title>
+    <title>Drag</title>
     <link rel="icon" type="image/png" href="/home/images/icon.png" />
-    <link rel="stylesheet" href="./src/css/index.css" />
-    <script type="module" src="./src/js/index.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./script.js" defer></script>
   </head>
-
   <body>
     <header class="header">
       <nav class="nav">
@@ -56,9 +55,6 @@
           <li class="nav-list-item">
             <a class="nav-list-item-link" href="/javascript/projects/canvas">Canvas</a>
           </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/javascript/projects/editor">Editor</a>
-          </li>
         </ul>
         <div class="nav-right">
           <label class="switch">
@@ -69,10 +65,28 @@
       </nav>
     </header>
     <main class="main">
-      <h1 class="main-title">Javascript</h1>
-      <p class="main-paragraph">
-        This web contains access to different Javascript projects currently under development
-      </p>
+      <h1 class="main-title">Editor</h1>
+      <div class="main-content">
+        <p class="main-paragraph">Select an image</p>
+        <label class="drop drag-and-drop" for="file-input">
+          <input class="file-input" type="file" id="image-input" accept="image/*" />
+          <div class="drop-title">
+            <span class="drop-title-keyword">select</span>
+            <span>or</span>
+            <span class="drop-title-keyword">drop</span>
+            <span>your files</span>
+          </div>
+          <span class="drop-subtitle">No files selected</span>
+        </label>
+        <p class="main-paragraph">Choose a filter</p>
+        <select id="filter-select">
+          <option value="none">None</option>
+          <option value="grayscale(100%)">Grayscale</option>
+          <option value="sepia(100%)">Sepia</option>
+        </select>
+        <img id="image-output" />
+        <a id="download-link" download>Download</a>
+      </div>
     </main>
     <footer class="footer">
       <ul class="footer-list">
