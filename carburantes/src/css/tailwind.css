@@ -14,7 +14,7 @@
 
 .hero-image::after {
   background: #0005;
-  content: "";
+  content: '';
   inset: 0;
   position: absolute;
 }
@@ -24,17 +24,17 @@ use {
 }
 
 use:nth-child(3) {
-  animation-duration: 10s;
+  animation-duration: 4s;
 }
 
 use:nth-child(2) {
-  animation-duration: 20s;
-  /* animation-delay: -5s; */
+  animation-duration: 8s;
+  animation-delay: -4s;
 }
 
 use:nth-child(1) {
-  animation-duration: 30s;
-  /* animation-delay: -10s; */
+  animation-duration: 24s;
+  animation-delay: -8s;
 }
 
 @keyframes move-forever {
