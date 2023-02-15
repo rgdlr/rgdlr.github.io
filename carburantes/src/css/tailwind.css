@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero-bottom {
+  height: 50px;
+  transform: scale(2);
+  transform-origin: top center;
+}
+
+.hero-image {
+  position: relative;
+}
+
+.hero-image::after {
+  background: #0005;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+use {
+  animation: move-forever 3s linear infinite;
+}
+
+use:nth-child(3) {
+  animation-duration: 10s;
+}
+
+use:nth-child(2) {
+  animation-duration: 20s;
+  /* animation-delay: -5s; */
+}
+
+use:nth-child(1) {
+  animation-duration: 30s;
+  /* animation-delay: -10s; */
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate(-2px, 0);
+  }
+  100% {
+    transform: translate(0px, 0);
+  }
+}
+
+#ws {
+  height: 150px;
+  width: 100%;
+}
