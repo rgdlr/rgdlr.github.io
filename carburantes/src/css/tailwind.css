@@ -4,11 +4,13 @@
 
 .hero-bottom {
   height: 50px;
-  transform: scale(2);
   transform-origin: top center;
+  transform: scale(2);
 }
 
 .hero-image {
+  background-position: 50%;
+  height: 85vh;
   position: relative;
 }
 
@@ -17,6 +19,13 @@
   content: '';
   inset: 0;
   position: absolute;
+}
+
+.hero-card {
+  backdrop-filter: blur(30px);
+  background: hsla(0, 0%, 100%, 0.7);
+  margin-top: -170px;
+  max-width: min(900px, 90%);
 }
 
 use {
@@ -47,6 +56,6 @@ use:nth-child(1) {
 }
 
 #ws {
-  height: 150px;
+  height: 125px;
   width: 100%;
 }
