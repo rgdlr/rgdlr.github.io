@@ -11,6 +11,7 @@
   gap: 1rem;
   overflow-x: auto;
   padding: 1rem;
+  transition: height 500ms ease;
 }
 
 .nav-list-item {
@@ -26,3 +27,45 @@
 .nav-right {
   padding: 1rem;
 }
+
+/* TODO : HAMBURGER MENU */
+
+/* .nav-hamburger {
+  padding: 1rem;
+}
+
+.nav-hamburger-checkbox {
+  position: absolute;
+}
+
+.nav-hamburger-icon {
+  height: 2em;
+  width: 2em;
+}
+
+.nav-hamburger-checkbox:not(:checked) ~ div {
+  background-color: red;
+}
+
+.nav-hamburger-checkbox:checked ~ div {
+  background-color: blue;
+}
+
+.nav-hamburger:has(.nav-hamburger-checkbox:not(:checked)) ~ .nav-list {
+  height: 0;
+  visibility: hidden;
+}
+
+.nav-hamburger:has(.nav-hamburger-checkbox:checked) ~ .nav-list {
+  height: 100vh;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-list {
+    flex-direction: column;
+  }
+  .nav-hamburger,
+  .nav-right {
+    height: 100%;
+  }
+} */
