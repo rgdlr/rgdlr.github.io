@@ -1,7 +1,5 @@
 .nav {
   align-items: center;
-  background-color: var(--background-color-primary);
-  color: var(--background-color-secondary);
   display: flex;
   justify-content: flex-end;
   width: min(100rem, 100%);

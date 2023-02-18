@@ -6,33 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carousel</title>
     <link rel="stylesheet" href="./style.css" />
-    <script type="module" src="../../src/js/index.js" defer></script>
+    <script type="module" src="../../js/index.js" defer></script>
   </head>
-
   <body>
-    <header class="header">
-      <nav class="nav">
-        <ul class="nav-list">
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/css">Home</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/css/projects/layout">Layout</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/css/projects/avatar">Avatar</a>
-          </li>
-          <li class="nav-list-item">
-            <a class="nav-list-item-link" href="/css/projects/carousel">Carousel</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <template data-import="/css/src/components/header.html"></template>
     <main class="main">
       <h1 class="main-title">Carousel</h1>
       <div class="main-content">
         <div class="carousel carousel--horizontal" tabindex="0">
-          <div class="slide" style="background-color: #333">
+          <div class="slide" style="background-color: #777">
             <span>Carousel horizontal</span>
             <span>Slide 1</span>
           </div>
@@ -40,14 +22,14 @@
             <span>Carousel horizontal</span>
             <span>Slide 2</span>
           </div>
-          <div class="slide" style="background-color: #777">
+          <div class="slide" style="background-color: #333">
             <span>Carousel horizontal</span>
             <span>Slide 3</span>
           </div>
         </div>
         <br />
         <div class="carousel carousel--vertical" tabindex="0">
-          <div class="slide" style="background-color: #333">
+          <div class="slide" style="background-color: #777">
             <span>Carousel vertical</span>
             <span>Slide 1</span>
           </div>
@@ -55,17 +37,13 @@
             <span>Carousel vertical</span>
             <span>Slide 2</span>
           </div>
-          <div class="slide" style="background-color: #777">
+          <div class="slide" style="background-color: #333">
             <span>Carousel vertical</span>
             <span>Slide 3</span>
           </div>
         </div>
       </div>
     </main>
-    <footer class="footer">
-      <ul class="footer-list">
-        <li class="footer-list-item">All Rights Reserved © <span id="footer-year"></span> RGDLR</li>
-      </ul>
-    </footer>
+    <template data-import="/css/src/components/footer.html"></template>
   </body>
 </html>

@@ -1,4 +1,4 @@
-@import url("../../src/css/index.css");
+@import url("../../css/index.css");
 
 .carousel {
   display: flex;
@@ -31,4 +31,5 @@
   min-height: 100%;
   min-width: 100%;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
