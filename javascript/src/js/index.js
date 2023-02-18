@@ -1,5 +1,8 @@
 "use strict";
 
+import "./import.js";
+export * from "./import.js";
+
 import "./event.js";
 export * from "./event.js";
 
@@ -62,3 +65,11 @@ export * from "./webWorker.js";
 
 import "./custom.js";
 export * from "./custom.js";
+
+// -----
+
+import { importHtmlElements } from "./import.js";
+import { applyCustom } from "./custom.js";
+
+await importHtmlElements();
+applyCustom();

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modal</title>
+  <link rel="icon" type="image/png" href="/home/images/icon.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <template data-import="/javascript/src/components/header.html"></template>
+  <main class="main">
+    <h1 class="main-title">Modal</h1>
+    <div class="main-content">
+      <section class="modal-open">
+        <span class="modal-open-button">OPEN MODAL</span>
+      </section>
+      <article class="modal hidden">
+        <div class="modal-window modal-window-fit-content">
+          <div class="modal-window-header">
+            <h2 class="modal-window-header-title">
+              MODAL HEADER TITLE
+            </h2>
+            <span class="modal-window-header-close">x</span>
+          </div>
+          <div class="modal-window-body">
+            <span>MODAL BODY</span>
+          </div>
+          <div class="modal-window-footer">
+            <span class="modal-window-footer-cancel">CANCEL</span>
+            <span class="modal-window-footer-accept">ACCEPT</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+  <template data-import="/javascript/src/components/footer.html"></template>
+</body>
+
+</html>

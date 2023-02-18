@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPS</title>
+  <link rel="icon" type="image/png" href="/home/images/icon.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <template data-import="/javascript/src/components/header.html"></template>
+  <main class="main">
+    <h1 class="main-title">GPS</h1>
+    <div class="main-content">
+      <section class="position">
+        <div class="position-content">
+          <span class="position-latitude-title">Latitude</span>
+          <span class="position-longitude-title">Longitude</span>
+          <span class="position-altitude-title">Altitude</span>
+        </div>
+        <div class="position-content">
+          <span class="position-latitude-value"><i>unknown</i></span>
+          <span class="position-longitude-value"><i>unknown</i></span>
+          <span class="position-altitude-value"><i>unknown</i></span>
+        </div>
+      </section>
+      <section class="position-map">
+        <div class="position-map-osm"></div>
+      </section>
+    </div>
+  </main>
+  <template data-import="/javascript/src/components/footer.html"></template>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Worker</title>
+  <link rel="icon" type="image/png" href="/home/images/icon.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <template data-import="/javascript/src/components/header.html"></template>
+  <main class="main">
+    <h1 class="main-title">Web Worker</h1>
+    <div class="main-content">
+      <p class="main-paragraph">Fibonacci using web worker and memoization</p>
+      <p class="main-paragraph">
+        <small><b>WARN</b> : depending on device, use numbers between 30 and 45 for heavy operation</small>
+      </p>
+      <form class="indexed-db-form fibonacci-main">
+        <input autocomplete="off" class="indexed-db-form-input" type="number" placeholder="Fibonacci main" required
+          name="fibonacciMain" max="45" />
+        <input class="indexed-db-form-input-submit" type="submit" value="Calculate" />
+      </form>
+      <form class="indexed-db-form fibonacci-worker">
+        <input autocomplete="off" class="indexed-db-form-input" type="number" placeholder="Fibonacci worker" required
+          name="fibonacciWorker" max="45" />
+        <input class=" indexed-db-form-input-submit" type="submit" value="Calculate" />
+      </form>
+      <section class="clock">
+        <div class="clock-hours">
+          <span class="fibonacci-number">00</span>
+        </div>
+        <div class="clock-minutes">
+          <span class="fibonacci-result">00</span>
+        </div>
+        <div class="clock-seconds">
+          <span class="fibonacci-time">00</span>
+          <span>ms</span>
+        </div>
+        <span class="fibonacci-cached" hidden>cached</span>
+      </section>
+      <div class="web-worker-loader" hidden>
+        <div class="web-worker-loader-spinner"></div>
+        <div class="web-worker-loader-text"></div>
+      </div>
+    </div>
+  </main>
+  <template data-import="/javascript/src/components/footer.html"></template>
+</body>
+
+</html>

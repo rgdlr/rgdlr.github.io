@@ -2,8 +2,6 @@
 
 import { EVENT, getTheme, setTheme, THEME } from "./index.js";
 
-window.document.getElementById("footer-year").innerText = new Date().getFullYear();
-
 export function getThemeFromSwitch(themeSwitch) {
   return themeSwitch.checked ? THEME.VALUES.DARK : THEME.VALUES.LIGHT;
 }
@@ -59,17 +57,21 @@ export function setThemeForSwitch(theme, themeSwitch) {
   }
 }
 
-const themeSwitch = window.document.querySelector(".switch-checkbox");
-themeSwitch.addEventListener(EVENT.CHANGE, () => {
-  const theme = getThemeFromSwitch(themeSwitch);
-  setThemeForSwitch(theme, themeSwitch);
-  setTheme(theme);
-});
+export function applyCustom() {
+  const themeSwitch = window.document.querySelector(".switch-checkbox");
+  themeSwitch.addEventListener(EVENT.CHANGE, () => {
+    const theme = getThemeFromSwitch(themeSwitch);
+    setThemeForSwitch(theme, themeSwitch);
+    setTheme(theme);
+  });
 
-updateThemeForSwitchByPrefersColorScheme(themeSwitch);
-setThemeForSwitch(getTheme(), themeSwitch);
+  updateThemeForSwitchByPrefersColorScheme(themeSwitch);
+  setThemeForSwitch(getTheme(), themeSwitch);
 
-const themeSwitchCircle = window.document.querySelector(".switch-circle");
-themeSwitchCircle.style.display = "grid";
+  const themeSwitchCircle = window.document.querySelector(".switch-circle");
+  themeSwitchCircle.style.display = "grid";
+
+  window.document.getElementById("footer-year").innerText = new Date().getFullYear();
+}
 
 // TODO : use initial modal window to choose language + use multi-language

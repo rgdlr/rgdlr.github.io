@@ -1,0 +1,89 @@
+@import url(../../css/index.css);
+
+/* GRID LAYOUT */
+
+.lazy-load {
+  width: 100%;
+}
+
+.lazy-load.lazy-load-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.lazy-load.lazy-load-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--background-color-gradient);
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.card.card-flex {
+  width: min(20rem, 100%);
+}
+
+.card.card-grid {
+  margin: 0rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-header-icon {
+  padding: 0.5rem;
+  width: 3rem;
+}
+
+.card-header-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card-body {
+}
+
+.card-body-list {
+}
+
+.card-body-list-item {
+}
+
+.card-body-list-item-title {
+  font-weight: bold;
+}
+
+.card-body-list-item-description {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.card-footer {
+  text-align: center;
+}
+
+.card-footer-website {
+  color: var(--background-color-primary);
+  font-weight: bold;
+  text-decoration: none;
+  width: 100%;
+}
+
+.card-footer-website:hover {
+  color: var(--color-main);
+}

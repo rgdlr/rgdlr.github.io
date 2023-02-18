@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IndexedDB</title>
+  <link rel="icon" type="image/png" href="/home/images/icon.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <template data-import="/javascript/src/components/header.html"></template>
+  <main class="main">
+    <h1 class="main-title">IndexedDB</h1>
+    <div class="main-content">
+      <section class="indexed-db">
+        <form class="indexed-db-form">
+          <input autocomplete="off" class="indexed-db-form-input language" type="text" placeholder="Language" required
+            name="language" />
+          <input autocomplete="off" class="indexed-db-form-input rating" type="number" placeholder="Rating" required
+            name="rating" />
+          <input class="indexed-db-form-input-submit" type="submit" value="Save" />
+        </form>
+        <div class="indexed-db-table-scroll">
+          <table class="indexed-db-table">
+            <thead class="indexed-db-table-head">
+              <tr class="indexed-db-table-row">
+                <th
+                  class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-language">
+                  <span>Language</span>
+                </th>
+                <th class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-rating">
+                  <span>Rating</span>
+                </th>
+                <th class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-edit">
+                </th>
+                <th class="indexed-db-table-row-cell indexed-db-table-row-cell-header indexed-db-table-row-cell-delete">
+                </th>
+              </tr>
+            </thead>
+            <tbody class="indexed-db-table-body"></tbody>
+            <tfoot class="indexed-db-table-footer"></tfoot>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+  <template data-import="/javascript/src/components/footer.html"></template>
+</body>
+
+</html>

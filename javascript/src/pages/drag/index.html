@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drag</title>
+  <link rel="icon" type="image/png" href="/home/images/icon.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./script.js" defer></script>
+</head>
+
+<body>
+  <template data-import="/javascript/src/components/header.html"></template>
+  <main class="main">
+    <h1 class="main-title">Drag</h1>
+    <div class="main-content">
+      <p class="main-paragraph">
+        To create a draggable element, add <b>draggable="true"</b> attribute to tag
+      </p>
+      <p class="main-paragraph">
+        <small><b>WARN</b> : drag is only available in desktop mode</small>
+      </p>
+      <section class="drop">
+        <div class="drag-source"></div>
+        <div class="drag-target file">
+          <div class="drop-title">
+            <span>Drag and drop circle here</span>
+          </div>
+        </div>
+      </section>
+      <section class="drag-container">
+        <span draggable="true" class="drag drag-primary"></span>
+        <span draggable="true" class="drag drag-secondary"></span>
+        <span draggable="true" class="drag drag-element"></span>
+      </section>
+    </div>
+  </main>
+  <template data-import="/javascript/src/components/footer.html"></template>
+</body>
+
+</html>

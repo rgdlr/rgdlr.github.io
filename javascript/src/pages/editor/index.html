@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag</title>
+    <link rel="icon" type="image/png" href="/home/images/icon.png" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./script.js" defer></script>
+  </head>
+  <body>
+    <template data-import="/javascript/src/components/header.html"></template>
+    <main class="main">
+      <h1 class="main-title">Editor</h1>
+      <div class="main-content">
+        <p class="main-paragraph">Select an image</p>
+        <label class="drop drag-and-drop" for="file-input">
+          <input class="file-input" type="file" id="image-input" accept="image/*" />
+          <div class="drop-title">
+            <span class="drop-title-keyword">select</span>
+            <span>or</span>
+            <span class="drop-title-keyword">drop</span>
+            <span>your files</span>
+          </div>
+          <span class="drop-subtitle">No files selected</span>
+        </label>
+        <p class="main-paragraph">Choose a filter</p>
+        <select id="filter-select">
+          <option value="none">None</option>
+          <option value="grayscale(100%)">Grayscale</option>
+          <option value="sepia(100%)">Sepia</option>
+        </select>
+        <img id="image-output" />
+        <a id="download-link" download>Download</a>
+      </div>
+    </main>
+    <template data-import="/javascript/src/components/footer.html"></template>
+  </body>
+</html>

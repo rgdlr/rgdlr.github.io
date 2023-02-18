@@ -1,0 +1,44 @@
+@import url(../../css/index.css);
+
+.canvas {
+}
+
+.canvas-panel,
+.canvas-paint {
+  margin-bottom: 1rem;
+}
+
+.canvas-paint {
+  background-color: var(--color-main);
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
+  cursor: crosshair;
+}
+
+.paint-brush {
+  display: flex;
+  gap: 1rem;
+}
+
+.paint-brush-color,
+.paint-brush-size {
+  background-color: var(--color-main);
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--color-main);
+}
+
+.paint-brush-size {
+  padding: 0rem 0.5rem;
+  width: 100%;
+}
+
+.paint-brush-size::-webkit-slider-runnable-track {
+  background: var(--background-color-main);
+  border-radius: 1rem;
+  height: 0.5rem;
+}
+
+.paint-brush-size::-webkit-slider-thumb {
+  margin-top: -0.25rem;
+  background: var(--background-color-main);
+}
