@@ -2,29 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-.hero-bottom {
-  height: 50px;
-  transform: scale(2);
-  transform-origin: top center;
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
 }
 
+.hero-bottom {
+	height: 50px;
+	transform: scale(2);
+	transform-origin: top center;
+}
+
+.virtual-tour {
+  aspect-ratio: 3/2;
+}
+
+/* @media screen and (max-width: 600px) {
+  .virtual-tour {
+    aspect-ratio: 2/3;
+	}
+} */
+
 .card::after {
-  background: linear-gradient(transparent, #eee);
-  bottom: 0;
-  content: '';
-  height: 75px;
-  left: 0;
-  position: absolute;
-  width: 100%;
+	background: linear-gradient(transparent, #eee);
+	bottom: 0;
+	content: '';
+	height: 75px;
+	left: 0;
+	position: absolute;
+	width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
-  .platform-black,
-  .platform-black:hover {
-    filter: invert(1) brightness(2);
-  }
+	.platform-black,
+	.platform-black:hover {
+		filter: invert(1) brightness(2);
+	}
 
-  .card::after {
-    background: linear-gradient(transparent, #223);
-  }
+	.card::after {
+		background: linear-gradient(transparent, #223);
+	}
 }
