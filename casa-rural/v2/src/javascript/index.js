@@ -1,4 +1,4 @@
-AOS.init({ startEvent: 'DOMContentLoaded', once: true, offset: 250, delay: 250 });
+AOS.init({ startEvent: 'DOMContentLoaded', once: true, offset: 125, delay: 75 });
 
 function cropSvg(svgEl) {
   const bbox = svgEl.getBBox();

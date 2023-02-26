@@ -33,7 +33,7 @@ html {
 	width: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	.platform-black,
 	.platform-black:hover {
 		filter: invert(1) brightness(2);
@@ -42,4 +42,4 @@ html {
 	.card::after {
 		background: linear-gradient(transparent, #223);
 	}
-}
+} */
