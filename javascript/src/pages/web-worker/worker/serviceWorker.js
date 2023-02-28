@@ -1,10 +1,10 @@
 "use strict";
 
-import { EVENT } from "../../../src/js/event.js";
+import { EVENT } from "../../../js/event.js";
 
 // NOTE : this === self
 // NOTE : script location in files tree is important for scope (where interception take place)
-// NOTE : script location "/javascript/projects/web-worker/worker/" is not fetching data > no fetch intercepted
+// NOTE : script location "/javascript/src/pages/web-worker/worker/" is not fetching data > no fetch intercepted
 
 // TODO : use skipWaiting(), etc. improve ServiceWorker
 // TODO : create realtime chat using serviceWorker

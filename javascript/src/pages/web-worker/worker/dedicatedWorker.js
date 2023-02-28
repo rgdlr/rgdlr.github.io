@@ -1,8 +1,8 @@
 "use strict";
 
-import { EVENT } from "../../../src/js/event.js";
-import { Memoization } from "../../../src/js/memoization.js";
-import { fibonacci } from "../../../src/js/util.js";
+import { EVENT } from "../../../js/event.js";
+import { Memoization } from "../../../js/memoization.js";
+import { fibonacci } from "../../../js/util.js";
 
 const memoizedFibonacci = new Memoization().measureUseCallback(fibonacci);
 
