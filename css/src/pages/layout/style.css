@@ -1,7 +1,6 @@
 @import url("../../css/index.css");
 
 body {
-  color: #eee;
   display: grid;
   grid:
     "header" min-content
@@ -46,6 +45,7 @@ body {
 
 .nav {
   grid-area: nav;
+  background-color: var(--background-color-primary);
   justify-content: flex-start;
 }
 
