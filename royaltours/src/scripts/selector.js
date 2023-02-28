@@ -1,16 +1,16 @@
 export class Selector {
-  static ALL = "all";
-  static ATTRIBUTE = "attribute";
-  static CLASS = "class";
-  static ID = "id";
-  static ONE = "one";
+  static ALL = 'all';
+  static ATTRIBUTE = 'attribute';
+  static CLASS = 'class';
+  static ID = 'id';
+  static ONE = 'one';
 
   static from = (container) => ({
     all: (selector) => Array.from(container.querySelectorAll(selector)),
     attribute: (key, value) => container.querySelector(`[${key}=${value}]`),
     class: (selector) => container.getElementsByClassName(selector),
     id: (selector) => container.getElementById(selector),
-    one: (selector) => container.querySelector(selector),
+    one: (selector) => container.querySelector(selector)
   });
 
   static all = (selector) => this.from(window.document).all(selector);
@@ -25,15 +25,13 @@ export class Selector {
   }
 }
 
-// TODO : $.fromEach(container)(selector)
-// TODO : $(selector).from(selector).array(selector) https://www.youtube.com/watch?v=AHdmvGW1oic
 export function $(selector) {
   return $.one(selector);
 }
 
 $.from = function (container) {
   if (!(container instanceof Node)) {
-    throw new Error("Error: container is not valid");
+    throw new Error('Error: container is not valid');
   }
 
   const from = (selector) => from.one(selector);

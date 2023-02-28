@@ -47,7 +47,7 @@
 .h--line-bottom::before {
   background-color: var(--color-light-500);
   bottom: 0;
-  content: "";
+  content: '';
   height: 0.175em;
   position: absolute;
   width: 2em;

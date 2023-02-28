@@ -13,18 +13,17 @@
   position: relative;
   top: 0;
 
-  transition: box-shadow 500ms ease, filter 500ms ease, height 500ms ease,
-    left 500ms ease, scale 500ms ease, top 500ms ease, transform 500ms ease,
-    width 500ms ease;
+  transition: box-shadow 500ms ease, filter 500ms ease, height 500ms ease, left 500ms ease,
+    scale 500ms ease, top 500ms ease, transform 500ms ease, width 500ms ease;
 }
 
 .card:hover {
   scale: 1.02;
 }
 
-/* .cards:has(.card:hover) .card:not(:hover) {
+.cards:hover .card:not(:hover):not([style]) {
   filter: blur(0.05em) saturate(0.85);
-} */
+}
 
 .card__header {
   align-items: center;
@@ -94,9 +93,9 @@
 .card__li::before {
   border-radius: 50%;
   color: var(--color-primary-700);
-  content: "\f054";
+  content: '\f054';
   display: grid;
-  font-family: "FontAwesome";
+  font-family: 'FontAwesome';
   height: 1em;
   left: 0;
   padding: 0.25em;
@@ -109,12 +108,12 @@
 
 .card__li.card__li--included::before {
   color: var(--color-secondary-700);
-  content: "\f00c";
+  content: '\f00c';
 }
 
 .card__li.card__li--semi-included::before {
   color: #bb3;
-  content: "\f00c";
+  content: '\f00c';
 }
 
 .card__li.card__li--excluded {
@@ -124,7 +123,7 @@
 
 .card__li.card__li--excluded::before {
   color: var(--color-tertiary-700);
-  content: "\f00d";
+  content: '\f00d';
 }
 
 .card__li:hover::before {
@@ -148,8 +147,8 @@
 }
 
 .card__asterisk::before {
-  content: "* " counter(card__asterisk);
-  font-family: "FontAwesome";
+  content: '* ' counter(card__asterisk);
+  font-family: 'FontAwesome';
   font-size: var(--font-size--sm);
 }
 
@@ -175,5 +174,5 @@
   color: var(--color-primary-700);
   height: 2em;
   width: 2em;
-  content: "* " counter(card__li--asterisk);
+  content: '* ' counter(card__li--asterisk);
 }

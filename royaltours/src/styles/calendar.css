@@ -1,17 +1,10 @@
-/* TODO : ... */
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
-
 .calendar {
-  /* TODO : check for iframe */
-  /* --calendar-cell-height: min(3em, calc(100vw / 7)); */
   --calendar-cell-height: min(3em, calc((100vw - 2em) / 7));
   --calendar-cell-width: var(--calendar-cell-height);
   --calendar-monthday-offset: 0;
-  width: fit-content;
   cursor: default;
+  overflow: hidden;
+  width: fit-content;
 }
 
 .calendar * {
@@ -49,6 +42,21 @@
 .calendar__monthdays {
   display: grid;
   grid-template-columns: repeat(7, var(--calendar-cell-width, 1fr));
+  text-transform: capitalize;
+}
+
+.calendar__monthdays {
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.calendar__monthdays--prev {
+  opacity: 0;
+  transform: translateX(-15em);
+}
+
+.calendar__monthdays--next {
+  opacity: 0;
+  transform: translateX(15em);
 }
 
 .calendar__weekday {
@@ -111,8 +119,9 @@
 
 .calendar__button:focus,
 .calendar__button:hover,
-.calendar__monthday:not(
-    :is(.calendar__monthday--disabled, .calendar__monthday--unavailable)
-  ):is(:focus, :hover) {
+.calendar__monthday:not(:is(.calendar__monthday--disabled, .calendar__monthday--unavailable)):is(
+    :focus,
+    :hover
+  ) {
   background-color: var(--color-primary-500);
 }

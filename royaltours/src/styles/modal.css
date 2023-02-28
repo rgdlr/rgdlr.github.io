@@ -44,8 +44,8 @@ body.body__modal--open {
   backdrop-filter: blur(0.2em);
   opacity: 1;
   visibility: visible;
-  transition: -webkit-backdrop-filter 500ms ease, backdrop-filter 500ms ease,
-    opacity 500ms ease, visibility 500ms ease;
+  transition: -webkit-backdrop-filter 500ms ease, backdrop-filter 500ms ease, opacity 500ms ease,
+    visibility 500ms ease;
 }
 
 .modal--hidden {
@@ -128,8 +128,7 @@ body.body__modal--open {
 
 .modal:has(.modal__close) .modal__header,
 .modal:has(.modal__close):not(:has(.modal__header)) .modal__body,
-.modal:has(.modal__close):not(:has(.modal__header, .modal__body))
-  .modal__footer {
+.modal:has(.modal__close):not(:has(.modal__header, .modal__body)) .modal__footer {
   padding-right: 4em;
 }
 

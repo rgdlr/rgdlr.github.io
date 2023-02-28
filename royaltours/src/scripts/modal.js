@@ -1,9 +1,9 @@
-import { $ } from "./selector.js";
+import { $ } from './selector.js';
 
 function changeFocusOnToggleModal(modal, modalWindow, trigger) {
-  modalWindow.setAttribute("tabindex", "-1");
-  modal.addEventListener("transitionend", (_event) => {
-    if (modal.classList.contains("modal--hidden")) {
+  modalWindow.setAttribute('tabindex', '-1');
+  modal.addEventListener('transitionend', (_event) => {
+    if (modal.classList.contains('modal--hidden')) {
       trigger.focus();
     } else if (trigger === window.document.activeElement) {
       modalWindow.focus();
@@ -18,15 +18,14 @@ function getFocusableElements(container = window.document) {
 }
 
 function limitFocusOnShowModal(modalWindow) {
-  modalWindow.addEventListener("keydown", (event) => {
-    if (event.key !== "Tab") {
+  modalWindow.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab') {
       return;
     }
 
-    const focusableElements = [
-      modalWindow,
-      ...getFocusableElements(modalWindow),
-    ].filter((elem) => !elem.getAttribute("style")?.includes("display: none"));
+    const focusableElements = [modalWindow, ...getFocusableElements(modalWindow)].filter(
+      (elem) => !elem.getAttribute('style')?.includes('display: none')
+    );
 
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
@@ -43,11 +42,11 @@ function limitFocusOnShowModal(modalWindow) {
 }
 
 function showModalOnClickTrigger(modal, trigger, callback) {
-  trigger.addEventListener("click", (_event) => {
-    window.document.body.classList.add("body__modal--open");
-    modal.classList.remove("modal--hidden");
+  trigger.addEventListener('click', (_event) => {
+    window.document.body.classList.add('body__modal--open');
+    modal.classList.remove('modal--hidden');
 
-    if (typeof callback === "function") {
+    if (typeof callback === 'function') {
       callback();
     }
   });
@@ -55,8 +54,8 @@ function showModalOnClickTrigger(modal, trigger, callback) {
 
 export function allowShowModal(modal, callback) {
   const modalWindow = modal.firstElementChild;
-  const modalId = modal.getAttribute("data-modal-target");
-  const modalTrigger = $.attribute("data-modal-trigger", modalId);
+  const modalId = modal.getAttribute('data-modal-target');
+  const modalTrigger = $.attribute('data-modal-trigger', modalId);
 
   showModalOnClickTrigger(modal, modalTrigger, callback);
   limitFocusOnShowModal(modalWindow);
@@ -68,19 +67,17 @@ export function allowShowModals(modals) {
 }
 
 function enableHideModal(modal, callback) {
-  window.document.body.classList.remove("body__modal--open");
-  modal.classList.add("modal--hidden");
+  window.document.body.classList.remove('body__modal--open');
+  modal.classList.add('modal--hidden');
 
-  if (typeof callback === "function") {
+  if (typeof callback === 'function') {
     callback();
   }
 }
 
 export function allowHideModal(modal, callback) {
-  const modalClose = modal.querySelector(".modal__close");
-  modalClose.addEventListener("click", (_event) =>
-    enableHideModal(modal, callback)
-  );
+  const modalClose = modal.querySelector('.modal__close');
+  modalClose.addEventListener('click', (_event) => enableHideModal(modal, callback));
 
   // modal.addEventListener("keydown", ({ key }) => {
   //   enableHideModal(modal, () => {
@@ -91,8 +88,8 @@ export function allowHideModal(modal, callback) {
   //   });
   // });
 
-  modal.addEventListener("keydown", ({ key }) => {
-    if (key !== "Escape" && key !== "Q" && key !== "q") {
+  modal.addEventListener('keydown', ({ key }) => {
+    if (key !== 'Escape' && key !== 'Q' && key !== 'q') {
       return;
     }
     enableHideModal(modal, callback);
@@ -104,7 +101,7 @@ export function allowHideModals(modals) {
 }
 
 export function initModals() {
-  const modals = $.array(".modal");
+  const modals = $.array('.modal');
   allowShowModals(modals);
   allowHideModals(modals);
 }

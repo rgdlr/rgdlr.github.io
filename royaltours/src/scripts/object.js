@@ -19,8 +19,7 @@ export function mergeObjectArraysWithCommonProperty(
 ) {
   return arrayWithBasicProperties.map((fullItem) => {
     const foundItem = arrayWithExtraProperties.find(
-      (extraItem) =>
-        extraItem[arrayCommonProperty] === fullItem[arrayCommonProperty]
+      (extraItem) => extraItem[arrayCommonProperty] === fullItem[arrayCommonProperty]
     );
     return foundItem ? { ...fullItem, ...foundItem } : fullItem;
   });

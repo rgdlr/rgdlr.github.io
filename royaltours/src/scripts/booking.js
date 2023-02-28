@@ -1,7 +1,7 @@
-import { getCalendar } from "./calendar.js";
-import { fetchJsonPromise } from "./json.js";
+import { getCalendar } from './calendar.js';
+import { fetchJsonPromise } from './json.js';
 
-// TODO : JUST IMPROVE EVERYTHING
+// TODO : could be improved
 
 export function getBookingsMonth({ bookings, date }) {
   const { month, year } = getCalendar({ date });
@@ -11,7 +11,7 @@ export function getBookingsMonth({ bookings, date }) {
   return bookingsMonth;
 }
 
-export function getBookingsWithCache() {
+export function getBookingsMonthWithCache() {
   const cache = {};
   return async function ({ date }) {
     const { month, year } = getCalendar({ date });
@@ -28,7 +28,7 @@ export function getBookingsWithCache() {
   };
 }
 
-export function getBookingsWithSessionStorage() {
+export function getBookingsMonthWithSessionStorage() {
   return async function ({ date }) {
     const { month, year } = getCalendar({ date });
     const key = `${year}:${month}`;
@@ -47,5 +47,4 @@ export function getBookingsWithSessionStorage() {
   };
 }
 
-// TODO : IMPORTANT TO IMPROVE
-export const getBookings = getBookingsWithCache();
+export const getBookings = getBookingsMonthWithCache();

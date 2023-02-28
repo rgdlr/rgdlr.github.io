@@ -46,9 +46,8 @@
   --color-tertiary-800: #c88;
   --color-tertiary-900: #d99;
 
-  --font-family-primary: system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  --font-family-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --font-family-secondary: serif;
   --font-family-tertiary: monospace;
 

@@ -67,7 +67,7 @@
 .sticky__button:hover::before,
 .sticky__button:focus::before {
   border-radius: 50%;
-  content: "";
+  content: '';
   height: calc(100% + 0.25em);
   inset: 50%;
   position: absolute;

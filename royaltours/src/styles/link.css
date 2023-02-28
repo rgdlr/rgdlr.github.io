@@ -9,3 +9,8 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.link--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

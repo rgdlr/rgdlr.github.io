@@ -15,7 +15,6 @@
   max-width: 1.5em;
   min-height: 1.5em;
   min-width: 1.5em;
-  outline: none;
   position: relative;
   text-align: center;
   width: 1.5em;
@@ -50,7 +49,7 @@
 .checkbox::before,
 .radio::before {
   background-color: var(--color-primary-500);
-  content: "";
+  content: '';
   position: absolute;
   inset: 100%;
 
@@ -68,7 +67,7 @@
 
 .checkbox--indeterminate::after {
   background-color: var(--color-light-500);
-  content: "";
+  content: '';
   height: 12%;
   inset: 50%;
   position: absolute;
