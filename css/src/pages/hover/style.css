@@ -1,14 +1,11 @@
 @import url("../../css/index.css");
 
 .hover {
+  box-sizing: border-box;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 0.5rem;
   position: relative;
-}
-
-.hover--card {
-  height: 10rem;
-  width: min(20rem, 100%);
 }
 
 .hover-content {
@@ -21,30 +18,22 @@
 
   transform-style: preserve-3d;
   transform: perspective(100rem) rotateY(var(--rotateY)) rotateX(var(--rotateX));
-  transition: transform 500ms ease;
+  transition: transform var(--transition-duration) ease;
 }
 
-.hover--shadow .hover-content::after,
-.hover--shadow .hover-content::before {
-  content: "";
-  position: absolute;
-  border-radius: inherit;
+.hover[data-hover] .hover-content {
+  --transition-duration: 300ms;
 }
 
-.hover--shadow .hover-content::before {
-  background: var(--color-main);
-  filter: blur(1rem) opacity(0.5);
-  inset: 0.45rem;
-  transform: translateZ(-1.95rem);
+.hover[data-mouseover] .hover-content {
+  --transition-duration: 150ms;
 }
 
-.hover--shadow .hover-content::after {
-  background: linear-gradient(-45deg, var(--background-color-primary), var(--background-color-secondary));
-  inset: -0.5rem;
-  transform: translateZ(-2rem);
+.hover[data-mousemove] .hover-content {
+  --transition-duration: 75ms;
 }
 
-.hover .hover-area {
+.hover > .hover-area {
   z-index: 10;
   position: absolute;
 }
@@ -130,7 +119,7 @@
 
 .hover > .hover-area:nth-child(6):hover ~ .hover-content {
   --rotateX: +00deg;
-  --rotateY: 25deg;
+  --rotateY: +25deg;
 }
 
 .hover > .hover-area:nth-child(7):hover ~ .hover-content {
@@ -146,4 +135,33 @@
 .hover > .hover-area:nth-child(9):hover ~ .hover-content {
   --rotateX: -25deg;
   --rotateY: +25deg;
+}
+
+.hover--card {
+  height: 10rem;
+  width: min(20rem, 100%);
+}
+
+.hover--shadow .hover-content::after,
+.hover--shadow .hover-content::before {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+}
+
+.hover--shadow .hover-content::before {
+  background: var(--color-main);
+  filter: blur(0.25rem) opacity(0.25);
+  inset: 0rem;
+  transform: translateZ(-1.75rem);
+}
+
+.hover--shadow .hover-content::after {
+  background: linear-gradient(
+    -45deg,
+    var(--background-color-primary),
+    var(--background-color-secondary)
+  );
+  inset: -0.5rem;
+  transform: translateZ(-2rem);
 }

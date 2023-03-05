@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hover</title>
     <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./script.js" defer></script>
     <script type="module" src="../../js/index.js" defer></script>
   </head>
   <body>
@@ -13,8 +14,8 @@
     <main class="main">
       <h1 class="main-title">Hover</h1>
       <div class="main-content">
-        <h2 class="main-title">CSS hover effect</h2>
-        <div class="hover hover--shadow hover--card">
+        <p class="main-paragraph">CSS hover effect</p>
+        <div class="hover hover--shadow hover--card" data-hover>
           <div class="hover-area"></div>
           <div class="hover-area"></div>
           <div class="hover-area"></div>
@@ -28,33 +29,20 @@
         </div>
         <br />
         <!-- TODO : add effect using js mouseover -->
-        <h2 class="main-title">JS mouseover effect</h2>
-        <div class="hover hover--shadow hover--card">
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
+        <p class="main-paragraph">JS mouseover effect</p>
+        <div class="hover hover--shadow hover--card" data-mouseover>
+          <div class="hover-content">Hover content</div>
+        </div>
+        <br />
+        <p class="main-paragraph">JS mousemove effect</p>
+        <div class="hover hover--shadow hover--card" data-mousemove>
           <div class="hover-content">Hover content</div>
         </div>
         <br />
         <!-- TODO : add effect using js gyroscope -->
-        <h2 class="main-title">JS gyroscope effect</h2>
+        <p class="main-paragraph">JS gyroscope effect</p>
         <div class="hover hover--shadow hover--card">
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-area"></div>
-          <div class="hover-content">Hover content</div>
+          <div class="hover-content" data-gyroscope>Hover content</div>
         </div>
       </div>
     </main>
