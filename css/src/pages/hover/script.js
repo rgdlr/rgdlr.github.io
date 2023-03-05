@@ -1,6 +1,7 @@
 const MAX_ROTATION_DEGREES = 35;
-const mouseMoves = window.document.querySelectorAll("[data-mousemove]");
 const mouseOvers = window.document.querySelectorAll("[data-mouseover]");
+const mouseFollows = window.document.querySelectorAll("[data-mousefollow]");
+const mouseMoves = window.document.querySelectorAll("[data-mousemove]");
 
 // -----
 
@@ -24,6 +25,32 @@ document.addEventListener("mousemove", (event) =>
 
 // -----
 
+function rotateElementOnMouseMoveFollow(event, element) {
+  const { left, top, width, height } = element.getBoundingClientRect();
+
+  const mouseX = event.clientX;
+  const mouseY = event.clientY;
+
+  const elementX = left + width / 2;
+  const elementY = top + height / 2;
+
+  const offsetX =
+    ((mouseX - elementX) / (elementX > mouseX ? elementX : window.innerWidth - elementX)) *
+    MAX_ROTATION_DEGREES;
+  const offsetY =
+    ((mouseY - elementY) / (elementY > mouseY ? elementY : window.innerHeight - elementY)) *
+    MAX_ROTATION_DEGREES;
+
+  element.style.setProperty("--rotateX", -offsetY + "deg");
+  element.style.setProperty("--rotateY", +offsetX + "deg");
+}
+
+document.addEventListener("mousemove", (event) =>
+  mouseFollows.forEach((mouseFollow) => rotateElementOnMouseMoveFollow(event, mouseFollow))
+);
+
+// -----
+
 function rotateElementOnMouseOver(event, element) {
   const { left, top } = element.getBoundingClientRect();
 
@@ -43,7 +70,7 @@ function rotateElementOnMouseOver(event, element) {
 mouseOvers.forEach((mouseOver) => {
   mouseOver.addEventListener("mousemove", (event) => rotateElementOnMouseOver(event, mouseOver));
   mouseOver.addEventListener("mouseleave", (event) => {
-    mouseOver.style.setProperty("--rotateX", "0deg");
-    mouseOver.style.setProperty("--rotateY", "0deg");
+    mouseOver.style.setProperty("--rotateX", undefined);
+    mouseOver.style.setProperty("--rotateY", undefined);
   });
 });
