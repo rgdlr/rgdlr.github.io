@@ -116,10 +116,9 @@ function initMap() {
 
     const distanceMatrixService = new google.maps.DistanceMatrixService();
     distanceMatrixService.getDistanceMatrix(request).then((response) => {
-      document.getElementById("displacement").innerText =
-        response.rows[0].elements[0].duration.text
-          .replace(/[^0-9\s]/g, "")
-          .replace(/\s{2,}/g, " ");
+      document.getElementById("displacement").innerText = response.rows[0].elements[0].duration.text
+        .replace(/[^0-9\s]/g, "")
+        .replace(/\s{2,}/g, " ");
       calculateBudget();
     });
   });
@@ -150,8 +149,7 @@ form.addEventListener("submit", () => {
 function uploadFile() {
   const UPLOAD_FILE_SIZE_LIMIT = 150 * 1024 * 1024;
   var dbx = new Dropbox.Dropbox({
-    accessToken:
-      "wDcMa-Jc35IAAAAAAAAAAadab0gWZ5w1rfNTzZsmGS-b9BsVlvwayJE_UuBGJQvX",
+    accessToken: "wDcMa-Jc35IAAAAAAAAAAadab0gWZ5w1rfNTzZsmGS-b9BsVlvwayJE_UuBGJQvX",
   });
   var fileInput = document.getElementById("file-upload");
   var file = fileInput.files[0];
@@ -245,25 +243,18 @@ function uploadFile() {
   return false;
 }
 
+const budget = document.getElementById("budget-container");
 let lastPosition = 0;
 
 window.addEventListener("scroll", (_event) => {
-  const budget = document.getElementById("budget-container");
   const { bottom } = budget.getBoundingClientRect();
 
-  if (window.scrollY > 50) {
-    budget.classList.remove("invisible");
-  } else {
-    budget.classList.add("invisible");
-  }
-
-  if (lastPosition === bottom) {
-    budget.classList.add("shadow-lg");
-  } else {
-    budget.classList.remove("shadow-lg");
-  }
+  lastPosition === bottom
+    ? budget.classList.add("shadow-lg")
+    : budget.classList.remove("shadow-lg");
 
   lastPosition = bottom;
 });
 
-document.getElementById("footer-year").textContent = new Date().getFullYear();
+const footerYear = document.getElementById("footer-year");
+footerYear.textContent = new Date().getFullYear();
