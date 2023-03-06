@@ -78,9 +78,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home"
-                >Inicio</a
-              >
+              <a class="nav-link active" aria-current="page" href="#home">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#trabajos">Trabajos</a>
@@ -99,29 +97,25 @@
       </div>
     </nav>
 
-    <!-- WORK -->
-    <div class="container" id="trabajos">
-      <h2 class="h2 pt-5 pb-3">Trabajos</h2>
-      <div class="p-5 ratio ratio-21x9">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/videoseries?list=PLSVUmAdJi3Zq4Eo7nHiBDt7C_v9ptJvdA"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        >
-        </iframe>
-      </div>
-    </div>
-
     <!-- FORM https://postmail.invotes.com/accounts/manage/34a5e2b5-2298-4c40-a256-048380eb6918 -->
-    <form
-      action="https://postmail.invotes.com/send"
-      method="post"
-      id="email_form"
-    >
+    <form action="https://postmail.invotes.com/send" method="post" id="email_form">
+      <!-- WORK -->
+      <div class="container" id="trabajos">
+        <h2 class="h2 pt-5 pb-3">Trabajos</h2>
+        <div class="p-5 ratio ratio-21x9">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/videoseries?list=PLSVUmAdJi3Zq4Eo7nHiBDt7C_v9ptJvdA"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+      </div>
+
       <!-- BUDGET -->
       <div class="container p-4 pt-5" id="presupuesto">
         <h2 class="h2 pt-3 pb-3">Presupuesto</h2>
@@ -214,11 +208,7 @@
                 name="extra_illumination"
                 onchange="calculateBudget()"
               />
-              <label
-                class="form-check-label"
-                for="illumination"
-                class="form-label"
-              >
+              <label class="form-check-label" for="illumination" class="form-label">
                 Iluminación
               </label>
               <span
@@ -238,10 +228,7 @@
                 onchange="calculateBudget()"
               />
               <label class="form-check-label" for="drone" class="form-label"
-                >Dron
-                <span class="badge rounded-pill bg-light text-dark ms-1"
-                  >nuevo</span
-                ></label
+                >Dron <span class="badge rounded-pill bg-light text-dark ms-1">nuevo</span></label
               >
             </div>
             <div class="form-check mb-2">
@@ -252,9 +239,7 @@
                 name="extra_script"
                 onchange="calculateBudget()"
               />
-              <label class="form-check-label" for="script" class="form-label"
-                >Guionización</label
-              >
+              <label class="form-check-label" for="script" class="form-label">Guionización</label>
             </div>
             <div class="form-check mb-2">
               <input
@@ -264,10 +249,7 @@
                 name="extra_cover-youtube"
                 onchange="calculateBudget()"
               />
-              <label
-                class="form-check-label"
-                for="cover-youtube"
-                class="form-label"
+              <label class="form-check-label" for="cover-youtube" class="form-label"
                 >Portada YouTube</label
               >
             </div>
@@ -279,10 +261,7 @@
                 name="extra_cover-spotify"
                 onchange="calculateBudget()"
               />
-              <label
-                class="form-check-label"
-                for="cover-spotify"
-                class="form-label"
+              <label class="form-check-label" for="cover-spotify" class="form-label"
                 >Portada Spotify</label
               >
             </div>
@@ -294,10 +273,7 @@
                 name="extra_photography"
                 onchange="calculateBudget()"
               />
-              <label
-                class="form-check-label"
-                for="photography"
-                class="form-label"
+              <label class="form-check-label" for="photography" class="form-label"
                 >Sesión de fotografía</label
               >
             </div>
@@ -406,11 +382,7 @@
         <!-- <label class="form-label" for="extra_file">Archivo</label>
             <input class="form-control" type="file" id="extra_file" name="extra_file" disabled /><br> -->
 
-        <input
-          type="hidden"
-          name="access_token"
-          value="gfuodolx9kvvptl7p5bzixxd"
-        />
+        <input type="hidden" name="access_token" value="gfuodolx9kvvptl7p5bzixxd" />
         <!-- return urls can be fully qualified -OR- start with / for root relative -OR- start with . for url relative -->
         <input
           type="hidden"
@@ -424,20 +396,10 @@
         />
 
         <div class="d-lg-none d-grid text-end">
-          <input
-            class="btn btn-secondary"
-            id="submit_form"
-            type="submit"
-            value="Enviar"
-          />
+          <input class="btn btn-secondary" id="submit_form" type="submit" value="Enviar" />
         </div>
         <div class="d-none d-lg-block text-end">
-          <input
-            class="btn btn-secondary"
-            id="submit_form"
-            type="submit"
-            value="Enviar"
-          />
+          <input class="btn btn-secondary" id="submit_form" type="submit" value="Enviar" />
         </div>
 
         <!-- not required, but we'd appreciate it if you'd link to us somewhere on your site -->
@@ -456,13 +418,7 @@
           <button id="file-check" hidden>
             <i class="bi bi-check-circle"></i>
           </button>
-          <button
-            class="btn btn-secondary"
-            type="button"
-            onclick="uploadFile()"
-          >
-            Enviar
-          </button>
+          <button class="btn btn-secondary" type="button" onclick="uploadFile()">Enviar</button>
         </div>
       </div>
     </form>
@@ -470,14 +426,10 @@
     <!-- FOOTER -->
     <div class="mt-5 p-5 bg-dark">
       <p class="text-center text-light fw-bold">
-        <i class="bi bi-code-slash"></i> with
-        <i class="bi bi-suit-heart-fill"></i> by RGDLR
+        <i class="bi bi-code-slash"></i> with <i class="bi bi-suit-heart-fill"></i> by RGDLR
       </p>
       <p class="fs-5 text-center text-light">
-        <a
-          class="text-light"
-          target="_blank"
-          href="https://www.instagram.com/hesit8_mad"
+        <a class="text-light" target="_blank" href="https://www.instagram.com/hesit8_mad"
           ><i class="bi bi-instagram p-2"></i
         ></a>
         <a
@@ -486,10 +438,7 @@
           href="https://www.youtube.com/channel/UCKyN-dqAwYkF6J44P-zCCTw"
           ><i class="bi bi-youtube p-2"></i
         ></a>
-        <a
-          class="text-light"
-          target="_blank"
-          href="https://www.facebook.com/Hesit8.Mad/"
+        <a class="text-light" target="_blank" href="https://www.facebook.com/Hesit8.Mad/"
           ><i class="bi bi-facebook p-2"></i
         ></a>
       </p>
@@ -519,8 +468,7 @@
           </div>
           <div class="modal-body">
             <p class="text-center">
-              2 tubos LED RGB para lograr unas condiciones lumínicas óptimas en
-              cualquier ambiente
+              2 tubos LED RGB para lograr unas condiciones lumínicas óptimas en cualquier ambiente
             </p>
             <div class="d-flex justify-content-center flex-wrap">
               <div class="card m-3" style="width: 25rem">
