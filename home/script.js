@@ -15,7 +15,6 @@
     getComputedStyle(document.documentElement).getPropertyValue("--color-palette-tertiary") + "80";
 
   function setNavigationActiveElement(navigationBars, navigationElementIndex) {
-    console.log(backgroundColor);
     navigationBars.forEach(({ children }) =>
       Array.from(children).forEach((element, index, _array) => {
         element.style.backgroundColor =
