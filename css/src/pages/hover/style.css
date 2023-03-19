@@ -1,5 +1,16 @@
 @import url("../../css/index.css");
 
+@property --rotation-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotation {
+  from { --rotation-angle: 0deg; }
+  to { --rotation-angle: 360deg; }
+}
+
 .hover {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
@@ -135,17 +146,29 @@
 }
 
 .hover--shadow .hover-content::after,
-.hover--shadow .hover-content::before {
+.hover--shadow .hover-content::before,
+.hover--glow .hover-content::after,
+.hover--glow .hover-content::before {
   content: "";
   position: absolute;
   border-radius: inherit;
 }
 
-.hover--shadow .hover-content::before {
-  background: var(--color-main);
-  filter: blur(0.25rem) opacity(0.25);
+.hover--shadow .hover-content::before,
+.hover--glow .hover-content::before {
   inset: 0rem;
   transform: translateZ(-1.75rem);
+}
+
+.hover--shadow .hover-content::after,
+.hover--glow .hover-content::after {
+  inset: -0.5rem;
+  transform: translateZ(-2rem);
+}
+
+.hover--shadow .hover-content::before {
+  background: var(--color-main);
+  filter: blur(0.25rem) opacity(0.5);
 }
 
 .hover--shadow .hover-content::after {
@@ -154,6 +177,19 @@
     var(--background-color-primary),
     var(--background-color-secondary)
   );
-  inset: -0.5rem;
-  transform: translateZ(-2rem);
+}
+
+.hover--glow .hover-content::after,
+.hover--glow .hover-content::before {
+  background: conic-gradient(
+    from var(--rotation-angle),
+    var(--background-color-primary),
+    var(--background-color-secondary),
+    var(--background-color-primary)
+  );
+  animation: rotation 3s linear infinite;
+}
+
+.hover--glow .hover-content::before {
+  filter: blur(1.5rem);
 }
