@@ -182,7 +182,7 @@
 .hover--glow .hover-content::after,
 .hover--glow .hover-content::before {
   background: conic-gradient(
-    from var(--rotation-angle),
+    from var(--rotation-angle, 0deg),
     var(--background-color-primary),
     var(--background-color-secondary),
     var(--background-color-primary)
