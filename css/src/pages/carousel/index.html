@@ -15,9 +15,6 @@
       <h1 class="main-title">Carousel</h1>
       <div class="main-content">
         <section class="carousel carousel--horizontal">
-          <button class="carousel-previous">
-            <span class="carousel-button">&lt;</span>
-          </button>
           <ul class="slides" tabindex="0">
             <li class="slide slide--active" style="background-color: #777">
               <span>Carousel horizontal</span>
@@ -32,63 +29,66 @@
               <span>Slide 3</span>
             </li>
           </ul>
+          <button class="carousel-previous">
+            <span class="carousel-button">&lt;</span>
+          </button>
           <button class="carousel-next">
             <span class="carousel-button">&gt;</span>
           </button>
         </section>
         <br />
         <section class="carousel carousel--vertical">
+          <ul class="slides" tabindex="0">
+            <li class="slide slide--active" style="background-color: #777">
+              <span>Carousel vertical</span>
+              <span>Slide 1</span>
+            </li>
+            <li class="slide" style="background-color: #555">
+              <span>Carousel vertical</span>
+              <span>Slide 2</span>
+            </li>
+            <li class="slide" style="background-color: #333">
+              <span>Carousel vertical</span>
+              <span>Slide 3</span>
+            </li>
+          </ul>
           <button class="carousel-previous">
             <span class="carousel-button">&lt;</span>
           </button>
-          <ul class="slides" tabindex="0">
-            <div class="slide" style="background-color: #777">
-              <span>Carousel vertical</span>
-              <span>Slide 1</span>
-            </div>
-            <div class="slide" style="background-color: #555">
-              <span>Carousel vertical</span>
-              <span>Slide 2</span>
-            </div>
-            <div class="slide" style="background-color: #333">
-              <span>Carousel vertical</span>
-              <span>Slide 3</span>
-            </div>
-          </ul>
           <button class="carousel-next">
             <span class="carousel-button">&gt;</span>
           </button>
         </section>
         <br />
-        <section class="carousel carousel--simple carousel--horizontal" tabindex="0">
-          <div class="slide" style="background-color: #777">
+        <ul class="carousel carousel--simple carousel--horizontal" tabindex="0">
+          <li class="slide" style="background-color: #777">
             <span>Carousel simple horizontal</span>
             <span>Slide 1</span>
-          </div>
-          <div class="slide" style="background-color: #555">
+          </li>
+          <li class="slide" style="background-color: #555">
             <span>Carousel simple horizontal</span>
             <span>Slide 2</span>
-          </div>
-          <div class="slide" style="background-color: #333">
+          </li>
+          <li class="slide" style="background-color: #333">
             <span>Carousel simple horizontal</span>
             <span>Slide 3</span>
-          </div>
-        </section>
+          </li>
+        </ul>
         <br />
-        <section class="carousel carousel--simple carousel--vertical" tabindex="0">
-          <div class="slide" style="background-color: #777">
+        <ul class="carousel carousel--simple carousel--vertical" tabindex="0">
+          <li class="slide" style="background-color: #777">
             <span>Carousel simple vertical</span>
             <span>Slide 1</span>
-          </div>
-          <div class="slide" style="background-color: #555">
+          </li>
+          <li class="slide" style="background-color: #555">
             <span>Carousel simple vertical</span>
             <span>Slide 2</span>
-          </div>
-          <div class="slide" style="background-color: #333">
+          </li>
+          <li class="slide" style="background-color: #333">
             <span>Carousel simple vertical</span>
             <span>Slide 3</span>
-          </div>
-        </section>
+          </li>
+        </ul>
       </div>
     </main>
     <template data-import="/css/src/components/footer.html"></template>

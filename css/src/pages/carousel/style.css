@@ -101,6 +101,11 @@
   scroll-snap-stop: always;
 }
 
+.carousel:has(.slide:first-child:is(.slide--active)) .carousel-previous,
+.carousel:has(.slide:last-child:is(.slide--active)) .carousel-next {
+  display: none;
+}
+
 .carousel.carousel--simple {
   display: flex;
   height: 50vh;
