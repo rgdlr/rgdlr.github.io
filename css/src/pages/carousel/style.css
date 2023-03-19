@@ -1,26 +1,127 @@
 @import url("../../css/index.css");
 
 .carousel {
+  height: 50vh;
+  position: relative;
+  width: 100%;
+}
+
+.carousel-previous,
+.carousel-next {
+  all: unset;
+  align-items: center;
+  cursor: default;
+  display: flex;
+  font-size: 1.25rem;
+  justify-content: center;
+  position: absolute;
+}
+
+.carousel-button {
+  align-items: center;
+  background-color: var(--background-color-primary);
+  border-radius: 50%;
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  opacity: 0.5;
+  padding: 0.25rem;
+  width: 2rem;
+}
+
+.carousel-previous:hover .carousel-button,
+.carousel-next:hover .carousel-button {
+  color: var(--background-color-secondary);
+  opacity: 1;
+}
+
+.carousel--horizontal .carousel-previous,
+.carousel--horizontal .carousel-next {
+  height: 100%;
+  top: 0;
+  width: 4rem;
+}
+
+.carousel--vertical .carousel-previous,
+.carousel--vertical .carousel-next {
+  height: 4rem;
+  left: 0;
+  width: 100%;
+}
+
+.carousel--horizontal .carousel-previous {
+  left: 0;
+}
+
+.carousel--horizontal .carousel-next {
+  right: 0;
+}
+
+.carousel--vertical .carousel-previous {
+  top: 0;
+}
+
+.carousel--vertical .carousel-next {
+  bottom: 0;
+}
+
+.carousel--vertical .carousel-button {
+  rotate: 90deg;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel--horizontal .slides {
+  flex-direction: row;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel--vertical .slides {
+  flex-direction: column;
+  overflow: hidden;
+  scroll-snap-type: y mandatory;
+}
+
+.slide {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: center;
+  min-height: 100%;
+  min-width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.carousel.carousel--simple {
   display: flex;
   height: 50vh;
   width: 100%;
 }
 
-.carousel--horizontal {
+.carousel.carousel--simple.carousel--horizontal {
   flex-direction: row;
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
 }
 
-.carousel--vertical {
+.carousel.carousel--simple.carousel--vertical {
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
 
-.slide {
+.carousel.carousel--simple .slide {
   align-items: center;
   color: white;
   display: flex;
