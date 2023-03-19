@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tooltip</title>
     <link rel="stylesheet" href="./style.css" />
-    <script type="module" src="./script.js" defer></script>
     <script type="module" src="../../js/index.js" defer></script>
   </head>
   <body>
@@ -15,15 +14,37 @@
       <h1 class="main-title">Tooltip</h1>
       <div class="main-content">
         <section class="tooltips">
-          <ul>
+          <ul class="tooltips-list">
+            <li class="tooltip tooltip--top" tabindex="0">
+              <div class="tooltip-content">tooltip</div>
+              <span>top</span>
+            </li>
+            <li class="tooltip tooltip--right" tabindex="0">
+              <div class="tooltip-content">tooltip</div>
+              <span>right</span>
+            </li>
+            <li class="tooltip tooltip--bottom" tabindex="0">
+              <div class="tooltip-content">tooltip</div>
+              <span>bottom</span>
+            </li>
+            <li class="tooltip tooltip--left" tabindex="0">
+              <div class="tooltip-content">tooltip</div>
+              <span>left</span>
+            </li>
+          </ul>
+          <ul class="tooltips-list">
             <li>
-              <a class="tooltip" href="mailto:rodrigrtic@gmail.com" target="_blank">
+              <a class="tooltip tooltip--top" href="mailto:rodrigrtic@gmail.com" target="_blank">
                 <div class="tooltip-content">Email</div>
                 <span>@</span>
               </a>
             </li>
             <li>
-              <a class="tooltip" href="https://www.linkedin.com/in/rgdlr" target="_blank">
+              <a
+                class="tooltip tooltip--right"
+                href="https://www.linkedin.com/in/rgdlr"
+                target="_blank"
+              >
                 <div class="tooltip-content">Linkedin</div>
                 <span>in</span>
               </a>

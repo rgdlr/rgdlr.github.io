@@ -4,17 +4,26 @@
   width: 100%;
 }
 
+.tooltips-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
 .tooltip {
   align-items: center;
   border-radius: 0.5rem;
+  cursor: default;
   display: flex;
   justify-content: center;
   margin-bottom: 0.5rem;
   outline: none;
   padding: 0.25rem 0.5rem;
   position: relative;
+  transition: background-color 250ms ease, color 0.25s ease, color 250ms ease, color 0.25s ease;
   width: fit-content;
-  transition: background-color 250ms ease, color 0.25s ease;
 }
 
 .tooltip-content {
@@ -23,19 +32,9 @@
   padding: 0.25rem 0.5rem;
   pointer-events: none;
   position: absolute;
-  top: 0;
-  transition: top 350ms cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  z-index: 1;
+  transition: inset 350ms cubic-bezier(0.68, -0.55, 0.265, 1.55),
     opacity 350ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.tooltip-content::before {
-  bottom: -0.25rem;
-  content: "";
-  height: 0.5rem;
-  left: 50%;
-  position: absolute;
-  transform: translateX(-50%) rotate(45deg);
-  width: 0.5rem;
 }
 
 .tooltip:is(:focus, :hover),
@@ -48,5 +47,72 @@
 .tooltip:is(:focus, :hover) .tooltip-content {
   opacity: 1;
   pointer-events: all;
-  top: -2.75rem;
+}
+
+.tooltip--top .tooltip-content {
+  inset: 0 auto auto auto;
+}
+
+.tooltip--top:is(:focus, :hover) .tooltip-content {
+  inset: calc(-100% - 1rem) auto auto auto;
+}
+
+.tooltip--right .tooltip-content {
+  inset: auto auto auto 0;
+}
+
+.tooltip--right:is(:focus, :hover) .tooltip-content {
+  inset: auto auto auto calc(100% + 1rem);
+}
+
+.tooltip--bottom .tooltip-content {
+  inset: auto auto 0 auto;
+}
+
+.tooltip--bottom:is(:focus, :hover) .tooltip-content {
+  inset: auto auto calc(-100% - 1rem) auto;
+}
+
+.tooltip--left .tooltip-content {
+  inset: auto 0 auto auto;
+}
+
+.tooltip--left:is(:focus, :hover) .tooltip-content {
+  inset: auto calc(100% + 1rem) auto auto;
+}
+
+.tooltip .tooltip-content::before {
+  content: "";
+  height: 0.5rem;
+  position: absolute;
+  width: 0.5rem;
+  z-index: -1;
+}
+
+.tooltip--top .tooltip-content::before,
+.tooltip--bottom .tooltip-content::before {
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tooltip--right .tooltip-content::before,
+.tooltip--left .tooltip-content::before {
+  bottom: 50%;
+  transform: translateY(50%) rotate(45deg);
+}
+
+.tooltip--top .tooltip-content::before {
+  bottom: -0.25rem;
+}
+
+.tooltip--right .tooltip-content::before {
+  left: -0.25rem;
+}
+
+.tooltip--bottom .tooltip-content::before {
+  top: -0.25rem;
+}
+
+.tooltip--left .tooltip-content::before {
+  right: -0.25rem;
 }
