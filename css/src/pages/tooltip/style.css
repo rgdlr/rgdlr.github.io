@@ -1,10 +1,6 @@
 @import url("../../css/index.css");
 
 .tooltips {
-  width: 100%;
-}
-
-.tooltips-list {
   align-items: center;
   display: flex;
   flex-wrap: wrap;

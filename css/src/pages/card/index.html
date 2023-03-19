@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="../../js/index.js" defer></script>
+  </head>
+  <body>
+    <template data-import="/css/src/components/header.html"></template>
+    <main class="main">
+      <h1 class="main-title">Card</h1>
+      <div class="main-content">
+        <section class="cards">
+          <div
+            class="card card--javascript">
+            <img class="card-image" src="/home/images/png/javascript.png" alt="javascript logo">
+            <div class="card-content">
+              <h3 class="card-title">Javascript</h3>
+              <p class="card-description">Javascript projects</p>
+              <a class="card-button" href="/javascript">Visit Website</a>
+            </div>
+          </div>
+          <div class="card card--css">
+            <img class="card-image" src="/home/images/png/css.png" alt="css logo">
+            <div class="card-content">
+              <h3 class="card-title">CSS</h3>
+              <p class="card-description">CSS projects</p>
+              <a class="card-button" href="/css">Visit Website</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <template data-import="/css/src/components/footer.html"></template>
+  </body>
+</html>

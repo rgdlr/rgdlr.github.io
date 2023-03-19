@@ -134,27 +134,27 @@ hr {
 }
 
 .card.film {
-  background: url(/home/images/png/film.png) center/75%;
+  background: url(/home/images/png/film.png) center/75% no-repeat;
 }
 
 .card.house {
-  background: url(/home/images/png/house.png) center/75%;
+  background: url(/home/images/png/house.png) center/75% no-repeat;
 }
 
 .card.store {
-  background: url(/home/images/png/store.png) center/80%;
+  background: url(/home/images/png/store.png) center/80% no-repeat;
 }
 
 .card.wc {
-  background: url(/home/images/png/web-components.png) center/80%;
+  background: url(/home/images/png/web-components.png) center/80% no-repeat;
 }
 
 .card.js {
-  background: url(/home/images/png/javascript.png) center/70%;
+  background: url(/home/images/png/javascript.png) center/70% no-repeat;
 }
 
 .card.css {
-  background: url(/home/images/png/clock.png) center/70%;
+  background: url(/home/images/png/clock.png) center/70% no-repeat;
 }
 
 .card.film,
