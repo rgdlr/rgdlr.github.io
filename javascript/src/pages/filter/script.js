@@ -17,9 +17,6 @@ imageInput.addEventListener("change", () => {
 
 filterSelect.addEventListener("change", () => {
   imageOutput.style.filter = filterSelect.value;
-});
-
-downloadLink.addEventListener("click", () => {
   const image = new Image();
   image.src = imageOutput.src;
   image.addEventListener("load", () => {
