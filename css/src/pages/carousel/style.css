@@ -88,6 +88,7 @@
 }
 
 .slide {
+  all: unset;
   align-items: center;
   color: white;
   display: flex;
@@ -99,6 +100,7 @@
   min-width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  text-align: center;
 }
 
 .carousel:has(.slide:first-child:is(.slide--active)) .carousel-previous,
