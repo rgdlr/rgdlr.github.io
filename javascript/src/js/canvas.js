@@ -84,7 +84,7 @@ export class Canvas {
       this.#context.closePath();
     };
 
-    // TODO : listen events only in mobile/table
+    // TODO : listen events only in mobile/tablet
     this.#canvas.addEventListener(EVENT.TOUCH_START, startPosition);
     this.#canvas.addEventListener(EVENT.TOUCH_END, endPosition);
     this.#canvas.addEventListener(EVENT.TOUCH_MOVE, draw);
