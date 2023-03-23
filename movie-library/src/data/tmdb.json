@@ -1,0 +1,26 @@
+{
+    "api": {
+        "url": "https://api.themoviedb.org/3",
+        "v3_key": "67367955229a7192c0ce3ef2d80b924d",
+        "v4_token": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzM2Nzk1NTIyOWE3MTkyYzBjZTNlZjJkODBiOTI0ZCIsInN1YiI6IjYxNjFmOTZkYjg2NWViMDA0Mjc3NjY4OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NMYg7TQjbfynJyNQhOc88XY4vpFDDrSK5DleP2QDrqs",
+        "web": "https://www.themoviedb.org"
+    },
+    "github": {
+        "url": "https://github.com/ymulenll/movies-curso-react/tree/master",
+        "url-1": "https://github.com/ymulenll/movies-curso-react/tree/parte1",
+        "url-2": "https://github.com/ymulenll/movies-curso-react/tree/parte2",
+        "url-3": "https://github.com/ymulenll/movies-curso-react/tree/parte3",
+        "url-4": "https://github.com/ymulenll/movies-curso-react/tree/parte4"
+    },
+    "user": {
+        "email": "sipet93872@neragez.com",
+        "password": "movielibrary",
+        "username": "sipet"
+    },
+    "youtube": {
+        "url_1": "https://www.youtube.com/watch?v=hdgUDN1sgtA",
+        "url_2": "https://www.youtube.com/watch?v=afxLq1UFEfQ",
+        "url_3": "https://www.youtube.com/watch?v=3z-Y4kbLrTM",
+        "url_4": "https://www.youtube.com/watch?v=VbXAwjAxfU0"
+    }
+}
