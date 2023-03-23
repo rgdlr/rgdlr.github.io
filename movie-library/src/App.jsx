@@ -6,7 +6,7 @@ import { NotFound } from "./pages/NotFound";
 
 export function App() {
     return (
-        <Router basename={'/movie-library/build'}>
+        <Router basename={'/movie-library/app'}>
             <header>
                 <Link to="/">
                     <h1 className={style.title}>Movie Library</h1>
