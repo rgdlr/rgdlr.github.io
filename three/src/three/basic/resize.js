@@ -1,6 +1,6 @@
 import { perspectiveCamera } from "./camera.js";
 
-class Resize {
+export class Resize {
   #renderer;
 
   constructor() {}
