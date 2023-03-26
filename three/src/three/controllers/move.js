@@ -8,7 +8,7 @@ export class MoveController {
     this.peerId = peerId;
     this.state = null;
     this.character = null;
-    this.speed = 0.09;
+    this.speed = 0.05;
   }
 
   init(characterController) {

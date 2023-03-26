@@ -28,31 +28,31 @@ export class KeyController {
     this.state.rotation.y = 0;
     this.state.angle.y = 0;
 
-    if (this.keyListener.isPressed(["w", "W", "ArrowUp"])) {
+    if (this.keyListener.isPressed(["w", "W"])) {
       this.state.translation.y = 1;
     }
-    if (this.keyListener.isPressed(["s", "S", "ArrowDown"])) {
+    if (this.keyListener.isPressed(["s", "S"])) {
       this.state.translation.y = -1;
     }
-    if (this.keyListener.isPressed(["a", "A", "ArrowLeft"])) {
+    if (this.keyListener.isPressed(["a", "A"])) {
       this.state.translation.x = 1;
     }
-    if (this.keyListener.isPressed(["d", "D", "ArrowRight"])) {
+    if (this.keyListener.isPressed(["d", "D"])) {
       this.state.translation.x = -1;
     }
 
     // if (this.keyListener.isPressed("ArrowUp")) {
-    //   this.state.rotation.y = 1;
-    // }
-    // if (this.keyListener.isPressed("ArrowDown")) {
-    //   this.state.rotation.y = -1;
-    // }
-    // if (this.keyListener.isPressed("ArrowLeft")) {
     //   this.state.angle.y = 1;
     // }
-    // if (this.keyListener.isPressed("ArrowRight")) {
+    // if (this.keyListener.isPressed("ArrowDown")) {
     //   this.state.angle.y = -1;
     // }
+    if (this.keyListener.isPressed("ArrowLeft")) {
+      this.state.rotation.y = 1;
+    }
+    if (this.keyListener.isPressed("ArrowRight")) {
+      this.state.rotation.y = -1;
+    }
   }
 }
 

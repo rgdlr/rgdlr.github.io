@@ -1,5 +1,5 @@
 import { FBXLoader } from "../../../addons/loaders/fbx-loader.js";
-import { AnimationLoader } from "../../../tools/animations/animation-loader.js";
+import { AnimationLoader } from "../../../animations/animation-loader.js";
 import { PromiseLoader } from "../../../tools/promise-loader.js";
 import { animations } from "./animations.js";
 

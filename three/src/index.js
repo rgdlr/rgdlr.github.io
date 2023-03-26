@@ -1,6 +1,9 @@
+import { animationController } from "./three/controllers/animation.js";
 import { characterController } from "./three/controllers/character.js";
 import { keyController } from "./three/controllers/key.js";
+import { modeController } from "./three/controllers/mode.js";
 import { moveController } from "./three/controllers/move.js";
+import { rotationController } from "./three/controllers/rotation.js";
 import { standardBox } from "./three/figures/box.js";
 import { basicPlane } from "./three/figures/plane.js";
 import { botLoader } from "./three/models/characters/bot/bot-loader.js";
@@ -30,28 +33,26 @@ perspectiveCamera.lookAt(standardBox.position);
 // objectFollow(perspectiveCamera, standardBox);
 
 botLoader().then((bot) => {
-  // scene.add(bot);
-  // characterController.setCharacter(bot);
-  // characterController.add(keyController);
-  // characterController.add(moveController);
-  // characterController.start();
+  scene.add(bot);
+  characterController.setCharacter(bot);
+  characterController.add(keyController);
+  characterController.add(moveController);
+  characterController.add(animationController);
+  characterController.add(modeController);
+  characterController.add(rotationController);
+  characterController.start();
+  recorder.add(() => {
+    const { x, y, z } = bot.position;
+    perspectiveCamera.position.set(x, y + 3, z - 3);
+    perspectiveCamera.lookAt(bot.position);
+  });
 });
-
-characterController.add(keyController);
-characterController.add(moveController);
-characterController.setCharacter(standardBox);
 
 recorder.add(() => {
   if (keyListener.isPressed(["r", "R"])) {
     standardBox.rotation.y += 0.025;
   }
   webGlRenderer.render(scene, perspectiveCamera);
-  perspectiveCamera.lookAt(standardBox.position);
-  // perspectiveCamera.position.set(
-  //   standardBox.position.x,
-  //   standardBox.position.y + 3,
-  //   standardBox.position.z - 3
-  // );
 });
 
 resize.start(webGlRenderer);

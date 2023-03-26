@@ -1,5 +1,5 @@
-import { AnimationMixer, Clock } from "../../three.module.js";
-import { recorder } from "../recorder.js";
+import { AnimationMixer, Clock } from "../three.module.js";
+import { recorder } from "../tools/recorder.js";
 
 export class TransitionHandler {
   peerId;
