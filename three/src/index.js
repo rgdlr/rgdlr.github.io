@@ -34,6 +34,7 @@ perspectiveCamera.lookAt(standardBox.position);
 
 botLoader().then((bot) => {
   scene.add(bot);
+
   characterController.setCharacter(bot);
   characterController.add(keyController);
   characterController.add(moveController);
@@ -41,6 +42,7 @@ botLoader().then((bot) => {
   characterController.add(modeController);
   characterController.add(rotationController);
   characterController.start();
+
   recorder.add(() => {
     const { x, y, z } = bot.position;
     perspectiveCamera.position.set(x, y + 3, z - 3);
