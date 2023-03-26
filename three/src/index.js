@@ -3,6 +3,7 @@ import { keyController } from "./three/controllers/key.js";
 import { moveController } from "./three/controllers/move.js";
 import { standardBox } from "./three/figures/box.js";
 import { basicPlane } from "./three/figures/plane.js";
+import { botLoader } from "./three/models/characters/bot/bot-loader.js";
 import { perspectiveCamera } from "./three/tools/camera.js";
 import { keyListener } from "./three/tools/key-listener.js";
 import { ambientDirectionalLight } from "./three/tools/light.js";
@@ -23,9 +24,18 @@ perspectiveCamera.position.set(0, 3, -3);
 perspectiveCamera.lookAt(standardBox.position);
 
 // webGlRenderer.setAnimationLoop();
+//
 // cameraMovements(perspectiveCamera);
 // objectMovements(standardBox);
 // objectFollow(perspectiveCamera, standardBox);
+
+botLoader().then((bot) => {
+  // scene.add(bot);
+  // characterController.setCharacter(bot);
+  // characterController.add(keyController);
+  // characterController.add(moveController);
+  // characterController.start();
+});
 
 characterController.add(keyController);
 characterController.add(moveController);
