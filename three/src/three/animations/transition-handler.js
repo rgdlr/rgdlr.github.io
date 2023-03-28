@@ -64,6 +64,5 @@ export class TransitionHandler {
       this.clips[this.lastClip].crossFadeTo(this.clips[animationId], 0.2, true);
     }
     this.lastClip = animationId;
-    // TODO : CHECK 1:02:00 (finished?)
   }
 }
