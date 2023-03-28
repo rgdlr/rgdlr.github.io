@@ -6,7 +6,7 @@ import { moveController } from "./three/controllers/move.js";
 import { rotationController } from "./three/controllers/rotation.js";
 import { standardBox } from "./three/figures/box.js";
 import { basicPlane } from "./three/figures/plane.js";
-import { botLoader } from "./three/models/characters/bot/bot-loader.js";
+import { loadBot } from "./three/models/characters/bot/bot-loader.js";
 import { perspectiveCamera } from "./three/tools/camera.js";
 import { keyListener } from "./three/tools/key-listener.js";
 import { ambientDirectionalLight } from "./three/tools/light.js";
@@ -32,7 +32,7 @@ perspectiveCamera.lookAt(standardBox.position);
 // objectMovements(standardBox);
 // objectFollow(perspectiveCamera, standardBox);
 
-botLoader().then((bot) => {
+loadBot().then((bot) => {
   scene.add(bot);
 
   characterController.setCharacter(bot);

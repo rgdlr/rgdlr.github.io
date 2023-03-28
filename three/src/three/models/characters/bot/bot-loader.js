@@ -11,7 +11,7 @@ for (const [key, value] of Object.entries(animations)) {
   animationUrls[key] = path + "animations/" + value;
 }
 
-export const botLoader = () => {
+export const loadBot = () => {
   const animationLoader = new AnimationLoader(modelUrl, animationUrls);
   const promiseLoader = new PromiseLoader(FBXLoader, function (object) {
     const scale = 0.005;
