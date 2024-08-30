@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui;
+        }
+
+        .calendar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-inline: auto;
+            max-width: 50rem;
+            min-width: fit-content;
+            padding-inline: 0.5rem;
+        }
+
+        .calendar__nav {
+            align-items: center;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: space-between;
+            margin-block: 0.5rem;
+        }
+
+        .calendar__button {
+            align-items: center;
+            aspect-ratio: 1;
+            background-color: #5552;
+            border: none;
+            display: flex;
+            display: flex;
+            justify-content: center;
+            min-height: 2.5rem;
+        }
+
+        .calendar__button:hover {
+            background-color: #5551;
+        }
+
+        .calendar__title {
+            align-items: center;
+            background-color: #5552;
+            display: flex;
+            font-weight: bold;
+            justify-content: center;
+            min-height: 2.5rem;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .calendar__months {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            width: 100%;
+        }
+
+        .calendar__month {
+            background-color: #5552;
+            font-weight: bold;
+            grid-column: span 7;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .calendar__weekday {
+            background-color: #5551;
+            font-weight: bold;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .calendar__day {
+            min-height: 36px;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .calendar__day--office {
+            background-color: #fbe521;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .calendar__day--office::after {
+            align-items: center;
+            background-color: #faed7f;
+            content: "Oficina";
+            display: flex;
+            font-size: 0.7rem;
+            inset: 0;
+            justify-content: center;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 500ms ease;
+        }
+
+        .calendar__day--office:hover::after {
+            opacity: 1;
+        }
+
+        .calendar__today {
+            border: 0.1rem dashed #4646da;
+            color: #4646da;
+            font-weight: bold;
+        }
+
+        .calendar__next-office-day {
+            background-color: #5552;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            text-align: end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calendar">
+        <nav class="calendar__nav">
+            <button class="calendar__button" id="prev-month">&lt;</button>
+            <div class="calendar__title">HaztePull</div>
+            <button class="calendar__button" id="next-month">&gt;</button>
+        </nav>
+        <div class="calendar__months"></div>
+        <div class="calendar__next-office-day"></div>
+    </div>
+    <script>
+        let currentMonthIndex = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        const months = [
+            { name: 'Enero', days: 31 },
+            { name: 'Febrero', days: 28 },
+            { name: 'Marzo', days: 31 },
+            { name: 'Abril', days: 30 },
+            { name: 'Mayo', days: 31 },
+            { name: 'Junio', days: 30 },
+            { name: 'Julio', days: 31 },
+            { name: 'Agosto', days: 31 },
+            { name: 'Septiembre', days: 30 },
+            { name: 'Octubre', days: 31 },
+            { name: 'Noviembre', days: 30 },
+            { name: 'Diciembre', days: 31 }
+        ];
+
+        function getWeekNumber(date) {
+            date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+            const weekNumber = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+            return weekNumber;
+        }
+
+        function getOfficeDays(weekNumber, year) {
+            const weekBase = 36;
+            const yearBase = 2024;
+            if (year < yearBase || (year === yearBase && weekNumber < weekBase)) {
+                return [];
+            }
+            let weeksFromBase;
+            if (year > yearBase || (year === yearBase && weekNumber >= weekBase)) {
+                weeksFromBase = (year - yearBase) * 52 + (weekNumber - weekBase);
+            } else {
+                weeksFromBase = (year - yearBase) * 52 + (weekNumber - weekBase);
+                if (weeksFromBase < 0) {
+                    weeksFromBase = (year - yearBase) * 52 + (weekNumber - weekBase);
+                }
+            }
+            const patternWeek = ((weeksFromBase % 3) + 3) % 3;
+            if (patternWeek === 0 || patternWeek === 2) {
+                return ['jueves', 'viernes'];
+            } else if (patternWeek === 1) {
+                return ['jueves'];
+            }
+            return [];
+        }
+
+        function renderCalendar() {
+            const calendarElement = document.querySelector('.calendar__months');
+            calendarElement.innerHTML = '';
+
+            const month = months[currentMonthIndex];
+            const monthYearLabel = document.createElement('div');
+            monthYearLabel.className = 'calendar__month';
+            monthYearLabel.innerText = `${month.name} ${currentYear}`;
+            calendarElement.appendChild(monthYearLabel);
+
+            const dayHeaders = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+            dayHeaders.forEach(header => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar__weekday';
+                dayHeader.innerText = header;
+                calendarElement.appendChild(dayHeader);
+            });
+
+            const firstDay = new Date(currentYear, currentMonthIndex, 1).getDay();
+            const daysInMonth = month.days;
+
+            const startDay = (firstDay === 0 ? 6 : firstDay - 1);
+            const days = Array(startDay).fill(null);
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                days.push(day);
+            }
+
+            const totalDays = days.length;
+            const daysNeeded = 42 - totalDays;
+
+            for (let i = 0; i < daysNeeded; i++) {
+                days.push(null);
+            }
+
+            const today = new Date();
+            const todayDay = today.getDate();
+            const todayMonth = today.getMonth();
+            const todayYear = today.getFullYear();
+
+            days.forEach((day, i) => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar__day';
+
+                if (day) {
+                    dayElement.innerText = day;
+                    const date = new Date(currentYear, currentMonthIndex, day);
+                    const weekNumber = getWeekNumber(date);
+                    const officeDays = getOfficeDays(weekNumber, currentYear);
+                    const dayOfWeek = date.toLocaleDateString('es-ES', { weekday: 'long' });
+                    if (officeDays.includes(dayOfWeek)) {
+                        dayElement.classList.add('calendar__day--office');
+                    }
+                    if (day === todayDay && currentMonthIndex === todayMonth && currentYear === todayYear) {
+                        dayElement.classList.add('calendar__today');
+                    }
+                }
+
+                calendarElement.appendChild(dayElement);
+            });
+        }
+
+        function getNextOfficeDay(date = new Date()) {
+            const weekNumber = getWeekNumber(date);
+            const officeDays = getOfficeDays(weekNumber, date.getFullYear());
+            const dayOfWeek = date.toLocaleDateString('es-ES', { weekday: 'long' });
+            if (officeDays.includes(dayOfWeek)) {
+                return date;
+            }
+            date.setDate(date.getDate() + 1);
+            return getNextOfficeDay(date);
+        }
+
+        function renderNextOfficeDay() {
+            const nextOfficeDayElement = document.querySelector('.calendar__next-office-day');
+            const nextOfficeDay = getNextOfficeDay();
+            nextOfficeDayElement.innerHTML = `Próximo día de oficina: <strong>${nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: '2-digit' }).replace(',', '')}</strong>`;
+        }
+
+        document.getElementById('prev-month').addEventListener('click', () => {
+            if (currentMonthIndex > 0) {
+                currentMonthIndex--;
+            } else {
+                currentMonthIndex = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+
+        document.getElementById('next-month').addEventListener('click', () => {
+            if (currentMonthIndex < 11) {
+                currentMonthIndex++;
+            } else {
+                currentMonthIndex = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        });
+
+        renderCalendar();
+        renderNextOfficeDay();
+    </script>
+</body>
+
+</html>
