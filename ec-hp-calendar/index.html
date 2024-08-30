@@ -6,20 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario</title>
     <style>
-        * {
+        :root {
+            --color: #111;
+            --background-color: #eee;
+        }
+
+        body {
+            color: var(--color);
+            background-color: var(--background-color);
+            font-family: system-ui;
+        }
+
+        *, *::after, *::before {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        body {
-            font-family: system-ui;
+        svg {
+            stroke: var(--color);
         }
 
         .calendar {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin-top: 0.5rem;
             margin-inline: auto;
             max-width: 50rem;
             min-width: fit-content;
@@ -31,7 +43,11 @@
             display: flex;
             gap: 0.5rem;
             justify-content: space-between;
-            margin-block: 0.5rem;
+        }
+
+        .calendar__buttons {
+            display: flex;
+            gap: 0.5rem;
         }
 
         .calendar__button {
@@ -39,7 +55,6 @@
             aspect-ratio: 1;
             background-color: #5552;
             border: none;
-            display: flex;
             display: flex;
             justify-content: center;
             min-height: 2.5rem;
@@ -49,20 +64,28 @@
             background-color: #5551;
         }
 
-        .calendar__title {
-            align-items: center;
+        .calendar__title,
+        .calendar__next-office-day,
+        .calendar__total-office-days {
             background-color: #5552;
-            display: flex;
+            padding: 0.5rem;
+        }
+
+        .calendar__title {
+            border-bottom: 0.1rem solid #5552;
             font-weight: bold;
-            justify-content: center;
-            min-height: 2.5rem;
+            text-align: center;
             text-transform: uppercase;
-            width: 100%;
+        }
+
+        .calendar__total-office-days {
+            margin-bottom: 0.5rem;
         }
 
         .calendar__months {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 0.5rem;
             width: 100%;
         }
 
@@ -88,7 +111,7 @@
         }
 
         .calendar__day--office {
-            background-color: #fbe521;
+            background-color: #d3646499;
             font-weight: bold;
             position: relative;
         }
@@ -111,32 +134,50 @@
         }
 
         .calendar__today {
-            border: 0.1rem dashed #4646da;
+            outline: 0.1rem dashed #4646da;
             color: #4646da;
             font-weight: bold;
         }
 
-        .calendar__next-office-day {
-            background-color: #5552;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            text-align: end;
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color: #eee;
+                --background-color: #111;
+            }
+            .calendar__day--office {
+                background-color: #91181899;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="calendar">
-        <nav class="calendar__nav">
-            <button class="calendar__button" id="prev-month">&lt;</button>
-            <div class="calendar__title">HaztePull</div>
-            <button class="calendar__button" id="next-month">&gt;</button>
-        </nav>
-        <div class="calendar__months"></div>
+        <div class="calendar__title">HaztePull</div>
         <div class="calendar__next-office-day"></div>
+        <div class="calendar__total-office-days"></div>
+        <div class="calendar__months"></div>
+        <nav class="calendar__nav">
+            <div class="calendar__buttons">
+                <button class="calendar__button calendar__button--prev-year">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-left"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
+                </button>
+                <button class="calendar__button calendar__button--prev-month">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+            </div>
+            <div class="calendar__buttons">
+                <button class="calendar__button calendar__button--next-month">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+                <button class="calendar__button calendar__button--next-year">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>
+                </button>
+            </div>
+        </nav>
     </div>
     <script>
-        let currentMonthIndex = new Date().getMonth();
+        let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
 
         const months = [
@@ -189,7 +230,7 @@
             const calendarElement = document.querySelector('.calendar__months');
             calendarElement.innerHTML = '';
 
-            const month = months[currentMonthIndex];
+            const month = months[currentMonth];
             const monthYearLabel = document.createElement('div');
             monthYearLabel.className = 'calendar__month';
             monthYearLabel.innerText = `${month.name} ${currentYear}`;
@@ -203,7 +244,7 @@
                 calendarElement.appendChild(dayHeader);
             });
 
-            const firstDay = new Date(currentYear, currentMonthIndex, 1).getDay();
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = month.days;
 
             const startDay = (firstDay === 0 ? 6 : firstDay - 1);
@@ -231,14 +272,14 @@
 
                 if (day) {
                     dayElement.innerText = day;
-                    const date = new Date(currentYear, currentMonthIndex, day);
+                    const date = new Date(currentYear, currentMonth, day);
                     const weekNumber = getWeekNumber(date);
                     const officeDays = getOfficeDays(weekNumber, currentYear);
                     const dayOfWeek = date.toLocaleDateString('es-ES', { weekday: 'long' });
                     if (officeDays.includes(dayOfWeek)) {
                         dayElement.classList.add('calendar__day--office');
                     }
-                    if (day === todayDay && currentMonthIndex === todayMonth && currentYear === todayYear) {
+                    if (day === todayDay && currentMonth === todayMonth && currentYear === todayYear) {
                         dayElement.classList.add('calendar__today');
                     }
                 }
@@ -261,31 +302,78 @@
         function renderNextOfficeDay() {
             const nextOfficeDayElement = document.querySelector('.calendar__next-office-day');
             const nextOfficeDay = getNextOfficeDay();
-            nextOfficeDayElement.innerHTML = `Próximo día de oficina: <strong>${nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: '2-digit' }).replace(',', '')}</strong>`;
+            nextOfficeDayElement.innerHTML = `Día siguiente: <strong>${nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: '2-digit' }).replace(',', '')}</strong>`;
         }
 
-        document.getElementById('prev-month').addEventListener('click', () => {
-            if (currentMonthIndex > 0) {
-                currentMonthIndex--;
-            } else {
-                currentMonthIndex = 11;
-                currentYear--;
-            }
-            renderCalendar();
-        });
+        function renderTotalOfficeDays() {
+            const totalOfficeDaysElement = document.querySelector('.calendar__total-office-days');
+            const daysFromChange = 0;
+            totalOfficeDaysElement.innerHTML = `Días desde el cambio: <strong>${daysFromChange}</strong>`;
+        }
 
-        document.getElementById('next-month').addEventListener('click', () => {
-            if (currentMonthIndex < 11) {
-                currentMonthIndex++;
-            } else {
-                currentMonthIndex = 0;
-                currentYear++;
+        function addNavigationEventListeners () {
+            const prevYearElement = document.querySelector('.calendar__button--prev-year');
+            const prevMonthElement = document.querySelector('.calendar__button--prev-month');
+            const nextMonthElement = document.querySelector('.calendar__button--next-month');
+            const nextYearElement = document.querySelector('.calendar__button--next-year');
+
+            function prevYear() {
+                currentYear--;
+                renderCalendar();
             }
-            renderCalendar();
-        });
+
+            function prevMonth() {
+                if (currentMonth > 0) {
+                    currentMonth--;
+                } else {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar();
+            }
+
+            function nextMonth() {
+                if (currentMonth < 11) {
+                    currentMonth++;
+                } else {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar();
+            }
+            
+            function nextYear() {
+                currentYear++;
+                renderCalendar();
+            }
+
+            function navigateListener(navigation, time) {
+                const navigateYear = navigation === "prev" ? prevYear : nextYear;
+                const navigateMonth = navigation === "prev" ? prevMonth : nextMonth;
+                const navigate = time === "year" ? navigateYear : navigateMonth;
+                return ["click", navigate];
+            }
+
+            prevYearElement.addEventListener(...navigateListener("prev", "year"));
+            nextMonthElement.addEventListener(...navigateListener("next", "month"));
+            prevMonthElement.addEventListener(...navigateListener("prev", "month"));
+            nextYearElement.addEventListener(...navigateListener("next", "year"));
+
+            const removeZoomOnDblClickListener = ["dblclick", function removeZoomOnDblClick (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }];
+
+            prevYearElement.addEventListener(...removeZoomOnDblClickListener);
+            prevMonthElement.addEventListener(...removeZoomOnDblClickListener);
+            nextMonthElement.addEventListener(...removeZoomOnDblClickListener);
+            nextYearElement.addEventListener(...removeZoomOnDblClickListener);
+        }
 
         renderCalendar();
         renderNextOfficeDay();
+        renderTotalOfficeDays();
+        addNavigationEventListeners();
     </script>
 </body>
 
