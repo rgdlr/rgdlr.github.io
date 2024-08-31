@@ -208,6 +208,7 @@
             aspect-ratio: 1;
             background-color: #5552;
             border: none;
+            color: inherit;
             display: flex;
             justify-content: center;
             min-height: 2.5rem;
@@ -216,6 +217,12 @@
         .calendar__button:focus,
         .calendar__button:hover {
             background-color: #5551;
+        }
+
+        .calendar__button--today {
+            flex-grow: 1;
+            font-weight: bold;
+            height: 0;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -338,6 +345,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
                 </button>
             </div>
+            <button class="calendar__button calendar__button--today">Hoy</button>
             <div class="calendar__buttons">
                 <button class="calendar__button calendar__button--next-month">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
@@ -473,6 +481,7 @@
                     }
                     if (day === todayDay && currentMonth === todayMonth && currentYear === todayYear) {
                         dayElement.classList.add('calendar__day--today');
+                        dayElement.setAttribute('tabindex', '0');
                     }
                 }
                 calendarElement.appendChild(dayElement);
@@ -588,6 +597,18 @@
             }
         }
 
+        function goToCurrentMonth() {
+            const month = new Date().getMonth();
+            const year = new Date().getFullYear();
+            if (month !== currentMonth || year !== currentYear) {
+                currentMonth = month;
+                currentYear = year;
+                renderCalendar();
+            } else {
+                document.querySelector('.calendar__day--today').focus();
+            }
+        }
+
         function prevYear() {
             animateCalendar("prev", () => {
                 currentYear--;
@@ -631,6 +652,7 @@
             const prevMonthElement = document.querySelector('.calendar__button--prev-month');
             const nextMonthElement = document.querySelector('.calendar__button--next-month');
             const nextYearElement = document.querySelector('.calendar__button--next-year');
+            const todayElement = document.querySelector('.calendar__button--today');
 
             function navigateListener(navigation, time) {
                 const navigateYear = navigation === "prev" ? prevYear : nextYear;
@@ -643,6 +665,7 @@
             nextMonthElement.addEventListener(...navigateListener("next", "month"));
             prevMonthElement.addEventListener(...navigateListener("prev", "month"));
             nextYearElement.addEventListener(...navigateListener("next", "year"));
+            todayElement.addEventListener("click", goToCurrentMonth);
 
             const removeZoomOnDblClickListener = ["dblclick", function removeZoomOnDblClick (event) {
                 event.preventDefault();
