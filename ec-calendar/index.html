@@ -492,7 +492,6 @@
                 validTo: `${currentMonth === 11 ? currentYear + 1: currentYear}-${formatNumberDigits(currentMonth === 11 ? 1 : currentMonth + 2)}-01`,
             }).then((data) => {
                 data.forEach(({ startDate, endDate, name }) => {
-                    console.log({data});
                     const DATE_DAY = 2;
                     const startDay = startDate.split("-")[DATE_DAY];
                     const endDay = endDate.split("-")[DATE_DAY];
@@ -600,10 +599,13 @@
         function goToCurrentMonth() {
             const month = new Date().getMonth();
             const year = new Date().getFullYear();
+            const isPrev = new Date(year, month) < new Date(currentYear, currentMonth);
             if (month !== currentMonth || year !== currentYear) {
-                currentMonth = month;
-                currentYear = year;
-                renderCalendar();
+                animateCalendar(isPrev ? "prev" : "next", () => {
+                    currentMonth = month;
+                    currentYear = year;
+                    renderCalendar();
+                });
             } else {
                 document.querySelector('.calendar__day--today').focus();
             }
