@@ -123,6 +123,11 @@
             text-align: center;
         }
 
+        .calendar__day:nth-child(7n),
+        .calendar__day:nth-child(7n + 1) {
+            opacity: 0.25;
+        }
+
         .calendar__day--office {
             background-color: #fa7f7f;
             font-weight: bold;
@@ -388,19 +393,53 @@
         function renderNextOfficeDay() {
             const nextOfficeDayElement = document.querySelector('.calendar__next-office-day-date');
             const nextOfficeDay = getNextOfficeDay();
-            nextOfficeDayElement.innerText = nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: '2-digit' }).replace(',', '');
+            nextOfficeDayElement.innerText = nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit' }).replace(',', '');
         }
 
         function renderTotalOfficeDays() {
             const totalOfficeDaysElement = document.querySelector('.calendar__total-office-days-number');
-            const totalDaysFromChange = 0;
+            const today = new Date();
+            console.log(today);
+            const weekNumberToday = getWeekNumber(today);
+            const currentYear = today.getFullYear();
+            let totalDaysFromChange = 0;
+            let year = 2024;
+            let week = 36;
+            while (year < currentYear || (year === currentYear && week <= weekNumberToday)) {
+                const officeDays = getOfficeDays(week, year);
+                totalDaysFromChange += officeDays.length;
+                week++;
+                if (week > 52) {
+                    week = 1;
+                    year++;
+                }
+            }
             totalOfficeDaysElement.innerText = totalDaysFromChange;
         }
 
         function renderExtraOfficeDays() {
-            const totalOfficeDaysElement = document.querySelector('.calendar__extra-office-days-number');
-            const extraDaysFromChange = 0;
-            totalOfficeDaysElement.innerText = extraDaysFromChange;
+            const extraOfficeDaysElement = document.querySelector('.calendar__extra-office-days-number');
+            const today = new Date();
+            console.log(today);
+            const weekNumberToday = getWeekNumber(today);
+            const currentYear = today.getFullYear();
+            let extraDaysFromChange = 0;
+            let year = 2024;
+            let week = 36;
+            const originalPattern = [1, 1, 2];
+            let patternIndex = 0;
+            while (year < currentYear || (year === currentYear && week <= weekNumberToday)) {
+                const officeDays = getOfficeDays(week, year);
+                const originalOfficeDays = originalPattern[patternIndex];
+                extraDaysFromChange += (officeDays.length - originalOfficeDays);
+                week++;
+                if (week > 52) {
+                    week = 1;
+                    year++;
+                }
+                patternIndex = (patternIndex + 1) % originalPattern.length;
+            }
+            extraOfficeDaysElement.innerText = extraDaysFromChange;
         }
 
         function animateCalendar(navigation, callback) {
