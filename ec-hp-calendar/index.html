@@ -311,41 +311,42 @@
             totalOfficeDaysElement.innerHTML = `Días desde el cambio: <strong>${daysFromChange}</strong>`;
         }
 
-        function addNavigationEventListeners () {
+
+        function prevYear() {
+            currentYear--;
+            renderCalendar();
+        }
+
+        function prevMonth() {
+            if (currentMonth > 0) {
+                currentMonth--;
+            } else {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            if (currentMonth < 11) {
+                currentMonth++;
+            } else {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        }
+        
+        function nextYear() {
+            currentYear++;
+            renderCalendar();
+        }
+
+        function addButtonNavigationEventListeners () {
             const prevYearElement = document.querySelector('.calendar__button--prev-year');
             const prevMonthElement = document.querySelector('.calendar__button--prev-month');
             const nextMonthElement = document.querySelector('.calendar__button--next-month');
             const nextYearElement = document.querySelector('.calendar__button--next-year');
-
-            function prevYear() {
-                currentYear--;
-                renderCalendar();
-            }
-
-            function prevMonth() {
-                if (currentMonth > 0) {
-                    currentMonth--;
-                } else {
-                    currentMonth = 11;
-                    currentYear--;
-                }
-                renderCalendar();
-            }
-
-            function nextMonth() {
-                if (currentMonth < 11) {
-                    currentMonth++;
-                } else {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-                renderCalendar();
-            }
-            
-            function nextYear() {
-                currentYear++;
-                renderCalendar();
-            }
 
             function navigateListener(navigation, time) {
                 const navigateYear = navigation === "prev" ? prevYear : nextYear;
@@ -370,10 +371,62 @@
             nextYearElement.addEventListener(...removeZoomOnDblClickListener);
         }
 
+        function addSwipeNavigationEventListeners() {
+            const calendarElement = document.querySelector('.calendar');
+
+            let startX = 0;
+            let endX = 0;
+            let isMouseDown = false;
+
+            function handleGesture() {
+                if (endX < startX - 50) {
+                    nextMonth();
+                }
+
+                if (endX > startX + 50) {
+                    prevMonth();
+                }
+            }
+
+            calendarElement.addEventListener('touchstart', (event) => {
+                startX = event.changedTouches[0].screenX;
+            });
+
+            calendarElement.addEventListener('touchend', (event) => {
+                endX = event.changedTouches[0].screenX;
+                handleGesture();
+            });
+
+            calendarElement.addEventListener('mousedown', (event) => {
+                startX = event.screenX;
+                isMouseDown = true;
+            });
+
+            calendarElement.addEventListener('mousemove', (event) => {
+                if (isMouseDown) {
+                    endX = event.screenX;
+                }
+            });
+
+            calendarElement.addEventListener('mouseup', (event) => {
+                if (isMouseDown) {
+                    endX = event.screenX;
+                    handleGesture();
+                    isMouseDown = false;
+                }
+            });
+
+            calendarElement.addEventListener('mouseleave', () => {
+                isMouseDown = false;
+            });
+        }
+
         renderCalendar();
         renderNextOfficeDay();
         renderTotalOfficeDays();
-        addNavigationEventListeners();
+
+        addButtonNavigationEventListeners();
+        addSwipeNavigationEventListeners();
     </script>
 </body>
 
