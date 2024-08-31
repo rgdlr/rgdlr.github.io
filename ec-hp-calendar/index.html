@@ -15,6 +15,7 @@
             color: var(--color);
             background-color: var(--background-color);
             font-family: system-ui;
+            overflow: hidden;
         }
 
         *, *::after, *::before {
@@ -35,6 +36,7 @@
             margin-inline: auto;
             max-width: 50rem;
             min-width: fit-content;
+            overflow-x: hidden;
             padding-inline: 0.5rem;
         }
 
@@ -66,20 +68,31 @@
 
         .calendar__title,
         .calendar__next-office-day,
-        .calendar__total-office-days {
+        .calendar__total-office-days,
+        .calendar__extra-office-days {
             background-color: #5552;
-            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
         }
 
         .calendar__title {
             border-bottom: 0.1rem solid #5552;
             font-weight: bold;
-            text-align: center;
+            justify-content: center;
             text-transform: uppercase;
         }
 
-        .calendar__total-office-days {
+        .calendar__extra-office-days {
             margin-bottom: 0.5rem;
+        }
+
+        .calendar__dot-line {
+            border-bottom: 0.1rem dotted var(--color);
+            flex-grow: 1;
+            margin-bottom: 0.25rem;
+            opacity: 0.25;
         }
 
         .calendar__months {
@@ -111,14 +124,14 @@
         }
 
         .calendar__day--office {
-            background-color: #d3646499;
+            background-color: #fa7f7f;
             font-weight: bold;
             position: relative;
         }
 
         .calendar__day--office::after {
             align-items: center;
-            background-color: #faed7f;
+            background-color: inherit;
             content: "Oficina";
             display: flex;
             font-size: 0.7rem;
@@ -145,7 +158,67 @@
                 --background-color: #111;
             }
             .calendar__day--office {
-                background-color: #91181899;
+                background-color: #911818;
+            }
+        }
+
+        .animate-prev-in {
+            animation: animatePrevIn 125ms forwards;
+        }
+
+        @keyframes animatePrevIn {
+            from {
+                transform: translateX(-25%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-prev-out {
+            animation: animatePrevOut 125ms forwards;
+        }
+
+        @keyframes animatePrevOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(25%);
+                opacity: 0;
+            }
+        }
+
+        .animate-next-in {
+            animation: animateNextIn 125ms forwards;
+        }
+
+        @keyframes animateNextIn {
+            from {
+                transform: translateX(25%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-next-out {
+            animation: animateNextOut 125ms forwards;
+        }
+
+        @keyframes animateNextOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-25%);
+                opacity: 0;
             }
         }
     </style>
@@ -154,8 +227,21 @@
 <body>
     <div class="calendar">
         <div class="calendar__title">HaztePull</div>
-        <div class="calendar__next-office-day"></div>
-        <div class="calendar__total-office-days"></div>
+        <div class="calendar__next-office-day">
+            <span>Día siguiente</span>
+            <span class="calendar__dot-line"></span>
+            <strong class="calendar__next-office-day-date"></strong>
+        </div>
+        <div class="calendar__total-office-days">
+            <span>Días totales desde el cambio</span>
+            <span class="calendar__dot-line"></span>
+            <strong class="calendar__total-office-days-number"></strong>
+        </div>
+        <div class="calendar__extra-office-days">
+            <span>Días extra desde el cambio</span>
+            <span class="calendar__dot-line"></span>
+            <strong class="calendar__extra-office-days-number"></strong>
+        </div>
         <div class="calendar__months"></div>
         <nav class="calendar__nav">
             <div class="calendar__buttons">
@@ -300,46 +386,89 @@
         }
 
         function renderNextOfficeDay() {
-            const nextOfficeDayElement = document.querySelector('.calendar__next-office-day');
+            const nextOfficeDayElement = document.querySelector('.calendar__next-office-day-date');
             const nextOfficeDay = getNextOfficeDay();
-            nextOfficeDayElement.innerHTML = `Día siguiente: <strong>${nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: '2-digit' }).replace(',', '')}</strong>`;
+            nextOfficeDayElement.innerText = nextOfficeDay.toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: '2-digit' }).replace(',', '');
         }
 
         function renderTotalOfficeDays() {
-            const totalOfficeDaysElement = document.querySelector('.calendar__total-office-days');
-            const daysFromChange = 0;
-            totalOfficeDaysElement.innerHTML = `Días desde el cambio: <strong>${daysFromChange}</strong>`;
+            const totalOfficeDaysElement = document.querySelector('.calendar__total-office-days-number');
+            const totalDaysFromChange = 0;
+            totalOfficeDaysElement.innerText = totalDaysFromChange;
         }
 
+        function renderExtraOfficeDays() {
+            const totalOfficeDaysElement = document.querySelector('.calendar__extra-office-days-number');
+            const extraDaysFromChange = 0;
+            totalOfficeDaysElement.innerText = extraDaysFromChange;
+        }
+
+        function animateCalendar(navigation, callback) {
+            const calendarElement = document.querySelector('.calendar__months');
+            if (navigation === "prev") {
+                calendarElement.classList.add('animate-prev-out');
+                calendarElement.addEventListener('animationend', function handleAnimationEnd() {
+                    calendarElement.classList.remove('animate-prev-out');
+                    callback();
+                    calendarElement.classList.add('animate-prev-in');
+                    calendarElement.addEventListener('animationend', function handleAnimateInEnd() {
+                        calendarElement.classList.remove('animate-prev-in');
+                        calendarElement.removeEventListener('animationend', handleAnimateInEnd);
+                    });
+                    calendarElement.removeEventListener('animationend', handleAnimationEnd);
+                });
+            }
+            if (navigation === "next") {
+                calendarElement.classList.add('animate-next-out');
+                calendarElement.addEventListener('animationend', function handleAnimationEnd() {
+                    calendarElement.classList.remove('animate-next-out');
+                    callback();
+                    calendarElement.classList.add('animate-next-in');
+                    calendarElement.addEventListener('animationend', function handleAnimateInEnd() {
+                        calendarElement.classList.remove('animate-next-in');
+                        calendarElement.removeEventListener('animationend', handleAnimateInEnd);
+                    });
+                    calendarElement.removeEventListener('animationend', handleAnimationEnd);
+                });
+            }
+        }
 
         function prevYear() {
-            currentYear--;
-            renderCalendar();
+            animateCalendar("prev", () => {
+                currentYear--;
+                renderCalendar();
+            });
         }
 
         function prevMonth() {
-            if (currentMonth > 0) {
-                currentMonth--;
-            } else {
-                currentMonth = 11;
-                currentYear--;
-            }
-            renderCalendar();
+            animateCalendar("prev", () => {
+                if (currentMonth > 0) {
+                    currentMonth--;
+                } else {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar();
+            });
         }
 
         function nextMonth() {
-            if (currentMonth < 11) {
-                currentMonth++;
-            } else {
-                currentMonth = 0;
-                currentYear++;
-            }
-            renderCalendar();
+            animateCalendar("next", () => {
+                if (currentMonth < 11) {
+                    currentMonth++;
+                } else {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar();
+            });
         }
-        
+
         function nextYear() {
-            currentYear++;
-            renderCalendar();
+            animateCalendar("next", () => {
+                currentYear++;
+                renderCalendar();
+            });
         }
 
         function addButtonNavigationEventListeners () {
@@ -424,6 +553,7 @@
         renderCalendar();
         renderNextOfficeDay();
         renderTotalOfficeDays();
+        renderExtraOfficeDays();
 
         addButtonNavigationEventListeners();
         addSwipeNavigationEventListeners();
