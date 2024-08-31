@@ -40,48 +40,22 @@
             padding-inline: 0.5rem;
         }
 
-        .calendar__nav {
-            align-items: center;
-            display: flex;
-            gap: 0.5rem;
-            justify-content: space-between;
-        }
-
-        .calendar__buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .calendar__button {
-            align-items: center;
-            aspect-ratio: 1;
-            background-color: #5552;
-            border: none;
-            display: flex;
-            justify-content: center;
-            min-height: 2.5rem;
-        }
-
-        .calendar__button:focus,
-        .calendar__button:hover {
-            background-color: #5551;
-        }
-
         .calendar__title,
         .calendar__next-office-day,
         .calendar__total-office-days,
-        .calendar__extra-office-days {
+        .calendar__extra-office-days,
+        .calendar__legend {
             background-color: #5552;
             display: flex;
             gap: 0.5rem;
             justify-content: space-between;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.7rem;
         }
 
         .calendar__title {
             font-weight: bold;
             justify-content: center;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
         }
 
@@ -122,28 +96,41 @@
             min-height: 36px;
             padding: 0.5rem;
             text-align: center;
+            background-color: #3335;
         }
 
         .calendar__day--office,
-        .calendar__day--non-working {
+        .calendar__day--non-working,
+        .calendar__day--today {
             position: relative;
         }
 
-        .calendar__day--office {
-            background-color: #ee5959cc;
+        .calendar__day--office,
+        .calendar__legend-color--office {
+            background-color: #ee5959;
         }
 
-        .calendar__day--non-working {
-            background-color: #46a728cc;
+        .calendar__day--non-working,
+        .calendar__legend-color--non-working {
+            background-color: #46a728;
+        }
+
+        .calendar__day--today,
+        .calendar__legend-color--today {
+            background-color: #4646da;
         }
 
         .calendar__day--office::after,
-        .calendar__day--non-working::after {
+        .calendar__day--non-working::after,
+        .calendar__day--today::after {
             align-items: center;
             background-color: inherit;
             display: flex;
+            font-size: 0.7rem;
+            inset: 0;
             justify-content: center;
             opacity: 0;
+            padding: 0.5rem;
             position: absolute;
             transition: opacity 500ms ease;
             visibility: hidden;
@@ -151,16 +138,16 @@
 
         .calendar__day--office::after {
             content: "Oficina";
-            font-size: 0.7rem;
-            inset: 0;
         }
 
         .calendar__day--non-working::after {
             content: attr(title);
-            font-size: 0.7rem;
             inset: 0 -3.335rem;
-            padding: 0.5rem;
             z-index: 1;
+        }
+
+        .calendar__day--today::after {
+            content: "Hoy";
         }
 
         .calendar__day--non-working.calendar__day--lun::after {
@@ -174,20 +161,60 @@
         .calendar__day--office:focus::after,
         .calendar__day--office:hover::after,
         .calendar__day--non-working:focus::after,
-        .calendar__day--non-working:hover::after {
+        .calendar__day--non-working:hover::after,
+        .calendar__day--today:focus::after,
+        .calendar__day--today:hover::after {
             opacity: 1;
             visibility: visible;
         }
 
-        .calendar__day--sáb:not(.calendar__day--non-working),
-        .calendar__day--dom:not(.calendar__day--non-working) {
+        .calendar__day--sáb:not(.calendar__day--non-working):not(.calendar__day--today),
+        .calendar__day--dom:not(.calendar__day--non-working):not(.calendar__day--today) {
             color: #46a72880;
         }
 
-        .calendar__today {
-            outline: 0.1rem dashed #4646da;
-            color: #4646da;
-            font-weight: bold;
+        .calendar__legend {
+            font-size: 0.75rem;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar__legend-item {
+            align-items: center;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar__legend-color {
+            height: 0.75rem;
+            width: 0.75rem;
+        }
+
+        .calendar__nav {
+            align-items: center;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: space-between;
+        }
+
+        .calendar__buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar__button {
+            align-items: center;
+            aspect-ratio: 1;
+            background-color: #5552;
+            border: none;
+            display: flex;
+            justify-content: center;
+            min-height: 2.5rem;
+        }
+
+        .calendar__button:focus,
+        .calendar__button:hover {
+            background-color: #5551;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -195,11 +222,17 @@
                 --color: #eee;
                 --background-color: #111;
             }
-            .calendar__day--office {
-                background-color: #da4f4fcc;
+            .calendar__day--office,
+            .calendar__legend-color--office {
+                background-color: #da4f4f;
             }
-            .calendar__day--non-working {
-                background-color: #359119cc;
+            .calendar__day--non-working,
+            .calendar__legend-color--non-working {
+                background-color: #359119;
+            }
+            .calendar__day--today,
+            .calendar__legend-color--today {
+                background-color: #4646da;
             }
         }
 
@@ -284,6 +317,17 @@
             <strong class="calendar__extra-office-days-number"></strong>
         </div>
         <div class="calendar__months"></div>
+        <ul class="calendar__legend">
+            <li class="calendar__legend-item">
+                <div class="calendar__legend-color calendar__legend-color--today"></div> Día de hoy
+            </li>
+            <li class="calendar__legend-item">
+                <div class="calendar__legend-color calendar__legend-color--office"></div> Día de oficina
+            </li>
+            <li class="calendar__legend-item">
+                <div class="calendar__legend-color calendar__legend-color--non-working"></div> Día no laboral
+            </li>
+        </ul>
         <nav class="calendar__nav">
             <div class="calendar__buttons">
                 <button class="calendar__button calendar__button--prev-year">
@@ -427,7 +471,7 @@
                         dayElement.setAttribute('tabindex', '0');
                     }
                     if (day === todayDay && currentMonth === todayMonth && currentYear === todayYear) {
-                        dayElement.classList.add('calendar__today');
+                        dayElement.classList.add('calendar__day--today');
                     }
                 }
                 calendarElement.appendChild(dayElement);
