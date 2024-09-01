@@ -249,62 +249,62 @@
         }
 
         .animate-prev-in {
-            animation: animatePrevIn 125ms forwards;
+            animation: animatePrevIn 225ms forwards;
         }
 
         @keyframes animatePrevIn {
             from {
-                transform: translateX(-25%);
-                opacity: 0;
+                opacity: 0.25;
+                translate: -50%;
             }
             to {
-                transform: translateX(0);
                 opacity: 1;
+                translate: 0;
             }
         }
 
         .animate-prev-out {
-            animation: animatePrevOut 125ms forwards;
+            animation: animatePrevOut 25ms forwards;
         }
 
         @keyframes animatePrevOut {
             from {
-                transform: translateX(0);
                 opacity: 1;
+                translate: 0;
             }
             to {
-                transform: translateX(25%);
-                opacity: 0;
+                opacity: 0.25;
+                translate: 50%;
             }
         }
 
         .animate-next-in {
-            animation: animateNextIn 125ms forwards;
+            animation: animateNextIn 225ms forwards;
         }
 
         @keyframes animateNextIn {
             from {
-                transform: translateX(25%);
-                opacity: 0;
+                opacity: 0.25;
+                translate: 50%;
             }
             to {
-                transform: translateX(0);
                 opacity: 1;
+                translate: 0;
             }
         }
 
         .animate-next-out {
-            animation: animateNextOut 125ms forwards;
+            animation: animateNextOut 25ms forwards;
         }
 
         @keyframes animateNextOut {
             from {
-                transform: translateX(0);
                 opacity: 1;
+                translate: 0;
             }
             to {
-                transform: translateX(-25%);
-                opacity: 0;
+                opacity: 0.25;
+                translate: -50%;
             }
         }
     </style>
