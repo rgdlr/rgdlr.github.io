@@ -74,6 +74,7 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             margin-bottom: 0.5rem;
+            user-select: none;
             width: 100%;
         }
 
@@ -96,7 +97,6 @@
             min-height: 36px;
             padding: 0.5rem;
             text-align: center;
-            background-color: #3335;
         }
 
         .calendar__day--office,
@@ -132,7 +132,9 @@
             opacity: 0;
             padding: 0.5rem;
             position: absolute;
-            transition: opacity 500ms ease;
+            scale: 0 1;
+            transition: opacity 250ms ease, translate 250ms ease, scale 250ms ease;
+            translate: 0;
             visibility: hidden;
         }
 
@@ -142,20 +144,12 @@
 
         .calendar__day--non-working::after {
             content: attr(title);
-            inset: 0 -3.335rem;
+            inset: 0 -3.33rem;
             z-index: 1;
         }
 
         .calendar__day--today::after {
             content: "Hoy";
-        }
-
-        .calendar__day--non-working.calendar__day--lun::after {
-            transform: translateX(33.335%);
-        }
-
-        .calendar__day--non-working.calendar__day--dom::after {
-            transform: translateX(-33.335%);
         }
 
         .calendar__day--office:focus::after,
@@ -165,7 +159,18 @@
         .calendar__day--today:focus::after,
         .calendar__day--today:hover::after {
             opacity: 1;
+            scale: 1 1;
             visibility: visible;
+        }
+
+        .calendar__day--non-working.calendar__day--lun:focus::after,
+        .calendar__day--non-working.calendar__day--lun:hover::after {
+            translate: 33.33%;
+        }
+
+        .calendar__day--non-working.calendar__day--dom:focus::after,
+        .calendar__day--non-working.calendar__day--dom:hover::after {
+            translate: -33.33%;
         }
 
         .calendar__day--sáb:not(.calendar__day--non-working):not(.calendar__day--today),
@@ -174,7 +179,6 @@
         }
 
         .calendar__legend {
-            font-size: 0.75rem;
             gap: 1rem;
             justify-content: right;
             margin-bottom: 0.5rem;
@@ -327,13 +331,13 @@
         <div class="calendar__months"></div>
         <ul class="calendar__legend">
             <li class="calendar__legend-item">
-                <div class="calendar__legend-color calendar__legend-color--today"></div> Día de hoy
+                <div class="calendar__legend-color calendar__legend-color--today"></div> Hoy
             </li>
             <li class="calendar__legend-item">
-                <div class="calendar__legend-color calendar__legend-color--office"></div> Día de oficina
+                <div class="calendar__legend-color calendar__legend-color--office"></div> Oficina
             </li>
             <li class="calendar__legend-item">
-                <div class="calendar__legend-color calendar__legend-color--non-working"></div> Día no laboral
+                <div class="calendar__legend-color calendar__legend-color--non-working"></div> No laboral
             </li>
         </ul>
         <nav class="calendar__nav">
