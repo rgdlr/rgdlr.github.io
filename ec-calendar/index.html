@@ -552,43 +552,44 @@
         function renderTotalOfficeDays() {
             const totalOfficeDaysElement = document.querySelector('.calendar__total-office-days-number');
             const today = new Date();
-            const weekNumberToday = getWeekNumber(today);
-            const currentYear = today.getFullYear();
-            let totalDaysFromChange = 0;
-            let year = 2024;
-            let week = 36;
-            while (year < currentYear || (year === currentYear && week <= weekNumberToday)) {
-                const officeDays = getOfficeDays(week, year);
-                totalDaysFromChange += officeDays.length;
-                week++;
-                if (week > 52) {
-                    week = 1;
-                    year++;
+            let totalOfficeDays = 0;
+            let currentDate = new Date(2024, 8, 1);
+            while (currentDate <= today) {
+                const weekNumber = getWeekNumber(currentDate);
+                const year = currentDate.getFullYear();
+                const officeDays = getOfficeDays(weekNumber, year);
+                const dayOfWeek = currentDate.toLocaleDateString('es-ES', { weekday: 'long' });
+                if (officeDays.includes(dayOfWeek)) {
+                    totalOfficeDays++;
                 }
+                currentDate.setDate(currentDate.getDate() + 1);
             }
-            totalOfficeDaysElement.innerText = totalDaysFromChange;
+            totalOfficeDaysElement.innerText = totalOfficeDays;
         }
 
         function renderExtraOfficeDays() {
             const extraOfficeDaysElement = document.querySelector('.calendar__extra-office-days-number');
             const today = new Date();
-            const weekNumberToday = getWeekNumber(today);
             const currentYear = today.getFullYear();
+            const currentWeekNumber = getWeekNumber(today);
             let extraDaysFromChange = 0;
             let year = 2024;
             let week = 36;
+            let dayOfYear = new Date(2024, 8, 1);
             const originalPattern = [1, 1, 2];
             let patternIndex = 0;
-            while (year < currentYear || (year === currentYear && week <= weekNumberToday)) {
-                const officeDays = getOfficeDays(week, year);
+            while (dayOfYear <= today) {
+                const weekNumber = getWeekNumber(dayOfYear);
+                const officeDays = getOfficeDays(weekNumber, dayOfYear.getFullYear());
                 const originalOfficeDays = originalPattern[patternIndex];
-                extraDaysFromChange += (officeDays.length - originalOfficeDays);
-                week++;
-                if (week > 52) {
-                    week = 1;
-                    year++;
+                const dayOfWeek = dayOfYear.toLocaleDateString('es-ES', { weekday: 'long' });
+                if (officeDays.includes(dayOfWeek) && !(['jueves', 'viernes'].slice(0, originalOfficeDays).includes(dayOfWeek))) {
+                    extraDaysFromChange++;
                 }
-                patternIndex = (patternIndex + 1) % originalPattern.length;
+                dayOfYear.setDate(dayOfYear.getDate() + 1);
+                if (getWeekNumber(dayOfYear) !== weekNumber) {
+                    patternIndex = (patternIndex + 1) % originalPattern.length;
+                }
             }
             extraOfficeDaysElement.innerText = extraDaysFromChange;
         }
