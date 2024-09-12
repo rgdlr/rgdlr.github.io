@@ -40,7 +40,6 @@
             padding-inline: 0.5rem;
         }
 
-        .calendar__title,
         .calendar__next-office-day,
         .calendar__total-office-days,
         .calendar__extra-office-days,
@@ -57,6 +56,24 @@
             justify-content: center;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
+        }
+
+        .calendar__select {
+            all: unset;
+            background-color: #5552;
+            padding-block: 0.7rem;
+            text-align: center;
+            width: 100%;
+            transition: background-color 250ms ease;
+        }
+
+        .calendar__select:hover {
+            background-color: #5555;
+        }
+
+        .calendar__select > * {
+            all: unset;
+            background-color: #111;
         }
 
         .calendar__extra-office-days {
@@ -135,7 +152,6 @@
             scale: 0 1;
             transition: opacity 250ms ease, translate 250ms ease, scale 250ms ease;
             translate: 0;
-            visibility: hidden;
         }
 
         .calendar__day--office::after {
@@ -312,19 +328,26 @@
 
 <body>
     <div class="calendar">
-        <div class="calendar__title">HaztePull</div>
+        <div class="calendar__title">
+            <select name="" class="calendar__select">
+                <option value="hazte-pull" class="calendar__option">HaztePull</option>
+                <option value="oh-my-code" class="calendar__option">OhMyCode</option>
+                <option value="kaizen" class="calendar__option">Kaizen</option>
+                <option value="apps" class="calendar__option">Apps</option>
+            </select>
+        </div>
         <div class="calendar__next-office-day">
             <span>Día siguiente</span>
             <span class="calendar__dot-line"></span>
             <strong class="calendar__next-office-day-date"></strong>
         </div>
         <div class="calendar__total-office-days">
-            <span>Días totales desde el cambio</span>
+            <span>Días totales</span>
             <span class="calendar__dot-line"></span>
             <strong class="calendar__total-office-days-number"></strong>
         </div>
         <div class="calendar__extra-office-days">
-            <span>Días extra desde el cambio</span>
+            <span>Días extra</span>
             <span class="calendar__dot-line"></span>
             <strong class="calendar__extra-office-days-number"></strong>
         </div>
@@ -741,6 +764,11 @@
 
         addButtonNavigationEventListeners();
         addSwipeNavigationEventListeners();
+
+        const calendarSelect = document.querySelector(".calendar__select");
+        calendarSelect.addEventListener("change", (event) => {
+            event.target.value !== "hazte-pull" && alert("Lo siento, " + event.target.value + " no está disponible aún :(")
+        });
     </script>
 </body>
 
