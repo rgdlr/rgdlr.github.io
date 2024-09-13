@@ -137,6 +137,18 @@
             background-color: #4646da;
         }
 
+        .calendar__day--office.calendar__day--non-working {
+            background: linear-gradient(to right, #ee5959, #46a728);
+        }
+
+        .calendar__day--office.calendar__day--today {
+            background: linear-gradient(to right, #ee5959, #4646da);
+        }
+
+        .calendar__day--non-working.calendar__day--today {
+            background: linear-gradient(to right, #46a728, #4646da);
+        }
+
         .calendar__day--office::after,
         .calendar__day--non-working::after,
         .calendar__day--today::after {
@@ -159,6 +171,7 @@
         }
 
         .calendar__day--non-working::after {
+            background-color: #46a728;
             content: attr(title);
             inset: 0 -100%;
             z-index: 1;
@@ -331,9 +344,9 @@
         <div class="calendar__title">
             <select name="" class="calendar__select">
                 <option value="hazte-pull" class="calendar__option">HaztePull</option>
-                <option value="oh-my-code" class="calendar__option">OhMyCode</option>
                 <option value="kaizen" class="calendar__option">Kaizen</option>
-                <option value="apps" class="calendar__option">Apps</option>
+                <option disabled ="oh-my-code" class="calendar__option">OhMyCode</option>
+                <option disabled ="apps" class="calendar__option">Apps</option>
             </select>
         </div>
         <div class="calendar__next-office-day">
@@ -349,7 +362,7 @@
         <div class="calendar__extra-office-days">
             <span>Días extra</span>
             <span class="calendar__dot-line"></span>
-            <strong class="calendar__extra-office-days-number"></strong>
+            <strong class="calendar__extra-office-days-number">...</strong>
         </div>
         <div class="calendar__months"></div>
         <ul class="calendar__legend">
@@ -384,6 +397,12 @@
         </nav>
     </div>
     <script>
+        const teamPatterns = {
+            "hazte-pull": [[0,0,0,1,1,0,0], [0,0,0,1,0,0,0], [0,0,0,1,1,0,0]],
+            "kaizen": [[0,1,0,0,0,0,0], [0,1,0,0,1,0,0], [1,1,0,0,0,0,0]]
+        };
+
+        const calendarSelectTeam = document.querySelector(".calendar__select");
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
 
@@ -402,6 +421,14 @@
             { name: 'Diciembre', days: 31 }
         ];
 
+        function getTeamPattern() {
+            const teamSearchParams = new URLSearchParams(location.search).get("team");
+            if (teamSearchParams) {
+                calendarSelectTeam.value = teamSearchParams;
+            }
+            return teamPatterns[calendarSelectTeam.value];
+        }
+
         function formatNumberDigits(number, digits = 2) {
             return number.toString().padStart(digits, '0');
         }
@@ -413,12 +440,14 @@
             return weekNumber;
         }
 
-        function getOfficeDays(weekNumber, year) {
+        function getOfficeDays(weekNumber, year, pattern) {
             const weekBase = 36;
             const yearBase = 2024;
+
             if (year < yearBase || (year === yearBase && weekNumber < weekBase)) {
                 return [];
             }
+
             let weeksFromBase;
             if (year > yearBase || (year === yearBase && weekNumber >= weekBase)) {
                 weeksFromBase = (year - yearBase) * 52 + (weekNumber - weekBase);
@@ -428,13 +457,20 @@
                     weeksFromBase = (year - yearBase) * 52 + (weekNumber - weekBase);
                 }
             }
-            const patternWeek = ((weeksFromBase % 3) + 3) % 3;
-            if (patternWeek === 0 || patternWeek === 2) {
-                return ['jueves', 'viernes'];
-            } else if (patternWeek === 1) {
-                return ['jueves'];
-            }
-            return [];
+
+            const patternWeekIndex = ((weeksFromBase % pattern.length) + pattern.length) % pattern.length;
+            const weekPattern = pattern[patternWeekIndex];
+
+            const officeDays = [];
+            const daysOfWeek = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+            
+            weekPattern.forEach((isOfficeDay, index) => {
+                if (isOfficeDay === 1) {
+                    officeDays.push(daysOfWeek[index]);
+                }
+            });
+
+            return officeDays;
         }
 
         async function getNonWorkingDays({ countryIsoCode = "ES", languageIsoCode = "ES", validFrom = `${new Date().getFullYear()}-01-01`, validTo = `${new Date().getFullYear()}-12-31`, subdivisionCode = "ES-MD" }) {
@@ -489,6 +525,7 @@
             const todayDay = today.getDate();
             const todayMonth = today.getMonth();
             const todayYear = today.getFullYear();
+            const teamPattern = getTeamPattern();
 
             days.forEach((day, i) => {
                 const dayElement = document.createElement('div');
@@ -500,7 +537,7 @@
                     dayElement.classList.add(`calendar__day--${formatNumberDigits(day)}`);
                     const date = new Date(currentYear, currentMonth, day);
                     const weekNumber = getWeekNumber(date);
-                    const officeDays = getOfficeDays(weekNumber, currentYear);
+                    const officeDays = getOfficeDays(weekNumber, currentYear, teamPattern);
                     const dayOfWeek = date.toLocaleDateString('es-ES', { weekday: 'long' });
                     if (officeDays.includes(dayOfWeek)) {
                         dayElement.classList.add('calendar__day--office');
@@ -533,8 +570,9 @@
         }
 
         function getNextOfficeDay(date = new Date()) {
+            const teamPattern = getTeamPattern();
             const weekNumber = getWeekNumber(date);
-            const officeDays = getOfficeDays(weekNumber, date.getFullYear());
+            const officeDays = getOfficeDays(weekNumber, date.getFullYear(), teamPattern);
             const dayOfWeek = date.toLocaleDateString('es-ES', { weekday: 'long' });
             if (officeDays.includes(dayOfWeek)) {
                 return date;
@@ -550,6 +588,7 @@
         }
 
         function renderTotalOfficeDays() {
+            const teamPattern = getTeamPattern();
             const totalOfficeDaysElement = document.querySelector('.calendar__total-office-days-number');
             const today = new Date();
             let totalOfficeDays = 0;
@@ -557,7 +596,7 @@
             while (currentDate <= today) {
                 const weekNumber = getWeekNumber(currentDate);
                 const year = currentDate.getFullYear();
-                const officeDays = getOfficeDays(weekNumber, year);
+                const officeDays = getOfficeDays(weekNumber, year, teamPattern);
                 const dayOfWeek = currentDate.toLocaleDateString('es-ES', { weekday: 'long' });
                 if (officeDays.includes(dayOfWeek)) {
                     totalOfficeDays++;
@@ -565,33 +604,6 @@
                 currentDate.setDate(currentDate.getDate() + 1);
             }
             totalOfficeDaysElement.innerText = totalOfficeDays;
-        }
-
-        function renderExtraOfficeDays() {
-            const extraOfficeDaysElement = document.querySelector('.calendar__extra-office-days-number');
-            const today = new Date();
-            const currentYear = today.getFullYear();
-            const currentWeekNumber = getWeekNumber(today);
-            let extraDaysFromChange = 0;
-            let year = 2024;
-            let week = 36;
-            let dayOfYear = new Date(2024, 8, 1);
-            const originalPattern = [1, 1, 2];
-            let patternIndex = 0;
-            while (dayOfYear <= today) {
-                const weekNumber = getWeekNumber(dayOfYear);
-                const officeDays = getOfficeDays(weekNumber, dayOfYear.getFullYear());
-                const originalOfficeDays = originalPattern[patternIndex];
-                const dayOfWeek = dayOfYear.toLocaleDateString('es-ES', { weekday: 'long' });
-                if (officeDays.includes(dayOfWeek) && !(['jueves', 'viernes'].slice(0, originalOfficeDays).includes(dayOfWeek))) {
-                    extraDaysFromChange++;
-                }
-                dayOfYear.setDate(dayOfYear.getDate() + 1);
-                if (getWeekNumber(dayOfYear) !== weekNumber) {
-                    patternIndex = (patternIndex + 1) % originalPattern.length;
-                }
-            }
-            extraOfficeDaysElement.innerText = extraDaysFromChange;
         }
 
         function animateCalendar(navigation, callback) {
@@ -761,14 +773,17 @@
         renderCalendar();
         renderNextOfficeDay();
         renderTotalOfficeDays();
-        renderExtraOfficeDays();
 
         addButtonNavigationEventListeners();
         addSwipeNavigationEventListeners();
 
-        const calendarSelect = document.querySelector(".calendar__select");
-        calendarSelect.addEventListener("change", (event) => {
-            event.target.value !== "hazte-pull" && alert("Lo siento, " + event.target.value + " no está disponible aún :(")
+        calendarSelectTeam.addEventListener("change", (event) => {
+            const teamUrl = new URLSearchParams(location.search);
+            teamUrl.set("team", event.target.value);
+            history.replaceState(null, null, `?${teamUrl.toString()}`);
+            renderCalendar();
+            renderNextOfficeDay();
+            renderTotalOfficeDays();
         });
     </script>
 </body>
