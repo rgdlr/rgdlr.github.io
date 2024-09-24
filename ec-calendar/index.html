@@ -356,8 +356,7 @@
             <select name="" class="calendar__select">
                 <option value="hazte-pull" class="calendar__option">HaztePull</option>
                 <option value="kaizen" class="calendar__option">Kaizen</option>
-                <option disabled ="oh-my-code" class="calendar__option">OhMyCode</option>
-                <option disabled ="apps" class="calendar__option">Apps</option>
+                <option value="oh-my-code" class="calendar__option">OhMyCode</option>
             </select>
         </div>
         <div class="calendar__next-office-day">
@@ -410,7 +409,8 @@
     <script>
         const teamPatterns = {
             "hazte-pull": [[0,0,0,1,1,0,0], [0,0,0,1,0,0,0], [0,0,0,1,1,0,0]],
-            "kaizen": [[0,1,0,0,0,0,0], [0,1,0,0,1,0,0], [1,1,0,0,0,0,0]]
+            "kaizen": [[0,1,0,0,0,0,0], [0,1,0,0,1,0,0], [1,1,0,0,0,0,0]],
+            "oh-my-code": [[1,0,1,0,0,0,0], [1,0,1,0,0,0,0], [0,0,1,0,0,0,0]]
         };
 
         const calendarSelectTeam = document.querySelector(".calendar__select");
@@ -564,7 +564,7 @@
 
             getNonWorkingDays({
                 validFrom: `${currentYear}-${formatNumberDigits(currentMonth + 1)}-01`,
-                validTo: `${currentMonth === 11 ? currentYear + 1: currentYear}-${formatNumberDigits(currentMonth === 11 ? 1 : currentMonth + 2)}-01`,
+                validTo: `${currentYear}-${formatNumberDigits(currentMonth + 1)}-${months[currentMonth].days}`,
             }).then((data) => {
                 data.forEach(({ startDate, endDate, name }) => {
                     const DATE_DAY = 2;
