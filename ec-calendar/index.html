@@ -427,7 +427,7 @@
     </div>
     <script>
         const teamPatterns = {
-            "hazte-pull": [[0,0,0,1,1,0,0], [0,0,0,1,0,0,0], [0,0,0,1,1,0,0]],
+            "hazte-pull": [[0,0,0,1,1,0,0], [0,0,0,1,1,0,0], [0,0,0,1,0,0,0]],
             "kaizen": [[0,1,0,0,0,0,0], [0,1,0,0,1,0,0], [1,1,0,0,0,0,0]],
             "oh-my-code": [[1,0,1,0,0,0,0], [1,0,1,0,0,0,0], [0,0,1,0,0,0,0]]
         };
@@ -471,8 +471,8 @@
         }
 
         function getOfficeDays(weekNumber, year, pattern) {
-            const weekBase = 36;
-            const yearBase = 2024;
+            const weekBase = 1;
+            const yearBase = 2025;
 
             if (year < yearBase || (year === yearBase && weekNumber < weekBase)) {
                 return [];
