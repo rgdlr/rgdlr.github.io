@@ -90,7 +90,8 @@
             background-color: #eee;
         }
 
-        .calendar__extra-office-days {
+        /* .calendar__extra-office-days, */
+        .calendar__next-office-day {
             margin-bottom: 0.5rem;
         }
 
@@ -360,6 +361,10 @@
                 translate: -50%;
             }
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -383,12 +388,12 @@
             <span class="calendar__dot-line"></span>
             <strong class="calendar__next-office-day-date"></strong>
         </div>
-        <div class="calendar__total-office-days">
+        <div class="calendar__total-office-days hidden">
             <span>Días totales</span>
             <span class="calendar__dot-line"></span>
             <strong class="calendar__total-office-days-number"></strong>
         </div>
-        <div class="calendar__extra-office-days">
+        <div class="calendar__extra-office-days hidden">
             <span>Días extra</span>
             <span class="calendar__dot-line"></span>
             <strong class="calendar__extra-office-days-number">...</strong>
