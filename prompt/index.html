@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Especificaciones Full-Stack</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #030712;
+        color: #f3f4f6;
+        min-height: 100vh;
+      }
+      #appContainer {
+        width: 100%;
+        max-width: 40rem;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 0 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #progressBarContainer {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        background-color: #030712;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      .feature-card-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        margin-bottom: 0.75rem;
+        border-radius: 0.75rem;
+        border: 2px solid #1f2937;
+        background-color: #111827;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        position: relative;
+      }
+      .feature-card-label:hover {
+        border-color: #374151;
+        background-color: #1f2937;
+      }
+      .feature-card-label input[type="checkbox"] {
+        display: none;
+      }
+      .master-card-label {
+        border: 2px solid #374151 !important;
+        background-color: #1f2937 !important;
+        font-weight: 700 !important;
+      }
+      .master-card-label:hover {
+        background-color: #273041 !important;
+      }
+      .master-card-label.indeterminate-style {
+        border-color: #facc15 !important;
+        background-color: #2e2616 !important;
+      }
+      .master-card-label.indeterminate-style span {
+        color: #facc15 !important;
+      }
+      .master-card-label.indeterminate-style .check-icon {
+        color: #facc15 !important;
+        opacity: 1 !important;
+      }
+      .feature-card-label.checked-style {
+        border-color: #6366f1;
+        background-color: #1e254e;
+        transform: scale(1.01);
+      }
+      .feature-card-label.checked-style span {
+        color: #a5b4fc;
+        font-weight: 600;
+      }
+      .check-icon {
+        color: #a5b4fc;
+        font-size: 1.25rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .feature-card-label.checked-style .check-icon {
+        opacity: 1;
+      }
+      .dark-input {
+        background-color: #111827;
+        border: none;
+        box-shadow: 0 0 0 1px #374151;
+        color: #f3f4f6;
+        transition: box-shadow 0.2s;
+      }
+      .dark-input:focus {
+        box-shadow: 0 0 0 2px #6366f1;
+        background-color: #0d121c;
+      }
+      .dark-output {
+        background-color: #0d121c;
+        border-color: #374151;
+        color: #f3f4f6;
+        min-height: 200px;
+      }
+      #stepper-navigation {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background-color: #030712;
+        border-top: 1px solid #1f2937;
+        z-index: 10;
+      }
+      .primary-button {
+        background-color: #6366f1;
+        border: none;
+      }
+      .primary-button:hover {
+        background-color: #4f46e5;
+      }
+      .flat-button {
+        border: none;
+        background-color: #1f2937;
+      }
+      .flat-button:hover:not(:disabled) {
+        background-color: #374151;
+      }
+      #stepper-content {
+        transition: height 0.4s ease-in-out;
+        min-height: 400px;
+      }
+      .step-container {
+        transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        min-height: 250px;
+        width: 100%;
+      }
+      .step-out-down {
+        opacity: 0;
+        transform: translateY(20px);
+        position: absolute;
+      }
+      .step-out-up {
+        opacity: 0;
+        transform: translateY(-20px);
+        position: absolute;
+      }
+      .step-active {
+        opacity: 1;
+        transform: translateY(0);
+        position: relative;
+      }
+      .step-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+      .border-l-accent {
+        border-left-width: 3px;
+        padding-left: 1.5rem;
+      }
+      .tab-button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background-color: transparent;
+        color: #9ca3af;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .tab-button.active {
+        color: #a5b4fc;
+        border-bottom-color: #6366f1;
+        font-weight: 600;
+      }
+      .tab-button:hover {
+        color: #f3f4f6;
+      }
+      #progressBarInnerContainer {
+        height: 6px;
+        background-color: #1f2937;
+        border-radius: 2px;
+      }
+      #progressBar {
+        height: 100%;
+        background-color: #6366f1;
+        width: 0%;
+        transition: width 0.4s ease-in-out;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body
+    class="p-0 text-gray-100 flex min-h-screen flex-col transition duration-500 overflow-y-scroll"
+  >
+    <div id="progressBarContainer">
+      <div id="progressBarInnerContainer" class="w-full">
+        <div id="progressBar"></div>
+      </div>
+    </div>
+    <div id="appContainer">
+      <div id="stepper-content" class="relative">
+        <div id="step-0" class="step-container step-active">
+          <h2 class="step-title font-extrabold text-white mb-6">
+            ¿Qué quieres construir?
+          </h2>
+          <p class="text-gray-400 mb-8 text-lg">
+            Describe el objetivo principal, la función clave y el problema que resuelve tu
+            aplicación.
+          </p>
+          <div class="mb-8">
+            <label for="appIdea" class="block font-bold text-gray-200 mb-2 text-base"
+              >Describe tu idea:</label
+            >
+            <textarea
+              id="appIdea"
+              rows="6"
+              class="w-full p-4 dark-input rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+              placeholder="Ej: Una aplicación web para gestionar recetas de cocina, donde los usuarios pueden guardar, editar y compartir sus platos, permitiendo la búsqueda por ingredientes."
+            >
+Una aplicación web para gestionar recetas de cocina, donde los usuarios pueden guardar, editar y compartir sus platos</textarea
+            >
+          </div>
+        </div>
+        <div id="steps-features">
+          <div
+            id="step-1"
+            data-category="fundamentales"
+            class="step-container step-out-down hidden"
+          >
+            <h2 class="step-title font-extrabold text-white mb-6">
+              Características Fundamentales
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              Selecciona las bases esenciales de la aplicación (asumidas si no se selecciona
+              ninguna):
+            </p>
+            <div class="feature-list-group space-y-3">
+              <label class="feature-card-label master-card-label" data-category="fundamentales">
+                <span class="text-gray-300 text-base"
+                  >TODO en Fundamentales</span
+                >
+                <input type="checkbox" id="check-fundamentales" data-category="fundamentales" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-fundamentales-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="fundamentales">
+                <span class="text-gray-300 text-base"
+                  >Operaciones CRUD (Crear, Leer, Actualizar, Eliminar datos)</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="fundamentales"
+                  value="Operaciones CRUD (Crear, Leer, Actualizar, Eliminar datos) del modelo principal."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="fundamentales">
+                <span class="text-gray-300 text-base"
+                  >Validación de Datos (en el cliente y en el servidor) robusta.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="fundamentales"
+                  value="Validación de Datos (en el cliente y en el servidor) robusta."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="fundamentales">
+                <span class="text-gray-300 text-base">API (REST/GraphQL) bien documentada.</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="fundamentales"
+                  value="API (REST/GraphQL) bien documentada para la comunicación cliente-servidor."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="fundamentales">
+                <span class="text-gray-300 text-base">Manejo de Errores centralizado.</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="fundamentales"
+                  value="Manejo de Errores centralizado y mensajes amigables al usuario."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div
+            id="step-2"
+            data-category="interaccion_ux"
+            class="step-container step-out-down hidden"
+          >
+            <h2 class="step-title font-extrabold text-white mb-6">
+              Interacción y UX (Frontend)
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              ¿Qué funcionalidades de experiencia de usuario son necesarias?
+            </p>
+            <div class="feature-list-group space-y-3">
+              <label class="feature-card-label master-card-label" data-category="interaccion_ux">
+                <span class="text-gray-300 text-base"
+                  >TODO en Interacción</span
+                >
+                <input type="checkbox" id="check-interaccion_ux" data-category="interaccion_ux" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-interaccion-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="interaccion_ux">
+                <span class="text-gray-300 text-base"
+                  >Búsqueda de texto completo y Filtrado avanzado.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="interaccion_ux"
+                  value="Búsqueda de texto completo y Filtrado avanzado dinámico."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="interaccion_ux">
+                <span class="text-gray-300 text-base"
+                  >Sistema de Notificaciones (Push, Email o In-App).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="interaccion_ux"
+                  value="Sistema de Notificaciones (Push, Email o In-App)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="interaccion_ux">
+                <span class="text-gray-300 text-base">Diseño 100% Adaptable (Mobile-First).</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="interaccion_ux"
+                  value="Diseño 100% Adaptable (Mobile-First Responsive Design)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="interaccion_ux">
+                <span class="text-gray-300 text-base"
+                  >Soporte para Modo Offline y persistencia local.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="interaccion_ux"
+                  value="Soporte para Modo Offline (sincronización y persistencia local)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="interaccion_ux">
+                <span class="text-gray-300 text-base"
+                  >Funcionalidad en Tiempo Real (WebSockets).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="interaccion_ux"
+                  value="Funcionalidad en Tiempo Real (WebSockets para Chat o Colaboración)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div id="step-3" data-category="seguridad" class="step-container step-out-down hidden">
+            <h2 class="step-title font-extrabold text-white mb-6">
+              Autenticación y Seguridad
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              ¿Cómo quieres gestionar el acceso y qué niveles de seguridad necesitas?
+            </p>
+            <div class="feature-list-group space-y-3">
+              <label class="feature-card-label master-card-label" data-category="seguridad">
+                <span class="text-gray-300 text-base"
+                  >TODO en Seguridad</span
+                >
+                <input type="checkbox" id="check-seguridad" data-category="seguridad" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-seguridad-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="seguridad">
+                <span class="text-gray-300 text-base">Autorización y Roles (ACL o RBAC).</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="seguridad"
+                  value="Autorización y Roles (ACL o RBAC) para limitar acceso a recursos."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="seguridad">
+                <span class="text-gray-300 text-base">Autenticación de Dos Factores (2FA).</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="seguridad"
+                  value="Autenticación de Dos Factores (2FA)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="seguridad">
+                <span class="text-gray-300 text-base"
+                  >Registro/Login con Redes Sociales (Social Login).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="seguridad"
+                  value="Registro/Login con Redes Sociales (Social Login - OAuth)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="seguridad">
+                <span class="text-gray-300 text-base"
+                  >Cifrado de Datos Sensibles (en reposo y en tránsito).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="seguridad"
+                  value="Cifrado de Datos Sensibles (en reposo y en tránsito) con políticas sólidas."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="seguridad">
+                <span class="text-gray-300 text-base">Cumplimiento Normativo (GDPR, CCPA).</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="seguridad"
+                  value="Cumplimiento Normativo (GDPR, CCPA, políticas de privacidad y cookies)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div
+            id="step-4"
+            data-category="gestion_datos"
+            class="step-container step-out-down hidden"
+          >
+            <h2 class="step-title font-extrabold text-white mb-6">
+              Gestión de Datos y Storage
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              Selecciona las estrategias de almacenamiento de datos.
+            </p>
+            <div class="feature-list-group space-y-3">
+              <label class="feature-card-label master-card-label" data-category="gestion_datos">
+                <span class="text-gray-300 text-base"
+                  >TODO en Datos</span
+                >
+                <input type="checkbox" id="check-gestion_datos" data-category="gestion_datos" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-gestion_datos-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="gestion_datos">
+                <span class="text-gray-300 text-base"
+                  >Política de Copias de Seguridad (Backup) y Restauración.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="gestion_datos"
+                  value="Política de Copias de Seguridad (Backup) y Restauración de la base de datos."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="gestion_datos">
+                <span class="text-gray-300 text-base"
+                  >Selección de Base de Datos Específica (SQL, NoSQL o ambas).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="gestion_datos"
+                  value="Selección de Base de Datos Específica (SQL, NoSQL o ambas)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="gestion_datos">
+                <span class="text-gray-300 text-base"
+                  >Almacenamiento de archivos multimedia en la nube (S3, GCS, CDN).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="gestion_datos"
+                  value="Almacenamiento de archivos multimedia en la nube (S3, GCS, CDN)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="gestion_datos">
+                <span class="text-gray-300 text-base"
+                  >Mecanismo de Migraciones de Base de Datos.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="gestion_datos"
+                  value="Mecanismo de Migraciones de Base de Datos (Database Migrations)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div
+            id="step-5"
+            data-category="datos_analisis"
+            class="step-container step-out-down hidden"
+          >
+            <h2 class="step-title font-extrabold text-white mb-6">
+              Análisis y Estándares
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              ¿Qué métricas, personalización o cumplimiento necesita la aplicación?
+            </p>
+            <div class="feature-list-group space-y-3">
+              <label class="feature-card-label master-card-label" data-category="datos_analisis">
+                <span class="text-gray-300 text-base"
+                  >TODO en Análisis</span
+                >
+                <input type="checkbox" id="check-datos_analisis" data-category="datos_analisis" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-analisis-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="datos_analisis">
+                <span class="text-gray-300 text-base"
+                  >Generación de Informes y Dashboards de KPIs.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="datos_analisis"
+                  value="Generación de Informes y Dashboards de Métricas Clave (KPIs)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="datos_analisis">
+                <span class="text-gray-300 text-base"
+                  >Personalización impulsada por Modelos de IA/ML.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="datos_analisis"
+                  value="Personalización o Sugerencias impulsadas por Modelos de IA/ML."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="datos_analisis">
+                <span class="text-gray-300 text-base"
+                  >Cumplimiento total con estándares de Accesibilidad (WCAG).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="datos_analisis"
+                  value="Cumplimiento total con estándares de Accesibilidad (WCAG 2.1/2.2)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="datos_analisis">
+                <span class="text-gray-300 text-base"
+                  >Optimización para Motores de Búsqueda (SEO).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="datos_analisis"
+                  value="Optimización para Motores de Búsqueda (SEO)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div id="step-6" data-category="arquitectura" class="step-container step-out-down hidden">
+            <h2 class="step-title font-extrabold text-white mb-6">
+              Arquitectura y Escalabilidad
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              Selecciona las prácticas de desarrollo y despliegue (DevOps) necesarias.
+            </p>
+            <div class="feature-list-group space-y-3">
+              <label class="feature-card-label master-card-label" data-category="arquitectura">
+                <span class="text-gray-300 text-base"
+                  >TODO en Arquitectura</span
+                >
+                <input type="checkbox" id="check-arquitectura" data-category="arquitectura" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-arquitectura-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="arquitectura">
+                <span class="text-gray-300 text-base"
+                  >Pruebas Automatizadas (Unitarias, Integración, E2E).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="arquitectura"
+                  value="Pruebas Automatizadas (Unitarias, Integración, E2E) como requisito de calidad."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="arquitectura">
+                <span class="text-gray-300 text-base"
+                  >Despliegue Continuo (CI/CD) automatizado.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="arquitectura"
+                  value="Despliegue Continuo (CI/CD) automatizado para ambientes de desarrollo/producción."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="arquitectura">
+                <span class="text-gray-300 text-base"
+                  >Contenerización (Docker) para portabilidad.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="arquitectura"
+                  value="Contenerización de la aplicación (Docker) para portabilidad."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="arquitectura">
+                <span class="text-gray-300 text-base"
+                  >Arquitectura de Microservicios o Serverless.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="arquitectura"
+                  value="Uso de arquitectura de Microservicios o Serverless (en lugar de Monolito)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="arquitectura">
+                <span class="text-gray-300 text-base">Diseño para Escalabilidad Horizontal.</span>
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="arquitectura"
+                  value="Diseño para Escalabilidad Horizontal (Load Balancing/Auto-scaling)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div id="step-7" data-category="operaciones" class="step-container step-out-down hidden">
+            <h2
+              class="step-title font-extrabold text-white mb-6"
+            >
+              Operaciones y Monetización
+            </h2>
+            <p class="text-gray-400 mb-6 text-lg">
+              ¿Cómo se gestionará el negocio, el soporte y los ingresos?
+            </p>
+            <div class="feature-list-group space-y-3 pb-4">
+              <label class="feature-card-label master-card-label" data-category="operaciones">
+                <span class="text-gray-300 text-base"
+                  >TODO en Operaciones</span
+                >
+                <input type="checkbox" id="check-operaciones" data-category="operaciones" />
+                <svg
+                  class="check-icon w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="check-operaciones-path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="operaciones">
+                <span class="text-gray-300 text-base"
+                  >Panel de Administración (Admin Dashboard).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="operaciones"
+                  value="Panel de Administración (Admin Dashboard) para gestión de usuarios/contenido."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="operaciones">
+                <span class="text-gray-300 text-base"
+                  >Sistema de Facturación, Pagos y Suscripciones.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="operaciones"
+                  value="Sistema de Facturación, Pagos y Suscripciones (Monetización)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="operaciones">
+                <span class="text-gray-300 text-base"
+                  >Sistema de Soporte (Tickets o Chat integrado).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="operaciones"
+                  value="Sistema de Soporte (Tickets, Help Desk o Chat integrado)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="operaciones">
+                <span class="text-gray-300 text-base"
+                  >Monitoreo Proactivo de la Salud del Servidor (APM).</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="operaciones"
+                  value="Monitoreo Proactivo de la Salud del Servidor (APM, Uptime)."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+              <label class="feature-card-label" data-category="operaciones">
+                <span class="text-gray-300 text-base"
+                  >Gestión de Contenido (CMS) o Datos Maestros.</span
+                >
+                <input
+                  type="checkbox"
+                  name="feature"
+                  data-category="operaciones"
+                  value="Gestión de Contenido (CMS) o Datos Maestros para marketing/legal."
+                />
+                <svg
+                  class="check-icon w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <div id="step-8" class="step-container step-out-down hidden">
+            <h2 class="step-title font-extrabold text-white mb-6">
+              ¡Especificación Completa!
+            </h2>
+            <p class="text-gray-400 mb-8 text-lg">
+              Tu solicitud ha sido estructurada. Selecciona el formato de salida y cópialo.
+            </p>
+
+            <div class="mt-4">
+              <div class="flex border-b border-gray-700 mb-4">
+                <button id="tab-text" onclick="showTab('text')" class="tab-button">Markdown</button>
+                <button id="tab-json" onclick="showTab('json')" class="tab-button">JSON</button>
+              </div>
+
+              <div id="tab-content-text" class="tab-content">
+                <textarea
+                  id="promptOutputText"
+                  rows="12"
+                  readonly
+                  class="w-full p-3 dark-output text-sm focus:ring-indigo-500 rounded-lg"
+                ></textarea>
+                <button
+                  onclick="copyToClipboard('promptOutputText')"
+                  class="mt-3 py-2 px-4 flat-button text-white font-semibold rounded-full w-full"
+                >
+                  Copiar Prompt
+                </button>
+              </div>
+
+              <div id="tab-content-json" class="tab-content hidden">
+                <textarea
+                  id="promptOutputJson"
+                  rows="12"
+                  readonly
+                  class="w-full p-3 dark-output text-sm font-mono focus:ring-indigo-500 rounded-lg"
+                ></textarea>
+                <button
+                  onclick="copyToClipboard('promptOutputJson')"
+                  class="mt-3 py-2 px-4 flat-button text-white font-semibold rounded-full w-full"
+                >
+                  Copiar JSON
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grow"></div>
+    <div
+      id="stepper-navigation"
+      class="fixed bottom-0 left-0 right-0 p-4 bg-gray-950 border-t border-gray-800 z-10 flex justify-between"
+    >
+      <button
+        id="prevButton"
+        onclick="prevStep()"
+        class="py-3 px-6 bg-gray-800 text-white font-semibold rounded-full opacity-50 cursor-not-allowed transition duration-150 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        ← Anterior
+      </button>
+      <button
+        id="nextButton"
+        onclick="nextStep()"
+        class="py-3 px-6 bg-indigo-600 text-white font-bold rounded-full transition duration-150 hover:bg-indigo-500"
+      >
+        Siguiente →
+      </button>
+    </div>
+    <script>
+      const categoryDisplayNames = {
+        fundamentales: "fundamentales",
+        interaccion_ux: "interaccion_ux",
+        seguridad: "autenticacion_seguridad",
+        gestion_datos: "gestion_datos_storage",
+        datos_analisis: "analisis_estandares",
+        arquitectura: "arquitectura_escalabilidad",
+        operaciones: "operaciones_monetizacion",
+      };
+
+      const CHECK_PATH = "M5 13l4 4L19 7";
+      const MINUS_PATH = "M5 12h14";
+
+      let currentStep = 0;
+      const totalSteps = 8;
+
+      function updateNavigation() {
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+
+        if (currentStep <= 0) {
+          prevButton.disabled = true;
+          prevButton.classList.add("opacity-50", "cursor-not-allowed");
+          prevButton.classList.remove("hover:bg-gray-700");
+        } else {
+          prevButton.disabled = false;
+          prevButton.classList.remove("opacity-50", "cursor-not-allowed");
+          prevButton.classList.add("hover:bg-gray-700");
+        }
+
+        if (currentStep >= totalSteps) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.style.display = "inline-block";
+        }
+
+        if (currentStep === totalSteps - 1) {
+          nextButton.textContent = "Generar Especificación →";
+          nextButton.classList.remove("bg-indigo-600", "hover:bg-indigo-500");
+          nextButton.classList.add("bg-green-600", "hover:bg-green-700");
+        } else if (currentStep === totalSteps) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.textContent = "Siguiente →";
+          nextButton.classList.add("bg-indigo-600", "hover:bg-indigo-500");
+          nextButton.classList.remove("bg-green-600", "hover:bg-green-700");
+        }
+
+        const progressBar = document.getElementById("progressBar");
+        const progress = (currentStep / totalSteps) * 100;
+        progressBar.style.width = `${progress}%`;
+      }
+
+      function showStep(stepIndex, dir) {
+        const steps = document.querySelectorAll(".step-container");
+        const oldStepElement = document.getElementById(`step-${currentStep}`);
+        const newStepElement = document.getElementById(`step-${stepIndex}`);
+
+        if (!newStepElement) return;
+
+        const enterClass = "step-active";
+        const exitClass = dir === "next" ? "step-out-up" : "step-out-down";
+
+        setTimeout(() => {
+          const newStepHeight = newStepElement.scrollHeight + 50;
+          document.getElementById("stepper-content").style.height = `${newStepHeight}px`;
+        }, 50);
+
+        if (oldStepElement && oldStepElement !== newStepElement) {
+          oldStepElement.classList.remove("step-active", "step-out-down", "step-out-up");
+          oldStepElement.classList.add(exitClass);
+          oldStepElement.style.position = "absolute";
+          oldStepElement.style.zIndex = 1;
+        } else if (oldStepElement === newStepElement) {
+          currentStep = stepIndex;
+          updateNavigation();
+          return;
+        }
+
+        newStepElement.classList.remove("hidden", "step-out-down", "step-out-up");
+        newStepElement.classList.add(dir === "next" ? "step-out-down" : "step-out-up");
+        newStepElement.style.position = "absolute";
+        newStepElement.style.zIndex = 2;
+
+        setTimeout(() => {
+          newStepElement.classList.remove("step-out-down", "step-out-up");
+          newStepElement.classList.add(enterClass);
+        }, 10);
+
+        setTimeout(() => {
+          steps.forEach((step) => {
+            if (step !== newStepElement) {
+              step.classList.add("hidden");
+              step.style.position = "absolute";
+              step.style.zIndex = 0;
+            }
+          });
+          newStepElement.style.position = "relative";
+          newStepElement.style.zIndex = 1;
+
+          if (stepIndex === totalSteps) {
+            generateOutputs();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+
+          currentStep = stepIndex;
+          updateNavigation();
+        }, 400);
+
+        currentStep = stepIndex;
+        updateNavigation();
+      }
+
+      function nextStep() {
+        if (currentStep < totalSteps) {
+          showStep(currentStep + 1, "next");
+        }
+      }
+
+      function prevStep() {
+        if (currentStep > 0) {
+          showStep(currentStep - 1, "prev");
+        }
+      }
+
+      function showTab(tabName) {
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.add("hidden");
+        });
+        document.querySelectorAll(".tab-button").forEach((button) => {
+          button.classList.remove("active");
+        });
+
+        const activeContent = document.getElementById(`tab-content-${tabName}`);
+        if (activeContent) activeContent.classList.remove("hidden");
+
+        const activeButton = document.getElementById(`tab-${tabName}`);
+        if (activeButton) activeButton.classList.add("active");
+      }
+
+      function toggleAll(category, checked) {
+        const selector = `input[name="feature"][data-category="${category}"]`;
+        const checkboxes = document.querySelectorAll(selector);
+
+        checkboxes.forEach((cb) => {
+          cb.checked = checked;
+          if (cb.parentElement) {
+            cb.parentElement.classList.toggle("checked-style", checked);
+          }
+        });
+
+        const masterCheckbox = document.getElementById(`check-${category}`);
+        if (masterCheckbox) {
+          masterCheckbox.checked = checked;
+        }
+
+        updateSelectAllCheckbox(category);
+        generateOutputs();
+        showStep(currentStep, "none");
+      }
+
+      function updateSelectAllCheckbox(category) {
+        const selector = `input[name="feature"][data-category="${category}"]`;
+        const featureCheckboxes = Array.from(document.querySelectorAll(selector));
+        const total = featureCheckboxes.length;
+        const checked = featureCheckboxes.filter((cb) => cb.checked).length;
+        const selectAll = document.getElementById(`check-${category}`);
+        const pathElement = document.getElementById(`check-${category}-path`);
+
+        if (selectAll) {
+          const isFullyChecked = total > 0 && total === checked;
+          const isIndeterminate = total > 0 && checked > 0 && checked < total;
+
+          selectAll.checked = isFullyChecked;
+          selectAll.indeterminate = isIndeterminate;
+
+          const parentLabel = selectAll.parentElement;
+
+          if (parentLabel) {
+            parentLabel.classList.remove("checked-style", "indeterminate-style");
+
+            if (isIndeterminate) {
+              parentLabel.classList.add("indeterminate-style");
+              if (pathElement) {
+                pathElement.setAttribute("d", MINUS_PATH);
+              }
+            } else if (isFullyChecked) {
+              parentLabel.classList.add("checked-style");
+              if (pathElement) {
+                pathElement.setAttribute("d", CHECK_PATH);
+              }
+            } else {
+              if (pathElement) {
+                pathElement.setAttribute("d", CHECK_PATH);
+              }
+            }
+          }
+        }
+      }
+
+      function collectData() {
+        const appIdea = document.getElementById("appIdea").value.trim();
+        const features = {};
+        const checkedCheckboxes = document.querySelectorAll('input[name="feature"]:checked');
+
+        checkedCheckboxes.forEach((cb) => {
+          const category = cb.getAttribute("data-category");
+          if (!features[category]) {
+            features[category] = [];
+          }
+          features[category].push(cb.value);
+        });
+
+        const allCategories = Object.keys(categoryDisplayNames);
+        allCategories.forEach((cat) => {
+          if (!features[cat]) {
+            features[cat] = [];
+          }
+        });
+
+        return {
+          appIdea,
+          fundamentales: features.fundamentales,
+          interaccion_ux: features.interaccion_ux,
+          seguridad: features.seguridad,
+          gestion_datos: features.gestion_datos,
+          datos_analisis: features.datos_analisis,
+          arquitectura: features.arquitectura,
+          operaciones: features.operaciones,
+        };
+      }
+
+      function generateTextPrompt(data) {
+        const {
+          appIdea,
+          fundamentales,
+          interaccion_ux,
+          seguridad,
+          gestion_datos,
+          datos_analisis,
+          arquitectura,
+          operaciones,
+        } = data;
+        const output = document.getElementById("promptOutputText");
+
+        if (!appIdea) {
+          output.value =
+            "ERROR: Por favor, introduce una idea principal en el primer paso para generar la especificación.";
+          return;
+        }
+
+        let prompt = `## ESPECIFICACIÓN DETALLADA DE APLICACIÓN FULL-STACK\n\n`;
+        prompt += `### IDEA PRINCIPAL Y OBJETIVO\n\n`;
+        prompt += `${appIdea}\n\n`;
+
+        prompt += `### CARACTERÍSTICAS TÉCNICAS REQUERIDAS\n\n`;
+
+        prompt += `#### Funcionalidades Fundamentales (Núcleo)\n`;
+        prompt +=
+          fundamentales.length > 0
+            ? fundamentales.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- Se asumen las funcionalidades básicas (CRUD, API, Validación).\n\n`;
+
+        prompt += `#### Interacción y UX Avanzada (Frontend)\n`;
+        prompt +=
+          interaccion_ux.length > 0
+            ? interaccion_ux.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- No se requieren funcionalidades de interacción avanzadas.\n\n`;
+
+        prompt += `#### Autenticación y Seguridad Avanzada\n`;
+        prompt +=
+          seguridad.length > 0
+            ? seguridad.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- Seguridad estándar (limitada a Autenticación/Autorización).\n\n`;
+
+        prompt += `#### Gestión de Datos y Storage\n`;
+        prompt +=
+          gestion_datos.length > 0
+            ? gestion_datos.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- Almacenamiento básico sin estrategias de backup/migración definidas.\n\n`;
+
+        prompt += `#### Análisis, Informes y Estándares\n`;
+        prompt +=
+          datos_analisis.length > 0
+            ? datos_analisis.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- No se requieren características de análisis o estándares avanzados.\n\n`;
+
+        prompt += `#### Arquitectura y Escalabilidad (DevOps)\n`;
+        prompt +=
+          arquitectura.length > 0
+            ? arquitectura.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- Arquitectura monolítica estándar sin requisitos de CI/CD avanzados.\n\n`;
+
+        prompt += `#### Operaciones, Mantenimiento y Monetización\n`;
+        prompt +=
+          operaciones.length > 0
+            ? operaciones.map((f) => `- ${f}`).join("\n") + "\n\n"
+            : `- No se requieren características de operaciones específicas.\n\n`;
+
+        prompt += `### SOLICITUD\n\n`;
+        prompt += `Con base en los requisitos definidos, por favor, elabora un plan de desarrollo detallado para esta aplicación. Separa claramente las tareas por Frontend, Backend y Base de Datos, sugiere las tecnologías más adecuadas y proporciona una estimación de la complejidad para cada sección.`;
+
+        output.value = prompt;
+      }
+
+      function generateJsonPrompt(data) {
+        const {
+          appIdea,
+          fundamentales,
+          interaccion_ux,
+          seguridad,
+          gestion_datos,
+          datos_analisis,
+          arquitectura,
+          operaciones,
+        } = data;
+        const output = document.getElementById("promptOutputJson");
+        if (!appIdea) {
+          output.value = JSON.stringify(
+            {
+              error:
+                "ERROR: Por favor, introduce una idea principal en el primer paso para generar la especificación.",
+            },
+            null,
+            2
+          );
+          return;
+        }
+        const assumedFund = Array.from(
+          document.querySelectorAll('input[name="feature"][data-category="fundamentales"]')
+        ).map((cb) => cb.value);
+        const finalFundamentales = fundamentales.length > 0 ? fundamentales : assumedFund;
+        const jsonStructure = {
+          meta: {
+            titulo: "Especificación de Requisitos de Aplicación Full-Stack",
+            fecha: new Date().toISOString().split("T")[0],
+          },
+          idea_principal: appIdea,
+          requisitos: {
+            fundamentales: finalFundamentales,
+            interaccion_ux: interaccion_ux,
+            autenticacion_seguridad: seguridad,
+            gestion_datos_storage: gestion_datos,
+            analisis_estandares: datos_analisis,
+            arquitectura_escalabilidad: arquitectura,
+            operaciones_monetizacion: operaciones,
+          },
+          solicitud:
+            "Elaborar un plan de desarrollo detallado, separando tareas por Frontend, Backend y Base de Datos, con sugerencias de tecnologías y estimación de complejidad.",
+        };
+        output.value = JSON.stringify(jsonStructure, null, 2);
+      }
+
+      function generateOutputs() {
+        const data = collectData();
+        generateTextPrompt(data);
+        generateJsonPrompt(data);
+        const allCategories = Object.keys(categoryDisplayNames);
+        allCategories.forEach((cat) => updateSelectAllCheckbox(cat));
+      }
+
+      function copyToClipboard(elementId) {
+        const output = document.getElementById(elementId);
+        output.select();
+        output.setSelectionRange(0, 99999);
+        try {
+          document.execCommand("copy");
+          showNotification("¡Contenido copiado al portapapeles!", "success");
+        } catch (err) {
+          console.error("Error al intentar copiar: ", err);
+          showNotification(
+            "Error: No se pudo copiar el texto automáticamente. Por favor, cópialo manualmente.",
+            "error"
+          );
+        }
+      }
+
+      function showNotification(message, type) {
+        const notification = document.createElement("div");
+        notification.textContent = message;
+        notification.className = `fixed bottom-5 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-xl text-white font-semibold z-50 transition-opacity duration-300 ${
+          type === "success" ? "bg-green-500" : "bg-red-500"
+        }`;
+        document.body.appendChild(notification);
+        setTimeout(() => {
+          notification.style.opacity = "0";
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+
+      window.onload = function () {
+        showTab("text");
+        const allCategories = Object.keys(categoryDisplayNames);
+        allCategories.forEach((category) => {
+          const masterCheckbox = document.getElementById(`check-${category}`);
+          if (masterCheckbox) {
+            const pathElement = document.getElementById(`check-${category}-path`);
+            if (pathElement) {
+              pathElement.setAttribute("d", CHECK_PATH);
+            }
+          }
+        });
+        const featureCards = document.querySelectorAll(".feature-card-label");
+        featureCards.forEach((label) => {
+          const checkbox = label.querySelector('input[type="checkbox"]');
+          checkbox.addEventListener("change", function (e) {
+            const category = checkbox.getAttribute("data-category");
+            const checked = checkbox.checked;
+            if (checkbox.id.startsWith("check-")) {
+              toggleAll(category, checked);
+            } else {
+              label.classList.toggle("checked-style", checked);
+              updateSelectAllCheckbox(category);
+              generateOutputs();
+            }
+          });
+          if (
+            checkbox.getAttribute("data-category") === "fundamentales" &&
+            checkbox.name === "feature"
+          ) {
+            checkbox.checked = true;
+            label.classList.add("checked-style");
+          }
+        });
+        allCategories.forEach((cat) => updateSelectAllCheckbox(cat));
+        document.getElementById("appIdea").addEventListener("input", generateOutputs);
+        showStep(0, "next");
+      };
+    </script>
+  </body>
+</html>
