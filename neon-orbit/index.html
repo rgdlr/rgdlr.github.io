@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neon Orbit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #050505;
+            font-family: 'Exo 2', sans-serif;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* UI Layer por encima del canvas */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #score-display {
+            padding-top: 40px;
+            color: #fff;
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        #start-screen, #game-over-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            pointer-events: auto; /* Habilita clicks aquí */
+            backdrop-filter: blur(8px);
+            transition: opacity 0.3s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none !important;
+            z-index: -1 !important;
+        }
+
+        h1 {
+            color: #00ffff;
+            font-size: 3rem;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 25px #00ffff;
+            letter-spacing: 4px;
+            text-align: center;
+        }
+
+        p {
+            color: #ddd;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Botones grandes y fáciles de tocar */
+        .btn {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Exo 2', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            transition: all 0.2s;
+            touch-action: manipulation;
+            pointer-events: auto; /* Asegurar que reciba eventos */
+        }
+
+        .btn:active {
+            background: #00ffff;
+            color: #000;
+            transform: scale(0.95);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        #final-score {
+            color: #ff0055;
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+            text-shadow: 0 0 30px rgba(255, 0, 85, 0.6);
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="ui-layer">
+        <div id="score-display">0</div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="start-screen">
+        <h1>Neon Orbit</h1>
+        <p>Tu energía gira atrapada en los nodos.<br>Toca la pantalla para saltar al siguiente.</p>
+        <button class="btn" id="start-btn">Jugar</button>
+        <div class="hint">Toca en el momento justo</div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-screen" class="hidden">
+        <h1 style="color: #ff0055; text-shadow: 0 0 25px #ff0055;">Fin</h1>
+        <p>Puntuación</p>
+        <div id="final-score">0</div>
+        <button class="btn" id="restart-btn">Reintentar</button>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score-display');
+        const startScreen = document.getElementById('start-screen');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const finalScoreEl = document.getElementById('final-score');
+        const startBtn = document.getElementById('start-btn');
+        const restartBtn = document.getElementById('restart-btn');
+
+        let width, height;
+        let lastTime = 0;
+        let score = 0;
+        let gameState = 'start'; // start, playing, gameover
+        let cameraY = 0;
+        let animationFrameId;
+        
+        const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff00', '#ff8800'];
+
+        let player;
+        let nodes = [];
+        let particles = [];
+
+        // --- CLASES ---
+
+        class Node {
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.pulseOffset = Math.random() * Math.PI;
+            }
+
+            draw(ctx, time) {
+                // Efecto de respiración suave
+                const pulse = Math.sin(time * 0.005 + this.pulseOffset) * 2;
+                
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = this.color;
+                
+                // Anillo
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y - cameraY, this.radius + pulse, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Centro (núcleo gravitatorio)
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.2;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y - cameraY, this.radius - 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+                
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        class Player {
+            constructor(startNode) {
+                this.currentNode = startNode;
+                this.angle = -Math.PI / 2; // Empieza arriba
+                this.radius = 8;
+                this.speed = 0.05;
+                this.dir = 1;
+                this.flying = false;
+                this.vx = 0;
+                this.vy = 0;
+                this.x = 0;
+                this.y = 0;
+                this.trail = [];
+                this.updateOrbitPos();
+            }
+
+            updateOrbitPos() {
+                // Distancia orbital: radio del nodo + espacio
+                const orbitalRadius = this.currentNode.radius + 15;
+                this.x = this.currentNode.x + Math.cos(this.angle) * orbitalRadius;
+                this.y = this.currentNode.y + Math.sin(this.angle) * orbitalRadius;
+            }
+
+            launch() {
+                if (this.flying) return;
+                
+                this.flying = true;
+                // Velocidad base
+                const launchSpeed = 16;
+                // Tangente: ángulo actual + 90 grados * dirección
+                const tangent = this.angle + (Math.PI / 2 * this.dir);
+                
+                this.vx = Math.cos(tangent) * launchSpeed;
+                this.vy = Math.sin(tangent) * launchSpeed;
+                
+                createParticles(this.x, this.y, 10, '#fff');
+            }
+
+            update() {
+                this.trail.push({x: this.x, y: this.y});
+                if (this.trail.length > 15) this.trail.shift();
+
+                if (!this.flying) {
+                    this.angle += this.speed * this.dir;
+                    this.updateOrbitPos();
+                } else {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Detección de colisiones
+                    for (let node of nodes) {
+                        if (node === this.currentNode) continue;
+
+                        const dx = this.x - node.x;
+                        const dy = this.y - node.y;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+
+                        // Margen de captura generoso
+                        if (dist < node.radius + 20) {
+                            this.land(node, Math.atan2(dy, dx));
+                            return;
+                        }
+                    }
+
+                    // Game Over si sale de pantalla
+                    if (this.x < -50 || this.x > width + 50 || this.y - cameraY > height + 100) {
+                        gameOver();
+                    }
+                }
+            }
+
+            land(node, angle) {
+                this.flying = false;
+                this.currentNode = node;
+                this.angle = angle;
+                // Cambia dirección al aterrizar para hacerlo interesante
+                this.dir = Math.random() > 0.5 ? 1 : -1;
+                
+                // Aumentar velocidad ligeramente
+                this.speed = Math.min(0.08, 0.05 + (score * 0.001));
+
+                score++;
+                scoreEl.textContent = score;
+                createParticles(this.x, this.y, 20, node.color);
+                
+                generateNodes();
+            }
+
+            draw(ctx) {
+                // Estela
+                if (this.trail.length > 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.trail[0].x, this.trail[0].y - cameraY);
+                    for (let p of this.trail) ctx.lineTo(p.x, p.y - cameraY);
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                // Jugador
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#fff';
+                ctx.fillStyle = '#fff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y - cameraY, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4 + 1;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.life = 1.0;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= 0.03;
+            }
+            draw(ctx) {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y - cameraY, 3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        // --- FUNCIONES DEL JUEGO ---
+
+        function createParticles(x, y, amount, color) {
+            for(let i=0; i<amount; i++) particles.push(new Particle(x, y, color));
+        }
+
+        function generateNodes() {
+            // Limpieza de nodos muy lejanos abajo
+            nodes = nodes.filter(n => n.y - cameraY < height * 2);
+
+            let lastNode = nodes[nodes.length - 1];
+            
+            // Queremos tener siempre unos 5 nodos por delante
+            while (nodes.length < 6) {
+                // Generación procedural vertical
+                const distBase = 220; 
+                // A más score, nodos un poco más separados
+                const distance = distBase + Math.random() * 80;
+                
+                // Ángulo hacia arriba (Entre -45 y -135 grados aprox)
+                // Math.PI es izquierda, 2*Math.PI es derecha.
+                // Queremos ir hacia Y negativo.
+                // Rango de ángulos: 210 grados (izq-arriba) a 330 grados (der-arriba)
+                const angle = (Math.PI + 0.5) + Math.random() * (Math.PI - 1.0); 
+                
+                let nx = lastNode.x + Math.cos(angle) * distance;
+                let ny = lastNode.y + Math.sin(angle) * distance;
+
+                // Mantener dentro de pantalla horizontalmente
+                if (nx < 60) nx = 60 + Math.random() * 50;
+                if (nx > width - 60) nx = width - 60 - Math.random() * 50;
+
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                // Radio se hace más pequeño con el tiempo
+                const radius = Math.max(30, 60 - score * 0.8);
+
+                const newNode = new Node(nx, ny, radius, color);
+                nodes.push(newNode);
+                lastNode = newNode;
+            }
+        }
+
+        function initGame() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            
+            resize();
+            score = 0;
+            scoreEl.textContent = "0";
+            cameraY = 0;
+            nodes = [];
+            particles = [];
+            
+            // Nodo inicial centrado abajo
+            const startNode = new Node(width/2, height - 200, 60, colors[0]);
+            nodes.push(startNode);
+            generateNodes();
+
+            player = new Player(startNode);
+            
+            gameState = 'playing';
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            
+            lastTime = performance.now();
+            loop(lastTime);
+        }
+
+        function gameOver() {
+            gameState = 'gameover';
+            finalScoreEl.textContent = score;
+            gameOverScreen.classList.remove('hidden');
+        }
+
+        function loop(timestamp) {
+            if (gameState !== 'playing') return;
+            requestAnimationFrame(loop);
+
+            const dt = timestamp - lastTime;
+            lastTime = timestamp;
+
+            // Actualizar cámara suavemente
+            // Objetivo: Mantener al jugador al 70% de altura de pantalla
+            const targetY = player.y - height * 0.7;
+            if (targetY < cameraY) {
+                // Lerp para suavidad
+                cameraY += (targetY - cameraY) * 0.1;
+            }
+
+            // Lógica
+            player.update();
+            for(let i=particles.length-1; i>=0; i--) {
+                particles[i].update();
+                if(particles[i].life <= 0) particles.splice(i, 1);
+            }
+
+            // Render
+            ctx.fillStyle = '#050505';
+            ctx.fillRect(0, 0, width, height);
+
+            // Fondo grid sutil
+            ctx.strokeStyle = '#111';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            const gridSize = 80;
+            const offY = cameraY % gridSize;
+            for(let x=0; x<width; x+=gridSize) {
+                ctx.moveTo(x, 0); ctx.lineTo(x, height);
+            }
+            for(let y=-offY; y<height; y+=gridSize) {
+                ctx.moveTo(0, y); ctx.lineTo(width, y);
+            }
+            ctx.stroke();
+
+            nodes.forEach(n => n.draw(ctx, timestamp));
+            particles.forEach(p => p.draw(ctx));
+            player.draw(ctx);
+        }
+
+        // --- INPUTS ---
+
+        function handleInput(e) {
+            // IMPORTANTE: Si tocamos un botón, ignorar la lógica del juego
+            if (e.target.closest('.btn')) return;
+
+            // Prevenir comportamientos por defecto en toques (zoom, scroll)
+            if (e.type === 'touchstart') e.preventDefault();
+
+            if (gameState === 'playing') {
+                player.launch();
+            }
+        }
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        window.addEventListener('resize', resize);
+        
+        // Escuchar en todo el documento para el juego
+        document.addEventListener('mousedown', handleInput);
+        document.addEventListener('touchstart', handleInput, { passive: false });
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') handleInput(e);
+        });
+
+        // Eventos específicos para botones (detener propagación es clave)
+        [startBtn, restartBtn].forEach(btn => {
+            // Usamos 'click' estándar que funciona bien si no prevenimos default en el padre
+            // Pero como prevenimos default en document para el juego, necesitamos manejar esto con cuidado
+            
+            // Solución robusta para móvil y desktop:
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                initGame();
+            });
+            
+            // Para asegurar respuesta rápida en touch sin esperar al click
+            btn.addEventListener('touchstart', (e) => {
+                e.stopPropagation(); // Evita que llegue al document
+                // No llamamos preventDefault aquí para permitir que el click se genere,
+                // O llamamos initGame directamente.
+                // Mejor estrategia: dejar que el 'click' maneje todo para evitar doble disparo,
+                // ya que hemos filtrado el touchstart global con .closest('.btn')
+            });
+        });
+
+        // Inicio
+        resize();
+
+    </script>
+</body>
+</html>
