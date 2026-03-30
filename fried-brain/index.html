@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>CEREBRO FRITO</title>
+    <!-- Importamos Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Animaciones personalizadas */
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(-3deg);
+        }
+        50% {
+          transform: rotate(3deg);
+        }
+      }
+      .animate-wiggle {
+        animation: wiggle 1s ease-in-out infinite;
+      }
+
+      /* AJUSTES CRÍTICOS PARA IOS/IPHONE */
+      body {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        /* Usamos dvh para la altura real en móviles */
+        height: 100dvh;
+        width: 100vw;
+        overflow: hidden;
+        background-color: #171717; /* neutral-900 */
+      }
+
+      /* Clases de utilidad para respetar el Notch del iPhone */
+      .safe-top-padding {
+        padding-top: env(safe-area-inset-top, 20px);
+      }
+
+      .safe-top-position {
+        top: env(safe-area-inset-top, 20px);
+      }
+
+      /* Asegurar que la barra de tiempo baje lo suficiente */
+      .timer-bar-container {
+        position: absolute;
+        left: 0;
+        right: 0;
+        /* Se sitúa justo debajo del área segura */
+        top: env(safe-area-inset-top, 0px);
+        height: 8px;
+        z-index: 50;
+      }
+
+      /* La puntuación debe flotar bien visible */
+      .score-display {
+        position: absolute;
+        right: 1.5rem; /* right-6 */
+        /* Calculamos: Area segura + un poco de margen */
+        top: calc(env(safe-area-inset-top, 20px) + 1.5rem);
+        z-index: 50;
+      }
+
+      /* Aviso para dispositivos no táctiles */
+      .no-touch-warning {
+        display: none;
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .no-touch-warning {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans flex flex-col">
+    <!-- Aviso para dispositivos no táctiles -->
+    <div
+      class="no-touch-warning fixed inset-0 bg-black/90 z-[100] flex-col items-center justify-center p-8 text-center animate-in fade-in"
+    >
+      <svg
+        width="80"
+        height="80"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-yellow-500 mb-4 animate-pulse"
+      >
+        <path
+          d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+        ></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+      <h2 class="text-3xl font-black text-white mb-4 uppercase">¡Atención!</h2>
+      <p class="text-xl text-gray-300">
+        Este juego requiere una <strong class="text-yellow-400">pantalla táctil</strong> para jugar.
+      </p>
+      <p class="text-sm text-gray-500 mt-4">
+        Por favor, abre esta página en un dispositivo móvil o tablet.
+      </p>
+    </div>
+
+    <!-- Contenedor Principal de la App -->
+    <div id="app" class="flex-1 flex flex-col w-full h-full relative">
+      <!-- El contenido se inyectará aquí -->
+    </div>
+
+    <!-- Lógica del Juego -->
+    <script>
+      // --- ESTADO GLOBAL ---
+      const state = {
+        screen: "MENU",
+        players: [],
+        currentPlayerIdx: 0,
+        scores: {},
+        score: 0,
+        timeLeft: 0,
+        totalTime: 0,
+        challenge: null,
+        feedback: null,
+        timerInterval: null,
+      };
+
+      const CONFIG = {
+        INITIAL_TIME: 3000,
+        MIN_TIME: 800,
+        SWIPE_THRESHOLD: 50, // Mínimo de píxeles para considerar un swipe
+      };
+
+      const app = document.getElementById("app");
+
+      // Variables Touch
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      // --- ICONOS SVG ---
+      const ICONS = {
+        UP: `<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`,
+        DOWN: `<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`,
+        LEFT: `<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>`,
+        RIGHT: `<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`,
+        SKULL: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 mb-4 animate-wiggle"><circle cx="9" cy="12" r="1"></circle><circle cx="15" cy="12" r="1"></circle><path d="M8 20v2h8v-2"></path><path d="M12.5 17l-.5-1-.5 1h1z"></path><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"></path></svg>`,
+        RETRY: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>`,
+        NEXT: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+      };
+
+      // --- UTILIDADES ---
+      function triggerVibration(pattern) {
+        if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+          try {
+            navigator.vibrate(pattern);
+          } catch (e) {}
+        }
+      }
+
+      // --- LÓGICA ---
+      function generateChallenge() {
+        const directions = ["UP", "DOWN", "LEFT", "RIGHT"];
+        const randomDir = directions[Math.floor(Math.random() * directions.length)];
+        let invertedChance = 0;
+        if (state.score > 5) invertedChance = 0.3;
+        if (state.score > 15) invertedChance = 0.5;
+        const isInverted = Math.random() < invertedChance;
+        return { direction: randomDir, type: isInverted ? "INVERTED" : "NORMAL" };
+      }
+
+      function startGame() {
+        state.score = 0;
+        state.feedback = null;
+        state.screen = "GAME";
+        nextRound();
+        render();
+      }
+
+      function nextRound() {
+        state.challenge = generateChallenge();
+        const time = Math.max(CONFIG.MIN_TIME, CONFIG.INITIAL_TIME - state.score * 100);
+        state.totalTime = time;
+        state.timeLeft = time;
+
+        if (state.timerInterval) clearInterval(state.timerInterval);
+
+        const startTime = Date.now();
+        state.timerInterval = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          state.timeLeft = state.totalTime - elapsed;
+
+          const bar = document.getElementById("timer-bar");
+          if (bar) {
+            const pct = (state.timeLeft / state.totalTime) * 100;
+            bar.style.width = `${Math.max(0, pct)}%`;
+          }
+
+          if (state.timeLeft <= 0) {
+            handleFail("¡TIEMPO AGOTADO!");
+          }
+        }, 30);
+        render();
+      }
+
+      function handleSwipe(direction) {
+        if (state.screen !== "GAME") return;
+        let correctDir = state.challenge.direction;
+        if (state.challenge.type === "INVERTED") {
+          const opposites = { UP: "DOWN", DOWN: "UP", LEFT: "RIGHT", RIGHT: "LEFT" };
+          correctDir = opposites[state.challenge.direction];
+        }
+
+        if (direction === correctDir) {
+          triggerVibration(30);
+          state.score++;
+          state.feedback = "CORRECT";
+          nextRound();
+        } else {
+          handleFail("¡DIRECCIÓN INCORRECTA!");
+        }
+      }
+
+      function handleFail(reason) {
+        triggerVibration([100, 50, 100, 50, 200]);
+        if (state.timerInterval) clearInterval(state.timerInterval);
+        const currentPlayer = state.players[state.currentPlayerIdx] || "Jugador 1";
+        const currentMax = state.scores[currentPlayer] || 0;
+        if (state.score > currentMax) {
+          state.scores[currentPlayer] = state.score;
+        }
+        state.screen = "FAIL";
+        render();
+      }
+
+      // --- RENDER ---
+      function render() {
+        app.innerHTML = "";
+        if (state.screen === "MENU") renderMenu();
+        else if (state.screen === "GAME") renderGame();
+        else if (state.screen === "FAIL") renderFail();
+      }
+
+      function renderMenu() {
+        const currentPlayer = state.players[state.currentPlayerIdx] || "Esperando...";
+        const hasPlayers = state.players.length > 0;
+        let playersListHTML = state.players
+          .map(
+            (p, i) => `
+                <div class="flex justify-between px-3 py-2 rounded ${i === state.currentPlayerIdx ? "bg-yellow-900/30 border border-yellow-600" : "bg-neutral-700"}">
+                   <span>${p}</span>
+                   <span class="font-mono text-yellow-400">${state.scores[p] || 0} pts</span>
+                 </div>
+            `,
+          )
+          .join("");
+
+        const html = `
+                <div class="safe-top-padding flex-1 flex flex-col p-6 items-center justify-center space-y-8 animate-in fade-in h-full">
+                    <div class="text-center">
+                        <h1 class="text-5xl font-black text-yellow-400 mb-2 tracking-tighter leading-none">CEREBRO<br/>FRITO</h1>
+                        <p class="text-gray-400 text-sm tracking-widest">EL DESAFÍO STROOP</p>
+                    </div>
+                    <div class="w-full max-w-xs bg-neutral-800 rounded-xl p-4 border border-neutral-700 shadow-lg">
+                        <div class="flex gap-2 mb-4">
+                            <input id="new-player-input" type="text" placeholder="Nombre..." 
+                                class="flex-1 bg-neutral-900 px-3 py-2 rounded text-white focus:outline-none focus:ring-2 ring-yellow-500 border border-neutral-700">
+                            <button onclick="addPlayerAction()" class="bg-yellow-600 px-4 rounded text-black font-bold hover:bg-yellow-500 transition-colors">+</button>
+                        </div>
+                        <div class="max-h-40 overflow-y-auto space-y-1 text-sm">
+                            ${state.players.length === 0 ? '<p class="text-gray-500 text-center italic py-2">Añade jugadores para empezar</p>' : playersListHTML}
+                        </div>
+                    </div>
+                    ${
+                      hasPlayers
+                        ? `
+                        <div class="text-center w-full max-w-xs animate-pulse">
+                            <p class="text-xs text-gray-500 mb-2 font-bold uppercase">TURNO DE</p>
+                            <h2 class="text-4xl font-black text-white mb-6 truncate">${currentPlayer}</h2>
+                            <button onclick="startGame()" class="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-black text-2xl py-5 rounded-2xl shadow-[0_0_20px_rgba(250,204,21,0.4)] transform active:scale-95 transition-all">
+                                ¡JUGAR!
+                            </button>
+                        </div>
+                    `
+                        : ""
+                    }
+                </div>
+            `;
+        app.innerHTML = html;
+      }
+
+      function renderGame() {
+        if (!state.challenge) return;
+        const bgClass = state.challenge.type === "INVERTED" ? "bg-red-600" : "bg-green-600";
+
+        // Usamos posicionamiento fijo para el HUD (Heads-Up Display) para que siempre esté encima y respete el notch
+        const html = `
+                <div id="game-container" class="absolute inset-0 w-full h-full flex flex-col transition-colors duration-200 ${bgClass}">
+                    
+                    <!-- HUD: Barra de Tiempo y Puntuación -->
+                    <!-- Barra de tiempo -->
+                    <div class="timer-bar-container w-full bg-black/30">
+                        <div id="timer-bar" class="h-full bg-white transition-none" style="width: 100%"></div>
+                    </div>
+
+                    <!-- Puntuación -->
+                    <div class="score-display bg-black/40 backdrop-blur px-4 py-2 rounded-full font-mono text-2xl font-bold border border-white/20 shadow-lg">
+                        ${state.score}
+                    </div>
+
+                    <!-- Zona Central -->
+                    <div class="flex-1 flex flex-col items-center justify-center pointer-events-none p-4 select-none safe-top-padding">
+                        <div class="mb-12 transform scale-125">
+                            <div class="bg-white/20 p-8 rounded-full backdrop-blur-sm shadow-2xl">
+                                <div class="text-white drop-shadow-lg">
+                                    ${ICONS[state.challenge.direction]}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center space-y-2">
+                            <h3 class="text-xl font-bold uppercase tracking-widest text-white/80">INSTRUCCIÓN</h3>
+                            <div class="bg-black/80 px-8 py-6 rounded-2xl border-4 border-white shadow-2xl">
+                                ${
+                                  state.challenge.type === "NORMAL"
+                                    ? '<p class="text-4xl font-black text-green-400">SIGUE</p>'
+                                    : '<p class="text-4xl font-black text-red-500 animate-pulse">¡AL REVÉS!</p>'
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 text-center text-white/50 text-sm font-bold tracking-wider pointer-events-none pb-12">
+                        DESLIZA EL DEDO
+                    </div>
+                </div>
+            `;
+        app.innerHTML = html;
+
+        const container = document.getElementById("game-container");
+        container.addEventListener("touchstart", handleTouchStart, { passive: false });
+        container.addEventListener("touchend", handleTouchEnd, { passive: false });
+        container.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
+      }
+
+      function renderFail() {
+        const currentPlayer = state.players[state.currentPlayerIdx];
+        const html = `
+                <div class="flex-1 bg-red-950 flex flex-col items-center justify-center p-6 text-center animate-in zoom-in duration-300 safe-top-padding">
+                    ${ICONS.SKULL}
+                    <h2 class="text-7xl font-black text-white mb-2 drop-shadow-md">${state.score}</h2>
+                    <p class="text-red-300 font-bold tracking-[0.2em] mb-10 text-sm">PUNTOS OBTENIDOS</p>
+                    <div class="bg-black/40 p-6 rounded-xl border border-red-800 mb-8 w-full max-w-xs shadow-lg">
+                        <p class="text-gray-400 text-xs mb-1 uppercase font-bold">Jugador</p>
+                        <p class="text-2xl font-bold text-white truncate">${currentPlayer}</p>
+                    </div>
+                    <div class="flex gap-4 w-full max-w-xs">
+                         <button onclick="startGame()" class="flex-1 bg-white text-red-900 py-4 rounded-xl font-bold flex flex-col items-center justify-center active:scale-95 shadow-lg transition-transform hover:bg-gray-100">
+                           <div class="mb-1 text-red-900">${ICONS.RETRY}</div>
+                           REINTENTAR
+                         </button>
+                         <button onclick="nextPlayer()" class="flex-1 bg-red-600 text-white py-4 rounded-xl font-bold flex flex-col items-center justify-center active:scale-95 shadow-lg transition-transform hover:bg-red-500">
+                           <div class="mb-1 text-white">${ICONS.NEXT}</div>
+                           SIGUIENTE
+                         </button>
+                    </div>
+                </div>
+            `;
+        app.innerHTML = html;
+      }
+
+      // --- EVENTOS ---
+      function addPlayerAction() {
+        const input = document.getElementById("new-player-input");
+        const name = input.value.trim();
+        if (name) {
+          state.players.push(name);
+          input.value = "";
+          renderMenu();
+        }
+      }
+
+      function nextPlayer() {
+        state.currentPlayerIdx = (state.currentPlayerIdx + 1) % state.players.length;
+        state.screen = "MENU";
+        render();
+      }
+
+      function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }
+
+      function handleTouchEnd(e) {
+        if (!touchStartX || !touchStartY) return;
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const diffX = endX - touchStartX;
+        const diffY = endY - touchStartY;
+        const timeDiff = Date.now() - touchStartTime;
+        touchStartX = 0;
+        touchStartY = 0;
+        if (timeDiff > 500) return;
+
+        // Usamos el nuevo umbral configurado
+        if (Math.abs(diffX) < CONFIG.SWIPE_THRESHOLD && Math.abs(diffY) < CONFIG.SWIPE_THRESHOLD)
+          return;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+          handleSwipe(diffX > 0 ? "RIGHT" : "LEFT");
+        } else {
+          handleSwipe(diffY > 0 ? "DOWN" : "UP");
+        }
+      }
+
+      render();
+    </script>
+  </body>
+</html>
