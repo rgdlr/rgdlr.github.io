@@ -1,172 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <title>AI-Enabled Full Stack Software Engineer</title> -->
   <title>Ingeniero de Software Full Stack Asistido por IA</title>
-  <meta name="description" content="Rodrigo G. es un Ingeniero de Software Full Stack Asistido por IA, cofundador en Madrid y especialista en crear productos digitales uniendo código, inteligencia artificial y negocio." />
+  <meta name="description"
+    content="Rodrigo G. es un Ingeniero de Software Full Stack Asistido por IA, cofundador en Madrid y especialista en crear productos digitales uniendo código, inteligencia artificial y negocio." />
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=boska@400,500,700&display=swap" rel="stylesheet" />
-  <style>
-    :root, [data-theme="light"] { --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem); --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.05rem); --text-lg: clamp(1.125rem, 1rem + 0.65vw, 1.4rem); --text-xl: clamp(1.5rem, 1.15rem + 1vw, 2rem); --text-2xl: clamp(2.1rem, 1.4rem + 2.4vw, 3.6rem); --color-bg: #f7f6f2; --color-surface: #fbfaf7; --color-surface-2: #f0ede8; --color-text: #201d18; --color-text-muted: #6f6a62; --color-text-faint: #9f9990; --color-border: rgba(32, 29, 24, 0.12); --color-divider: rgba(32, 29, 24, 0.08); --color-primary: #0b0b02; --color-primary-hover: #08060c; --color-primary-soft: rgba(11, 11, 2, 0.06); --color-text-inverse: #f8f6f2; --shadow-sm: 0 4px 12px rgba(26, 22, 16, 0.03); --shadow-md: 0 12px 32px rgba(26, 22, 16, 0.08); --shadow-hover: 0 20px 40px rgba(26, 22, 16, 0.12); --bento-radius: 1.75rem; --bento-pad: clamp(1.5rem, 3vw, 2.5rem); --bento-gap: clamp(1rem, 2vw, 1.5rem); --font-body: 'General Sans', Inter, sans-serif; --font-display: 'Boska', Georgia, serif; --content: 1240px; --color-highlight-bg: color-mix(in srgb, var(--color-text) 3%, var(--color-surface)); }
-    [data-theme="dark"] { --color-bg: #151412; --color-surface: #1d1b18; --color-surface-2: #25221e; --color-text: #e3dfd8; --color-text-muted: #b0aa9f; --color-text-faint: #7d776e; --color-border: rgba(227, 223, 216, 0.12); --color-divider: rgba(227, 223, 216, 0.08); --color-primary: #f7fef6; --color-primary-hover: #f2f2f8; --color-primary-soft: rgba(247, 254, 246, 0.08); --color-text-inverse: #181613; --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2); --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.3); --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.45); --color-highlight-bg: color-mix(in srgb, var(--color-text) 8%, var(--color-surface-2)); }
-    * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    body { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.65; background: var(--color-bg); color: var(--color-text); }
-    a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
-    button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
-    article, section { scroll-margin-top: 6.5rem; }
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: var(--color-bg); }
-    ::-webkit-scrollbar-thumb { background: var(--color-text-faint); border-radius: 999px; border: 2px solid var(--color-bg); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
-    .skip-link { position: absolute; left: 1rem; top: -100%; background: var(--color-primary); color: var(--color-text-inverse); padding: .5rem 1rem; border-radius: 999px; z-index: 100; transition: top 0.2s; }
-    .skip-link:focus { top: 1rem; }
-    .shell { width: min(calc(100% - 2rem), var(--content)); margin: 0 auto; }
-    .header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: color-mix(in srgb, var(--color-bg) 75%, transparent); border-bottom: 1px solid var(--color-divider); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 76px; }
-    .brand { display: flex; align-items: center; gap: .85rem; font-size: var(--text-sm); }
-    .brand-mark { width: 42px; height: 42px; color: var(--color-primary); }
-    .brand-text strong { display: block; font-size: var(--text-base); }
-    .brand-text span { color: var(--color-text-muted); font-size: var(--text-xs); }
-    .nav { display: flex; align-items: center; gap: 1rem; }
-    .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-    .nav-links a { color: var(--color-text-muted); font-size: var(--text-sm); font-weight: 500; }
-    .nav-links a:hover { color: var(--color-primary); }
-    .theme-toggle, .cta-inline { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-surface); box-shadow: var(--shadow-sm); transition: all 0.2s ease; }
-    .theme-toggle:hover { background: var(--color-surface-2); }
-    .cta-inline { padding: 0 1.25rem; color: var(--color-text-inverse); background: var(--color-primary); border-color: transparent; font-size: var(--text-sm); font-weight: 500; }
-    .cta-inline:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); }
-    .bento-pop { animation: bento-pop 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
-    .bento-hero { animation-delay: 0.05s; }
-    .bento-panel { animation-delay: 0.15s; }
-    .reveal-scroll { opacity: 0; transform: translateY(40px) scale(0.96); will-change: transform, opacity; }
-    .bento-grid { display: grid; grid-template-columns: 1fr; gap: var(--bento-gap); padding: 2rem 0 4rem; }
-    .bento-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--bento-radius); padding: var(--bento-pad); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 1.5rem; transition: box-shadow 0.4s ease, border-color 0.4s ease; position: relative; overflow: hidden; }
-    .bento-card::after { content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, color-mix(in srgb, var(--color-text) 2.5%, transparent), transparent); transform: skewX(-25deg); transition: none; pointer-events: none; }
-    .bento-card:hover { box-shadow: var(--shadow-hover); border-color: var(--color-divider); }
-    .bento-card:hover::after { left: 200%; transition: left 0.7s ease; }
-    .bento-hero { background: linear-gradient(145deg, color-mix(in srgb, var(--color-primary-soft) 80%, transparent), transparent 45%), var(--color-surface); justify-content: flex-start; gap: 2.5rem; min-height: 100%; }
-    .bento-contacto { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; }
-    .eyebrow, .meta-label { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .85rem; border-radius: 999px; background: var(--color-primary-soft); color: var(--color-primary); font-size: var(--text-xs); letter-spacing: .05em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.75rem; }
-    h1, h2 { font-family: var(--font-display); line-height: 1.05; letter-spacing: -.03em; }
-    h1 { font-size: var(--text-2xl); max-width: 22ch; margin-top: 1rem; }
-    h2 { font-size: var(--text-xl); }
-    .lead { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 40ch; margin-top: 1rem; }
-    .section-head { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
-    .section-subhead { color: var(--color-text-muted); margin-bottom: 0.5rem; }
-    .hero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
-    .stat { padding: 1.5rem; border: 1px solid var(--color-divider); border-radius: 1rem; background: color-mix(in srgb, var(--color-surface-2) 50%, transparent); }
-    .stat strong { display: block; font-size: var(--text-xl); line-height: 1; margin-bottom: .5rem; }
-    .stat span { color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.4; display: block; }
-    .hero-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: 1rem; margin-top: auto; }
-    .btn { min-height: 52px; padding: 0 1.5rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); font-size: var(--text-sm); font-weight: 600; transition: all 0.2s ease; background: var(--color-surface); }
-    .btn:hover { background: var(--color-surface-2); border-color: var(--color-divider); }
-    .btn-primary { background: var(--color-primary); color: var(--color-text-inverse); border-color: transparent; }
-    .btn-primary:hover { background: var(--color-primary-hover); color: var(--color-text-inverse); box-shadow: var(--shadow-md); }
-    .mini-list { display: grid; gap: 1.25rem; margin-bottom: 1rem; }
-    .mini-item { padding-bottom: 1.25rem; border-bottom: 1px solid var(--color-divider); }
-    .mini-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .mini-item strong { display: block; margin-bottom: 0.25rem; font-size: 1.05rem; }
-    .timeline-body { color: var(--color-text-muted); display: flex; flex-direction: column; gap: 0.5rem; }
-    .timeline-body ul { font-size: var(--text-xs); padding: 0.5rem 0 0.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-    .timeline-body ul ul { gap: 0.25rem; }
-    .mini-item p { color: var(--color-text-muted); }
-    .timeline { position: relative; padding-left: 1.75rem; display: flex; flex-direction: column; gap: 2.5rem; margin-top: 1rem; }
-    .timeline-item { position: relative; display: grid; gap: 0.5rem; cursor: pointer; }
-    .timeline-item::after { content: ''; position: absolute; left: calc(-1.75rem + 3.5px); top: 0.5rem; bottom: -2.5rem; width: 1px; background: var(--color-divider); z-index: 1; }
-    .timeline-item:last-child::after { display: none; }
-    .timeline-item::before { content: ''; position: absolute; left: -1.75rem; top: 0.4rem; width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--color-text) 15%, var(--color-surface)); z-index: 2; transition: background 0.3s ease; box-shadow: 0 0 0 6px var(--color-surface); }
-    .timeline-item:hover::before { background: var(--color-text-muted); }
-    .timeline-top { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
-    .timeline-top h3 { font-size: 1.1rem; line-height: 1.3; color: var(--color-text); }
-    .timeline-meta { color: var(--color-text-muted); font-size: var(--text-sm); display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-top: 0.25rem; }
-    .timeline-meta span:not(:last-child)::after { content: "•"; margin-left: 0.75rem; color: var(--color-text-faint); }
-    .timeline-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: var(--color-text-muted); transition: all 0.2s ease; margin-top: -4px; flex-shrink: 0; position: static; }
-    .timeline-link::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; border-radius: 0.5rem; }
-    .timeline-item:hover .timeline-link { color: var(--color-primary); background: var(--color-surface-2); }
-    .timeline-link svg { width: 16px; height: 16px; }
-    .timeline-link-internal { position: relative; z-index: 10; text-decoration: underline; text-underline-offset: 4px; }
-    .timeline-link-internal:hover { color: var(--color-primary); }
-    .timeline-company { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; text-decoration-thickness: 1px; transition: all 0.3s ease; }
-    .timeline-item:hover .timeline-company { text-decoration-color: var(--color-text-muted); }
-    .certs-item { position: relative; }
-    .certs-item strong { display: flex; justify-content: space-between; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; text-decoration-thickness: 1px; transition: all 0.3s ease; }
-    .certs-item:hover strong:has(.certs-link) { text-decoration-color: var(--color-primary); }
-    .certs-item:hover .certs-link { color: var(--color-primary); background: var(--color-surface-2); }
-    .certs-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: var(--color-text-muted); transition: all 0.2s ease; margin-top: -4px; flex-shrink: 0; position: static; }
-    .certs-link::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; border-radius: 0.5rem; }
-    .certs-link svg { width: 16px; height: 16px; }
-    .chips { display: flex; flex-wrap: wrap; gap: .6rem; }
-    .chip { padding: .35rem .7rem; border-radius: 0.5rem; background: var(--color-surface); border: 1px solid var(--color-border); font-size: var(--text-sm); font-weight: 500; cursor: default; transition: all 0.2s ease; }
-    .chip.highlight { background: var(--color-highlight-bg); color: var(--color-text); border-color: color-mix(in srgb, var(--color-text) 15%, transparent); font-weight: 600; }
-    .contact-list { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-    .contact-list a { font-weight: 500; color: var(--color-text-muted); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: all 0.2s ease; }
-    .contact-list a:hover { color: var(--color-primary); text-decoration-color: var(--color-primary); }
-    .reflective-element { display: flex; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; padding: 0 1rem; }
-    .reflective-content { display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.65rem 1.5rem; border: 1px dashed var(--color-border); border-radius: 999px; background: var(--color-surface); color: var(--color-text-muted); font-size: var(--text-sm); transition: all 0.4s ease; cursor: default; }
-    footer { padding: 8rem 0 8rem; color: var(--color-text-muted); font-size: var(--text-sm); text-align: center; }
-    @keyframes bento-pop {
-      0% { opacity: 0; transform: translateY(30px) scale(0.98); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @media (min-width: 768px) {
-      .bento-grid { grid-template-columns: repeat(2, 1fr); }
-      .bento-hero, .bento-panel, .bento-experiencia, .bento-contacto { grid-column: span 2; }
-      .bento-skills, .bento-educacion { grid-column: span 1; }
-    }
-    @media (min-width: 1024px) {
-      .bento-grid { grid-template-columns: repeat(12, 1fr); }
-      .bento-hero { grid-column: span 8; }
-      .bento-panel { grid-column: span 4; }
-      .bento-experiencia { grid-column: span 7; grid-row: span 2; }
-      .bento-skills { grid-column: span 5; }
-      .bento-educacion { grid-column: span 5; }
-      .bento-contacto { grid-column: span 12; }
-    }
-    @media (max-width: 640px) {
-      .shell { width: min(calc(100% - 1rem), var(--content)); }
-      .header-inner { min-height: 64px; }
-      .timeline-meta span:not(:last-child)::after { display: none; }
-      .timeline-meta { flex-direction: column; gap: 0.25rem; align-items: flex-start; }
-      .timeline { padding-left: 1.5rem; gap: 2rem; }
-      .timeline-item::after { left: calc(-1.5rem + 3.5px); bottom: -2rem; }
-      .timeline-item::before { left: -1.5rem; }
-    }
-    @media (max-width: 980px) {
-      .nav-links { display: none; }
-    }
-    @media print {
-      @page { size: A4; margin: 10mm 4mm; }
-      html, body { background: #fff !important; color: #111 !important; }
-      body { font-size: 10.5pt; line-height: 1.42; }
-      .header nav, .header svg, .theme-toggle, footer, .reflective-element { display: none !important; }
-      .bento-grid { display: block; padding: 0; }
-      .shell { width: 100%; max-width: none; }
-      .bento-card { box-shadow: none !important; background: #fff !important; border: none !important; margin-bottom: 8mm; padding: 6mm !important; transform: none !important; opacity: 1 !important; animation: none !important; }
-      .bento-card .timeline-item { break-inside: avoid; }
-      .bento-panel { display: none !important; }
-      h1 { font-size: 24pt; max-width: 100%; }
-      h2 { font-size: 15pt !important; }
-      .lead { font-size: 11pt; margin-top: 4mm; max-width: none; }
-      .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
-      .timeline::before, .timeline-item::before { margin: 4px 0 0 6px; width: 6px; height: 6px; box-shadow: 0 0 0 4px var(--color-surface); }
-      a { color: inherit !important; }
-      .btn, .cert-link svg, .timeline-link svg { display: none; }
-    }
-  </style>
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=boska@400,500,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./index.css" />
+  <script src="./index.js" defer></script>
 </head>
+
 <body>
   <a href="#contenido" class="skip-link">Saltar al contenido</a>
   <header class="header">
     <div class="shell header-inner">
       <a class="brand" href="#top" aria-label="Inicio">
-        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logotipo personal">
-          <rect x="5" y="5" width="38" height="38" rx="12" stroke="currentColor" stroke-width="2.4"/>
-          <path d="M15 32V16H24.5C29.1 16 32 18.4 32 22.4C32 25.6 30 27.5 26.8 28L33 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Logotipo personal">
+          <rect x="5" y="5" width="38" height="38" rx="12" stroke="currentColor" stroke-width="2.4" />
+          <path d="M15 32V16H24.5C29.1 16 32 18.4 32 22.4C32 25.6 30 27.5 26.8 28L33 32" stroke="currentColor"
+            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <span class="brand-text"><strong>Rodrigo G.</strong><span>Creador multidisciplinar</span></span>
       </a>
@@ -178,7 +38,6 @@
           <a href="#educacion">Educación</a>
           <a href="#contacto">Contacto</a>
         </div>
-        <a class="cta-inline" href="mailto:rodrigrtic@gmail.com">Contactar</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar tema"></button>
       </nav>
     </div>
@@ -188,12 +47,17 @@
       <div>
         <span class="eyebrow">Madrid · España</span>
         <h1>Ingeniero de Software Full Stack Asistido por IA</h1>
-        <p class="lead">Especialista en la construcción de productos digitales, integrando excelencia técnica, visión estratégica de negocio y ejecución creativa. Enfoque actual orientado a la inteligencia artificial y la automatización de procesos.</p>
+        <p class="lead">Especialista en la construcción de productos digitales, integrando excelencia técnica, visión
+          estratégica de negocio y ejecución creativa. Enfoque actual orientado a la inteligencia artificial y la
+          automatización de procesos.</p>
       </div>
       <div class="hero-grid" aria-label="Resumen profesional">
-        <div class="stat"><strong>7+ años</strong><span>Trayectoria sólida en ingeniería de software y creación de productos digitales</span></div>
-        <div class="stat"><strong>MULTIROL</strong><span>Ingeniería, co-creación de startups, desarrollo full stack y dirección creativa</span></div>
-        <div class="stat"><strong>ES · EN · FR</strong><span>Español (nativo), inglés (profesional) y francés (elemental)</span></div>
+        <div class="stat"><strong>7+ años</strong><span>Trayectoria sólida en ingeniería de software y creación de
+            productos digitales</span></div>
+        <div class="stat"><strong>MULTIROL</strong><span>Ingeniería, co-creación de startups, desarrollo full stack y
+            dirección creativa</span></div>
+        <div class="stat"><strong>ES · EN · FR</strong><span>Español (nativo), inglés (profesional) y francés
+            (elemental)</span></div>
       </div>
       <div class="hero-actions">
         <a class="btn btn-primary" href="mailto:rodrigrtic@gmail.com">Escríbeme</a>
@@ -205,17 +69,26 @@
         <span class="meta-label">Perfil</span>
         <h2>Tecnología, producto y narrativa</h2>
       </div>
-      <p class="section-subhead">Perfil híbrido que fusiona la ingeniería de software, el emprendimiento y la dirección creativa, abarcando desde la concepción de la idea hasta el despliegue final. Foco en una ejecución técnica orientada a la utilidad, la escalabilidad y la excelencia visual.</p>
+      <p class="section-subhead">Perfil híbrido que fusiona la ingeniería de software, el emprendimiento y la dirección
+        creativa, abarcando desde la concepción de la idea hasta el despliegue final. Foco en una ejecución técnica
+        orientada a la utilidad, la escalabilidad y la excelencia visual.</p>
       <div class="mini-list">
-        <div class="mini-item"><strong>Especialidad</strong><p>Desarrollo full stack con un fuerte énfasis en frontend, arquitectura web escalable y productos digitales de alto rendimiento.</p></div>
-        <div class="mini-item"><strong>Diferencial</strong><p>Habilidad para alinear código limpio, objetivos de negocio y estética de marca en proyectos de alta exigencia y ambición.</p></div>
+        <div class="mini-item"><strong>Especialidad</strong>
+          <p>Desarrollo full stack con un fuerte énfasis en frontend, arquitectura web escalable y productos digitales
+            de alto rendimiento.</p>
+        </div>
+        <div class="mini-item"><strong>Diferencial</strong>
+          <p>Habilidad para alinear código limpio, objetivos de negocio y estética de marca en proyectos de alta
+            exigencia y ambición.</p>
+        </div>
       </div>
     </aside>
     <article class="bento-card bento-experiencia reveal-scroll" id="experiencia">
       <div class="section-head">
         <span class="meta-label">Experiencia</span>
         <h2>Trayectoria profesional</h2>
-        <p class="section-subhead">Una carrera forjada a través de la creación de startups propias, el desarrollo de software corporativo y la dirección de proyectos orientados a la innovación tecnológica.</p>
+        <p class="section-subhead">Una carrera forjada a través de la creación de startups propias, el desarrollo de
+          software corporativo y la dirección de proyectos orientados a la innovación tecnológica.</p>
       </div>
       <div class="timeline">
         <div class="timeline-item">
@@ -225,14 +98,24 @@
               <span>Cofundador · Emprendedor multidisciplinar</span>
               <div class="timeline-meta"><span>jun. 2023 — actualidad</span><span>Madrid</span></div>
             </div>
-            <a href="https://yelatoagency.com" class="timeline-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Yelato Agency">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://yelatoagency.com" class="timeline-link" target="_blank" rel="noopener noreferrer"
+              aria-label="Ver Yelato Agency">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </div>
           <div class="timeline-body">
-            <p>Agencia tecnológica y creativa cofundada junto a <a href="https://www.linkedin.com/in/javier-herrer%C3%ADas-gonz%C3%A1lez-b0496a20b" target="_blank" rel="noopener noreferrer" class="timeline-link-internal">Javier</a>, experto en marketing y publicidad. Un proyecto que consolida años de sinergia y desarrollo profesional multidisciplinar.</p>
-            <p>Especializados en la creación de soluciones digitales para clientes B2B, B2C y B2B2C en diversos sectores. Aportamos una visión estratégica del mercado combinada con una sólida ejecución técnica para escalar negocios mediante la tecnología.</p>
-            <p>A través de nuestros proyectos más destacados, hemos construido una base técnica y empresarial robusta que continúa en constante crecimiento y evolución.</p>
+            <p>Agencia tecnológica y creativa cofundada junto a <a
+                href="https://www.linkedin.com/in/javier-herrer%C3%ADas-gonz%C3%A1lez-b0496a20b" target="_blank"
+                rel="noopener noreferrer" class="timeline-link-internal">Javier</a>, experto en marketing y publicidad.
+              Un proyecto que consolida años de sinergia y desarrollo profesional multidisciplinar.</p>
+            <p>Especializados en la creación de soluciones digitales para clientes B2B, B2C y B2B2C en diversos
+              sectores. Aportamos una visión estratégica del mercado combinada con una sólida ejecución técnica para
+              escalar negocios mediante la tecnología.</p>
+            <p>A través de nuestros proyectos más destacados, hemos construido una base técnica y empresarial robusta
+              que continúa en constante crecimiento y evolución.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -242,15 +125,28 @@
               <span>Cofundador · CTO</span>
               <div class="timeline-meta"><span>oct. 2023 — abr. 2026</span><span>Madrid</span></div>
             </div>
-            <a href="https://home.clubinapp.com" class="timeline-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Clubin">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://home.clubinapp.com" class="timeline-link" target="_blank" rel="noopener noreferrer"
+              aria-label="Ver Clubin">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </div>
           <div class="timeline-body">
-            <p>Dirección tecnológica y estratégica desde la fundación hasta la expansión global de la plataforma. Liderazgo en la arquitectura técnica, toma de decisiones empresariales, dirección creativa y gestión de inversores. Implementación de automatizaciones avanzadas y desarrollo de sistemas RAG (Retrieval-Augmented Generation) para consultoría de datos.</p>
+            <p>Dirección tecnológica y estratégica desde la fundación hasta la expansión global de la plataforma.
+              Liderazgo en la arquitectura técnica, toma de decisiones empresariales, dirección creativa y gestión de
+              inversores. Implementación de automatizaciones avanzadas y desarrollo de sistemas RAG (Retrieval-Augmented
+              Generation) para consultoría de datos.</p>
             <ul>
-              <li><strong>Funciones</strong>: Desarrollo integral del ecosistema de software (herramientas internas, B2C, B2B y B2B2C), administración de la infraestructura, facturación, dirección ejecutiva y comunicación directa con clientes y partners.</li>
-              <li><strong>Tecnologías</strong>: HTML, CSS, JavaScript, TypeScript, React, Astro, Tailwind, Supabase, Redsys, Stripe, Vite, Vercel, NextJS, NodeJS, Git, GitHub, GitHub Actions, GitHub Copilot, ChatGPT, Perplexity, Jira, Bitbucket, Confluence, Figma, GA, GSC, GTM, PostgreSQL, MySQL, PHP, Docker, Docker Compose, Monorepo, Turborepo, Bun, Devcontainers, Cloudflare, Sentry, SonarQube, OneSignal, Google Cloud, Oracle Cloud Infrastructure, Home Server.</li>
+              <li><strong>Funciones</strong>: Desarrollo integral del ecosistema de software (herramientas internas,
+                B2C, B2B y B2B2C), administración de la infraestructura, facturación, dirección ejecutiva y comunicación
+                directa con clientes y partners.</li>
+              <li><strong>Tecnologías</strong>: HTML, CSS, JavaScript, TypeScript, React, Astro, Tailwind, Supabase,
+                Redsys, Stripe, Vite, Vercel, NextJS, NodeJS, Git, GitHub, GitHub Actions, GitHub Copilot, ChatGPT,
+                Perplexity, Jira, Bitbucket, Confluence, Figma, GA, GSC, GTM, PostgreSQL, MySQL, PHP, Docker, Docker
+                Compose, Monorepo, Turborepo, Bun, Devcontainers, Cloudflare, Sentry, SonarQube, OneSignal, Google
+                Cloud, Oracle Cloud Infrastructure, Home Server.</li>
               <li>
                 <strong>Hitos</strong>:
                 <ul>
@@ -271,23 +167,43 @@
               <span>Desarrollador Frontend Lead</span>
               <div class="timeline-meta"><span>ago. 2023 — nov. 2025</span><span>Madrid</span></div>
             </div>
-            <a href="https://www.primeit.es" class="timeline-link" target="_blank" rel="noopener noreferrer" aria-label="Ver PrimeIT">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://www.primeit.es" class="timeline-link" target="_blank" rel="noopener noreferrer"
+              aria-label="Ver PrimeIT">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </div>
           <div class="timeline-body">
-            <p>Desarrollo y optimización de interfaces con un enfoque estricto en la mantenibilidad, el rendimiento y la calidad para uno de los principales medios de comunicación en España. Evolución de la experiencia de usuario (UX) tanto en el periódico digital masivo como en el CMS interno. Implementación pionera de herramientas contextuales impulsadas por IA para optimizar el flujo de trabajo de los periodistas. Trabajo en un entorno Agile/Scrum dentro de un equipo multidisciplinar compuesto por 13 profesionales (diseño, frontend, backend y Product Owner).</p>
+            <p>Desarrollo y optimización de interfaces con un enfoque estricto en la mantenibilidad, el rendimiento y la
+              calidad para uno de los principales medios de comunicación en España. Evolución de la experiencia de
+              usuario (UX) tanto en el periódico digital masivo como en el CMS interno. Implementación pionera de
+              herramientas contextuales impulsadas por IA para optimizar el flujo de trabajo de los periodistas. Trabajo
+              en un entorno Agile/Scrum dentro de un equipo multidisciplinar compuesto por 13 profesionales (diseño,
+              frontend, backend y Product Owner).</p>
             <ul>
-              <li><strong>Funciones</strong>: Liderazgo técnico, coordinación del equipo frontend, code reviews, mentoring continuo y evaluación técnica de candidatos en procesos de selección de perfiles junior a senior.</li>
-              <li><strong>Tecnologías</strong>: HTML, CSS, JavaScript, TypeScript, React, Lit, ShadCN, MUI, Playwright, Vite, Git, Gitlab, GitHub, Bitbucket, Jira, Confluence, Docker, Docker Compose, Figma, NPM, NVM, Yarn, Nx, Lerna, Bash, NodeJS, GitHub Copilot, Claude Code, Spec Driven Development, Domain Driven Development.</li>
+              <li><strong>Funciones</strong>: Liderazgo técnico, coordinación del equipo frontend, code reviews,
+                mentoring continuo y evaluación técnica de candidatos en procesos de selección de perfiles junior a
+                senior.</li>
+              <li><strong>Tecnologías</strong>: HTML, CSS, JavaScript, TypeScript, React, Lit, ShadCN, MUI, Playwright,
+                Vite, Git, Gitlab, GitHub, Bitbucket, Jira, Confluence, Docker, Docker Compose, Figma, NPM, NVM, Yarn,
+                Nx, Lerna, Bash, NodeJS, GitHub Copilot, Claude Code, Spec Driven Development, Domain Driven
+                Development.</li>
               <li>
                 <strong>Hitos</strong>:
                 <ul>
-                  <li>Resolución de un error crítico de producción en un componente Lit durante la primera semana de incorporación, sin experiencia previa en la tecnología.</li>
-                  <li>Promoción al panel de soporte técnico en el primer mes (habitualmente requerido a los 3 meses) gracias a una rápida curva de aprendizaje y dominio de la arquitectura de los proyectos.</li>
-                  <li>Primer premio en una Hackathon interna de Inteligencia Artificial con un proyecto conceptualizado y desarrollado en 24 horas.</li>
-                  <li>Creación proactiva de una herramienta CLI (Command Line Interface) para automatizar procesos recurrentes del equipo, optimizando los tiempos de onboarding con comandos dinámicos adaptados al rol de cada integrante.</li>
-                  <li>Resolución eficiente de bloqueos críticos de infraestructura local en entornos Linux (Ubuntu) para el equipo de desarrollo.</li>
+                  <li>Resolución de un error crítico de producción en un componente Lit durante la primera semana de
+                    incorporación, sin experiencia previa en la tecnología.</li>
+                  <li>Promoción al panel de soporte técnico en el primer mes (habitualmente requerido a los 3 meses)
+                    gracias a una rápida curva de aprendizaje y dominio de la arquitectura de los proyectos.</li>
+                  <li>Primer premio en una Hackathon interna de Inteligencia Artificial con un proyecto conceptualizado
+                    y desarrollado en 24 horas.</li>
+                  <li>Creación proactiva de una herramienta CLI (Command Line Interface) para automatizar procesos
+                    recurrentes del equipo, optimizando los tiempos de onboarding con comandos dinámicos adaptados al
+                    rol de cada integrante.</li>
+                  <li>Resolución eficiente de bloqueos críticos de infraestructura local en entornos Linux (Ubuntu) para
+                    el equipo de desarrollo.</li>
                 </ul>
               </li>
             </ul>
@@ -300,25 +216,44 @@
               <span>Desarrollador Full Stack</span>
               <div class="timeline-meta"><span>sep. 2021 — ago. 2023</span><span>Madrid</span></div>
             </div>
-            <a href="https://www.inetum.com" class="timeline-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Inetum">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://www.inetum.com" class="timeline-link" target="_blank" rel="noopener noreferrer"
+              aria-label="Ver Inetum">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </div>
           <div class="timeline-body">
-            <p>Desarrollo frontend y creación de componentes para el área de banca de empresas. Traducción de diseños UX/UI a maquetación pixel-perfect e integración en una librería core de Angular, esencial para el ecosistema de proyectos de la entidad bancaria. Trabajo coordinado en un equipo Agile de 11 desarrolladores.</p>
+            <p>Desarrollo frontend y creación de componentes para el área de banca de empresas. Traducción de diseños
+              UX/UI a maquetación pixel-perfect e integración en una librería core de Angular, esencial para el
+              ecosistema de proyectos de la entidad bancaria. Trabajo coordinado en un equipo Agile de 11
+              desarrolladores.</p>
             <ul>
-              <li><strong>Funciones</strong>: Desarrollo de maquetas, flujos de navegación y creación de la librería core (componentes, directivas, pipes y servicios) en Angular.</li>
-              <li><strong>Tecnologías</strong>: HTML, CSS, Sass, JavaScript, TypeScript, Angular, Git, Bitbucket, Jira, Figma, InVision, Ambar. Patrones de diseño, Principios SOLID, Agile, Scrum.</li>
+              <li><strong>Funciones</strong>: Desarrollo de maquetas, flujos de navegación y creación de la librería
+                core (componentes, directivas, pipes y servicios) en Angular.</li>
+              <li><strong>Tecnologías</strong>: HTML, CSS, Sass, JavaScript, TypeScript, Angular, Git, Bitbucket, Jira,
+                Figma, InVision, Ambar. Patrones de diseño, Principios SOLID, Agile, Scrum.</li>
             </ul>
-            <p>Participación clave en la migración tecnológica de un portal financiero B2B. Desarrollo de módulos críticos como canales de pago, gestión de facturación y descarga segura de documentos en un entorno multidisciplinar.</p>
+            <p>Participación clave en la migración tecnológica de un portal financiero B2B. Desarrollo de módulos
+              críticos como canales de pago, gestión de facturación y descarga segura de documentos en un entorno
+              multidisciplinar.</p>
             <ul>
-              <li><strong>Funciones</strong>: Implementación de arquitecturas complejas (smart/dumb components), refactorización continua, gestión de estado y aseguramiento de la calidad del software entregado.</li>
-              <li><strong>Tecnologías</strong>: TypeScript, Angular, Módulos, Rutas, Componentes, Directivas, Pipes, Servicios, Observables, NgRx, RxJs, Git, Bitbucket, Jira, InVision, Ambar. Patrones de diseño, Principios SOLID, Ley de Demeter, Tell Don't Ask, DRY, Agile, Scrum.</li>
+              <li><strong>Funciones</strong>: Implementación de arquitecturas complejas (smart/dumb components),
+                refactorización continua, gestión de estado y aseguramiento de la calidad del software entregado.</li>
+              <li><strong>Tecnologías</strong>: TypeScript, Angular, Módulos, Rutas, Componentes, Directivas, Pipes,
+                Servicios, Observables, NgRx, RxJs, Git, Bitbucket, Jira, InVision, Ambar. Patrones de diseño,
+                Principios SOLID, Ley de Demeter, Tell Don't Ask, DRY, Agile, Scrum.</li>
             </ul>
-            <p>Diseño e implementación de una librería transversal de componentes para un portal de pagos bancario, basado en arquitecturas hexagonales y de microfrontends. Objetivo centrado en maximizar la escalabilidad y la reutilización en toda la organización.</p>
+            <p>Diseño e implementación de una librería transversal de componentes para un portal de pagos bancario,
+              basado en arquitecturas hexagonales y de microfrontends. Objetivo centrado en maximizar la escalabilidad y
+              la reutilización en toda la organización.</p>
             <ul>
-              <li><strong>Funciones</strong>: Toma de requisitos funcionales, desarrollo de componentes accesibles, creación de tests unitarios, refactorización y despliegue continuo.</li>
-              <li><strong>Tecnologías</strong>: TypeScript, React, Hooks, Context, Redux, Webpack, Storybook, Jest, Testing Library, Web Components, Angular, Java, Spring, MySQL, Git, Git Hooks, Bitbucket, Jira, Figma, Patrones de diseño, SOLID, Scrum, Arquitectura Hexagonal, Arquitectura de Microfrontends.</li>
+              <li><strong>Funciones</strong>: Toma de requisitos funcionales, desarrollo de componentes accesibles,
+                creación de tests unitarios, refactorización y despliegue continuo.</li>
+              <li><strong>Tecnologías</strong>: TypeScript, React, Hooks, Context, Redux, Webpack, Storybook, Jest,
+                Testing Library, Web Components, Angular, Java, Spring, MySQL, Git, Git Hooks, Bitbucket, Jira, Figma,
+                Patrones de diseño, SOLID, Scrum, Arquitectura Hexagonal, Arquitectura de Microfrontends.</li>
             </ul>
           </div>
         </div>
@@ -329,15 +264,23 @@
               <span>Cofundador · Ingeniero de software y audiovisual</span>
               <div class="timeline-meta"><span>jun. 2021 — oct. 2023</span><span>Madrid</span></div>
             </div>
-            <a href="https://royaltours.es" class="timeline-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Royal Tours">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://royaltours.es" class="timeline-link" target="_blank" rel="noopener noreferrer"
+              aria-label="Ver Royal Tours">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </div>
           <div class="timeline-body">
-            <p>Desarrollo de soluciones tecnológicas orientadas a la modernización de negocios físicos, combinando desarrollo web clásico con experiencias digitales interactivas.</p>
-            <p>Foco en la creación de plataformas web para clientes de los sectores inmobiliario y turístico, potenciando su propuesta de valor mediante integraciones inmersivas como tours virtuales en 360° para propiedades y servicios.</p>
+            <p>Desarrollo de soluciones tecnológicas orientadas a la modernización de negocios físicos, combinando
+              desarrollo web clásico con experiencias digitales interactivas.</p>
+            <p>Foco en la creación de plataformas web para clientes de los sectores inmobiliario y turístico,
+              potenciando su propuesta de valor mediante integraciones inmersivas como tours virtuales en 360° para
+              propiedades y servicios.</p>
             <ul>
-              <li><strong>Funciones</strong>: Desarrollo de soluciones web full stack, diseño de arquitectura de software, implementación de funcionalidades a medida y mantenimiento de sistemas operativos.</li>
+              <li><strong>Funciones</strong>: Desarrollo de soluciones web full stack, diseño de arquitectura de
+                software, implementación de funcionalidades a medida y mantenimiento de sistemas operativos.</li>
               <li><strong>Tecnologías</strong>: HTML, CSS, JavaScript, NodeJS, Express, MongoDB, Git.</li>
             </ul>
           </div>
@@ -355,8 +298,8 @@
         <span class="chip highlight">HTML</span>
         <span class="chip highlight">JavaScript</span>
         <span class="chip highlight">TypeScript</span>
-        <span class="chip">C++</span>
         <span class="chip">C</span>
+        <span class="chip">C++</span>
         <span class="chip">Java</span>
         <span class="chip">JSON</span>
         <span class="chip">Kotlin</span>
@@ -365,63 +308,84 @@
         <span class="chip">Python</span>
         <span class="chip">Sass</span>
       </div>
-      <strong>Frameworks</strong>
+      <strong>Entornos de Ejecución</strong>
       <div class="chips">
-        <span class="chip highlight">NextJS</span>
         <span class="chip highlight">NodeJS</span>
-        <span class="chip">Angular</span>
         <span class="chip">Bun</span>
         <span class="chip">Deno</span>
+      </div>
+      <strong>Frameworks</strong>
+      <div class="chips">
+        <span class="chip highlight">Expo</span>
+        <span class="chip highlight">Express</span>
+        <span class="chip highlight">NextJS</span>
+        <span class="chip">Angular</span>
+        <span class="chip">Astro</span>
+        <span class="chip">Hono</span>
         <span class="chip">NestJS</span>
         <span class="chip">Spring</span>
+        <span class="chip">Tailwind</span>
       </div>
       <strong>Librerías</strong>
       <div class="chips">
-        <span class="chip highlight">Express</span>
-        <span class="chip highlight">React Native</span>
         <span class="chip highlight">React</span>
-        <span class="chip">Astro</span>
+        <span class="chip highlight">React Native</span>
         <span class="chip">Formik</span>
-        <span class="chip">Hono</span>
-        <span class="chip">Jest</span>
         <span class="chip">jQuery</span>
         <span class="chip">MUI</span>
-        <span class="chip">OneSignal</span>
-        <span class="chip">Playwright</span>
         <span class="chip">React Hook Form</span>
         <span class="chip">React Query</span>
         <span class="chip">Redux</span>
         <span class="chip">ShadCN</span>
-        <span class="chip">Storybook</span>
         <span class="chip">SWR</span>
-        <span class="chip">Tailwind</span>
-        <span class="chip">Testing Library</span>
-        <span class="chip">Vitest</span>
         <span class="chip">Zod</span>
         <span class="chip">Zustand</span>
+      </div>
+      <strong>APIs</strong>
+      <div class="chips">
+        <span class="chip highlight">REST API</span>
+        <span class="chip">GraphQL</span>
+        <span class="chip">OpenAPI / Swagger</span>
+        <span class="chip">WebSockets</span>
+      </div>
+      <strong>Pruebas</strong>
+      <div class="chips">
+        <span class="chip highlight">Playwright</span>
+        <span class="chip highlight">Vitest</span>
+        <span class="chip">Jest</span>
+        <span class="chip">Testing Library</span>
       </div>
       <strong>Bases de Datos</strong>
       <div class="chips">
         <span class="chip highlight">PostgreSQL</span>
+        <span class="chip">Drizzle</span>
         <span class="chip">MariaDB</span>
         <span class="chip">MongoDB</span>
         <span class="chip">MySQL</span>
         <span class="chip">NoSQL</span>
+        <span class="chip">Prisma</span>
         <span class="chip">SQL</span>
       </div>
-      <strong>Herramientas</strong>
+      <strong>Inteligencia Artificial</strong>
       <div class="chips">
         <span class="chip highlight">Claude Code</span>
         <span class="chip highlight">GitHub Copilot</span>
         <span class="chip highlight">Open Code</span>
+        <span class="chip">ChatGPT</span>
+        <span class="chip">Gemini</span>
+        <span class="chip">MCP</span>
+        <span class="chip">Perplexity</span>
+        <span class="chip">RAG</span>
+      </div>
+      <strong>Herramientas</strong>
+      <div class="chips">
         <span class="chip highlight">VSCode</span>
         <span class="chip">Bash</span>
         <span class="chip">Bitbucket</span>
-        <span class="chip">ChatGPT</span>
         <span class="chip">Commitlint</span>
         <span class="chip">Confluence</span>
         <span class="chip">ESLint</span>
-        <span class="chip">Gemini</span>
+        <span class="chip">Figma</span>
         <span class="chip">Git</span>
         <span class="chip">GitHub</span>
         <span class="chip">Gitlab</span>
@@ -429,27 +393,22 @@
         <span class="chip">Google Search Console</span>
         <span class="chip">Google Tag Manager</span>
         <span class="chip">Husky</span>
-        <span class="chip">Jenkins</span>
         <span class="chip">Jira</span>
-        <span class="chip">Kanban</span>
         <span class="chip">Lerna</span>
         <span class="chip">Lint Staged</span>
         <span class="chip">Makefile</span>
-        <span class="chip">MCP</span>
-        <span class="chip">Monorepo</span>
-        <span class="chip">n8n</span>
         <span class="chip">Ngrok</span>
         <span class="chip">Nix</span>
         <span class="chip">NPM</span>
         <span class="chip">NVM</span>
         <span class="chip">Nx</span>
-        <span class="chip">Perplexity</span>
+        <span class="chip">OneSignal</span>
+        <span class="chip">Postman</span>
         <span class="chip">Prettier</span>
         <span class="chip">Sentry</span>
         <span class="chip">SonarQube</span>
         <span class="chip">SSH</span>
         <span class="chip">Vite</span>
-        <span class="chip">WCAG</span>
         <span class="chip">Yarn</span>
         <span class="chip">Zsh</span>
       </div>
@@ -464,8 +423,12 @@
         <span class="chip">GitHub Actions</span>
         <span class="chip">Google Cloud</span>
         <span class="chip">Home Server</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">n8n</span>
         <span class="chip">Oracle Cloud Infrastructure</span>
         <span class="chip">Vercel</span>
+        <span class="chip">Nginx</span>
+        <span class="chip">Kubernetes</span>
       </div>
       <strong>Sistemas Operativos</strong>
       <div class="chips">
@@ -475,7 +438,7 @@
         <span class="chip">Windows</span>
         <span class="chip">WSL</span>
       </div>
-      <strong>Diseño de Software</strong>
+      <strong>Arquitectura y Metodologías</strong>
       <div class="chips">
         <span class="chip highlight">FSD</span>
         <span class="chip highlight">SDD</span>
@@ -483,6 +446,7 @@
         <span class="chip">Arquitectura Hexagonal</span>
         <span class="chip">Arquitectura Limpia</span>
         <span class="chip">DDD</span>
+        <span class="chip">Kanban</span>
         <span class="chip">KISS</span>
         <span class="chip">Microfrontends</span>
         <span class="chip">Microservicios</span>
@@ -492,7 +456,7 @@
         <span class="chip">SOLID</span>
         <span class="chip">TDA</span>
         <span class="chip">TDD</span>
-      </div>
+        <span class="chip">WCAG</span>
       </div>
     </article>
     <article class="bento-card bento-educacion reveal-scroll" id="educacion">
@@ -519,17 +483,26 @@
         <div class="mini-item certs-item">
           <strong>
             Desarrollo con IA @ Solo Learn
-            <a href="https://www.sololearn.com/es/profile/11566646" class="certs-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Certificación Ingeniería con IA de Solo Learn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://www.sololearn.com/es/profile/11566646" class="certs-link" target="_blank"
+              rel="noopener noreferrer" aria-label="Ver Certificación Ingeniería con IA de Solo Learn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </strong>
-          <p>Java, Kotlin, C, C++, Python, SQL, HTML, CSS, JavaScript, React, Redux, Web Fundamentals, Responsive Web Design, PHP, jQuery, Angular, NestJS</p>    
+          <p>Java, Kotlin, C, C++, Python, SQL, HTML, CSS, JavaScript, React, Redux, Web Fundamentals, Responsive Web
+            Design, PHP, jQuery, Angular, NestJS</p>
         </div>
         <div class="mini-item certs-item">
           <strong>
             Full Stack @ Open Webinars
-            <a href="https://openwebinars.net/cert/6qGzy" class="certs-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Certificación Full Stack de Open Webinars">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://openwebinars.net/cert/6qGzy" class="certs-link" target="_blank" rel="noopener noreferrer"
+              aria-label="Ver Certificación Full Stack de Open Webinars">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </strong>
           <p>Java 8, Spring, NodeJS, Express, SQL, JavaScript, ES6, Angular 6, Git, Scrum</p>
@@ -537,11 +510,15 @@
         <div class="mini-item certs-item">
           <strong>
             Aptitudes @ Linkedin
-            <a href="https://www.linkedin.com/in/rgdlr/details/skills" class="certs-link" target="_blank" rel="noopener noreferrer" aria-label="Ver Certificación Aptitudes de Linkedin">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            <a href="https://www.linkedin.com/in/rgdlr/details/skills" class="certs-link" target="_blank"
+              rel="noopener noreferrer" aria-label="Ver Certificación Aptitudes de Linkedin">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
             </a>
           </strong>
-          <p>Desarrollo Frontend, HTML, CSS, JavaScript, TypeScript, Angular, React.js, JSON, Git</p>    
+          <p>Desarrollo Frontend, HTML, CSS, JavaScript, TypeScript, Angular, React.js, JSON, Git</p>
         </div>
       </div>
       <h2>Idiomas</h2>
@@ -571,6 +548,15 @@
         <a href="https://rgdlr.github.io" target="_blank" rel="noopener noreferrer">rgdlr.github.io</a>
       </div>
     </section>
+    <section class="bento-card bento-contacto reveal-scroll" id="contacto-formulario">
+      <form class="contact-form" action="mailto:rodrigrtic@gmail.com" method="GET" enctype="text/plain">
+        <input class="contact-form-item" type="text" name="subject" id="subject" placeholder="Asunto" required />
+        <textarea class="contact-form-item" name="body" id="body" rows="5" placeholder="Mensaje" required></textarea>
+        <button class="chip highlight" type="submit" style="cursor: pointer; border: none; font-family: inherit;">
+          Enviar correo
+        </button>
+      </form>
+    </section>
   </main>
   <div class="shell reflective-element">
     <div class="reflective-content">
@@ -579,53 +565,8 @@
     </div>
   </div>
   <footer class="shell">
-    <p>All Rights Reserved © 2026 RGDLR</p>
+    <p>Todos los derechos reservados © 2026 RGDLR</p>
   </footer>
-  <script>
-    (function(){
-      const root = document.documentElement;
-      const toggle = document.querySelector('[data-theme-toggle]');
-      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      function icon(mode) {
-        return mode === 'dark' 
-          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
-          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-      }
-      function render(mode) {
-        root.setAttribute('data-theme', mode);
-        toggle.setAttribute('aria-label', mode === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
-        toggle.innerHTML = icon(mode);
-      }
-      render(theme);
-      toggle.addEventListener('click', function() {
-        theme = theme === 'dark' ? 'light' : 'dark';
-        render(theme);
-      });
-      const revealCards = document.querySelectorAll('.reveal-scroll');
-      let ticking = false;
-      function updateScroll() {
-        const windowHeight = window.innerHeight;
-        revealCards.forEach(card => {
-          const rect = card.getBoundingClientRect();
-          const start = windowHeight * 0.85; 
-          const end = windowHeight * 0.50; 
-          let progress = (start - rect.top) / (start - end);
-          progress = Math.max(0, Math.min(1, progress)); 
-          card.style.opacity = progress;
-          card.style.transform = `translateY(${40 * (1 - progress)}px) scale(${0.96 + (0.04 * progress)})`;
-        });
-        ticking = false;
-      }
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(updateScroll);
-          ticking = true;
-        }
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll, { passive: true });
-      updateScroll();
-    })();
-  </script>
 </body>
+
 </html>
