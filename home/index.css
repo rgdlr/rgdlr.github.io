@@ -739,7 +739,7 @@ h2 {
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-size: 16px;
   transition: all 0.2s ease;
 }
 
