@@ -22,21 +22,34 @@
   <header class="header">
     <div class="shell header-inner">
       <a class="brand" href="#top" aria-label="Inicio">
-        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-          aria-label="Logotipo personal">
+        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logotipo personal">
           <rect x="5" y="5" width="38" height="38" rx="12" stroke="currentColor" stroke-width="2.4" />
-          <path d="M15 32V16H24.5C29.1 16 32 18.4 32 22.4C32 25.6 30 27.5 26.8 28L33 32" stroke="currentColor"
-            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M15 32V16H24.5C29.1 16 32 18.4 32 22.4C32 25.6 30 27.5 26.8 28L33 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <span class="brand-text"><strong>Rodrigo G.</strong><span>Creador multidisciplinar</span></span>
+        <span class="brand-text">
+          <strong>Rodrigo G.</strong>
+          <span>Creador multidisciplinar</span>
+        </span>
       </a>
       <nav class="nav" aria-label="Principal">
-        <div class="nav-links">
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-menu">
+          <svg class="hamburger-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="nav-links" id="nav-menu">
           <a href="#perfil">Perfil</a>
           <a href="#experiencia">Experiencia</a>
           <a href="#skills">Skills</a>
           <a href="#educacion">Educación</a>
           <a href="#contacto">Contacto</a>
+          <a href="/projects/">Proyectos</a>
         </div>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar tema"></button>
       </nav>

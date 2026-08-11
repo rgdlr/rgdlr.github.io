@@ -12,19 +12,68 @@ function icon(mode) {
 
 function render(mode) {
   root.setAttribute("data-theme", mode);
-  toggle.setAttribute(
-    "aria-label",
-    mode === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro",
-  );
-  toggle.innerHTML = icon(mode);
+  if (toggle) {
+    toggle.setAttribute(
+      "aria-label",
+      mode === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro",
+    );
+    toggle.innerHTML = icon(mode);
+  }
 }
 
 render(theme);
 
-toggle.addEventListener("click", function () {
-  theme = theme === "dark" ? "light" : "dark";
-  render(theme);
-});
+if (toggle) {
+  toggle.addEventListener("click", function () {
+    theme = theme === "dark" ? "light" : "dark";
+    render(theme);
+  });
+}
+
+// Mobile Navigation Toggle
+const navToggle = document.querySelector("[data-nav-toggle]");
+const navMenu = document.getElementById("nav-menu");
+
+if (navToggle && navMenu) {
+  const hamburgerIcon = navToggle.querySelector(".hamburger-icon");
+  const closeIcon = navToggle.querySelector(".close-icon");
+
+  function toggleNavMenu(open) {
+    const isOpen = open !== undefined ? open : !navMenu.classList.contains("open");
+    navMenu.classList.toggle("open", isOpen);
+    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    navToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"
+    );
+    if (hamburgerIcon && closeIcon) {
+      hamburgerIcon.style.display = isOpen ? "none" : "block";
+      closeIcon.style.display = isOpen ? "block" : "none";
+    }
+  }
+
+  navToggle.addEventListener("click", () => toggleNavMenu());
+
+  navMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => toggleNavMenu(false));
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      navMenu.classList.contains("open") &&
+      !navMenu.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      toggleNavMenu(false);
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && navMenu.classList.contains("open")) {
+      toggleNavMenu(false);
+    }
+  });
+}
 
 const revealCards = document.querySelectorAll(".reveal-scroll");
 let ticking = false;
